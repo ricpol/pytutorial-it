@@ -1,87 +1,37 @@
 .. _tut-intro:
 
-**********************
-Whetting Your Appetite
-**********************
+**************************
+Per stuzzicare l'appetito.
+**************************
 
-If you do much work on computers, eventually you find that there's some task
-you'd like to automate.  For example, you may wish to perform a
-search-and-replace over a large number of text files, or rename and rearrange a
-bunch of photo files in a complicated way. Perhaps you'd like to write a small
-custom database, or a specialized GUI application, or a simple game.
+Se lavorate molto al computer, prima o poi vi troverete davanti a un compito che vi piacerebbe automatizzare. Per esempio, fare un trova-e-sostituisci su molti file contemporaneamente, o rinominare e riordinare un gruppo di foto secondo una regola complicata. Magari vi piacerebbe creare un piccolo database personale, o un'applicazione grafica per uno scopo specifico, o un semplice gioco. 
 
-If you're a professional software developer, you may have to work with several
-C/C++/Java libraries but find the usual write/compile/test/re-compile cycle is
-too slow.  Perhaps you're writing a test suite for such a library and find
-writing the testing code a tedious task.  Or maybe you've written a program that
-could use an extension language, and you don't want to design and implement a
-whole new language for your application.
+Se siete un programmatore professionista, forse dovete lavorare con diverse librerie C, C++ o Java, ma il consueto ciclo di scrivere, compilare, testare, ricompilare vi sembra troppo lento. Forse state scrivendo una *suite* di test per una libreria di questo tipo e pensate che scrivere il codice dei test sia un compito noioso. O forse avete scritto un programma che potrebbe aver bisogno di un linguaggio interno per le estensioni, ma non avete voglia di progettarne e implementarne uno da zero per la vostra applicazione. 
 
-Python is just the language for you.
+Allora Python è proprio il linguaggio che fa per voi.
 
-You could write a Unix shell script or Windows batch files for some of these
-tasks, but shell scripts are best at moving around files and changing text data,
-not well-suited for GUI applications or games. You could write a C/C++/Java
-program, but it can take a lot of development time to get even a first-draft
-program.  Python is simpler to use, available on Windows, Mac OS X, and Unix
-operating systems, and will help you get the job done more quickly.
+Per alcuni di questi compiti potrebbe bastare uno script della shell di Unix o un *batch file* di Windows: gli script però vanno bene per spostare i file e modificare i dati testuali, non sono adatti alle applicazioni grafiche o ai giochi. Potreste scrivere un programma in C, C++ o Java, ma questo richiederebbe molto tempo di sviluppo anche solo per arrivare a una prima bozza. Python è più semplice, è disponibile su Windows, Mac OS X e Unix, e vi aiuterà a finire il lavoro più in fretta.  
 
-Python is simple to use, but it is a real programming language, offering much
-more structure and support for large programs than shell scripts or batch files
-can offer.  On the other hand, Python also offers much more error checking than
-C, and, being a *very-high-level language*, it has high-level data types built
-in, such as flexible arrays and dictionaries.  Because of its more general data
-types Python is applicable to a much larger problem domain than Awk or even
-Perl, yet many things are at least as easy in Python as in those languages.
+Python è semplice da usare, ma è un linguaggio di programmazione serio che offre molta più struttura e supporto per programmi di grandi dimensioni, rispetto a uno script della shell o un batch file. D'altra parte, Python ha anche molta più gestione delle eccezioni di C; essendo poi un linguaggio *particolarmente* "di alto livello", include tipi di dati di alto livello, con la flessibilità delle sue liste e dizionari. Grazie alle sue strutture-dati più astratte, Python si può usare in campi applicativi molto più vasti rispetto ad Awk o anche a Perl, pur mantenendo la stessa semplicità d'uso di questi linguaggi. 
 
-Python allows you to split your program into modules that can be reused in other
-Python programs.  It comes with a large collection of standard modules that you
-can use as the basis of your programs --- or as examples to start learning to
-program in Python.  Some of these modules provide things like file I/O, system
-calls, sockets, and even interfaces to graphical user interface toolkits like
-Tk.
+Python vi consente di dividere il vostro programma in moduli che possono essere riutilizzati in altri programmi. Include già una vasta collezione di moduli standard, che potete usare come base per il vostro lavoro, o come esempi per imparare la programmazione in Python. Questi moduli, tra l'altro, offrono soluzioni per l'input/output dei file, le chiamate di sistema, i socket e perfino interfacce per *toolkit* grafici come Tk. 
 
-Python is an interpreted language, which can save you considerable time during
-program development because no compilation and linking is necessary.  The
-interpreter can be used interactively, which makes it easy to experiment with
-features of the language, to write throw-away programs, or to test functions
-during bottom-up program development. It is also a handy desk calculator.
+Python è un linguaggio interpretato, cosa che fa risparmiare molto tempo durante lo sviluppo, perché non c'è bisogno di compilare e collegare nulla. L'interprete può essere usato in modalità interattiva ed è quindi facile sperimentare con le funzionalità del linguaggio, scrivere programmi usa-e-getta, testare i costrutti durante lo sviluppo *bottom-up*. Può essere anche una pratica calcolatrice da tenere sottomano. 
 
-Python enables programs to be written compactly and readably.  Programs written
-in Python are typically much shorter than equivalent C,  C++, or Java programs,
-for several reasons:
+Python vi consente di scrivere codice compatto e leggibile. I programmi scritti in Python sono in genere molto più corti degli equivalenti in C, C++ o Java, per diverse ragioni:
 
-* the high-level data types allow you to express complex operations in a single
-  statement;
+* i tipi di dato di alto livello vi permettono di codificare operazioni complesse in una singola istruzione;
 
-* statement grouping is done by indentation instead of beginning and ending
-  brackets;
+* il raggruppamento delle istruzioni avviene rientrando il codice, invece di racchiuderlo tra parentesi;
 
-* no variable or argument declarations are necessary.
+* non c'è bisogno di dichiarare le variabili. 
 
-Python is *extensible*: if you know how to program in C it is easy to add a new
-built-in function or module to the interpreter, either to perform critical
-operations at maximum speed, or to link Python programs to libraries that may
-only be available in binary form (such as a vendor-specific graphics library).
-Once you are really hooked, you can link the Python interpreter into an
-application written in C and use it as an extension or command language for that
-application.
+Python è *estensibile*: se conoscete il C, è facile aggiungere all'interprete una nuova funzione predefinita o un modulo, sia per aumentare la velocità di esecuzione in punti critici del codice, sia per collegare un programma Python a librerie disponibili solo in forma binaria (per esempio, librerie grafiche di terze parti). Una volta che siete diventati esperti, potete collegare l'interprete Python all'interno di un programma scritto in C e usarlo come un'estensione, o un linguaggio interno di quel programma. 
 
-By the way, the language is named after the BBC show "Monty Python's Flying
-Circus" and has nothing to do with reptiles.  Making references to Monty
-Python skits in documentation is not only allowed, it is encouraged!
+A proposito, il nome del linguaggio deriva dallo show della BBC "Monty Python's Flying Circus" e non ha niente a che vedere con i rettili. Ogni riferimento agli sketch dei Monty Python nella documentazione è non solo permesso ma anzi incoraggiato. 
 
-Now that you are all excited about Python, you'll want to examine it in some
-more detail.  Since the best way to learn a language is to use it, the tutorial
-invites you to play with the Python interpreter as you read.
+Adesso che siete incuriositi da Python, avrete voglia di esaminarlo più nel dettaglio. Siccome il miglior modo di imparare un linguaggio è usarlo, vi invitiamo a sperimentare con l'interprete man mano che leggete il tutorial. 
 
-In the next chapter, the mechanics of using the interpreter are explained.  This
-is rather mundane information, but essential for trying out the examples shown
-later.
+Dedichiamo il prossimo capitolo a spiegare il meccanismo di funzionamento dell'interprete. Si tratta di concetti piuttosto semplici, ma sono importanti per consentirvi di provare gli esempi che verranno presentato più in là. 
 
-The rest of the tutorial introduces various features of the Python language and
-system through examples, beginning with simple expressions, statements and data
-types, through functions and modules, and finally touching upon advanced
-concepts like exceptions and user-defined classes.
-
-
+I capitoli successivi descrivono e dimostrano diverse funzionalità di Python e del suo ambiente, a cominciare da semplici espressioni, istruzioni e tipi di dati, proseguendo poi con le funzioni e i moduli, fino ad accennare agli argomenti più avanzati come le eccezioni e la creazione di classi personalizzate. 
