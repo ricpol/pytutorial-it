@@ -1,20 +1,17 @@
 .. _tut-morecontrol:
 
-***********************
-More Control Flow Tools
-***********************
+******************************************
+Altri strumenti per il controllo di flusso
+******************************************
 
-Besides the :keyword:`while` statement just introduced, Python uses the usual
-flow control statements known from other languages, with some twists.
-
+Oltre a :keyword:`while` di cui abbiamo già parlato, Python utilizza le consuete istruzioni per il controllo del flusso, comuni a molti linguggi, con qualche peculiarità. 
 
 .. _tut-if:
 
-:keyword:`!if` Statements
+Istruzione :keyword:`!if`
 =========================
 
-Perhaps the most well-known statement type is the :keyword:`if` statement.  For
-example::
+Forse l'istruzione più famosa è la :keyword:`if`. Per esempio::
 
    >>> x = int(input("Please enter an integer: "))
    Please enter an integer: 42
@@ -30,34 +27,20 @@ example::
    ...
    More
 
-There can be zero or more :keyword:`elif` parts, and the :keyword:`else` part is
-optional.  The keyword ':keyword:`!elif`' is short for 'else if', and is useful
-to avoid excessive indentation.  An  :keyword:`!if` ... :keyword:`!elif` ...
-:keyword:`!elif` ... sequence is a substitute for the ``switch`` or
-``case`` statements found in other languages.
-
+Possono esserci nessuna, una o più sezioni :keyword:`elif` e la sezione :keyword:`else` è opzionale. La parola riservata ':keyword:`!elif`' è una scorciatoia per "else if", e permette di evitare troppi livelli di rientro. Una sequenza :keyword:`!if` ... :keyword:`!elif` ... :keyword:`!elif` ... sostituisce le istruzioni ``switch`` o
+``case`` tipiche di altri linguaggi.
 
 .. _tut-for:
 
-:keyword:`!for` Statements
+Istruzione :keyword:`!for`
 ==========================
 
 .. index::
    statement: for
 
-The :keyword:`for` statement in Python differs a bit from what you may be used
-to in C or Pascal.  Rather than always iterating over an arithmetic progression
-of numbers (like in Pascal), or giving the user the ability to define both the
-iteration step and halting condition (as C), Python's :keyword:`!for` statement
-iterates over the items of any sequence (a list or a string), in the order that
-they appear in the sequence.  For example (no pun intended):
+Se siete abituati a Pascal o a C, troverete l'istruzione :keyword:`for` in Python leggermente diversa. Invece di iterare solo su una progressione aritmetica, come in Pascal, o dare la possibilità di definire sia il passo dell'iterazione sia la condizione d'arresto, come in C, il :keyword:`!for` di Python itera sugli elementi di una qualsiasi sequenza (una lista, una stringa...), nell'ordine in cui appaiono nella sequenza. Per esempio, ma senza alcun sottinteso omicida::
 
-.. One suggestion was to give a real C example here, but that may only serve to
-   confuse non-C programmers.
-
-::
-
-   >>> # Measure some strings:
+   >>> # Misura la lunghezza di alcune stringhe:
    ... words = ['cat', 'window', 'defenestrate']
    >>> for w in words:
    ...     print(w, len(w))
@@ -66,29 +49,25 @@ they appear in the sequence.  For example (no pun intended):
    window 6
    defenestrate 12
 
-Code that modifies a collection while iterating over that same collection can
-be tricky to get right.  Instead, it is usually more straight-forward to loop
-over a copy of the collection or to create a new collection::
+Il codice che *modifica* una collezione mentre itera sulla stessa può essere complicato da scrivere correttamente. Di solito è più semplice iterare su una *copia* della collezione, o crearne una nuova::
 
-    # Strategy:  Iterate over a copy
+    # Strategia: iterare su una copia
     for user, status in users.copy().items():
         if status == 'inactive':
             del users[user]
 
-    # Strategy:  Create a new collection
+    # Strategia: creare una nuova collezione
     active_users = {}
     for user, status in users.items():
         if status == 'active':
             active_users[user] = status
 
-
 .. _tut-range:
 
-The :func:`range` Function
-==========================
+La funzione :func:`range`
+=========================
 
-If you do need to iterate over a sequence of numbers, the built-in function
-:func:`range` comes in handy.  It generates arithmetic progressions::
+Se dovete iterare su una sequenza di numeri, la funzione predefinita :func:`range` è molto comoda. Produce una progressione aritmetica::
 
     >>> for i in range(5):
     ...     print(i)
@@ -99,10 +78,7 @@ If you do need to iterate over a sequence of numbers, the built-in function
     3
     4
 
-The given end point is never part of the generated sequence; ``range(10)`` generates
-10 values, the legal indices for items of a sequence of length 10.  It
-is possible to let the range start at another number, or to specify a different
-increment (even negative; sometimes this is called the 'step')::
+Il punto di arresto indicato non fa parte della sequenza generata: ``range(10)`` produce dieci valori, che sono anche gli indici corretti per una sequenza di lunghezza 10. Potete far partire l'intervallo da un numero diverso o specificare un incremento, anche negativo. A volte l'incremento è chiamato "il passo"::
 
     range(5, 10)
        5, 6, 7, 8, 9
@@ -113,8 +89,8 @@ increment (even negative; sometimes this is called the 'step')::
     range(-10, -100, -30)
       -10, -40, -70
 
-To iterate over the indices of a sequence, you can combine :func:`range` and
-:func:`len` as follows::
+Per iterare sugli indici di una sequenza, potete combinare le funzioni :func:`range` e
+:func:`len` come segue::
 
    >>> a = ['Mary', 'had', 'a', 'little', 'lamb']
    >>> for i in range(len(a)):
@@ -126,140 +102,113 @@ To iterate over the indices of a sequence, you can combine :func:`range` and
    3 little
    4 lamb
 
-In most such cases, however, it is convenient to use the :func:`enumerate`
-function, see :ref:`tut-loopidioms`.
+In casi del genere, tuttavia, vi conviene usare la funzione :func:`enumerate`: si veda per questo :ref:`tut-loopidioms`.
 
-A strange thing happens if you just print a range::
+Se cercate semplicemente di "stampare" un intervallo, succede una cosa strana::
 
    >>> print(range(10))
    range(0, 10)
 
-In many ways the object returned by :func:`range` behaves as if it is a list,
-but in fact it isn't. It is an object which returns the successive items of
-the desired sequence when you iterate over it, but it doesn't really make
-the list, thus saving space.
+L'oggetto restituito da :func:`range` si comporta in modo simile a una lista, ma in effetti non lo è. In realtà è un oggetto che restituisce l'elemento successivo della sequenza desiderata, quando vi iterate sopra, ma non *crea* davvero la lista, per risparmiare spazio. 
 
-We say such an object is :term:`iterable`, that is, suitable as a target for
-functions and constructs that expect something from which they can
-obtain successive items until the supply is exhausted.  We have seen that
-the :keyword:`for` statement is such a construct, while an example of a function
-that takes an iterable is :func:`sum`::
+Chiamiamo :term:`iterabile<iterable>` un oggetto di questo tipo: ovvero, un oggetto adatto a essere usato da funzioni e costrutti che si aspettano qualcosa da cui ottenere via via elementi successivi, finché ce ne sono. Abbiamo visto che l'istruzione :keyword:`for` è un costrutto di questo tipo; invece, un esempio di funzione che accetta un iterabile come parametro è :func:`sum`::
 
     >>> sum(range(4))  # 0 + 1 + 2 + 3
     6
 
-Later we will see more functions that return iterables and take iterables as
-arguments.  Lastly, maybe you are curious about how to get a list from a range.
-Here is the solution::
+Vedremo più in là altri esempi di funzioni che restituiscono degli iterabili, o che accettano iterabili come parametro. Infine, se siete curiosi di sapere come si può ottenere una lista da un :func:`range`, ecco la risposta::
 
    >>> list(range(4))
    [0, 1, 2, 3]
 
-In chapter :ref:`tut-structures`, we will discuss in more detail about
-:func:`list`.
+Nel capitolo :ref:`tut-structures` approfondiremo ancora la funzione :func:`list`.
 
 .. _tut-break:
 
-:keyword:`!break` and :keyword:`!continue` Statements, and :keyword:`!else` Clauses on Loops
-============================================================================================
+Le istruzioni :keyword:`!break` e :keyword:`!continue`, e la clausola :keyword:`!else` nei cicli
+================================================================================================
 
-The :keyword:`break` statement, like in C, breaks out of the innermost enclosing
-:keyword:`for` or :keyword:`while` loop.
+L'istruzione :keyword:`break` come in C, "salta fuori" dal ciclo :keyword:`for` o :keyword:`while` più interno in cui è inserita.
 
-Loop statements may have an :keyword:`!else` clause; it is executed when the loop
-terminates through exhaustion of the iterable (with :keyword:`for`) or when the
-condition becomes false (with :keyword:`while`), but not when the loop is
-terminated by a :keyword:`break` statement.  This is exemplified by the
-following loop, which searches for prime numbers::
+Le istruzioni di iterazione possono avere una clausola :keyword:`!else`: questa viene eseguita quando il ciclo termina perché l'iterabile si è esaurito (in un :keyword:`for`), o perché la condizione è divenuta "falsa" (in un :keyword:`while`); non viene però eseguita quando il ciclo termina a causa di una istruzione :keyword:`break`. Per esempio, il ciclo seguente ricerca i numeri primi::
 
    >>> for n in range(2, 10):
    ...     for x in range(2, n):
    ...         if n % x == 0:
-   ...             print(n, 'equals', x, '*', n//x)
+   ...             print(n, 'è uguale a', x, '*', n//x)
    ...             break
    ...     else:
-   ...         # loop fell through without finding a factor
-   ...         print(n, 'is a prime number')
+   ...         # il ciclo è finito senza trovare un fattore primo
+   ...         print(n, 'è un numero primo')
    ...
-   2 is a prime number
-   3 is a prime number
-   4 equals 2 * 2
-   5 is a prime number
-   6 equals 2 * 3
-   7 is a prime number
-   8 equals 2 * 4
-   9 equals 3 * 3
+   2 è un numero primo
+   3 è un numero primo
+   4 è uguale a 2 * 2
+   5 è un numero primo
+   6 è uguale a 2 * 3
+   7 è un numero primo
+   8 è uguale a 2 * 4
+   9 è uguale a 3 * 3
 
-(Yes, this is the correct code.  Look closely: the ``else`` clause belongs to
-the :keyword:`for` loop, **not** the :keyword:`if` statement.)
+(Sì, questo codice è giusto. Fate attenzione: la clausola ``else`` appartiene al ciclo :keyword:`for`, *non* all'istruzione :keyword:`if`.)
 
-When used with a loop, the ``else`` clause has more in common with the
-``else`` clause of a :keyword:`try` statement than it does with that of
-:keyword:`if` statements: a :keyword:`try` statement's ``else`` clause runs
-when no exception occurs, and a loop's ``else`` clause runs when no ``break``
-occurs. For more on the :keyword:`!try` statement and exceptions, see
-:ref:`tut-handling`.
+Quando viene usata in un ciclo, la clausola ``else`` è più simile alla ``else`` di un'istruzione :keyword:`try`, piuttosto che a quella di un :keyword:`if`. La ``else`` di un'istruzione :keyword:`try` viene eseguita quando non sono rilevate eccezioni, e allo stesso modo la ``else`` di un ciclo viene eseguita quando non ci sono ``break``. Approfondiremo l'istruzione :keyword:`!try` e le eccezioni nel capitolo :ref:`tut-handling`.
 
-The :keyword:`continue` statement, also borrowed from C, continues with the next
-iteration of the loop::
+L'istruzione :keyword:`continue`, anch'essa un prestito dal C, prosegue con la successiva iterazione del ciclo::
 
     >>> for num in range(2, 10):
     ...     if num % 2 == 0:
-    ...         print("Found an even number", num)
+    ...         print("Trovato un numero pari", num)
     ...         continue
-    ...     print("Found a number", num)
-    Found an even number 2
-    Found a number 3
-    Found an even number 4
-    Found a number 5
-    Found an even number 6
-    Found a number 7
-    Found an even number 8
-    Found a number 9
+    ...     print("Trovato un numero", num)
+    Trovato un numero pari 2
+    Trovato un numero 3
+    Trovato un numero pari 4
+    Trovato un numero 5
+    Trovato un numero pari 6
+    Trovato un numero 7
+    Trovato un numero pari 8
+    Trovato un numero 9
 
 .. _tut-pass:
 
-:keyword:`!pass` Statements
-===========================
+L'istruzione :keyword:`!pass`
+=============================
 
-The :keyword:`pass` statement does nothing. It can be used when a statement is
-required syntactically but the program requires no action. For example::
+L'istruzione :keyword:`pass` non fa nulla. Può essere usata quando sintatticamente è richiesta un'istruzione, ma il programma in sé non ha bisogno di fare nulla. Per esempio::
 
    >>> while True:
-   ...     pass  # Busy-wait for keyboard interrupt (Ctrl+C)
+   ...     pass  # Blocca in attesa dell'interruzione da tastiera (Ctrl+C)
    ...
 
-This is commonly used for creating minimal classes::
+Si usa di solito per creare una classe elementare::
 
    >>> class MyEmptyClass:
    ...     pass
    ...
 
-Another place :keyword:`pass` can be used is as a place-holder for a function or
-conditional body when you are working on new code, allowing you to keep thinking
-at a more abstract level.  The :keyword:`!pass` is silently ignored::
+Un altro modo di usare :keyword:`pass` è come segnaposto per una funzione o una condizione, quando state scrivendo codice nuovo e volete ragionare in termini più astratti. Il :keyword:`!pass` verrà ignorato silenziosamente::
 
    >>> def initlog(*args):
-   ...     pass   # Remember to implement this!
+   ...     pass   # Ricordati di implementare questa funzione!
    ...
 
 .. _tut-functions:
 
-Defining Functions
-==================
+Definire le funzioni
+====================
 
-We can create a function that writes the Fibonacci series to an arbitrary
-boundary::
+Possiamo creare una funzione che scrive i numeri di Fibonacci fino a un limite determinato::
 
-   >>> def fib(n):    # write Fibonacci series up to n
-   ...     """Print a Fibonacci series up to n."""
+   >>> def fib(n):    # scrive la serie di Fibonacci fino a n
+   ...     """Scrive la serie di Fibonacci fino a n."""
    ...     a, b = 0, 1
    ...     while a < n:
    ...         print(a, end=' ')
    ...         a, b = b, a+b
    ...     print()
    ...
-   >>> # Now call the function we just defined:
+   >>> # Adesso chiamate la funzione appena definita:
    ... fib(2000)
    0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597
 
@@ -268,40 +217,15 @@ boundary::
    single: docstrings
    single: strings, documentation
 
-The keyword :keyword:`def` introduces a function *definition*.  It must be
-followed by the function name and the parenthesized list of formal parameters.
-The statements that form the body of the function start at the next line, and
-must be indented.
+La parola chiave :keyword:`def` introduce la *definizione* di una funzione. Deve essere seguita dal nome della funzione e da una lista di parametri *formali* tra parentesi. Le istruzioni che compongono il corpo della funzione iniziano nella riga successiva, e devono essere rientrate. 
 
-The first statement of the function body can optionally be a string literal;
-this string literal is the function's documentation string, or :dfn:`docstring`.
-(More about docstrings can be found in the section :ref:`tut-docstrings`.)
-There are tools which use docstrings to automatically produce online or printed
-documentation, or to let the user interactively browse through code; it's good
-practice to include docstrings in code that you write, so make a habit of it.
+Opzionalmente, la prima istruzione della funzione può essere una stringa non assegnata: questa è la :dfn:`docstring`, ovvero la stringa di documentazione della funzione. Potete trovare altre informazioni nella sezione :ref:`tut-docstrings`. Esistono strumenti che usano le docstring per generare automaticamente la documentazione online o stampata, o per consentire all'utente di accedervi interattivamente. Includere la documentazione nel vostro codice è una buona pratica e dovrebbe diventare un'abitudine.
 
-The *execution* of a function introduces a new symbol table used for the local
-variables of the function.  More precisely, all variable assignments in a
-function store the value in the local symbol table; whereas variable references
-first look in the local symbol table, then in the local symbol tables of
-enclosing functions, then in the global symbol table, and finally in the table
-of built-in names. Thus, global variables and variables of enclosing functions
-cannot be directly assigned a value within a function (unless, for global
-variables, named in a :keyword:`global` statement, or, for variables of enclosing
-functions, named in a :keyword:`nonlocal` statement), although they may be
-referenced.
+*L'esecuzione* di una funzione produce una nuova tabella dei simboli usati per le variabili locali alla funzione. Più precisamente, tutti gli *assegnamenti* fatti all'interno della funzione conservano il valore in una tabella dei simboli locale; invece, i *riferimenti* alle variabili per prima cosa cercano il nome nella tabella locale, quindi nella tabella locale delle eventuali funzioni "superiori" in cui la nostra può essere inclusa, quindi nella tabella dei simboli globali, infine nella tabella dei nomi predefiniti. Di conseguenza è possibile *riferirsi* a una variabile globale o di una funzione superiore, ma non è possibile *assegnarle* un valore (a meno di non ricorrere all'istruzione :keyword:`global` per le variabili globali, o a :keyword:`nonlocal` per quelle delle funzioni superiori).
 
-The actual parameters (arguments) to a function call are introduced in the local
-symbol table of the called function when it is called; thus, arguments are
-passed using *call by value* (where the *value* is always an object *reference*,
-not the value of the object). [#]_ When a function calls another function, a new
-local symbol table is created for that call.
+I parametri *reali* (gli argomenti [#]_) di una funzione sono introdotti nella tabella dei simboli locali nel momento in cui la funzione è chiamata. Quindi, gli argomenti sono "passati per valore" (dove però il "valore" è sempre un *riferimento* all'oggetto, non il valore dell'oggetto). [#]_ Quando una funzione chiama un'altra funzione, una nuova tabella di simboli è creata per quella chiamata. 
 
-A function definition introduces the function name in the current symbol table.
-The value of the function name has a type that is recognized by the interpreter
-as a user-defined function.  This value can be assigned to another name which
-can then also be used as a function.  This serves as a general renaming
-mechanism::
+La *definizione* della funzione inserisce il nome della funzione nella tabella dei simboli corrente. Il valore assegnato al nome della funzione ha un tipo riconosciuto dall'interprete come una funzione definita dall'utente. Questo valore può essere assegnato a un altro nome, che a questo punto può essere utilizzato come la funzione stessa. Questo meccanismo consente di rinominare le cose::
 
    >>> fib
    <function fib at 10042ed0>
@@ -309,68 +233,46 @@ mechanism::
    >>> f(100)
    0 1 1 2 3 5 8 13 21 34 55 89
 
-Coming from other languages, you might object that ``fib`` is not a function but
-a procedure since it doesn't return a value.  In fact, even functions without a
-:keyword:`return` statement do return a value, albeit a rather boring one.  This
-value is called ``None`` (it's a built-in name).  Writing the value ``None`` is
-normally suppressed by the interpreter if it would be the only value written.
-You can see it if you really want to using :func:`print`::
+Se avete esperienza con altri linguaggi, potreste obiettare che ``fib`` non è una funzione ma una procedura, dal momento che non restituisce un valore. Tuttavia in Python anche le funzioni senza un'istruzione :keyword:`return` esplicita *restituiscono* in effetti un valore, per quanto piuttosto insignificante. Questo valore si chiama ``None`` (è un nome predefinito). L'interprete di solito evita di emettere direttamente ``None`` in output, quando è l'unica cosa che dovrebbe scrivere. Se volete davvero vedere il ``None``, potete usare la funzione :func:`print`::
 
    >>> fib(0)
    >>> print(fib(0))
    None
 
-It is simple to write a function that returns a list of the numbers of the
-Fibonacci series, instead of printing it::
+Non è difficile scrivere una funzione che *restituisce* una lista di numeri di Fibonacci, invece di scriverla::
 
-   >>> def fib2(n):  # return Fibonacci series up to n
-   ...     """Return a list containing the Fibonacci series up to n."""
+   >>> def fib2(n):  # restituisce i numeri di Fibonacci fino a n
+   ...     """Restituisce una lista con i numeri Fibonacci fino a n."""
    ...     result = []
    ...     a, b = 0, 1
    ...     while a < n:
-   ...         result.append(a)    # see below
+   ...         result.append(a)    # vedi sotto
    ...         a, b = b, a+b
    ...     return result
    ...
-   >>> f100 = fib2(100)    # call it
-   >>> f100                # write the result
+   >>> f100 = fib2(100)    # chiama la funzione
+   >>> f100                # scrive il risultato
    [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 
-This example, as usual, demonstrates some new Python features:
+Questo esempio, come di consueto, introduce alcuni concetti nuovi:
 
-* The :keyword:`return` statement returns with a value from a function.
-  :keyword:`!return` without an expression argument returns ``None``. Falling off
-  the end of a function also returns ``None``.
+* L'istruzione :keyword:`return` esce dall'esecuzione della funzione restituendo un valore. Se :keyword:`!return` non seguito da alcuna espressione, allora restituisce ``None``. Anche uscire dalla funzione senza un :keyword:`!return` restituisce ``None``.
 
-* The statement ``result.append(a)`` calls a *method* of the list object
-  ``result``.  A method is a function that 'belongs' to an object and is named
-  ``obj.methodname``, where ``obj`` is some object (this may be an expression),
-  and ``methodname`` is the name of a method that is defined by the object's type.
-  Different types define different methods.  Methods of different types may have
-  the same name without causing ambiguity.  (It is possible to define your own
-  object types and methods, using *classes*, see :ref:`tut-classes`)
-  The method :meth:`append` shown in the example is defined for list objects; it
-  adds a new element at the end of the list.  In this example it is equivalent to
-  ``result = result + [a]``, but more efficient.
-
+* L'istruzione ``result.append(a)`` chiama un *metodo* dell'oggetto-lista ``result``. Un metodo è una funzione che "appartiene" all'oggetto e si può chiamare con la sintassi ``obj.methodname`` dove ``obj`` è l'oggetto (che potrebbe essere il risultato di un'espressione) e ``methodname`` è il nome del metodo che è stato definito nel tipo dell'oggetto. Tipi diversi definiscono metodi diversi. Metodi di tipi diversi possono avere lo stesso nome, senza che ciò produca ambiguità. Potete definire i vostri tipi e i vostri metodi, usando le *classi*: vedi :ref:`tut-classes`. Il metodo :meth:`append` mostrato nell'esempio è definito per gli oggetti-lista: aggiunge un nuovo elemento in coda alla lista. In questo esempio è equivalente a ``result = result + [a]``, ma più efficiente. 
 
 .. _tut-defining:
 
-More on Defining Functions
-==========================
+Altre cose sulla definizione delle funzioni
+===========================================
 
-It is also possible to define functions with a variable number of arguments.
-There are three forms, which can be combined.
-
+È possibile definire le funzioni con un numero variabile di parametri. Ci sono tre modi per fare questo, che si possono combinare tra loro. 
 
 .. _tut-defaultargs:
 
-Default Argument Values
------------------------
+Parametri con valori di default
+-------------------------------
 
-The most useful form is to specify a default value for one or more arguments.
-This creates a function that can be called with fewer arguments than it is
-defined to allow.  For example::
+Il modo più utile è specificare un valore di default per uno o più parametri. In questo modo è possibile chiamare la funzione con meno argomenti di quelli che la definizione prescriverebbe. Per esempio::
 
    def ask_ok(prompt, retries=4, reminder='Please try again!'):
        while True:
@@ -384,20 +286,18 @@ defined to allow.  For example::
                raise ValueError('invalid user response')
            print(reminder)
 
-This function can be called in several ways:
+Questa funzione può essere chiamata in diversi modi:
 
-* giving only the mandatory argument:
+* passando solo l'argomento necessario:
   ``ask_ok('Do you really want to quit?')``
-* giving one of the optional arguments:
+* passando anche uno degli argomenti opzionali:
   ``ask_ok('OK to overwrite the file?', 2)``
-* or even giving all arguments:
+* o passando tutti gli argomenti:
   ``ask_ok('OK to overwrite the file?', 2, 'Come on, only yes or no!')``
 
-This example also introduces the :keyword:`in` keyword. This tests whether or
-not a sequence contains a certain value.
+Questo esempio introduce anche la parola-chiave :keyword:`in`, che testa se una sequenza contiene un certo valore oppure no.
 
-The default values are evaluated at the point of function definition in the
-*defining* scope, so that ::
+I valori di default sono valutati al momento della definizione della funzione, nella tabella dei simboli che ospita la definizione. Quindi questo ::
 
    i = 5
 
@@ -407,12 +307,9 @@ The default values are evaluated at the point of function definition in the
    i = 6
    f()
 
-will print ``5``.
+restituirà ``5``.
 
-**Important warning:**  The default value is evaluated only once. This makes a
-difference when the default is a mutable object such as a list, dictionary, or
-instances of most classes.  For example, the following function accumulates the
-arguments passed to it on subsequent calls::
+**Attenzione:**  I valori di default sono valutati una volta sola. Questo fa differenza quando il default è un oggetto *mutabile* come una lista, un dizionario o un'istanza di molte altre classi. Per esempio, questa funzione accumula gli argomenti che le vengono passati in chiamate successive::
 
    def f(a, L=[]):
        L.append(a)
@@ -422,14 +319,13 @@ arguments passed to it on subsequent calls::
    print(f(2))
    print(f(3))
 
-This will print ::
+Questo produrrà ::
 
    [1]
    [1, 2]
    [1, 2, 3]
 
-If you don't want the default to be shared between subsequent calls, you can
-write the function like this instead::
+Se non volete che i valori di default siano condivisi tra chiamate successive, potete scrivere la funzione in questo modo::
 
    def f(a, L=None):
        if L is None:
@@ -437,14 +333,12 @@ write the function like this instead::
        L.append(a)
        return L
 
-
 .. _tut-keywordargs:
 
-Keyword Arguments
------------------
+Parametri *keyword*
+-------------------
 
-Functions can also be called using :term:`keyword arguments <keyword argument>`
-of the form ``kwarg=value``.  For instance, the following function::
+Le funzioni possono essere chiamate anche passando :term:`argomenti keyword <keyword argument>` nella forma ``kwarg=value``. Per esempio, questa funzione ::
 
    def parrot(voltage, state='a stiff', action='voom', type='Norwegian Blue'):
        print("-- This parrot wouldn't", action, end=' ')
@@ -452,31 +346,23 @@ of the form ``kwarg=value``.  For instance, the following function::
        print("-- Lovely plumage, the", type)
        print("-- It's", state, "!")
 
-accepts one required argument (``voltage``) and three optional arguments
-(``state``, ``action``, and ``type``).  This function can be called in any
-of the following ways::
+prevede un parametro obbligatorio (``voltage``) e tre opzionali (``state``, ``action`` e ``type``). Questa funzione può essere chiamata in molti modi diversi::
 
-   parrot(1000)                                          # 1 positional argument
-   parrot(voltage=1000)                                  # 1 keyword argument
-   parrot(voltage=1000000, action='VOOOOOM')             # 2 keyword arguments
-   parrot(action='VOOOOOM', voltage=1000000)             # 2 keyword arguments
-   parrot('a million', 'bereft of life', 'jump')         # 3 positional arguments
-   parrot('a thousand', state='pushing up the daisies')  # 1 positional, 1 keyword
+   parrot(1000)                                          # 1 arg. posizionale
+   parrot(voltage=1000)                                  # 1 arg. keyword
+   parrot(voltage=1000000, action='VOOOOOM')             # 2 arg. keyword
+   parrot(action='VOOOOOM', voltage=1000000)             # 2 arg. keyword
+   parrot('a million', 'bereft of life', 'jump')         # 3 arg. posizionali
+   parrot('a thousand', state='pushing up the daisies')  # 1 posizionale, 1 keyword
 
-but all the following calls would be invalid::
+Ma tutte queste chiamate invece non sono valide::
 
-   parrot()                     # required argument missing
-   parrot(voltage=5.0, 'dead')  # non-keyword argument after a keyword argument
-   parrot(110, voltage=220)     # duplicate value for the same argument
-   parrot(actor='John Cleese')  # unknown keyword argument
+   parrot()                     # manca un argomento richiesto
+   parrot(voltage=5.0, 'dead')  # argomento non-keyword dopo un keyword
+   parrot(110, voltage=220)     # doppio valore per lo stesso argomento
+   parrot(actor='John Cleese')  # argomento keyword sconosciuto
 
-In a function call, keyword arguments must follow positional arguments.
-All the keyword arguments passed must match one of the arguments
-accepted by the function (e.g. ``actor`` is not a valid argument for the
-``parrot`` function), and their order is not important.  This also includes
-non-optional arguments (e.g. ``parrot(voltage=1000)`` is valid too).
-No argument may receive a value more than once.
-Here's an example that fails due to this restriction::
+Nella chiamata di funzione, gli argomenti keyword devono seguire quelli posizionali. Ciascun argomento keyword passato deve corrispondere a uno accettato dalla funzione (``actor`` non è un argomento valido per la funzione ``parrot``), anche se l'ordine non è importante. Questo vale anche per gli argomenti non opzionali (``parrot(voltage=1000)`` è una chiamata valida). Nessun argomento può ricevere un valore più di una volta. Ecco un esempio che non funziona perché viola questa restrizione::
 
    >>> def function(a):
    ...     pass
@@ -486,13 +372,7 @@ Here's an example that fails due to this restriction::
      File "<stdin>", line 1, in <module>
    TypeError: function() got multiple values for keyword argument 'a'
 
-When a final formal parameter of the form ``**name`` is present, it receives a
-dictionary (see :ref:`typesmapping`) containing all keyword arguments except for
-those corresponding to a formal parameter.  This may be combined with a formal
-parameter of the form ``*name`` (described in the next subsection) which
-receives a :ref:`tuple <tut-tuples>` containing the positional
-arguments beyond the formal parameter list.  (``*name`` must occur
-before ``**name``.) For example, if we define a function like this::
+Quando compare un parametro finale nella forma ``**name``, questo può ricevere un dizionario (vedi :ref:`Tipi di mapping - dizionari<typesmapping>`) che contiene tutti gli argomenti keyword che non corrispondono a un parametro formale. Questo può essere unito a un parametro nella forma ``*name`` (che descriviamo nella prossima sezione), che riceve una :ref:`tupla <tut-tuples>` con tutti gli argomenti posizionali che eccedono quelli indicati nella lista dei parametri. ``*name`` deve essere elencato prima di ``**name``. Per esempio, se definiamo una funzione in questo modo::
 
    def cheeseshop(kind, *arguments, **keywords):
        print("-- Do you have any", kind, "?")
@@ -503,7 +383,7 @@ before ``**name``.) For example, if we define a function like this::
        for kw in keywords:
            print(kw, ":", keywords[kw])
 
-It could be called like this::
+Potrebbe essere chiamata così::
 
    cheeseshop("Limburger", "It's very runny, sir.",
               "It's really very, VERY runny, sir.",
@@ -511,7 +391,7 @@ It could be called like this::
               client="John Cleese",
               sketch="Cheese Shop Sketch")
 
-and of course it would print:
+e naturalmente restituirebbe questo:
 
 .. code-block:: none
 
@@ -524,69 +404,51 @@ and of course it would print:
    client : John Cleese
    sketch : Cheese Shop Sketch
 
-Note that the order in which the keyword arguments are printed is guaranteed
-to match the order in which they were provided in the function call.
+Si noti che l'ordine in cui sono scritti gli argomenti corrisponde sempre a quello in cui li abbiamo inseriti nella chiamata di funzione. 
 
-Special parameters
+Parametri speciali
 ------------------
 
-By default, arguments may be passed to a Python function either by position
-or explicitly by keyword. For readability and performance, it makes sense to
-restrict the way arguments can be passed so that a developer need only look
-at the function definition to determine if items are passed by position, by
-position or keyword, or by keyword.
+Gli argomenti possono essere passati a una funzione Python per *posizione*, oppure esplicitamente in modo *keyword*. Per ragioni di leggibilità e performance, è una buona idea regolamentare i modi in cui si possono passare gli argomenti, così che basti solo un'occhiata alla definizione della funzione per capire se i vari elementi sono passati per posizione, per *keyword* o in entrambi i modi. 
 
-A function definition may look like:
+Una definizione di funzione potrebbe essere così:
 
 .. code-block:: none
 
    def f(pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2):
          -----------    ----------     ----------
            |             |                  |
-           |        Positional or keyword   |
-           |                                - Keyword only
-            -- Positional only
+           |        posizionali o keyword   |
+           |                                - solo keyword
+            -- solo posizionali
 
-where ``/`` and ``*`` are optional. If used, these symbols indicate the kind of
-parameter by how the arguments may be passed to the function:
-positional-only, positional-or-keyword, and keyword-only. Keyword parameters
-are also referred to as named parameters.
+dove ``/`` e ``*`` sono opzionali. Se vengono usati, questi simboli distinguono il tipo di parametro a seconda di come l'argomento può essere passato alla funzione: solo posizionale, posizione o keyword, solo keyword. Gli argomenti keyword sono detti anche "passati per nome". 
 
 -------------------------------
-Positional-or-Keyword Arguments
+Parametri posizionali o keyword
 -------------------------------
 
-If ``/`` and ``*`` are not present in the function definition, arguments may
-be passed to a function by position or by keyword.
+Se ``/`` e ``*`` non compaiono nella definizione della funzione, allora gli argomenti possono essere passati per posizione o per nome (keyword).
 
 --------------------------
-Positional-Only Parameters
+Parametri solo posizionali
 --------------------------
 
-Looking at this in a bit more detail, it is possible to mark certain parameters
-as *positional-only*. If *positional-only*, the parameters' order matters, and
-the parameters cannot be passed by keyword. Positional-only parameters are
-placed before a ``/`` (forward-slash). The ``/`` is used to logically
-separate the positional-only parameters from the rest of the parameters.
-If there is no ``/`` in the function definition, there are no positional-only
-parameters.
+Volendo specificare più in dettaglio, è possibile marcare certi parametri come *solo posizionali*. Per i parametri solo posizionali, l'ordine in cui sono elencati deve essere rispettato e non possono essere passati per nome. I parametri solo posizionali sono messi prima del segno ``/``, che è usato per separarli logicamente dagli altri parametri. Se non c'è il segno ``/`` nella definizione della funzione, allora non ci sono parametri solo posizionali. 
 
-Parameters following the ``/`` may be *positional-or-keyword* or *keyword-only*.
+I parametri che vengono dopo il ``/`` possono essere *posizionali o keyword*, oppure *solo keyword*. 
 
 ----------------------
-Keyword-Only Arguments
+Parametri solo keyword
 ----------------------
 
-To mark parameters as *keyword-only*, indicating the parameters must be passed
-by keyword argument, place an ``*`` in the arguments list just before the first
-*keyword-only* parameter.
+Per marcare i parametri come "solo keyword", indicando quindi che gli argomenti corrispondenti possono essere passati solo per nome, mettete un segno ``*`` nella lista dei parametri, subito prima del primo parametro "solo keyword".
 
------------------
-Function Examples
------------------
+------
+Esempi
+------
 
-Consider the following example function definitions paying close attention to the
-markers ``/`` and ``*``::
+Si considerino queste definizioni di funzione, facendo attenzione ai segni ``/`` e ``*``::
 
    >>> def standard_arg(arg):
    ...     print(arg)
@@ -600,10 +462,7 @@ markers ``/`` and ``*``::
    >>> def combined_example(pos_only, /, standard, *, kwd_only):
    ...     print(pos_only, standard, kwd_only)
 
-
-The first function definition, ``standard_arg``, the most familiar form,
-places no restrictions on the calling convention and arguments may be
-passed by position or keyword::
+La prima, ``standard_arg``, ha la forma più comune e non pone alcuna restrizione al modo di chiamare la funzione. Gli argomenti possono essere passati indifferentemente per posizione o per nome::
 
    >>> standard_arg(2)
    2
@@ -611,8 +470,7 @@ passed by position or keyword::
    >>> standard_arg(arg=2)
    2
 
-The second function ``pos_only_arg`` is restricted to only use positional
-parameters as there is a ``/`` in the function definition::
+La seconda funzione, ``pos_only_arg``, può solo passare gli argomenti per posizione, come prescrive il segno ``/`` nella sua definizione::
 
    >>> pos_only_arg(1)
    1
@@ -622,8 +480,7 @@ parameters as there is a ``/`` in the function definition::
      File "<stdin>", line 1, in <module>
    TypeError: pos_only_arg() got an unexpected keyword argument 'arg'
 
-The third function ``kwd_only_args`` only allows keyword arguments as indicated
-by a ``*`` in the function definition::
+La terza, ``kwd_only_args``, permette solo di passare gli argomenti per nome, avendo il segno ``*`` nella definizione::
 
    >>> kwd_only_arg(3)
    Traceback (most recent call last):
@@ -633,8 +490,7 @@ by a ``*`` in the function definition::
    >>> kwd_only_arg(arg=3)
    3
 
-And the last uses all three calling conventions in the same function
-definition::
+L'ultima utilizza tutte e tre le convenzioni per la chiamata, nella stessa definizione::
 
    >>> combined_example(1, 2, 3)
    Traceback (most recent call last):
@@ -652,14 +508,12 @@ definition::
      File "<stdin>", line 1, in <module>
    TypeError: combined_example() got an unexpected keyword argument 'pos_only'
 
-
-Finally, consider this function definition which has a potential collision between the positional argument ``name``  and ``**kwds`` which has ``name`` as a key::
+Infine, si consideri questa definizione di funzione, che presenta un potenziale conflitto tra il parametro posizionale ``name`` e un ``**kwds`` che potrebbe a sua volta contenere ``name`` tra le sue chiavi::
 
     def foo(name, **kwds):
         return 'name' in kwds
 
-There is no possible call that will make it return ``True`` as the keyword ``'name'``
-will always to bind to the first parameter. For example::
+Non c'è modo di chiamare la funzione e farle restituire ``True``: infatti la chiave ``'name'`` sarà sempre collegata al primo argomento, mai a ``**kwds``. Per esempio::
 
     >>> foo(1, **{'name': 2})
     Traceback (most recent call last):
@@ -667,59 +521,43 @@ will always to bind to the first parameter. For example::
     TypeError: foo() got multiple values for argument 'name'
     >>>
 
-But using ``/`` (positional only arguments), it is possible since it allows ``name`` as a positional argument and ``'name'`` as a key in the keyword arguments::
+Tuttavia, se usiamo il segno ``/`` per specificare i parametri solo posizionali, allora diventa possibile usare ``name`` come parametro posizionale e allo stesso tempo mettere ``'name'`` tra gli argomenti keyword::
 
     def foo(name, /, **kwds):
         return 'name' in kwds
     >>> foo(1, **{'name': 2})
     True
 
-In other words, the names of positional-only parameters can be used in
-``**kwds`` without ambiguity.
+In altre parole, i nomi dei parametri posizionali possono essere usati in ``**kwds`` senza pericolo di ambiguità.
 
------
-Recap
------
+-------------
+Ricapitolando
+-------------
 
-The use case will determine which parameters to use in the function definition::
+Scegliere che tipo di parametri impiegare nella definizione di una funzione dipende dalla necessità::
 
    def f(pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2):
 
-As guidance:
+Qualche indicazione:
 
-* Use positional-only if you want the name of the parameters to not be
-  available to the user. This is useful when parameter names have no real
-  meaning, if you want to enforce the order of the arguments when the function
-  is called or if you need to take some positional parameters and arbitrary
-  keywords.
-* Use keyword-only when names have meaning and the function definition is
-  more understandable by being explicit with names or you want to prevent
-  users relying on the position of the argument being passed.
-* For an API, use positional-only to prevent breaking API changes
-  if the parameter's name is modified in the future.
+* Usate i parametri solo posizionali se volete che il nome dei parametri non sia disponibile per l'utente. Questo è utile quando i nomi non hanno un significato particolare, o se volete che l'ordine dei parametri sia obbligato, o se avete bisogno anche di qualche parametro keyword oltre a quelli posizionali. 
+* Usate i parametri solo keyword quando i nomi hanno un significato e la definizione della funzione è più chiara esplicitando i nomi, o se volete impedire che l'utente possa affidarsi all'ordine degli argomenti passati. 
+* Dal punto di vista dell'interfaccia, usate i parametri solo posizionali per prevenire che un cambiamento futuro nel nome del parametro modifichi la API della funzione. 
 
 .. _tut-arbitraryargs:
 
-Arbitrary Argument Lists
-------------------------
+Liste di parametri arbitrari
+----------------------------
 
 .. index::
    single: * (asterisk); in function calls
 
-Finally, the least frequently used option is to specify that a function can be
-called with an arbitrary number of arguments.  These arguments will be wrapped
-up in a tuple (see :ref:`tut-tuples`).  Before the variable number of arguments,
-zero or more normal arguments may occur. ::
+Infine, il metodo usato meno frequentemente consiste nello specificare che una funzione può essere chiamata passando un numero arbitrario di argomenti. Questi valori verranno conservati in una :ref:`tupla<tut-tuples>`. Prima dei parametri variabili, è possibile inserire degli altri parametri normali. ::
 
    def write_multiple_items(file, separator, *args):
        file.write(separator.join(args))
 
-
-Normally, these ``variadic`` arguments will be last in the list of formal
-parameters, because they scoop up all remaining input arguments that are
-passed to the function. Any formal parameters which occur after the ``*args``
-parameter are 'keyword-only' arguments, meaning that they can only be used as
-keywords rather than positional arguments. ::
+Di solito questi parametri "variadici" vengono per ultimi nella lista della definizione, perché catturano tutti i restanti argomenti che vengono passati alla funzione. Tutti i parametri formali che vengono dopo ``*args`` non possono che essere "solo keyword", ovvero argomenti che possono essere passati solo per nome. ::
 
    >>> def concat(*args, sep="/"):
    ...     return sep.join(args)
@@ -731,27 +569,21 @@ keywords rather than positional arguments. ::
 
 .. _tut-unpacking-arguments:
 
-Unpacking Argument Lists
-------------------------
+Spacchettare le liste di argomenti
+----------------------------------
 
-The reverse situation occurs when the arguments are already in a list or tuple
-but need to be unpacked for a function call requiring separate positional
-arguments.  For instance, the built-in :func:`range` function expects separate
-*start* and *stop* arguments.  If they are not available separately, write the
-function call with the  ``*``\ -operator to unpack the arguments out of a list
-or tuple::
+Il caso opposto si verifica quando i valori da passare sono già contenuti in una lista o in una tupla, e devono essere "spacchettati" perché la chiamata di funzione richiede argomenti posizionali separati. Per esempio, la funzione predefinita :func:`range` prevede un parametro *start* e uno *stop*. Se non sono disponibili separatamente, potete scrivere la chiamata di funzione con l'operatore ``*``, che spacchetta gli argomenti di una lista o una tupla::
 
-   >>> list(range(3, 6))            # normal call with separate arguments
+   >>> list(range(3, 6))   # chiamata normale con argomenti separati
    [3, 4, 5]
    >>> args = [3, 6]
-   >>> list(range(*args))            # call with arguments unpacked from a list
+   >>> list(range(*args))  # chiamata con argomenti spacchettati da una lista
    [3, 4, 5]
 
 .. index::
    single: **; in function calls
 
-In the same fashion, dictionaries can deliver keyword arguments with the
-``**``\ -operator::
+Analogamente, i dizionari possono essere spacchettati con l'operatore ``**`` per passare argomenti keyword::
 
    >>> def parrot(voltage, state='a stiff', action='voom'):
    ...     print("-- This parrot wouldn't", action, end=' ')
@@ -762,19 +594,12 @@ In the same fashion, dictionaries can deliver keyword arguments with the
    >>> parrot(**d)
    -- This parrot wouldn't VOOM if you put four million volts through it. E's bleedin' demised !
 
-
 .. _tut-lambda:
 
-Lambda Expressions
-------------------
+Funzioni lambda
+---------------
 
-Small anonymous functions can be created with the :keyword:`lambda` keyword.
-This function returns the sum of its two arguments: ``lambda a, b: a+b``.
-Lambda functions can be used wherever function objects are required.  They are
-syntactically restricted to a single expression.  Semantically, they are just
-syntactic sugar for a normal function definition.  Like nested function
-definitions, lambda functions can reference variables from the containing
-scope::
+È possibile creare delle piccole funzioni anonime con la parola-chiave :keyword:`lambda`. Questa funzione restituisce la somma dei suoi due argomenti: ``lambda a, b: a+b``. Le funzioni lambda possono essere usate dovunque si può usare una normale funzione. Dal punto di vista sintattico, sono limitate a una singola espressione. Dal punto di vista semantico, sono solo una scorciatoia al posto di una normale definizione di funzione. Come le funzioni interne ad altre funzioni, anche le lambda possono accedere a variabili definite nella funzione soprastante::
 
    >>> def make_incrementor(n):
    ...     return lambda x: x + n
@@ -785,70 +610,49 @@ scope::
    >>> f(1)
    43
 
-The above example uses a lambda expression to return a function.  Another use
-is to pass a small function as an argument::
+Questo esempio utilizza una lambda per restituire una funzione. Un altro possibile utilizzo è quando si vuole passare una piccola funzione come argomento di un'altra funzione::
 
    >>> pairs = [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
    >>> pairs.sort(key=lambda pair: pair[1])
    >>> pairs
    [(4, 'four'), (1, 'one'), (3, 'three'), (2, 'two')]
 
-
 .. _tut-docstrings:
 
-Documentation Strings
----------------------
+Stringhe di documentazione
+--------------------------
 
 .. index::
    single: docstrings
    single: documentation strings
    single: strings, documentation
 
-Here are some conventions about the content and formatting of documentation
-strings.
+Ci sono alcune convenzioni sul contenuto e la formattazione di una stringa di documentazione. 
 
-The first line should always be a short, concise summary of the object's
-purpose.  For brevity, it should not explicitly state the object's name or type,
-since these are available by other means (except if the name happens to be a
-verb describing a function's operation).  This line should begin with a capital
-letter and end with a period.
+La prima riga dovrebbe essere un conciso riepilogo dello scopo dell'oggetto documentato. Per brevità, non dovrebbe dichiarare esplicitamente il nome dell'oggetto o il suo tipo, dal momento che queste informazioni si possono ottenere in altro modo (a meno che il nome non sia un verbo che descrive l'azione della funzione - *questo naturalmente è più facile in Inglese, ndT*). La riga dovrebbe iniziare con la lettera maiuscola e finire con un punto. 
 
-If there are more lines in the documentation string, the second line should be
-blank, visually separating the summary from the rest of the description.  The
-following lines should be one or more paragraphs describing the object's calling
-conventions, its side effects, etc.
+Se la stringa ha più di una riga, la seconda dovrebbe essere vuota, in modo da separare visivamente il sommario dal resto della documentazione. Le righe successive dovrebbero contenere uno o più paragrafi che descrivono come si deve usare l'oggetto, i suoi *side-effect*, etc. 
 
-The Python parser does not strip indentation from multi-line string literals in
-Python, so tools that process documentation have to strip indentation if
-desired.  This is done using the following convention. The first non-blank line
-*after* the first line of the string determines the amount of indentation for
-the entire documentation string.  (We can't use the first line since it is
-generally adjacent to the string's opening quotes so its indentation is not
-apparent in the string literal.)  Whitespace "equivalent" to this indentation is
-then stripped from the start of all lines of the string.  Lines that are
-indented less should not occur, but if they occur all their leading whitespace
-should be stripped.  Equivalence of whitespace should be tested after expansion
-of tabs (to 8 spaces, normally).
+Il parser di Python non elimina lo spazio dei rientri da una stringa multi-riga: di conseguenza i *tool* che processano la documentazione dovranno compiere questa operazione, se lo desiderano. Per questo occorre utilizzare una convenzione: la prima riga non vuota *dopo* la riga iniziale determina la spazio di rientro per tutto il resto della stringa. (Non possiamo usare la prima riga, perché di solito inizia con gli apici e quindi la stringa in sé non ha nessun rientro apparente.) Lo spazio "equivalente" a questo rientro deve essere quindi eliminato da tutte le righe della stringa. Non dovrebbero esserci righe con un rientro minore di questo, ma se ci sono allora tutto lo spazio iniziale dovrebbe essere tolto. Lo spazio "equivalente" dovrebbe essere calcolato dopo la conversione delle eventuali tabulazioni in spazi (di solito otto). 
 
-Here is an example of a multi-line docstring::
+Ecco un esempio di docstring multi-riga::
 
    >>> def my_function():
-   ...     """Do nothing, but document it.
+   ...     """Non fa nulla, ma lo documenta.
    ...
-   ...     No, really, it doesn't do anything.
+   ...     Davvero, non fa proprio nulla.
    ...     """
    ...     pass
    ...
    >>> print(my_function.__doc__)
-   Do nothing, but document it.
+   Non fa nulla, ma lo documenta.
 
-       No, really, it doesn't do anything.
-
+       Davvero, non fa proprio nulla.
 
 .. _tut-annotations:
 
-Function Annotations
---------------------
+Annotazione di funzioni
+-----------------------
 
 .. sectionauthor:: Zachary Ware <zachary.ware@gmail.com>
 .. index::
@@ -856,18 +660,9 @@ Function Annotations
    single: ->; function annotations
    single: : (colon); function annotations
 
-:ref:`Function annotations <function>` are completely optional metadata
-information about the types used by user-defined functions (see :pep:`3107` and
-:pep:`484` for more information).
+Le :ref:`annotazioni<function>` sono del tutto facoltative: si tratta di metadati informativi sui tipi utilizzati dalle funzioni (si vedano la :pep:`3107` e la :pep:`484` per ulteriori informazioni). 
 
-:term:`Annotations <function annotation>` are stored in the :attr:`__annotations__`
-attribute of the function as a dictionary and have no effect on any other part of the
-function.  Parameter annotations are defined by a colon after the parameter name, followed
-by an expression evaluating to the value of the annotation.  Return annotations are
-defined by a literal ``->``, followed by an expression, between the parameter
-list and the colon denoting the end of the :keyword:`def` statement.  The
-following example has a positional argument, a keyword argument, and the return
-value annotated::
+Le :term:`annotazioni <function annotation>` sono conservate nell'attributo :attr:`__annotations__` della funzione, che è un dizionario, e non hanno effetto su nessun'altra parte della funzione. Le annotazioni dei parametri si indicano con un "due punti" dopo il nome del parametro, seguito da un'espressione che restituisce il valore dell'annotazione. Le annotazioni per i valori di ritorno si indicano con un ``->`` seguito da un'espressione, collocati tra la fine della lista dei parametri e il "due punti" che termina l'istruzione :keyword:`def`. Nell'esempio che segue sono annotati un parametro posizionale, un parametro keyword e il valore di ritorno::
 
    >>> def f(ham: str, eggs: str = 'eggs') -> str:
    ...     print("Annotations:", f.__annotations__)
@@ -881,60 +676,40 @@ value annotated::
 
 .. _tut-codingstyle:
 
-Intermezzo: Coding Style
-========================
+Intermezzo: stile per il codice
+===============================
 
 .. sectionauthor:: Georg Brandl <georg@python.org>
 .. index:: pair: coding; style
 
-Now that you are about to write longer, more complex pieces of Python, it is a
-good time to talk about *coding style*.  Most languages can be written (or more
-concise, *formatted*) in different styles; some are more readable than others.
-Making it easy for others to read your code is always a good idea, and adopting
-a nice coding style helps tremendously for that.
+Prima di iniziare a scrivere codice Python più lungo e complesso, è arrivato il momento di affrontare il tema dello "stile" del codice. Molti linguaggi possono essere scritti (o più precisamente, *formattati*) usando stili diversi; alcuni più leggibili di altri. È sempre una buona idea facilitare la lettura del vostro codice per gli altri, e per questo adottare uno stile chiaro aiuta moltissimo. 
 
-For Python, :pep:`8` has emerged as the style guide that most projects adhere to;
-it promotes a very readable and eye-pleasing coding style.  Every Python
-developer should read it at some point; here are the most important points
-extracted for you:
+Nel mondo Python, la :pep:`8` si è affermata come la guida di stile da usare per molti progetti: promuove uno stile molto leggibile e scorrevole all'occhio. Tutti i programmatori Python dovrebbero leggerla prima o poi; sintetizziamo qui i punti più importanti per voi:  
 
-* Use 4-space indentation, and no tabs.
+* I rientri si fanno con 4 spazi, non con le tabulazioni. 
 
-  4 spaces are a good compromise between small indentation (allows greater
-  nesting depth) and large indentation (easier to read).  Tabs introduce
-  confusion, and are best left out.
+   4 spazi sono un buon compromesso tra rientri più stretti (che permettono più livelli di annidamento) e più larghi (che sono più facile da leggere). Le tabulazioni fanno solo confusione ed è meglio non usarle. 
+   
+* Le righe non devono superare i 79 caratteri.
 
-* Wrap lines so that they don't exceed 79 characters.
+   Questo è per aiutare gli utenti con schermi piccoli, e rende possibile affiancare due file di codice su quelli più grandi. 
 
-  This helps users with small displays and makes it possible to have several
-  code files side-by-side on larger displays.
+* Lasciate una riga vuota per separare le funzioni e le classi, e anche i blocchi di codice più grandi all'interno delle funzioni. 
 
-* Use blank lines to separate functions and classes, and larger blocks of
-  code inside functions.
+* Quando possibile, mettete i commenti su una riga separata.
 
-* When possible, put comments on a line of their own.
+* Usate le docstring. 
 
-* Use docstrings.
+* Mettete uno spazio prima e dopo gli operatori e dopo la virgola, ma non accanto alle parentesi: ``a = f(1, 2) + g(3, 4)``.
 
-* Use spaces around operators and after commas, but not directly inside
-  bracketing constructs: ``a = f(1, 2) + g(3, 4)``.
+* Adottate dei nomi consistenti per le vostre classi e le funzioni; la convenzione è usare ``UpperCamelCase`` per le classi e ``lowercase_with_underscores`` per le funzioni e i metodi. Il nome del primo parametro di un metodo è sempre ``self`` (si veda :ref:`tut-firstclasses` per ulteriori informazioni su classi e metodi).
 
-* Name your classes and functions consistently; the convention is to use
-  ``UpperCamelCase`` for classes and ``lowercase_with_underscores`` for functions
-  and methods.  Always use ``self`` as the name for the first method argument
-  (see :ref:`tut-firstclasses` for more on classes and methods).
+* Non usate encoding esotici se il vostro codice deve essere usato in un contesto internazionale. UTF-8 (il default per Python), o anche il semplice ASCII, sono preferibili in ogni caso. 
 
-* Don't use fancy encodings if your code is meant to be used in international
-  environments.  Python's default, UTF-8, or even plain ASCII work best in any
-  case.
+* Analogamente, non usate caratteri non-ASCII per gli identificatori se vi è anche la più remota possibilità che delle persone di nazionalità diversa leggeranno e lavoreranno sul codice. 
 
-* Likewise, don't use non-ASCII characters in identifiers if there is only the
-  slightest chance people speaking a different language will read or maintain
-  the code.
+.. rubric:: Note
 
+.. [#] ndT: in questa traduzione italiana cerchiamo di mantenere una coerente, se pure acrobatica, distinzione tra *parametri* (quelli formali, che appaiono nella *definizione* della funzione) e *argomenti* (i parametri reali, che appaiono nella *chiamata* della funzione). Il testo originale è talvolta meno preciso. 
 
-.. rubric:: Footnotes
-
-.. [#] Actually, *call by object reference* would be a better description,
-   since if a mutable object is passed, the caller will see any changes the
-   callee makes to it (items inserted into a list).
+.. [#] In effetti, una descrizione più accurata sarebbe *passati per riferimento all'oggetto*, dal momento che, se viene passato un oggetto mutabile, il codice chiamante vedrà tutte le modifiche fatte dal codice chiamato (come l'inserimento di elementi in una lista).
