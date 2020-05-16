@@ -1,103 +1,79 @@
 .. _tut-structures:
 
-***************
-Data Structures
-***************
+**************
+Strutture dati
+**************
 
-This chapter describes some things you've learned about already in more detail,
-and adds some new things as well.
+Questo capitolo descrive più in dettaglio argomenti già visti e aggiunge anche alcune cose nuove.
 
 .. _tut-morelists:
 
-More on Lists
-=============
+Un approfondimento sulle liste
+==============================
 
-The list data type has some more methods.  Here are all of the methods of list
-objects:
-
+Il tipo di dato "lista" ha diverse funzionalità ulteriori. Ecco un elenco di tutti i metodi disponibili per gli oggetti-lista:
 
 .. method:: list.append(x)
    :noindex:
 
-   Add an item to the end of the list.  Equivalent to ``a[len(a):] = [x]``.
-
+   Aggiunge un elemento alla fine della lista. Equivale a ``a[len(a):] = [x]``.
 
 .. method:: list.extend(iterable)
    :noindex:
 
-   Extend the list by appending all the items from the iterable.  Equivalent to
-   ``a[len(a):] = iterable``.
-
+   Estende una lista aggiungendovi tutti gli elementi di un oggetto iterabile. Equivale a ``a[len(a):] = iterable``.
 
 .. method:: list.insert(i, x)
    :noindex:
 
-   Insert an item at a given position.  The first argument is the index of the
-   element before which to insert, so ``a.insert(0, x)`` inserts at the front of
-   the list, and ``a.insert(len(a), x)`` is equivalent to ``a.append(x)``.
-
+   Inserisce un elemento alla posizione data. Il primo parametro è l'indice dell'elemento *prima del quale* sarà inserito il nostro, quindi ``a.insert(0, x)`` inserisce all'inizio della lista e ``a.insert(len(a), x)`` equivale a ``a.append(x)``.
 
 .. method:: list.remove(x)
    :noindex:
 
-   Remove the first item from the list whose value is equal to *x*.  It raises a
-   :exc:`ValueError` if there is no such item.
-
+   Rimuove il primo elemento della lista che ha valore *x*. Emette un :exc:`ValueError` se non esiste un elemento con questo valore.
 
 .. method:: list.pop([i])
    :noindex:
 
-   Remove the item at the given position in the list, and return it.  If no index
-   is specified, ``a.pop()`` removes and returns the last item in the list.  (The
-   square brackets around the *i* in the method signature denote that the parameter
-   is optional, not that you should type square brackets at that position.  You
-   will see this notation frequently in the Python Library Reference.)
-
+   Rimuove e *restituisce* l'elemento alla posizione specificata. Se non viene specificato un indice, ``a.pop()`` rimuove e restituisce l'ultimo elemento della lista. (Le parentesi quadre intorno alla *i* nell'elenco dei parametri non significano che dovreste usare quelle parentesi quando chiamate il metodo, ma indicano invece che il parametro è *opzionale*. Vedrete molto spesso questa notazione nella documentazione della libreria standard di Python.)
 
 .. method:: list.clear()
    :noindex:
 
-   Remove all items from the list.  Equivalent to ``del a[:]``.
-
+   Rimuove tutti gli elementi della lista. Equivale a ``del a[:]``.
 
 .. method:: list.index(x[, start[, end]])
    :noindex:
 
-   Return zero-based index in the list of the first item whose value is equal to *x*.
-   Raises a :exc:`ValueError` if there is no such item.
+   Restituisce l'indice (partendo da zero) del primo elemento con valore *x*.
+   Emette un :exc:`ValueError` se non esiste un elemento con quel valore.
 
-   The optional arguments *start* and *end* are interpreted as in the slice
-   notation and are used to limit the search to a particular subsequence of
-   the list.  The returned index is computed relative to the beginning of the full
-   sequence rather than the *start* argument.
-
+   I parametri opzionali *start* e *end* limitano la ricerca all'interno di una determinata sotto-lista, e sono interpretati come nella notazione per il sezionamento. L'indice restituito è però relativo all'intera lista, non alla sequenza che inizia con *start*. 
 
 .. method:: list.count(x)
    :noindex:
 
-   Return the number of times *x* appears in the list.
+   Restituisce il numero di volte che *x* appare nella lista.
 
 
 .. method:: list.sort(key=None, reverse=False)
    :noindex:
 
-   Sort the items of the list in place (the arguments can be used for sort
-   customization, see :func:`sorted` for their explanation).
-
+   Ordina sul posto gli elementi della lista. I parametri possono essere usati per aggiungere criteri all'ordinamento: si veda la funzione :func:`sorted` per il loro uso. 
 
 .. method:: list.reverse()
    :noindex:
 
-   Reverse the elements of the list in place.
+   Capovolge sul posto gli elementi della lista.
 
 
 .. method:: list.copy()
    :noindex:
 
-   Return a shallow copy of the list.  Equivalent to ``a[:]``.
+   Restituisce una copia per indirizzo (*shallow copy*) della lista. Equivale a ``a[:]``.
 
-
-An example that uses most of the list methods::
+Un esempio che utilizza molti metodi delle liste::
 
     >>> fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
     >>> fruits.count('apple')
@@ -106,7 +82,7 @@ An example that uses most of the list methods::
     0
     >>> fruits.index('banana')
     3
-    >>> fruits.index('banana', 4)  # Find next banana starting a position 4
+    >>> fruits.index('banana', 4)  # Il prossimo "banana", dalla posizione 4
     6
     >>> fruits.reverse()
     >>> fruits
@@ -120,31 +96,18 @@ An example that uses most of the list methods::
     >>> fruits.pop()
     'pear'
 
-You might have noticed that methods like ``insert``, ``remove`` or ``sort`` that
-only modify the list have no return value printed -- they return the default
-``None``. [1]_  This is a design principle for all mutable data structures in
-Python.
+Avrete notato che i metodi come ``insert``, ``remove`` o ``sort``, che modificano soltanto la lista, non hanno valore di ritorno -- ovvero, restituiscono il ``None`` di default. [1]_  Questo è un principio di design che vale per tutte le strutture-dati mutabili in Python.
 
-Another thing you might notice is that not all data can be sorted or
-compared.  For instance, ``[None, 'hello', 10]`` doesn't sort because
-integers can't be compared to strings and *None* can't be compared to
-other types.  Also, there are some types that don't have a defined
-ordering relation.  For example, ``3+4j < 5+7j`` isn't a valid
-comparison.
-
+Un'altra cosa da osservare è che non tutti i dati possono essere ordinati o confrontati. Per esempio, ``[None, 'hello', 10]`` non può essere ordinato perché gli interi non possono essere confrontati con le stringhe e *None* non si può confrontare con altri tipi di dato. Inoltre, ci sono alcuni tipi che non hanno un ordinamento predefinito: per esempio, ``3+4j < 5+7j`` non è una comparazione valida.
 
 .. _tut-lists-as-stacks:
 
-Using Lists as Stacks
----------------------
+Usare le liste come pile
+------------------------
 
 .. sectionauthor:: Ka-Ping Yee <ping@lfw.org>
 
-
-The list methods make it very easy to use a list as a stack, where the last
-element added is the first element retrieved ("last-in, first-out").  To add an
-item to the top of the stack, use :meth:`append`.  To retrieve an item from the
-top of the stack, use :meth:`pop` without an explicit index.  For example::
+È molto facile, grazie ai metodi che abbiamo visto, usare le liste come una pila (*stack*) ovvero come strutture in cui l'ultimo elemento aggiunto è il primo restituito (*last-in, first-out*). Per aggiungere un elemento in cima allo stack, usate :meth:`append`. Per estrarre un elemento dalla cima dello stack, usate :meth:`pop` senza un indice esplicito. Per esempio::
 
    >>> stack = [3, 4, 5]
    >>> stack.append(6)
@@ -162,46 +125,36 @@ top of the stack, use :meth:`pop` without an explicit index.  For example::
    >>> stack
    [3, 4]
 
-
 .. _tut-lists-as-queues:
 
-Using Lists as Queues
----------------------
+Usare le liste come code
+------------------------
 
 .. sectionauthor:: Ka-Ping Yee <ping@lfw.org>
 
-It is also possible to use a list as a queue, where the first element added is
-the first element retrieved ("first-in, first-out"); however, lists are not
-efficient for this purpose.  While appends and pops from the end of list are
-fast, doing inserts or pops from the beginning of a list is slow (because all
-of the other elements have to be shifted by one).
+È anche possibile usare le liste come code (*queue*), dove il primo elemento aggiunto è il primo restituito (*first-in, first-out*). Tuttavia le liste non sono strutture efficienti per questo scopo. Gli ``append`` e i ``pop`` alla fine della lista sono veloci, ma gli ``insert`` e i ``pop`` *all'inizio* sono lenti (perché tutti gli altri elementi devono slittare di una posizione). 
 
-To implement a queue, use :class:`collections.deque` which was designed to
-have fast appends and pops from both ends.  For example::
+Per implementare una coda, usate invece :class:`collections.deque`, che è pensata appositamente per avere ``append`` e ``pop`` veloci da entrambi i lati. Per esempio::
 
    >>> from collections import deque
    >>> queue = deque(["Eric", "John", "Michael"])
-   >>> queue.append("Terry")           # Terry arrives
-   >>> queue.append("Graham")          # Graham arrives
-   >>> queue.popleft()                 # The first to arrive now leaves
+   >>> queue.append("Terry")           # Terry arriva
+   >>> queue.append("Graham")          # Graham arriva
+   >>> queue.popleft()                 # Il primo ad arrivare parte
    'Eric'
-   >>> queue.popleft()                 # The second to arrive now leaves
+   >>> queue.popleft()                 # Adesso parte il secondo arrivato
    'John'
-   >>> queue                           # Remaining queue in order of arrival
+   >>> queue                           # Il resto, in ordine di arrivo
    deque(['Michael', 'Terry', 'Graham'])
-
 
 .. _tut-listcomps:
 
-List Comprehensions
--------------------
+List comprehension
+------------------
 
-List comprehensions provide a concise way to create lists.
-Common applications are to make new lists where each element is the result of
-some operations applied to each member of another sequence or iterable, or to
-create a subsequence of those elements that satisfy a certain condition.
+Una *list comprehension* è un modo conciso di creare una lista. Accade di frequente di dover creare una lista dove ciascun elemento è il risultato di un'operazione condotta sugli elementi di un'altra lista o iterabile; oppure, di dover estrarre gli elementi che soddisfano una certa condizione. 
 
-For example, assume we want to create a list of squares, like::
+Per esempio, vogliamo creare una lista di numeri quadrati, come questa::
 
    >>> squares = []
    >>> for x in range(10):
@@ -210,29 +163,22 @@ For example, assume we want to create a list of squares, like::
    >>> squares
    [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 
-Note that this creates (or overwrites) a variable named ``x`` that still exists
-after the loop completes.  We can calculate the list of squares without any
-side effects using::
+Si noti che in questo modo creiamo e sovrascriviamo più volte una variabile ``x`` che resta in vita anche dopo che il ciclo è terminato. Possiamo eliminare questo *side effect* creando la lista in questo modo::
 
    squares = list(map(lambda x: x**2, range(10)))
 
-or, equivalently::
+o, in modo equivalente::
 
    squares = [x**2 for x in range(10)]
 
-which is more concise and readable.
+che è più conciso e leggibile.
 
-A list comprehension consists of brackets containing an expression followed
-by a :keyword:`!for` clause, then zero or more :keyword:`!for` or :keyword:`!if`
-clauses.  The result will be a new list resulting from evaluating the expression
-in the context of the :keyword:`!for` and :keyword:`!if` clauses which follow it.
-For example, this listcomp combines the elements of two lists if they are not
-equal::
+Una *list comprehension* è racchiusa tra parentesi quadre; contiene un'espressione, seguita da una clausola :keyword:`!for`, seguita da zero o più clausole :keyword:`!for` o :keyword:`!if`. Il risultato è una nuova lista costruita valutando l'espressione nel contesto delle clausole :keyword:`!for` e :keyword:`!if` che la seguono. Per esempio, questa *list comprehension* produce una combinazione degli elementi di due liste, se non sono uguali::
 
    >>> [(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]
    [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
 
-and it's equivalent to::
+è equivalente a::
 
    >>> combs = []
    >>> for x in [1,2,3]:
@@ -243,54 +189,50 @@ and it's equivalent to::
    >>> combs
    [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
 
-Note how the order of the :keyword:`for` and :keyword:`if` statements is the
-same in both these snippets.
+Si noti che l'ordine del :keyword:`for` e dello :keyword:`if` è lo stesso in entrambe le soluzioni. 
 
-If the expression is a tuple (e.g. the ``(x, y)`` in the previous example),
-it must be parenthesized. ::
+Se l'espressione è una tupla (come ``(x, y)`` nell'esempio precedente) deve essere messa tra parentesi. ::
 
    >>> vec = [-4, -2, 0, 2, 4]
-   >>> # create a new list with the values doubled
+   >>> # crea una nuova lista con i valori raddoppiati
    >>> [x*2 for x in vec]
    [-8, -4, 0, 4, 8]
-   >>> # filter the list to exclude negative numbers
+   >>> # fitra la lista togliendo i valori negativi
    >>> [x for x in vec if x >= 0]
    [0, 2, 4]
-   >>> # apply a function to all the elements
+   >>> # applica una funzione a tutti gli elementi
    >>> [abs(x) for x in vec]
    [4, 2, 0, 2, 4]
-   >>> # call a method on each element
+   >>> # chiama un metodo su ciascun elemento
    >>> freshfruit = ['  banana', '  loganberry ', 'passion fruit  ']
    >>> [weapon.strip() for weapon in freshfruit]
    ['banana', 'loganberry', 'passion fruit']
-   >>> # create a list of 2-tuples like (number, square)
+   >>> # crea una lista di tiple del tipo (number, square)
    >>> [(x, x**2) for x in range(6)]
    [(0, 0), (1, 1), (2, 4), (3, 9), (4, 16), (5, 25)]
-   >>> # the tuple must be parenthesized, otherwise an error is raised
+   >>> # le tuple devono essere tra parentesi, o viene emesso un errore
    >>> [x, x**2 for x in range(6)]
      File "<stdin>", line 1, in <module>
        [x, x**2 for x in range(6)]
                   ^
    SyntaxError: invalid syntax
-   >>> # flatten a list using a listcomp with two 'for'
+   >>> # "appiattisce" una lista con due 'for'
    >>> vec = [[1,2,3], [4,5,6], [7,8,9]]
    >>> [num for elem in vec for num in elem]
    [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-List comprehensions can contain complex expressions and nested functions::
+Le *list comprehension* possono contenere espressioni complesse e funzioni dentro funzioni::
 
    >>> from math import pi
    >>> [str(round(pi, i)) for i in range(1, 6)]
    ['3.1', '3.14', '3.142', '3.1416', '3.14159']
 
-Nested List Comprehensions
---------------------------
+List comprehension annidate
+---------------------------
 
-The initial expression in a list comprehension can be any arbitrary expression,
-including another list comprehension.
+L'espressione iniziale di una *list comprehension* può essere qualsiasi cosa, anche un'altra *list comprehension*. 
 
-Consider the following example of a 3x4 matrix implemented as a list of
-3 lists of length 4::
+Per esempio, questa è una matrice 3x4, implementata come una lista di tre liste di lunghezza 4::
 
    >>> matrix = [
    ...     [1, 2, 3, 4],
@@ -298,14 +240,12 @@ Consider the following example of a 3x4 matrix implemented as a list of
    ...     [9, 10, 11, 12],
    ... ]
 
-The following list comprehension will transpose rows and columns::
+La seguente *list comprehension* annidata traspone righe e colonne::
 
    >>> [[row[i] for row in matrix] for i in range(4)]
    [[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
 
-As we saw in the previous section, the nested listcomp is evaluated in
-the context of the :keyword:`for` that follows it, so this example is
-equivalent to::
+Come abbiamo visto nel paragrafo precedente, la *list comprehension* annidata è valutata nel contesto del :keyword:`for` che la segue; il nostro esempio equivale quindi a::
 
    >>> transposed = []
    >>> for i in range(4):
@@ -314,11 +254,11 @@ equivalent to::
    >>> transposed
    [[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
 
-which, in turn, is the same as::
+che a sua volta è la stessa cosa di::
 
    >>> transposed = []
    >>> for i in range(4):
-   ...     # the following 3 lines implement the nested listcomp
+   ...     # le 3 righe seguenti equivalgono alla list comp. annidata
    ...     transposed_row = []
    ...     for row in matrix:
    ...         transposed_row.append(row[i])
@@ -327,24 +267,19 @@ which, in turn, is the same as::
    >>> transposed
    [[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
 
-In the real world, you should prefer built-in functions to complex flow statements.
-The :func:`zip` function would do a great job for this use case::
+Nella pratica di tutti i giorni, è preferibile usare le funzioni predefinite alle istruzioni di controllo di flusso troppo complicate. La funzione :func:`zip` è molto adatta al nostro specifico scenario::
 
    >>> list(zip(*matrix))
    [(1, 5, 9), (2, 6, 10), (3, 7, 11), (4, 8, 12)]
 
-See :ref:`tut-unpacking-arguments` for details on the asterisk in this line.
+Si veda :ref:`tut-unpacking-arguments` per l'uso dell'asterisco in questa chiamata di funzione.
 
 .. _tut-del:
 
-The :keyword:`!del` statement
-=============================
+L'istruzione :keyword:`!del`
+============================
 
-There is a way to remove an item from a list given its index instead of its
-value: the :keyword:`del` statement.  This differs from the :meth:`pop` method
-which returns a value.  The :keyword:`!del` statement can also be used to remove
-slices from a list or clear the entire list (which we did earlier by assignment
-of an empty list to the slice).  For example::
+L'istruzione :keyword:`del` consente di rimuovere un elemento da una lista, data la sua posizione, anziché il valore. È differente dal metodo :meth:`pop`, che restituisce il valore dell'elemento rimosso. L'istruzione :keyword:`del` può anche essere usata per rimuovere una sezione della lista, o svuotare l'intera lista (come abbiamo già fatto assegnando una lista vuota alla sezione). Per esempio::
 
    >>> a = [-1, 1, 66.25, 333, 333, 1234.5]
    >>> del a[0]
@@ -357,70 +292,48 @@ of an empty list to the slice).  For example::
    >>> a
    []
 
-:keyword:`del` can also be used to delete entire variables::
+:keyword:`del` può anche eliminare una variabile::
 
    >>> del a
 
-Referencing the name ``a`` hereafter is an error (at least until another value
-is assigned to it).  We'll find other uses for :keyword:`del` later.
-
+Adesso riferirsi ad ``a`` produce un errore, almeno finché non le viene assegnato un nuovo valore. Vedremo in seguito altri possibili usi di :keyword:`del`.
 
 .. _tut-tuples:
 
-Tuples and Sequences
-====================
+Tuple e sequenze
+================
 
-We saw that lists and strings have many common properties, such as indexing and
-slicing operations.  They are two examples of *sequence* data types (see
-:ref:`typesseq`).  Since Python is an evolving language, other sequence data
-types may be added.  There is also another standard sequence data type: the
-*tuple*.
+Abbiamo visto che le liste e le stringhe hanno molte proprietà in comune, come le operazioni di indicizzazione e sezionamento. In effetti sono due esempi del tipo di dato *sequenza* (si veda :ref:`Sequenze - liste, tuple, range<typesseq>`). Dal momento che Python è un linguaggio in evoluzione, altri tipi di sequenza potrebbero essere aggiunti in futuro. Un altro tipo di sequenza predefinita è la *tupla*. 
 
-A tuple consists of a number of values separated by commas, for instance::
+Una tupla è una serie di valori separati da virgola, per esempio::
 
    >>> t = 12345, 54321, 'hello!'
    >>> t[0]
    12345
    >>> t
    (12345, 54321, 'hello!')
-   >>> # Tuples may be nested:
+   >>> # Le tuple possono essere annidate:
    ... u = t, (1, 2, 3, 4, 5)
    >>> u
    ((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))
-   >>> # Tuples are immutable:
+   >>> # Le tuple sono immutabili:
    ... t[0] = 88888
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
    TypeError: 'tuple' object does not support item assignment
-   >>> # but they can contain mutable objects:
+   >>> # ma possono contenere oggetti mutabili:
    ... v = ([1, 2, 3], [3, 2, 1])
    >>> v
    ([1, 2, 3], [3, 2, 1])
 
+Come si può vedere, le tuple in output sono sempre scritte con le parentesi, in modo che le tuple annidate siano leggibili facilmente. Possono essere scritte in input con o senza parentesi, anche se molto spesso le parentesi sono comunque necessarie (se la tupla fa parte di un'espressione più grande). Non è possibile assegnare a un elemento della tupla: tuttavia è possibile creare tuple che contengono oggetti mutabili, come una lista. 
 
-As you see, on output tuples are always enclosed in parentheses, so that nested
-tuples are interpreted correctly; they may be input with or without surrounding
-parentheses, although often parentheses are necessary anyway (if the tuple is
-part of a larger expression).  It is not possible to assign to the individual
-items of a tuple, however it is possible to create tuples which contain mutable
-objects, such as lists.
+Anche se le tuple possono sembrare simili alle liste, sono usate in contesti diversi e per scopi diversi. Le tuple sono :term:`immutabili<immutable>` e di solito ospitano una collezione di elementi eterogenei, a cui si può accedere tramite "spacchettamento" (vedi oltre) o indici, o anche attributi, nel caso di una :func:`namedtuples <collections.namedtuple>`. Le liste sono :term:`mutabili<mutable>` e di solito ospitano elementi omogenei, a cui si accede iterando sulla lista. 
 
-Though tuples may seem similar to lists, they are often used in different
-situations and for different purposes.
-Tuples are :term:`immutable`, and usually contain a heterogeneous sequence of
-elements that are accessed via unpacking (see later in this section) or indexing
-(or even by attribute in the case of :func:`namedtuples <collections.namedtuple>`).
-Lists are :term:`mutable`, and their elements are usually homogeneous and are
-accessed by iterating over the list.
-
-A special problem is the construction of tuples containing 0 or 1 items: the
-syntax has some extra quirks to accommodate these.  Empty tuples are constructed
-by an empty pair of parentheses; a tuple with one item is constructed by
-following a value with a comma (it is not sufficient to enclose a single value
-in parentheses). Ugly, but effective.  For example::
+Le tuple che hanno nessuno o un elemento pongono un problema di costruzione: la sintassi prevede un paio di stranezze per risolvere questi casi. Le tuple vuote si creano con una coppia di parentesi, senza nulla dentro. Le tuple con un solo elemento hanno una virgola finale (non è sufficiente mettere il valore tra parentesi per creare una tupla). Non è bello da vedere, ma funziona. Per esempio::
 
    >>> empty = ()
-   >>> singleton = 'hello',    # <-- note trailing comma
+   >>> singleton = 'hello',    # <-- notare la virgola finale
    >>> len(empty)
    0
    >>> len(singleton)
@@ -428,100 +341,66 @@ in parentheses). Ugly, but effective.  For example::
    >>> singleton
    ('hello',)
 
-The statement ``t = 12345, 54321, 'hello!'`` is an example of *tuple packing*:
-the values ``12345``, ``54321`` and ``'hello!'`` are packed together in a tuple.
-The reverse operation is also possible::
+L'assegnazione ``t = 12345, 54321, 'hello!'`` è un esempio di *impacchettamento* di tupla: i valori``12345``, ``54321`` e ``'hello!'`` sono impacchettati insieme nella tupla. L'inverso è anche possibile::
 
    >>> x, y, z = t
 
-This is called, appropriately enough, *sequence unpacking* and works for any
-sequence on the right-hand side.  Sequence unpacking requires that there are as
-many variables on the left side of the equals sign as there are elements in the
-sequence.  Note that multiple assignment is really just a combination of tuple
-packing and sequence unpacking.
-
+Questo si chiama, prevedibilmente, *spacchettamento* di sequenza, e funziona con tutti i tipi di sequenza, a destra del segno di uguaglianza. Lo spacchettamento richiede che il numero delle variabili sul lato sinistro sia uguale al numero di elementi della sequenza sul lato destro. Si noti che l'assegnamento multiplo è in realtà una combinazione delle due operazioni di impacchettamento e spacchettamento. 
 
 .. _tut-sets:
 
-Sets
-====
+Set
+===
 
-Python also includes a data type for *sets*.  A set is an unordered collection
-with no duplicate elements.  Basic uses include membership testing and
-eliminating duplicate entries.  Set objects also support mathematical operations
-like union, intersection, difference, and symmetric difference.
+Python ha un tipo di dato per i *set*. Un set è una collezione non ordinata senza elementi duplicati. Tra gli utilizzi più frequenti vi sono i test di appartenenza e l'eliminazione dei duplicati. I set supportano anche le operazioni matematiche di unione, intersezione, differenza e differenza simmetrica. 
 
-Curly braces or the :func:`set` function can be used to create sets.  Note: to
-create an empty set you have to use ``set()``, not ``{}``; the latter creates an
-empty dictionary, a data structure that we discuss in the next section.
+Per creare un set si può usare la funzione :func:`set` o le parentesi graffe. Si noti che per creare un set vuoto occorre usare ``set()``, non ``{}``: questo infatti crea un *dizionario* vuoto, come vedremo nella prossima parte. 
 
-Here is a brief demonstration::
+Ecco una breve dimostrazione::
 
    >>> basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
-   >>> print(basket)                      # show that duplicates have been removed
+   >>> print(basket)                      # i duplicati sono stati rimossi
    {'orange', 'banana', 'pear', 'apple'}
-   >>> 'orange' in basket                 # fast membership testing
+   >>> 'orange' in basket                 # test di appartenza veloce
    True
    >>> 'crabgrass' in basket
    False
 
-   >>> # Demonstrate set operations on unique letters from two words
+   >>> # Dimostra le operazioni sui set con i caratteri di due parole
    ...
    >>> a = set('abracadabra')
    >>> b = set('alacazam')
-   >>> a                                  # unique letters in a
+   >>> a                                  # caratteri unici in a
    {'a', 'r', 'b', 'c', 'd'}
-   >>> a - b                              # letters in a but not in b
+   >>> a - b                              # in a ma non in b
    {'r', 'd', 'b'}
-   >>> a | b                              # letters in a or b or both
+   >>> a | b                              # in a o b o entrambi
    {'a', 'c', 'r', 'd', 'b', 'm', 'z', 'l'}
-   >>> a & b                              # letters in both a and b
+   >>> a & b                              # sia in a sia in b
    {'a', 'c'}
-   >>> a ^ b                              # letters in a or b but not both
+   >>> a ^ b                              # in a o b, ma non in entrambi
    {'r', 'd', 'b', 'm', 'z', 'l'}
 
-Similarly to :ref:`list comprehensions <tut-listcomps>`, set comprehensions
-are also supported::
+Analogamente alle :ref:`list comprehensions <tut-listcomps>`, esistono le *set comprehensions*::
 
    >>> a = {x for x in 'abracadabra' if x not in 'abc'}
    >>> a
    {'r', 'd'}
 
-
 .. _tut-dictionaries:
 
-Dictionaries
-============
+Dizionari
+=========
 
-Another useful data type built into Python is the *dictionary* (see
-:ref:`typesmapping`). Dictionaries are sometimes found in other languages as
-"associative memories" or "associative arrays".  Unlike sequences, which are
-indexed by a range of numbers, dictionaries are indexed by *keys*, which can be
-any immutable type; strings and numbers can always be keys.  Tuples can be used
-as keys if they contain only strings, numbers, or tuples; if a tuple contains
-any mutable object either directly or indirectly, it cannot be used as a key.
-You can't use lists as keys, since lists can be modified in place using index
-assignments, slice assignments, or methods like :meth:`append` and
-:meth:`extend`.
+Un altro utile tipo predefinito in Python è il *dizionario* (si veda :ref:`Tipi di mapping - dizionari<typesmapping>`). I dizionari sono anche chiamati "array associativi" o "memorie associative" in altri linguaggi. A differenza delle sequenze ceh sono indicizzate con intervalli numerici, i dizionari sono indicizzati con *chiavi*; le chiavi possono essere di qualsiasi tipo immutabile: stringhe e numeri sono sempre adatti come chiavi. Le tuple possono essere usate come chiavi, se contengono solo stringhe, numeri o altre tuple; se una tupla contiene qualsiasi altro oggetto mutabile, direttamente o indirettamente, allora non può fungere da chiave per un dizionario. Non potete usare le liste come chiavi, dal momento che queste possono essere modificate sul posto con l'assegnamento a un indice, il sezionamento o metodi come :meth:`append` e :meth:`extend`.
 
-It is best to think of a dictionary as a set of *key: value* pairs,
-with the requirement that the keys are unique (within one dictionary). A pair of
-braces creates an empty dictionary: ``{}``. Placing a comma-separated list of
-key:value pairs within the braces adds initial key:value pairs to the
-dictionary; this is also the way dictionaries are written on output.
+Conviene pensare a un dizionario come a una collezione di coppie *chiave: valore*, con il requisito che le chiavi devono essere univoche all'interno del dizionario. Una coppia di parentesi graffe crea un dizionario vuoto: ``{}``. Per inizializzare il dizionario, è possibile inserire nelle parentesi delle coppie *chiave: valore*; questo è anche il modo in cui i dizionari sono scritti in output. 
 
-The main operations on a dictionary are storing a value with some key and
-extracting the value given the key.  It is also possible to delete a key:value
-pair with ``del``. If you store using a key that is already in use, the old
-value associated with that key is forgotten.  It is an error to extract a value
-using a non-existent key.
+Le operazioni principali con i dizionari sono conservare un valore accoppiandolo a una chiave, e estrarre il valore data la chiave. È inoltre possibile cancellare una coppia *chiave: valore* con ``del``. Se si accoppia un valore a una chiave già in uso, il vecchio valore viene sovrascritto. Estrarre un valore con una chiave inesistente produce un errore. 
 
-Performing ``list(d)`` on a dictionary returns a list of all the keys
-used in the dictionary, in insertion order (if you want it sorted, just use
-``sorted(d)`` instead). To check whether a single key is in the
-dictionary, use the :keyword:`in` keyword.
+Usare ``list(d)`` su un dizionario restituisce una lista di tutte le chiavi usate nel dizionario, in ordine di inserimento (se le preferite ordinate, potete invece usare ``sorted(d)``). Per sapere se una chiave è presente in un dizionario, usate la parola-chiave :keyword:`in`.
 
-Here is a small example using a dictionary::
+Ecco un esempio di utilizzo di un dizionario::
 
    >>> tel = {'jack': 4098, 'sape': 4139}
    >>> tel['guido'] = 4127
@@ -542,32 +421,27 @@ Here is a small example using a dictionary::
    >>> 'jack' not in tel
    False
 
-The :func:`dict` constructor builds dictionaries directly from sequences of
-key-value pairs::
+La funzione :func:`dict` costruisce un dizionario da una sequenza di coppie *chiave, valore*::
 
    >>> dict([('sape', 4139), ('guido', 4127), ('jack', 4098)])
    {'sape': 4139, 'guido': 4127, 'jack': 4098}
 
-In addition, dict comprehensions can be used to create dictionaries from
-arbitrary key and value expressions::
+Inoltre, è possibile usare le *dict comprehension* per creare dizionari da espressioni arbitrarie che restituiscono coppie *chiave: valore*::
 
    >>> {x: x**2 for x in (2, 4, 6)}
    {2: 4, 4: 16, 6: 36}
 
-When the keys are simple strings, it is sometimes easier to specify pairs using
-keyword arguments::
+Quando le chiavi sono delle stringhe, è più semplice passare a :func:`dict` degli argomenti keyword::
 
    >>> dict(sape=4139, guido=4127, jack=4098)
    {'sape': 4139, 'guido': 4127, 'jack': 4098}
 
-
 .. _tut-loopidioms:
 
-Looping Techniques
-==================
+Tecniche di iterazione
+======================
 
-When looping through dictionaries, the key and corresponding value can be
-retrieved at the same time using the :meth:`items` method. ::
+Quando occorre iterare su un dizionario, le chiavi e i valori corrispondenti si possono estrarre contemporaneamente con il metodo :meth:`items`::
 
    >>> knights = {'gallahad': 'the pure', 'robin': 'the brave'}
    >>> for k, v in knights.items():
@@ -576,8 +450,7 @@ retrieved at the same time using the :meth:`items` method. ::
    gallahad the pure
    robin the brave
 
-When looping through a sequence, the position index and corresponding value can
-be retrieved at the same time using the :func:`enumerate` function. ::
+Quando si itera su una sequenza, l'indice e il valore corrispondente si possono estrarre contemporaneamente con la funzione :func:`enumerate`::
 
    >>> for i, v in enumerate(['tic', 'tac', 'toe']):
    ...     print(i, v)
@@ -586,8 +459,7 @@ be retrieved at the same time using the :func:`enumerate` function. ::
    1 tac
    2 toe
 
-To loop over two or more sequences at the same time, the entries can be paired
-with the :func:`zip` function. ::
+Per iterare su due o più sequenze contemporaneamente, queste possono essere accoppiate con la funzione :func:`zip`::
 
    >>> questions = ['name', 'quest', 'favorite color']
    >>> answers = ['lancelot', 'the holy grail', 'blue']
@@ -598,8 +470,7 @@ with the :func:`zip` function. ::
    What is your quest?  It is the holy grail.
    What is your favorite color?  It is blue.
 
-To loop over a sequence in reverse, first specify the sequence in a forward
-direction and then call the :func:`reversed` function. ::
+Per iterare su una sequenza in ordine inverso, si scrive l'iterazione in avanti e su questa si chiama la funzione :func:`reversed`::
 
    >>> for i in reversed(range(1, 10, 2)):
    ...     print(i)
@@ -610,8 +481,7 @@ direction and then call the :func:`reversed` function. ::
    3
    1
 
-To loop over a sequence in sorted order, use the :func:`sorted` function which
-returns a new sorted list while leaving the source unaltered. ::
+Per iterare su una sequenza in modo ordinato, usate la funzione :func:`sorted` che restituisce una nuova lista ordinata, lasciando inalterato l'originale::
 
    >>> basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
    >>> for f in sorted(set(basket)):
@@ -622,8 +492,7 @@ returns a new sorted list while leaving the source unaltered. ::
    orange
    pear
 
-It is sometimes tempting to change a list while you are looping over it;
-however, it is often simpler and safer to create a new list instead. ::
+Talvolta si cerca di modificare la lista mentre ci si sta iterando sopra; è spesso più semplice creare invece una nuova lista::
 
    >>> import math
    >>> raw_data = [56.2, float('NaN'), 51.7, 55.3, 52.5, float('NaN'), 47.8]
@@ -635,68 +504,36 @@ however, it is often simpler and safer to create a new list instead. ::
    >>> filtered_data
    [56.2, 51.7, 55.3, 52.5, 47.8]
 
-
 .. _tut-conditions:
 
-More on Conditions
-==================
+Un approfondimento sulle condizioni
+===================================
 
-The conditions used in ``while`` and ``if`` statements can contain any
-operators, not just comparisons.
+Le condizioni usate nelle istruzioni ``while`` e ``if`` possono contenere qualsiasi operatore, non solo di confronto. 
 
-The comparison operators ``in`` and ``not in`` check whether a value occurs
-(does not occur) in a sequence.  The operators ``is`` and ``is not`` compare
-whether two objects are really the same object; this only matters for mutable
-objects like lists.  All comparison operators have the same priority, which is
-lower than that of all numerical operators.
+Gli operatori di confronto ``in`` e ``not in`` controllano se un valore esiste o meno in una sequenza. Gli operatori ``is`` e ``is not`` ci dicono se due oggetti sono effettivamente lo stesso oggetto: questo importa solo per gli oggetti mutabili come le liste. Tutti gli operatori di confronto hanno la stessa priorità, che è più bassa di quella di tutti gli altri operatori numerici. 
 
-Comparisons can be chained.  For example, ``a < b == c`` tests whether ``a`` is
-less than ``b`` and moreover ``b`` equals ``c``.
+I confronti possono essere collegati. Per esempio, ``a < b == c`` testa se ``a`` è minore di ``b`` e inoltre se ``b`` è uguale a ``c``.
 
-Comparisons may be combined using the Boolean operators ``and`` and ``or``, and
-the outcome of a comparison (or of any other Boolean expression) may be negated
-with ``not``.  These have lower priorities than comparison operators; between
-them, ``not`` has the highest priority and ``or`` the lowest, so that ``A and
-not B or C`` is equivalent to ``(A and (not B)) or C``. As always, parentheses
-can be used to express the desired composition.
+I confronti possono essere combinati usando gli operatori booleani ``and`` e ``or``; il risultato di un confronto, o di qualsiasi altra espressione booleana, si può negare con ``not``. Questi operatori hanno una priorità più bassa degli operatori di confronto; tra di loro, ``not`` ha la priorità più alta e ``or`` la più bassa, così che ``A and not B or C`` equivale a ``(A and (not B)) or C``. Come sempre, si possono usare le parentesi per esprimere la priorità desiderata. 
 
-The Boolean operators ``and`` and ``or`` are so-called *short-circuit*
-operators: their arguments are evaluated from left to right, and evaluation
-stops as soon as the outcome is determined.  For example, if ``A`` and ``C`` are
-true but ``B`` is false, ``A and B and C`` does not evaluate the expression
-``C``.  When used as a general value and not as a Boolean, the return value of a
-short-circuit operator is the last evaluated argument.
+Gli operatori booleani ``and`` e ``or`` sono detti "operatori corto-circuito": i loro argomenti sono valutati da sinistra a destra, ma la valutazione si ferma non appena l'esito è chiaro. Per esempio, se ``A`` e ``C`` sono "veri" ma ``B`` è "falso", allora ``A and B and C`` si ferma prima di valutare l'espressione ``C``. Quando vengono usati per restituire un valore, e non come booleani, gli operatori corto-circuito restituiscono l'ultimo argomento valutato. 
 
-It is possible to assign the result of a comparison or other Boolean expression
-to a variable.  For example, ::
+È possibile assegnare a una variabile il risultato di un confronto o di un'altra espressione booleana. Per esempio, ::
 
    >>> string1, string2, string3 = '', 'Trondheim', 'Hammer Dance'
    >>> non_null = string1 or string2 or string3
    >>> non_null
    'Trondheim'
 
-Note that in Python, unlike C, assignment inside expressions must be done
-explicitly with the
-:ref:`walrus operator <why-can-t-i-use-an-assignment-in-an-expression>` ``:=``.
-This avoids a common class of problems encountered in C programs: typing ``=``
-in an expression when ``==`` was intended.
-
+Si noti che in Python, a differenza di C, un assegnamento dentro un'espressione può essere fatto solo esplicitamente con il :ref:`walrus operator <why-can-t-i-use-an-assignment-in-an-expression>` ``:=``. Questo evita una serie di problemi comuni che si incontrano programmando in C: scrivere per sbaglio ``=`` in un'espressione, quando si intende ``==``. 
 
 .. _tut-comparing:
 
-Comparing Sequences and Other Types
-===================================
-Sequence objects typically may be compared to other objects with the same sequence
-type. The comparison uses *lexicographical* ordering: first the first two
-items are compared, and if they differ this determines the outcome of the
-comparison; if they are equal, the next two items are compared, and so on, until
-either sequence is exhausted. If two items to be compared are themselves
-sequences of the same type, the lexicographical comparison is carried out
-recursively.  If all items of two sequences compare equal, the sequences are
-considered equal. If one sequence is an initial sub-sequence of the other, the
-shorter sequence is the smaller (lesser) one.  Lexicographical ordering for
-strings uses the Unicode code point number to order individual characters.
-Some examples of comparisons between sequences of the same type::
+Confronto di sequenze e altri tipi
+==================================
+
+In genere è possibile confrontare un oggetto-sequenza con una sequenza dello stesso tipo. Il confronto è fatto in ordine *lessicografico*: prima sono confrontati i primi due elementi tra loro, e se sono diversi questo determina l'esito del confronto; se sono uguali, si confrontano i secondi elementi e così via, fino a quando una delle due sequenze termina. Se due elementi da confrontare sono essi stessi delle sequenze, viene effettuato un confronto lessicografico tra questi, ricorsivamente. Se tutti gli elementi sono uguali fra loro, le sequenze sono considerate uguali. Se una sequenza è una sotto-sequenza iniziale di un'altra, è la sequenza più breve a risultare la minore nel confronto. L'ordine lessicografico per le stringhe usa i code point Unicode per confrontare i singoli caratteri. Ecco alcuni esempi di confronto tra sequenze dello stesso tipo::
 
    (1, 2, 3)              < (1, 2, 4)
    [1, 2, 3]              < [1, 2, 4]
@@ -706,14 +543,8 @@ Some examples of comparisons between sequences of the same type::
    (1, 2, 3)             == (1.0, 2.0, 3.0)
    (1, 2, ('aa', 'ab'))   < (1, 2, ('abc', 'a'), 4)
 
-Note that comparing objects of different types with ``<`` or ``>`` is legal
-provided that the objects have appropriate comparison methods.  For example,
-mixed numeric types are compared according to their numeric value, so 0 equals
-0.0, etc.  Otherwise, rather than providing an arbitrary ordering, the
-interpreter will raise a :exc:`TypeError` exception.
+Si noti che confrontare oggetti di tipo diverso con ``<`` o ``>`` è possibile, purché gli oggetti abbiano un metodo di confronto adeguato. Per esempio, i diversi tipi numerici sono confrontati in base al loro valore, quindi 0 è uguale a 0.0 e così via. In assenza di un metodo di confronto, l'interprete non fornisce un ordinamento arbitrario, ma emette invece un'eccezione :exc:`TypeError`.
 
+.. rubric:: Note
 
-.. rubric:: Footnotes
-
-.. [1] Other languages may return the mutated object, which allows method
-       chaining, such as ``d->insert("a")->remove("b")->sort();``.
+.. [1] Altri linguaggi preferiscono restituire l'oggetto mutato, cosa che consente il concatenamento dei metodi, per esempio ``d->insert("a")->remove("b")->sort();``.
