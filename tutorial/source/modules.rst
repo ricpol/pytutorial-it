@@ -1,40 +1,25 @@
 .. _tut-modules:
 
-*******
-Modules
-*******
+******
+Moduli
+******
 
-If you quit from the Python interpreter and enter it again, the definitions you
-have made (functions and variables) are lost. Therefore, if you want to write a
-somewhat longer program, you are better off using a text editor to prepare the
-input for the interpreter and running it with that file as input instead.  This
-is known as creating a *script*.  As your program gets longer, you may want to
-split it into several files for easier maintenance.  You may also want to use a
-handy function that you've written in several programs without copying its
-definition into each program.
+Se chiudete l'interprete di Python e poi vi rientrate, non ritroverete le definizioni che avevate impostato (funzioni e variabili). Di conseguenza, se volete scrivere un programma più lungo, vi conviene usare un editor di testo per preparare le istruzioni per l'interprete, e invocarlo poi con il file risultante come input. In questo modo avete creato uno *script*. Quando poi il vostro programma diventa più lungo, potreste volerlo dividere in diversi file più maneggevoli. Potreste anche voler usare in diversi programmi le stesse funzioni utili che avete scritto, senza bisogno di copiarle tutte le volte. 
 
-To support this, Python has a way to put definitions in a file and use them in a
-script or in an interactive instance of the interpreter. Such a file is called a
-*module*; definitions from a module can be *imported* into other modules or into
-the *main* module (the collection of variables that you have access to in a
-script executed at the top level and in calculator mode).
+A questo scopo, in Python potete mettere delle definizioni in un file e usarle poi in uno script o nella sessione interattiva dell'interprete. Un file di questo tipo è un *modulo*; le definizioni di un modulo possono essere *importate* in altri moduli o nel modulo *principale* (ovvero, l'insieme delle variabili a cui avete accesso da uno script eseguito, o dalla modalità interattiva).
 
-A module is a file containing Python definitions and statements.  The file name
-is the module name with the suffix :file:`.py` appended.  Within a module, the
-module's name (as a string) is available as the value of the global variable
-``__name__``.  For instance, use your favorite text editor to create a file
-called :file:`fibo.py` in the current directory with the following contents::
+Un modulo è un file che contiene definizioni e istruzioni Python. Il nome del file è quello del modulo più il suffisso :file:`.py`. Dentro il modulo, il nome è disponibile come valore della variabile globale ``__name__`` (una stringa). Per esempio, usate il vostro editor preferito per creare un file dal nome :file:`fibo.py` nella directory corrente, che contiene questo::
 
-   # Fibonacci numbers module
+   # modulo per i numeri di Finonacci
 
-   def fib(n):    # write Fibonacci series up to n
+   def fib(n):    # scrive i numeri di Fibonacci fino a n
        a, b = 0, 1
        while a < n:
            print(a, end=' ')
            a, b = b, a+b
        print()
 
-   def fib2(n):   # return Fibonacci series up to n
+   def fib2(n):   # restituisce i numeri di Fibonacci fino a n
        result = []
        a, b = 0, 1
        while a < n:
@@ -42,14 +27,11 @@ called :file:`fibo.py` in the current directory with the following contents::
            a, b = b, a+b
        return result
 
-Now enter the Python interpreter and import this module with the following
-command::
+Adesso entrate nell'interprete interattivo dei comandi e importate questo modulo così::
 
    >>> import fibo
 
-This does not enter the names of the functions defined in ``fibo``  directly in
-the current symbol table; it only enters the module name ``fibo`` there. Using
-the module name you can access the functions::
+Questa istruzione non inserisce i nomi delle funzioni definite in ``fibo`` direttamente nella tabella dei simboli corrente; piuttosto, vi inserisce il nome del modulo ``fibo``. Usando il nome del modulo potete accedere alle funzioni che contiene::
 
    >>> fibo.fib(1000)
    0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
@@ -58,62 +40,42 @@ the module name you can access the functions::
    >>> fibo.__name__
    'fibo'
 
-If you intend to use a function often you can assign it to a local name::
+Se intendete usare spesso una funzione, potete assegnarle un nome locale::
 
    >>> fib = fibo.fib
    >>> fib(500)
    0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
 
-
 .. _tut-moremodules:
 
-More on Modules
-===============
+Approfondimenti sui moduli
+==========================
 
-A module can contain executable statements as well as function definitions.
-These statements are intended to initialize the module. They are executed only
-the *first* time the module name is encountered in an import statement. [#]_
-(They are also run if the file is executed as a script.)
+Un modulo può contenere istruzioni eseguibili oltre a definizioni di funzioni. Queste istruzioni devono essere intese come un modo di inizializzare il modulo. Sono eseguite solo la *prima volta* che il nome del modulo è incontrato in una istruzione ``import``. [#]_ (Sono anche eseguite se il modulo è eseguito come script.) 
 
-Each module has its own private symbol table, which is used as the global symbol
-table by all functions defined in the module. Thus, the author of a module can
-use global variables in the module without worrying about accidental clashes
-with a user's global variables. On the other hand, if you know what you are
-doing you can touch a module's global variables with the same notation used to
-refer to its functions, ``modname.itemname``.
+Ciascun modulo ha una sua tabella dei simboli, che vale come tabella globale per tutte le funzioni che vi sono definite. Quindi l'autore del modulo può usare delle variabili globali senza preoccuparsi di conflitti accidentali con le variabili globali dell'utente del modulo. D'altra parte, se siete sicuri di quello che fate, potete accedere alle variabili globali del modulo con la stessa notazione che usate per riferirvi alle sue funzioni, ovvero ``modname.itemname``.
 
-Modules can import other modules.  It is customary but not required to place all
-:keyword:`import` statements at the beginning of a module (or script, for that
-matter).  The imported module names are placed in the importing module's global
-symbol table.
+I moduli possono importare altri moduli. È consuetudine, ma non obbligatorio, mettere tutte le istruzioni :keyword:`import` all'inizio del modulo (o dello script). I nomi dei moduli importati sono inseriti nella tabella dei simboli globale del modulo importatore. 
 
-There is a variant of the :keyword:`import` statement that imports names from a
-module directly into the importing module's symbol table.  For example::
+Esiste una variante dell'istruzione :keyword:`import` che consente di importare direttamente i nomi contenuti in un modulo nella tabella dei simboli del modulo importatore. Per esempio::
 
    >>> from fibo import fib, fib2
    >>> fib(500)
    0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
 
-This does not introduce the module name from which the imports are taken in the
-local symbol table (so in the example, ``fibo`` is not defined).
+In questo modo però il nome del modulo, i cui nomi interni sono importati, non è importato esso stesso (quindi, in questo esempio, ``fibo`` non è definito).
 
-There is even a variant to import all names that a module defines::
+C'è poi una variante che consente di importare *tutti* i nomi definiti in un modulo::
 
    >>> from fibo import *
    >>> fib(500)
    0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
 
-This imports all names except those beginning with an underscore (``_``).
-In most cases Python programmers do not use this facility since it introduces
-an unknown set of names into the interpreter, possibly hiding some things
-you have already defined.
+In questo modo vengono importati tutti i nomi del modulo, eccetto quelli che iniziano con un *underscore* (``_``). In genere i programmatori Python non usano questa tecnica, dal momento che introduce un numero sconosciuto di nomi nell'interprete, eventualmente sovrascrivendo nomi che erano già stati definiti. 
 
-Note that in general the practice of importing ``*`` from a module or package is
-frowned upon, since it often causes poorly readable code. However, it is okay to
-use it to save typing in interactive sessions.
+Si noti che in generale importare ``*`` da un modulo o da un package è considerato cattiva pratica, perché spesso rende il codice più difficile da leggere. Tuttavia va bene usare questa tecnica nelle sessioni interattive, per risparmiare battute nei nomi da inserire. 
 
-If the module name is followed by :keyword:`!as`, then the name
-following :keyword:`!as` is bound directly to the imported module.
+Se il nome del modulo è seguito dalla parola-chiave :keyword:`!as`, allora il nome che segue :keyword:`!as` è collegato direttamente al modulo importato.
 
 ::
 
@@ -121,155 +83,95 @@ following :keyword:`!as` is bound directly to the imported module.
    >>> fib.fib(500)
    0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
 
-This is effectively importing the module in the same way that ``import fibo``
-will do, with the only difference of it being available as ``fib``.
+Questo modo di importare il modulo è del tutto equivalente a ``import fibo``, con l'unica differenza che adesso il modulo sarà disponibile con il nome ``fib``.
 
-It can also be used when utilising :keyword:`from` with similar effects::
+Si può anche usare in combinazione con la parola-chiave :keyword:`from`, con effetti analoghi::
 
    >>> from fibo import fib as fibonacci
    >>> fibonacci(500)
    0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
 
-
 .. note::
 
-   For efficiency reasons, each module is only imported once per interpreter
-   session.  Therefore, if you change your modules, you must restart the
-   interpreter -- or, if it's just one module you want to test interactively,
-   use :func:`importlib.reload`, e.g. ``import importlib;
-   importlib.reload(modulename)``.
-
+   Per ragioni di efficienza, ogni modulo è importato solo una volta nella sessione dell'interprete. Di conseguenza, se modificate il vostro modulo, dovete riavviare l'interprete. In alternativa, se si tratta di un modulo che state testando interattivamente, potete usare la funzione :func:`importlib.reload`, ovvero scrivere ``import importlib; importlib.reload(modulename)``.
 
 .. _tut-modulesasscripts:
 
-Executing modules as scripts
-----------------------------
+Eseguire moduli come script
+---------------------------
 
-When you run a Python module with ::
+Quando eseguite un modulo Python con ::
 
    python fibo.py <arguments>
 
-the code in the module will be executed, just as if you imported it, but with
-the ``__name__`` set to ``"__main__"``.  That means that by adding this code at
-the end of your module::
+il codice del modulo verrà eseguito, proprio come se lo aveste importato, ma la variabile ``__name__`` sarà impostata a ``"__main__"``. Ciò vuol dire che, se inserite alla fine del modulo questa clausola::
 
    if __name__ == "__main__":
        import sys
        fib(int(sys.argv[1]))
 
-you can make the file usable as a script as well as an importable module,
-because the code that parses the command line only runs if the module is
-executed as the "main" file:
+potete rendere questo file utilizzabile sia come script sia come modulo importabile, perché il codice incluso nella clausola, che parsa la riga di comando, verrà eseguito solo quando il modulo è eseguito come il file "main": 
 
 .. code-block:: shell-session
 
    $ python fibo.py 50
    0 1 1 2 3 5 8 13 21 34
 
-If the module is imported, the code is not run::
+Se il modulo è importato, il codice non verrà eseguito::
 
    >>> import fibo
    >>>
 
-This is often used either to provide a convenient user interface to a module, or
-for testing purposes (running the module as a script executes a test suite).
-
+Questa tecnica è usata spesso, sia per fornire una comoda interfaccia utente per un modulo, sia per eseguire dei test (facendo in modo che, quando si esegue il modulo come script, si esegua una suite di test).
 
 .. _tut-searchpath:
 
-The Module Search Path
-----------------------
+Il percorso di ricerca dei moduli
+---------------------------------
 
 .. index:: triple: module; search; path
 
-When a module named :mod:`spam` is imported, the interpreter first searches for
-a built-in module with that name. If not found, it then searches for a file
-named :file:`spam.py` in a list of directories given by the variable
-:data:`sys.path`.  :data:`sys.path` is initialized from these locations:
+Quando importiamo un modulo di nome :mod:`spam`, l'interprete per prima cosa cerca tra i moduli predefiniti se ne esiste uno con quel nome. Se non lo trova, cerca un file :file:`spam.py` in una lista di directory contenuta nella variabile :data:`sys.path`. Questa, a sua volta, viene inizializzata con le seguenti *path*:
 
-* The directory containing the input script (or the current directory when no
-  file is specified).
-* :envvar:`PYTHONPATH` (a list of directory names, with the same syntax as the
-  shell variable :envvar:`PATH`).
-* The installation-dependent default.
+* La directory che contiene lo script importatore (o la directory corrente se questo non è specificato).
+* La variabile d'ambiente :envvar:`PYTHONPATH` (se impostata, contiene una lista di directory, con la stessa sintassi della variabile :envvar:`PATH`).
+* Un default che dipende dall'installazione di Python. 
 
 .. note::
-   On file systems which support symlinks, the directory containing the input
-   script is calculated after the symlink is followed. In other words the
-   directory containing the symlink is **not** added to the module search path.
+   Nei file system che supportano i symlink, la directory che contiene lo script importatore è calcolata dopo aver seguito i symlink. In altre parole, la directory che contiene il symlink *non* è aggiunta al percorso di ricerca dei moduli.
 
-After initialization, Python programs can modify :data:`sys.path`.  The
-directory containing the script being run is placed at the beginning of the
-search path, ahead of the standard library path. This means that scripts in that
-directory will be loaded instead of modules of the same name in the library
-directory. This is an error unless the replacement is intended.  See section
-:ref:`tut-standardmodules` for more information.
+Dopo che è stata inizializzata, è possibile modificare :data:`sys.path` dall'interno di un programma Python. La directory che contiene lo script in esecuzione è collocata all'inizio del lista dei percorsi da cercare, davanti alla directory della libreria standard. Ciò vuol dire che i moduli locali, se hanno lo stesso nome, verranno importati al posto di quelli della libreria standard. In genere questo è un errore, a meno che non sia fatto intenzionalmente. Si veda la sezione :ref:`tut-standardmodules` per maggiori informazioni.
 
 .. %
     Do we need stuff on zip files etc. ? DUBOIS
 
-"Compiled" Python files
------------------------
+File "compilati"
+----------------
 
-To speed up loading modules, Python caches the compiled version of each module
-in the ``__pycache__`` directory under the name :file:`module.{version}.pyc`,
-where the version encodes the format of the compiled file; it generally contains
-the Python version number.  For example, in CPython release 3.3 the compiled
-version of spam.py would be cached as ``__pycache__/spam.cpython-33.pyc``.  This
-naming convention allows compiled modules from different releases and different
-versions of Python to coexist.
+Per velocizzare il caricamento dei moduli, Python conserva nella directory di cache ``__pycache__`` una versione compilata di ciascun modulo, con il nome :file:`module.{version}.pyc`, dove *version* specifica il formato del file compilato: di solito è il numero di versione di Python. Per esempio, in CPyhton 3.3 la versione compilata del modulo ``spam.py`` si chiamerebbe ``__pycache__/spam.cpython-33.pyc``. Questa convenzione permette la coesistenza di moduli compilati da diverse versioni di Python. 
 
-Python checks the modification date of the source against the compiled version
-to see if it's out of date and needs to be recompiled.  This is a completely
-automatic process.  Also, the compiled modules are platform-independent, so the
-same library can be shared among systems with different architectures.
+Python confronta la data di ultima modifica del modulo con la sua versione compilata, e ricompila all'occorrenza. Questo processo è completamente automatico. Inoltre, i moduli compilati sono indipendenti dalla piattaforma, così che lo stesso modulo possa essere condiviso su sistemi diversi, con diverse architetture. 
 
-Python does not check the cache in two circumstances.  First, it always
-recompiles and does not store the result for the module that's loaded directly
-from the command line.  Second, it does not check the cache if there is no
-source module.  To support a non-source (compiled only) distribution, the
-compiled module must be in the source directory, and there must not be a source
-module.
+Python non controlla la cache in due circostanze. In primo luogo, quando un modulo è caricato direttamente dalla riga di comando, Python ricompila sempre il modulo senza conservarlo nella cache. In secondo luogo, non controlla la cache se non c'è anche il modulo originale. Per ottenere una distribuzione senza sorgenti (solo compilata), oltre a togliere il modulo originale, il modulo compilato deve essere collocato nella directory dei file originali. 
 
-Some tips for experts:
+Alcuni consigli per gli esperti:
 
-* You can use the :option:`-O` or :option:`-OO` switches on the Python command
-  to reduce the size of a compiled module.  The ``-O`` switch removes assert
-  statements, the ``-OO`` switch removes both assert statements and __doc__
-  strings.  Since some programs may rely on having these available, you should
-  only use this option if you know what you're doing.  "Optimized" modules have
-  an ``opt-`` tag and are usually smaller.  Future releases may
-  change the effects of optimization.
+* Potete usare le opzioni :option:`-O` o :option:`-OO` della riga di comando Python per ridurre le dimensioni del modulo compilato. La ``-O`` rimuove le istruzioni *assert*, mentre ``-OO`` rimuove sia gli *assert* sia le docstring. Dal momento che alcuni programmi potrebbero averne bisogno, usate queste opzioni solo se sapete che cosa state facendo. I moduli "ottimizzati" hanno un contrassegno ``opt-`` e di solito sono più piccoli. Future versioni di Python potrebbero cambiare gli effetti dell'ottimizzazione. 
 
-* A program doesn't run any faster when it is read from a ``.pyc``
-  file than when it is read from a ``.py`` file; the only thing that's faster
-  about ``.pyc`` files is the speed with which they are loaded.
+* Un programma non è più veloce se usa i file ``.pyc`` invece dei normali ``.py``. L'unica differenza è la velocità di *caricamento* del modulo. 
 
-* The module :mod:`compileall` can create .pyc files for all modules in a
-  directory.
+* Il modulo :mod:`compileall` della libreria standard può compilare tutti i moduli di una directory.
 
-* There is more detail on this process, including a flow chart of the
-  decisions, in :pep:`3147`.
-
+* Si veda la :pep:`3147` per ulteriori dettagli su questi procedimenti, incluso un diagramma di flusso dei vari passaggi. 
 
 .. _tut-standardmodules:
 
-Standard Modules
-================
+Moduli della libreria standard
+==============================
 
 .. index:: module: sys
 
-Python comes with a library of standard modules, described in a separate
-document, the Python Library Reference ("Library Reference" hereafter).  Some
-modules are built into the interpreter; these provide access to operations that
-are not part of the core of the language but are nevertheless built in, either
-for efficiency or to provide access to operating system primitives such as
-system calls.  The set of such modules is a configuration option which also
-depends on the underlying platform.  For example, the :mod:`winreg` module is only
-provided on Windows systems. One particular module deserves some attention:
-:mod:`sys`, which is built into every Python interpreter.  The variables
-``sys.ps1`` and ``sys.ps2`` define the strings used as primary and secondary
-prompts::
+Python è distribuito con una libreria standard di moduli, documentata in un una sezione separata, la Guida di Riferimento della Libreria Standard. Alcuni moduli sono pre-caricati nell'interprete: questi forniscono delle operazioni che non fanno parte del linguaggio, ma sono comunque predefinite, sia per ragioni di efficienza, sia per dare accesso alle primitive del sistema operativo sottostante. La composizione di questi moduli dipende dalla configurazione, che a sua volta dipende dalla piattaforma. Per esempio, :mod:`winreg` è solo disponibile su Windows. Un modulo meritevole di attenzione particolare è :mod:`sys`, sempre disponibile. Le variabili ``sys.ps1`` e ``sys.ps2`` definiscono le stringhe usate per il prompt primario e secondario::
 
    >>> import sys
    >>> sys.ps1
@@ -281,26 +183,19 @@ prompts::
    Yuck!
    C>
 
+Queste variabili sono disponibili solo se l'interprete è in modalità interattiva. 
 
-These two variables are only defined if the interpreter is in interactive mode.
-
-The variable ``sys.path`` is a list of strings that determines the interpreter's
-search path for modules. It is initialized to a default path taken from the
-environment variable :envvar:`PYTHONPATH`, or from a built-in default if
-:envvar:`PYTHONPATH` is not set.  You can modify it using standard list
-operations::
+La variabile ``sys.path`` è una lista di stringhe che determina il percorso di ricerca dei moduli da importare. È inizializzata con delle path contenute nella variabile d'ambiente :envvar:`PYTHONPATH`, oppure da default predefiniti se questa non è impostata. Potete modificare ``sys.path`` con le normali tecniche di manipolazione delle liste::
 
    >>> import sys
    >>> sys.path.append('/ufs/guido/lib/python')
 
-
 .. _tut-dir:
 
-The :func:`dir` Function
-========================
+La funzione :func:`dir`
+=======================
 
-The built-in function :func:`dir` is used to find out which names a module
-defines.  It returns a sorted list of strings::
+La funzione predefinita :func:`dir` ci dice quali nomi sono definiti in un modulo. Restituisce una lista ordinata di stringhe::
 
    >>> import fibo, sys
    >>> dir(fibo)
@@ -328,7 +223,7 @@ defines.  It returns a sorted list of strings::
     'stdin', 'stdout', 'thread_info', 'unraisablehook', 'version', 'version_info',
     'warnoptions']
 
-Without arguments, :func:`dir` lists the names you have defined currently::
+Senza argomenti, :func:`dir` elenca i nomi disponibili attualmente::
 
    >>> a = [1, 2, 3, 4, 5]
    >>> import fibo
@@ -336,13 +231,11 @@ Without arguments, :func:`dir` lists the names you have defined currently::
    >>> dir()
    ['__builtins__', '__name__', 'a', 'fib', 'fibo', 'sys']
 
-Note that it lists all types of names: variables, modules, functions, etc.
+Si noti che nell'elenco compaiono tutti i tipi di nomi: variabili, moduli, funzioni e così via. 
 
 .. index:: module: builtins
 
-:func:`dir` does not list the names of built-in functions and variables.  If you
-want a list of those, they are defined in the standard module
-:mod:`builtins`::
+:func:`dir` non elenca però i nomi delle funzioni e delle variabili predefinite. Se volete un lista di questi, sono definiti nel modulo :mod:`builtins`::
 
    >>> import builtins
    >>> dir(builtins)  # doctest: +NORMALIZE_WHITESPACE
@@ -378,33 +271,18 @@ want a list of those, they are defined in the standard module
 
 .. _tut-packages:
 
-Packages
-========
+Package
+=======
 
-Packages are a way of structuring Python's module namespace by using "dotted
-module names".  For example, the module name :mod:`A.B` designates a submodule
-named ``B`` in a package named ``A``.  Just like the use of modules saves the
-authors of different modules from having to worry about each other's global
-variable names, the use of dotted module names saves the authors of multi-module
-packages like NumPy or Pillow from having to worry about
-each other's module names.
+I package sono un modo di strutturare il *namespace* di un modulo Python usando la "notazione col punto". Per esempio, il nome :mod:`A.B` indica un sotto-modulo ``B`` all'interno di un package ``A``. Proprio come i moduli permettono a diversi autori di non doversi preoccupare dei nomi *di variabili* usati in altri moduli, così i package permettono agli autori di package con molti moduli, come NumPy o Pillow, di non doversi preoccupare dei nomi *dei moduli* usati da altri. 
 
-Suppose you want to design a collection of modules (a "package") for the uniform
-handling of sound files and sound data.  There are many different sound file
-formats (usually recognized by their extension, for example: :file:`.wav`,
-:file:`.aiff`, :file:`.au`), so you may need to create and maintain a growing
-collection of modules for the conversion between the various file formats.
-There are also many different operations you might want to perform on sound data
-(such as mixing, adding echo, applying an equalizer function, creating an
-artificial stereo effect), so in addition you will be writing a never-ending
-stream of modules to perform these operations.  Here's a possible structure for
-your package (expressed in terms of a hierarchical filesystem):
+Immaginate di voler costruire una collezione di moduli (un package) per la gestione di suoni e file sonori. Ci sono diversi formati di file sonori (di solito sono riconoscibili dalle estensioni, per esempio :file:`.wav`, :file:`.aiff`, :file:`.au`): quindi avrete bisogno di creare e mantenere una raccolta crescente di moduli per la conversione tra i vari formati. Ci sono poi molte diverse operazioni che si possono fare sui suoni (mixare, aggiungere eco, equalizzare, creare un effetto stereo artificiale): quindi dovrete scrivere una serie interminabile di moduli che implementano queste operazioni. Ecco una possibile struttura per il vostro package (espressa in forma di gerarchia del file system):
 
 .. code-block:: text
 
-   sound/                          Top-level package
-         __init__.py               Initialize the sound package
-         formats/                  Subpackage for file format conversions
+   sound/                          package top-level
+         __init__.py               inizializzazione del package
+         formats/                  sotto-package per le conversioni
                  __init__.py
                  wavread.py
                  wavwrite.py
@@ -413,164 +291,101 @@ your package (expressed in terms of a hierarchical filesystem):
                  auread.py
                  auwrite.py
                  ...
-         effects/                  Subpackage for sound effects
+         effects/                  sotto-package per gli effetti
                  __init__.py
                  echo.py
                  surround.py
                  reverse.py
                  ...
-         filters/                  Subpackage for filters
+         filters/                  sotto-package per i filtri
                  __init__.py
                  equalizer.py
                  vocoder.py
                  karaoke.py
                  ...
 
-When importing the package, Python searches through the directories on
-``sys.path`` looking for the package subdirectory.
+Quando importate il package, Python cerca nei percorsi della ``sys.path`` la directory del package.
 
-The :file:`__init__.py` files are required to make Python treat directories
-containing the file as packages.  This prevents directories with a common name,
-such as ``string``, unintentionally hiding valid modules that occur later
-on the module search path. In the simplest case, :file:`__init__.py` can just be
-an empty file, but it can also execute initialization code for the package or
-set the ``__all__`` variable, described later.
+I file :file:`__init__.py` sono necessari perché Python consideri effettivamente come un package la directory che contiene i moduli. Questo è per evitare che directory con un nome comune, per esempio ``string``, possano nascondere inavvertitamente dei nomi di moduli che vengono dopo nell'ordine dei percorsi di ricerca. Nel caso più semplice, :file:`__init__.py` può essere lasciato vuoto, ma è anche possibile fargli eseguire del codice di inizializzazione o impostare la variabile ``__all__``, come vedremo tra poco. 
 
-Users of the package can import individual modules from the package, for
-example::
+Gli utenti del package possono importare dei singoli moduli al suo interno, per esempio::
 
    import sound.effects.echo
 
-This loads the submodule :mod:`sound.effects.echo`.  It must be referenced with
-its full name. ::
+Questo carica il modulo :mod:`sound.effects.echo`. Occorre riferirsi a questo con il nome completo. ::
 
    sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)
 
-An alternative way of importing the submodule is::
+Un modo alternativo per importare il modulo è questo::
 
    from sound.effects import echo
 
-This also loads the submodule :mod:`echo`, and makes it available without its
-package prefix, so it can be used as follows::
+Anche in questo modo carichiamo il modulo :mod:`echo`, ma lo rendiamo disponibile senza il prefisso del nome del package. Può essere quindi usato così::
 
    echo.echofilter(input, output, delay=0.7, atten=4)
 
-Yet another variation is to import the desired function or variable directly::
+Un altro modo ancora è importare direttamente la funzione o la variabile richiesta::
 
    from sound.effects.echo import echofilter
 
-Again, this loads the submodule :mod:`echo`, but this makes its function
-:func:`echofilter` directly available::
+Ancora una volta, questo carica il modulo :mod:`echo`, rendendo però direttamente disponibile la sua funzione :func:`echofilter`::
 
    echofilter(input, output, delay=0.7, atten=4)
 
-Note that when using ``from package import item``, the item can be either a
-submodule (or subpackage) of the package, or some  other name defined in the
-package, like a function, class or variable.  The ``import`` statement first
-tests whether the item is defined in the package; if not, it assumes it is a
-module and attempts to load it.  If it fails to find it, an :exc:`ImportError`
-exception is raised.
+Notate che quando si usa la modalità ``from package import item``, allora *item* può essere sia il nome di un modulo (o sotto-package) del package, sia qualche altro nome definito nel package, come una funzione, una classe o una variabile. L'istruzione ``import`` per prima cosa controlla se *item* è definito nel package; se no, assume che si tratti di un modulo e cerca di caricarlo. Se l'operazione fallisce, viene emessa un'eccezione :exc:`ImportError`.
 
-Contrarily, when using syntax like ``import item.subitem.subsubitem``, each item
-except for the last must be a package; the last item can be a module or a
-package but can't be a class or function or variable defined in the previous
-item.
-
+Al contrario, quando usate la sintassi ``import item.subitem.subsubitem``, ogni elemento eccetto l'ultimo *deve* essere un package; l'ultimo può essere un package o un modulo, ma *non* può essere una classe o una funzione o una variabile definita nell'elemento precedente. 
 
 .. _tut-pkg-import-star:
 
-Importing \* From a Package
----------------------------
+Importare \* da un package
+--------------------------
 
 .. index:: single: __all__
 
-Now what happens when the user writes ``from sound.effects import *``?  Ideally,
-one would hope that this somehow goes out to the filesystem, finds which
-submodules are present in the package, and imports them all.  This could take a
-long time and importing sub-modules might have unwanted side-effects that should
-only happen when the sub-module is explicitly imported.
+Che cosa succede quando scriviamo ``from sound.effects import *``? Idealmente, ci si potrebbe aspettare che questa istruzione provochi una scansione nel file system, trovi i moduli presenti nel package e li importi tutti in un colpo solo. Questo però potrebbe richiedere molto tempo, e importare un sotto-modulo potrebbe causare *side-effect* indesiderati, che dovrebbero verificarsi solo quando il modulo è importato direttamente. 
 
-The only solution is for the package author to provide an explicit index of the
-package.  The :keyword:`import` statement uses the following convention: if a package's
-:file:`__init__.py` code defines a list named ``__all__``, it is taken to be the
-list of module names that should be imported when ``from package import *`` is
-encountered.  It is up to the package author to keep this list up-to-date when a
-new version of the package is released.  Package authors may also decide not to
-support it, if they don't see a use for importing \* from their package.  For
-example, the file :file:`sound/effects/__init__.py` could contain the following
-code::
+L'unica soluzione è che l'autore del package fornisca un indice esplicito del suo contenuto. L'istruzione :keyword:`import` segue questa convenzione: se il modulo :file:`__init__.py` di un package definisce una lista col nome ``__all__``, allora considera questa come l'indice dei moduli che dovrebbero essere importati da un ``from package import *``. È compito dell'autore aggiornare la lista quando rilascia una nuova versione del package. Un autore potrebbe anche non fornire la lista, se decide che non può essere utile importare "\*" dal suo package. Per esempio, il file :file:`sound/effects/__init__.py` potrebbe contenere questo codice::
 
    __all__ = ["echo", "surround", "reverse"]
 
-This would mean that ``from sound.effects import *`` would import the three
-named submodules of the :mod:`sound` package.
+In questo modo, ``from sound.effects import *`` importerebbe i tre moduli indicati del package :mod:`sound`.
 
-If ``__all__`` is not defined, the statement ``from sound.effects import *``
-does *not* import all submodules from the package :mod:`sound.effects` into the
-current namespace; it only ensures that the package :mod:`sound.effects` has
-been imported (possibly running any initialization code in :file:`__init__.py`)
-and then imports whatever names are defined in the package.  This includes any
-names defined (and submodules explicitly loaded) by :file:`__init__.py`.  It
-also includes any submodules of the package that were explicitly loaded by
-previous :keyword:`import` statements.  Consider this code::
+Se ``__all__`` non è definito, allora l'istruzione ``from sound.effects import *`` *non* importa comunque tutti i moduli del package :mod:`sound.effects` nel *namespace* corrente. Si limita a garantire che il package :mod:`sound.effects` è stato effettivamente importato (eventualmente eseguendo il codice trovato nel file :file:`__init__.py`) e quindi importa tutti i nomi definiti nel package: questo comprende tutti i nomi definiti (e i moduli esplicitamente importati) nel :file:`__init__.py`. Include anche tutti i moduli del package che sono stati esplicitamente importati in precedenza. Si consideri questo codice::
 
    import sound.effects.echo
    import sound.effects.surround
    from sound.effects import *
 
-In this example, the :mod:`echo` and :mod:`surround` modules are imported in the
-current namespace because they are defined in the :mod:`sound.effects` package
-when the ``from...import`` statement is executed.  (This also works when
-``__all__`` is defined.)
+In questo esempio, i moduli :mod:`echo` e :mod:`surround` sono importati nel *namespace* corrente perché sono definiti nel package :mod:`sound.effects` al momento di eseguire l'istruzione ``from...import`` (funziona allo stesso modo quando la variabile ``__all__`` è definita).
 
-Although certain modules are designed to export only names that follow certain
-patterns when you use ``import *``, it is still considered bad practice in
-production code.
+Anche se alcuni moduli sono progettati per esportare solo alcuni nomi, secondo certi criteri, quando importate con ``import *``, questa è comunque considerata una cattiva pratica nel codice "di produzione". 
 
-Remember, there is nothing wrong with using ``from package import
-specific_submodule``!  In fact, this is the recommended notation unless the
-importing module needs to use submodules with the same name from different
-packages.
+Ricordate che non c'è niente di male a importare ``from package import
+specific_submodule``. In effetti questo è il modo raccomandato, a meno che il modulo importatore non stia anche importando un altro modulo con lo stesso nome, da un altro package. 
 
+Riferimenti intra-package
+-------------------------
 
-Intra-package References
-------------------------
+Quando i package contengono a loro volta dei sub-package (come nel caso del nostro esempio :mod:`sound`), potete usare gli import *assoluti* per riferirvi a moduli di package "cugini". Per esempio, se il modulo :mod:`sound.filters.vocoder` ha bisogno di usare il modulo :mod:`echo` nel package :mod:`sound.effects`, può importarlo con ``from sound.effects import echo``.
 
-When packages are structured into subpackages (as with the :mod:`sound` package
-in the example), you can use absolute imports to refer to submodules of siblings
-packages.  For example, if the module :mod:`sound.filters.vocoder` needs to use
-the :mod:`echo` module in the :mod:`sound.effects` package, it can use ``from
-sound.effects import echo``.
-
-You can also write relative imports, with the ``from module import name`` form
-of import statement.  These imports use leading dots to indicate the current and
-parent packages involved in the relative import.  From the :mod:`surround`
-module for example, you might use::
+Potete anche usare gli import *relativi*, negli import del tipo ``from module import name``. Gli import relativi usano dei punti iniziali per indicare il package corrente e genitore interessati dall'import. Dal modulo :mod:`surround`, per esempio, potreste importare::
 
    from . import echo
    from .. import formats
    from ..filters import equalizer
 
-Note that relative imports are based on the name of the current module.  Since
-the name of the main module is always ``"__main__"``, modules intended for use
-as the main module of a Python application must always use absolute imports.
+Si noti che gli import relativi si basano sul nome del modulo importatore. Siccome il nome del modulo principale è sempre ``"__main__"``, i moduli intesi per essere usati come script (il modulo principale di un'applicazione Python) devono sempre usare gli import assoluti. 
 
+Package in directory multiple
+-----------------------------
 
-Packages in Multiple Directories
---------------------------------
+I package hanno un attributo speciale :attr:`__path__`. Questa variabile è una lista, inizializzata con il nome della directory dove risiede il file :file:`__init__.py` del package, prima che il codice di questo sia eseguito. Potete modificare il contenuto della variabile: così facendo modificate i percorsi di ricerca dei moduli e dei sub-package del package, per tutte le successive importazioni. 
 
-Packages support one more special attribute, :attr:`__path__`.  This is
-initialized to be a list containing the name of the directory holding the
-package's :file:`__init__.py` before the code in that file is executed.  This
-variable can be modified; doing so affects future searches for modules and
-subpackages contained in the package.
+Anche se è una funzionalità raramente necessaria, può essere usata per estendere l'insieme dei moduli disponibili in un package. 
 
-While this feature is not often needed, it can be used to extend the set of
-modules found in a package.
+.. only:: html
 
+   .. rubric:: Note
 
-.. rubric:: Footnotes
-
-.. [#] In fact function definitions are also 'statements' that are 'executed'; the
-   execution of a module-level function definition enters the function name in
-   the module's global symbol table.
+.. [#] In effetti anche le definizioni di funzione sono delle "istruzioni" che vengono eseguite; l'esecuzione della definizione di una funzione a livello del modulo inserisce il nome della funzione nella tabella dei simboli globale. 
