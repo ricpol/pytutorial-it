@@ -425,7 +425,9 @@ Questo esempio introduce diversi aspetti nuovi.
      ...
      0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,
 
-.. rubric:: Note
+.. only:: html
+
+   .. rubric:: Note
 
 .. [#] Dal momento che ``**`` ha una priorità più alta di ``-``, ``-3**2`` sarà interpretato come ``-(3**2)`` ovvero ``-9``.  Per evitare questo e ottenere invece ``9``, potete usare ``(-3)**2``.
 

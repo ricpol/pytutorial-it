@@ -545,6 +545,8 @@ In genere è possibile confrontare un oggetto-sequenza con una sequenza dello st
 
 Si noti che confrontare oggetti di tipo diverso con ``<`` o ``>`` è possibile, purché gli oggetti abbiano un metodo di confronto adeguato. Per esempio, i diversi tipi numerici sono confrontati in base al loro valore, quindi 0 è uguale a 0.0 e così via. In assenza di un metodo di confronto, l'interprete non fornisce un ordinamento arbitrario, ma emette invece un'eccezione :exc:`TypeError`.
 
-.. rubric:: Note
+.. only:: html
+
+   .. rubric:: Note
 
 .. [1] Altri linguaggi preferiscono restituire l'oggetto mutato, cosa che consente il concatenamento dei metodi, per esempio ``d->insert("a")->remove("b")->sort();``.

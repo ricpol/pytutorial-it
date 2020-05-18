@@ -708,7 +708,9 @@ Nel mondo Python, la :pep:`8` si è affermata come la guida di stile da usare pe
 
 * Analogamente, non usate caratteri non-ASCII per gli identificatori se vi è anche la più remota possibilità che delle persone di nazionalità diversa leggeranno e lavoreranno sul codice. 
 
-.. rubric:: Note
+.. only:: html
+
+   .. rubric:: Note
 
 .. [#] ndT: in questa traduzione italiana cerchiamo di mantenere una coerente, se pure acrobatica, distinzione tra *parametri* (quelli formali, che appaiono nella *definizione* della funzione) e *argomenti* (i parametri reali, che appaiono nella *chiamata* della funzione). Il testo originale è talvolta meno preciso. 
 

@@ -17,7 +17,7 @@ L'interprete Python di solito è installato in :file:`/usr/local/bin/python3.9` 
 
 Dal momento che la scelta della directory dell'interprete è un'opzione di installazione, sono possibili altre configurazioni. Chiedete a un esperto di Python o all'amministratore del sistema. Per esempio, un'alternativa popolare è :file:`/usr/local/python`.
 
-Sui sistemi Windows, se avete installato Python dal :ref:`Microsoft Store<windows-store>`, sarà disponibili il comando :file:`python3.9`. Se avete installato il *launcher* :ref:`py.exe <launcher>` potete usare il comando :file:`py`. Il paragrafo :ref:`Excursus: Impostare le variabili d'ambiente<setting-envvars>` descrive altri modi per avviare Python. 
+Su Windows, se avete installato Python dal :ref:`Microsoft Store<windows-store>`, sarà disponibili il comando :file:`python3.9`. Se avete installato il *launcher* :ref:`py.exe <launcher>` potete usare il comando :file:`py`. Il paragrafo :ref:`Excursus: Impostare le variabili d'ambiente<setting-envvars>` descrive altri modi per avviare Python. 
 
 Inserire il carattere terminatore del file (:kbd:`Control-D` in Unix, :kbd:`Control-Z` in Windows) nel *prompt* principale costringe l'interprete a uscire con *exit status* ``0``. Se non funziona, potete uscire dall'interprete con questo comando: ``quit()``.
 
@@ -94,6 +94,8 @@ L'eccezione alla regola è quando lo script inizia invece con una :ref:`shebang 
    #!/usr/bin/env python3
    # -*- coding: cp1252 -*-
 
-.. rubric:: Note
+.. only:: html
+
+   .. rubric:: Note
 
 .. [#] In ambiente Unix, l'eseguibile dell'interprete Python 3.x *non* è installato col nome ``python``, così da non entrare in conflitto con l'eseguibile di Python 2.x, anch'esso contemporaneamente presente. 
