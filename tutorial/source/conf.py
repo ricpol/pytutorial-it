@@ -24,6 +24,7 @@ author = 'Riccardo Polignieri'
 # The full version, including alpha/beta/rc tags
 release = '0'
 
+master_doc = 'index'
 
 # -- General configuration ---------------------------------------------------
 
@@ -61,3 +62,24 @@ html_theme = 'alabaster'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# -- Latex options ------------------------
+
+preamble_contents = r'''
+\addto\captionsitalian{\renewcommand{\literalblockcontinuedname}{...segue}}
+\addto\captionsitalian{\renewcommand{\literalblockcontinuesname}{continua...}}
+'''
+
+latex_elements = {
+    'papersize': 'a4paper',
+    'preamble': preamble_contents,
+    'classoptions': ',oneside',
+}
+
+latex_documents = [
+    (master_doc, 'pytutorial-it.tex', 'Il tutorial di Python tradotto',
+     'Riccardo Polignieri', 'manual', False),
+]
+
+latex_toplevel_sectioning = 'chapter'
+latex_domain_indices = False
