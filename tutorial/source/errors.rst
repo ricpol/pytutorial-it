@@ -1,21 +1,17 @@
 .. _tut-errors:
 
-*********************
-Errors and Exceptions
-*********************
+*******************
+Errori ed eccezioni
+*******************
 
-Until now error messages haven't been more than mentioned, but if you have tried
-out the examples you have probably seen some.  There are (at least) two
-distinguishable kinds of errors: *syntax errors* and *exceptions*.
-
+Fino ad ora non abbiamo parlato in modo specifico dei messaggi di errore ma, se avete provato gli esempi, sicuramente ne avrete visto qualcuno. Ci sono almeno due tipi di errore: gli *errori di sintassi* e le *eccezioni*. 
 
 .. _tut-syntaxerrors:
 
-Syntax Errors
-=============
+Errori di sintassi
+==================
 
-Syntax errors, also known as parsing errors, are perhaps the most common kind of
-complaint you get while you are still learning Python::
+Gli errori di sintassi, noti anche come errori di parsing, sono forse l'inciampo più comune quando state ancora imparando Python::
 
    >>> while True print('Hello world')
      File "<stdin>", line 1
@@ -23,24 +19,14 @@ complaint you get while you are still learning Python::
                       ^
    SyntaxError: invalid syntax
 
-The parser repeats the offending line and displays a little 'arrow' pointing at
-the earliest point in the line where the error was detected.  The error is
-caused by (or at least detected at) the token *preceding* the arrow: in the
-example, the error is detected at the function :func:`print`, since a colon
-(``':'``) is missing before it.  File name and line number are printed so you
-know where to look in case the input came from a script.
-
+Il parser riporta la riga sbagliata e mostra una piccola "freccia" che indica il primo punto in cui l'errore è stato rilevato. L'errore è causato (o almeno rilevato) all'elemento che *precede* la freccia: nell'esempio qui sopra, l'errore è rilevato alla funzione :func:`print`, perché mancano i "due punti" (``':'``) prima. Anche il nome del file e la riga sono riportati, in modo da sapere dove guardare, se l'input proviene da uno script. 
 
 .. _tut-exceptions:
 
-Exceptions
-==========
+Eccezioni
+=========
 
-Even if a statement or expression is syntactically correct, it may cause an
-error when an attempt is made to execute it. Errors detected during execution
-are called *exceptions* and are not unconditionally fatal: you will soon learn
-how to handle them in Python programs.  Most exceptions are not handled by
-programs, however, and result in error messages as shown here::
+Anche quando un'istruzione o un'espressione sono corretti dal punto di vista sintattico, possono provocare un errore quando sono *eseguiti*. Gli errori rilevati durante l'esecuzione si chiamano eccezioni e non sono sempre fatali: imparerete presto come gestirle nel vostro programma Python. Molte eccezioni, comunque, non sono gestite dal programma e restituiscono messaggi di errore come questi::
 
    >>> 10 * (1/0)
    Traceback (most recent call last):
@@ -55,35 +41,20 @@ programs, however, and result in error messages as shown here::
      File "<stdin>", line 1, in <module>
    TypeError: Can't convert 'int' object to str implicitly
 
-The last line of the error message indicates what happened. Exceptions come in
-different types, and the type is printed as part of the message: the types in
-the example are :exc:`ZeroDivisionError`, :exc:`NameError` and :exc:`TypeError`.
-The string printed as the exception type is the name of the built-in exception
-that occurred.  This is true for all built-in exceptions, but need not be true
-for user-defined exceptions (although it is a useful convention). Standard
-exception names are built-in identifiers (not reserved keywords).
+L'ultima riga del messaggio d'errore ci dice che cosa è successo. Gli oggetti-eccezioni possono avere diversi tipi, e la prima parte del messaggio riporta il tipo: negli esempi qui sopra, :exc:`ZeroDivisionError`, :exc:`NameError` e :exc:`TypeError`. La stringa mostrata come tipo è il nome dell'eccezione predefinita incontrata. Questo succede per tutte le eccezioni predefinite, ma potrebbe non esserlo per le eccezioni definite dall'utente (anche se è comunque una convenzione utile). I nomi delle eccezioni standard sono identificatori predefiniti, ma non parole-chiave riservate. 
 
-The rest of the line provides detail based on the type of exception and what
-caused it.
+Il resto della riga fornisce dettagli che dipendono dal tipo dell'eccezione e da che cosa l'ha causata. 
 
-The preceding part of the error message shows the context where the exception
-occurred, in the form of a stack traceback. In general it contains a stack
-traceback listing source lines; however, it will not display lines read from
-standard input.
+Tutto ciò che precede il messaggio d'errore mostra il *contesto* in cui è avvenuta l'eccezione, nella forma di un *traceback* dello stack. In generale, il traceback elenca le righe di codice coinvolte nel problema; tuttavia non visualizza le righe lette dallo standard input. 
 
-:ref:`bltin-exceptions` lists the built-in exceptions and their meanings.
-
+La sezione della documentazione :ref:`Eccezioni predefinite<bltin-exceptions>` elenca tutte le eccezioni predefinite e il loro significato.
 
 .. _tut-handling:
 
-Handling Exceptions
-===================
+Gestire le eccezioni
+====================
 
-It is possible to write programs that handle selected exceptions. Look at the
-following example, which asks the user for input until a valid integer has been
-entered, but allows the user to interrupt the program (using :kbd:`Control-C` or
-whatever the operating system supports); note that a user-generated interruption
-is signalled by raising the :exc:`KeyboardInterrupt` exception. ::
+I programmi possono gestire delle eccezioni specifiche. Nell'esempio che segue, chiediamo un input all'utente, fin quando non inserisce un numero valido; in ogni caso l'utente può interrompere il programma (con :kbd:`Control-C` o in qualunque modo consentito dal sistema operativo). Si noti che un'interruzione generata dall'utente provoca un'eccezione :exc:`KeyboardInterrupt`::
 
    >>> while True:
    ...     try:
@@ -93,37 +64,22 @@ is signalled by raising the :exc:`KeyboardInterrupt` exception. ::
    ...         print("Oops!  That was no valid number.  Try again...")
    ...
 
-The :keyword:`try` statement works as follows.
+L'istruzione :keyword:`try` funziona in questo modo.
 
-* First, the *try clause* (the statement(s) between the :keyword:`try` and
-  :keyword:`except` keywords) is executed.
+* Per prima cosa, viene eseguito il blocco *try*, ovvero le istruzioni tra il :keyword:`try` e lo :keyword:`except`.
 
-* If no exception occurs, the *except clause* is skipped and execution of the
-  :keyword:`try` statement is finished.
+* Se nessuna eccezione viene incontrata, il blocco *except* non viene eseguito e l'esecuzione dell'istruzione :keyword:`try` termina così.
 
-* If an exception occurs during execution of the try clause, the rest of the
-  clause is skipped.  Then if its type matches the exception named after the
-  :keyword:`except` keyword, the except clause is executed, and then execution
-  continues after the :keyword:`try` statement.
+* Se durante l'esecuzione del blocco *try* viene incontrata un'eccezione, le eventuali istruzioni rimanenti del blocco vengono saltate. Quindi, se il tipo dell'eccezione coincide con quella nominata dopo la parola-chiave :keyword:`except`, allora viene eseguito il blocco *except*. Quindi l'esecuzione prosegue normalmente con ciò che segue l'istruzione :keyword:`try`.
 
-* If an exception occurs which does not match the exception named in the except
-  clause, it is passed on to outer :keyword:`try` statements; if no handler is
-  found, it is an *unhandled exception* and execution stops with a message as
-  shown above.
+* Se viene incontrata un'eccezione che non corrisponde a quella prevista nel blocco *except*, allora l'eccezione è passata ad eventuali altre istruzioni :keyword:`try` annidate di livello superiore; se nessun gestore viene trovato, l'eccezione è *non gestita*: a questo punto l'esecuzione del programma si arresta con il messaggio di errore visto sopra. 
 
-A :keyword:`try` statement may have more than one except clause, to specify
-handlers for different exceptions.  At most one handler will be executed.
-Handlers only handle exceptions that occur in the corresponding try clause, not
-in other handlers of the same :keyword:`!try` statement.  An except clause may
-name multiple exceptions as a parenthesized tuple, for example::
+L'istruzione :keyword:`try` può avere più di una clausola *except*, per specificare gestori per diverse eccezioni: non più di un gestore per volta può essere eseguito. Il gestore affronta solo l'eccezione che si è verificata nella clausola *try* corrispondente, non quelle che eventualmente si verificano in altri gestori della stessa istruzione :keyword:`!try`. Una clausola *except* può gestire più eccezioni, specificandole come una tupla (con parentesi obbligatorie), per esempio::
 
    ... except (RuntimeError, TypeError, NameError):
    ...     pass
 
-A class in an :keyword:`except` clause is compatible with an exception if it is
-the same class or a base class thereof (but not the other way around --- an
-except clause listing a derived class is not compatible with a base class).  For
-example, the following code will print B, C, D in that order::
+Un'eccezione specificata in una clausola :keyword:`except` è compatibile con l'eccezione che si verifica se sono istanze della stessa classe, o se quest'ultima è una sotto-classe della prima (ma non il contrario: se l'eccezione specificata è una sotto-classe di quella che si verifica, non sono compatibili). Per esempio, il codice che segue produrrà nell'ordine B, C, D:: 
 
    class B(Exception):
        pass
@@ -144,13 +100,9 @@ example, the following code will print B, C, D in that order::
        except B:
            print("B")
 
-Note that if the except clauses were reversed (with ``except B`` first), it
-would have printed B, B, B --- the first matching except clause is triggered.
+Si noti che, mettendo le clausole *except* in ordine inverso (con ``except B`` al primo posto), l'output prodotto sarebbe B, B, B: la prima clausola *except* in grado di gestire l'eccezione viene eseguita. 
 
-The last except clause may omit the exception name(s), to serve as a wildcard.
-Use this with extreme caution, since it is easy to mask a real programming error
-in this way!  It can also be used to print an error message and then re-raise
-the exception (allowing a caller to handle the exception as well)::
+È possibile omettere il nome dell'eccezione nell'ultima clausola *except*, in modo che serva da ultima risorsa. Questa strategia va però usata con cautela, dal momento che è facile mascherare in questo modo un errore di programmazione. È anche possibile scrivere un messaggio di errore e quindi ri-emettere l'eccezione, in modo che il codice chiamante possa eventualmente gestirla::
 
    import sys
 
@@ -166,10 +118,7 @@ the exception (allowing a caller to handle the exception as well)::
        print("Unexpected error:", sys.exc_info()[0])
        raise
 
-The :keyword:`try` ... :keyword:`except` statement has an optional *else
-clause*, which, when present, must follow all except clauses.  It is useful for
-code that must be executed if the try clause does not raise an exception.  For
-example::
+L'istruzione :keyword:`try` ... :keyword:`except` prevede una clausola opzionale *else* che, se presente, deve venire dopo tutte le clausole *except*. Vi si può inserire del codice che deve essere eseguito solo se la clausola *try* non emette alcuna eccezione. Per esempio:: 
 
    for arg in sys.argv[1:]:
        try:
@@ -180,21 +129,11 @@ example::
            print(arg, 'has', len(f.readlines()), 'lines')
            f.close()
 
-The use of the :keyword:`!else` clause is better than adding additional code to
-the :keyword:`try` clause because it avoids accidentally catching an exception
-that wasn't raised by the code being protected by the :keyword:`!try` ...
-:keyword:`!except` statement.
+Usare :keyword:`!else` è preferibile a inserire del codice in più nel :keyword:`try`, perché in questo modo si evita di intercettare accidentalmente delle eccezioni emesse dal codice che non si intendeva proteggere nella clausola *try*. 
 
-When an exception occurs, it may have an associated value, also known as the
-exception's *argument*. The presence and type of the argument depend on the
-exception type.
+Quando si verifica un'eccezione, può avere un valore associato, detto anche *argomento* dell'eccezione. La presenza e il tipo di questo argomento dipende dall'eccezione. 
 
-The except clause may specify a variable after the exception name.  The
-variable is bound to an exception instance with the arguments stored in
-``instance.args``.  For convenience, the exception instance defines
-:meth:`__str__` so the arguments can be printed directly without having to
-reference ``.args``.  One may also instantiate an exception first before
-raising it and add any attributes to it as desired. ::
+La clausola *except* può specificare una variabile dopo il nome dell'eccezione. La variabile è legata all'istanza dell'eccezione, e i suoi argomenti sono conservati in ``instance.args``. Per comodità, l'istanza dell'eccezione definisce un metodo :meth:`__str__` tale per cui gli argomenti possono essere scritti direttamente, senza doversi riferire a ``.args``. È possibile anche istanziare l'eccezione prima di emetterla, in modo da aggiungere gli attributi desiderati::
 
    >>> try:
    ...     raise Exception('spam', 'eggs')
@@ -213,12 +152,9 @@ raising it and add any attributes to it as desired. ::
    x = spam
    y = eggs
 
-If an exception has arguments, they are printed as the last part ('detail') of
-the message for unhandled exceptions.
+Se un'eccezione ha degli argomenti, questi sono scritti nell'ultima parte ("detail") del messaggio di errore causato dall'eccezione non gestita. 
 
-Exception handlers don't just handle exceptions if they occur immediately in the
-try clause, but also if they occur inside functions that are called (even
-indirectly) in the try clause. For example::
+Un gestore può intercettare non solo le eccezioni che accadono direttamente nel blocco *try*, ma anche quelle emesse da funzioni chiamate (anche indirettamente) dal codice del *try*. Per esempio::
 
    >>> def this_fails():
    ...     x = 1/0
@@ -230,30 +166,23 @@ indirectly) in the try clause. For example::
    ...
    Handling run-time error: division by zero
 
-
 .. _tut-raising:
 
-Raising Exceptions
+Emettere eccezioni
 ==================
 
-The :keyword:`raise` statement allows the programmer to force a specified
-exception to occur. For example::
+L'istruzione :keyword:`raise` permette di forzare l'emissione di una specifica eccezione. Per esempio::
 
    >>> raise NameError('HiThere')
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
    NameError: HiThere
 
-The sole argument to :keyword:`raise` indicates the exception to be raised.
-This must be either an exception instance or an exception class (a class that
-derives from :class:`Exception`).  If an exception class is passed, it will
-be implicitly instantiated by calling its constructor with no arguments::
+L'unico argomento di :keyword:`raise` è il nome dell'eccezione da emettere. Questa deve essere o un'istanza o una classe-eccezione (ovvero, una classe che deriva da :class:`Exception`). Se viene passata una classe, questa sarà implicitamente istanziata chiamando il costruttore senza argomenti::
 
-   raise ValueError  # shorthand for 'raise ValueError()'
+   raise ValueError  # scorciatoia per 'raise ValueError()'
 
-If you need to determine whether an exception was raised but don't intend to
-handle it, a simpler form of the :keyword:`raise` statement allows you to
-re-raise the exception::
+Se avete bisogno di rilevare soltanto un'eccezione, ma non intendete davvero gestirla, potete usare una forma più semplice di :keyword:`raise` che permette di rilanciare l'eccezione::
 
    >>> try:
    ...     raise NameError('HiThere')
@@ -266,19 +195,16 @@ re-raise the exception::
      File "<stdin>", line 2, in <module>
    NameError: HiThere
 
-
 .. _tut-exception-chaining:
 
-Exception Chaining
-==================
+Concatenamento di eccezioni
+===========================
 
-The :keyword:`raise` statement allows an optional :keyword:`from` which enables
-chaining exceptions by setting the ``__cause__`` attribute of the raised
-exception. For example::
+L'istruzione :keyword:`raise` accetta un'opzione :keyword:`from` che consente di concatenare due eccezioni, impostando l'attributo ``__cause__`` dell'eccezione che viene emessa. Per esempio::
 
     raise RuntimeError from OSError
 
-This can be useful when you are transforming exceptions. For example::
+Questo è utile per trasformare un'eccezione in un'altra. Per esempio::
 
     >>> def func():
     ...    raise IOError
@@ -299,10 +225,7 @@ This can be useful when you are transforming exceptions. For example::
       File "<stdin>", line 4, in <module>
     RuntimeError
 
-The expression following the :keyword:`from` must be either an exception or
-``None``. Exception chaining happens automatically when an exception is raised
-inside an exception handler or :keyword:`finally` section. Exception chaining
-can be disabled by using ``from None`` idiom:
+L'espressione che segue il :keyword:`from` deve essere o un'eccezione, o ``None``. Il concatenamento delle eccezioni avviene automaticamente quando un'eccezione viene emessa da dentro il gestore di un'altra eccezione, o nella clausola :keyword:`finally`. L'idioma ``from None`` disabilita il concatenamento::
 
     >>> try:
     ...     open('database.sqlite')
@@ -313,33 +236,25 @@ can be disabled by using ``from None`` idiom:
       File "<stdin>", line 4, in <module>
     RuntimeError
 
-
 .. _tut-userexceptions:
 
-User-defined Exceptions
-=======================
+Eccezioni personalizzate
+========================
 
-Programs may name their own exceptions by creating a new exception class (see
-:ref:`tut-classes` for more about Python classes).  Exceptions should typically
-be derived from the :exc:`Exception` class, either directly or indirectly.
+Un programma può creare le sue eccezioni interne, scrivendo una nuova classe-eccezione (si veda la sezione :ref:`tut-classes` per ulteriori informazioni sulle classi in Python). Le eccezioni dovrebbero tipicamente derivare dalla classe :exc:`Exception`, direttamente o indirettamente.
 
-Exception classes can be defined which do anything any other class can do, but
-are usually kept simple, often only offering a number of attributes that allow
-information about the error to be extracted by handlers for the exception.  When
-creating a module that can raise several distinct errors, a common practice is
-to create a base class for exceptions defined by that module, and subclass that
-to create specific exception classes for different error conditions::
+Le classi delle eccezioni possono fare tutto ciò che farebbe una classe normale, ma di solito si preferisce mantenerle semplici, spesso fornendole solo di qualche attributo che aiuta a capire il problema quando viene intercettato dai gestori dell'eccezione. Quando si scrive un modulo che può incontrare diversi casi di errore, una pratica comune è scrivere una classe-madre per le eccezioni di quel modulo, e delle sotto-classi che descrivono eccezioni specifiche per le diverse condizioni di errore::
 
    class Error(Exception):
-       """Base class for exceptions in this module."""
+       """Classe-madre per le eccezioni di questo modulo."""
        pass
 
    class InputError(Error):
-       """Exception raised for errors in the input.
+       """Eccezione emessa in caso di errore nell'input.
 
-       Attributes:
-           expression -- input expression in which the error occurred
-           message -- explanation of the error
+       Attributi:
+           expression -- espressione di input che ha generato l'errore
+           message -- spiegazione dell'errore
        """
 
        def __init__(self, expression, message):
@@ -347,13 +262,13 @@ to create specific exception classes for different error conditions::
            self.message = message
 
    class TransitionError(Error):
-       """Raised when an operation attempts a state transition that's not
-       allowed.
+       """Emessa quando un'operazione provoca una transizione di stato
+       non permessa.
 
-       Attributes:
-           previous -- state at beginning of transition
-           next -- attempted new state
-           message -- explanation of why the specific transition is not allowed
+       Attributi:
+           previous -- stato iniziale della transizione
+           next -- stato finale che si cercava di ottenere
+           message -- motivo per cui la transizione non è ammessa
        """
 
        def __init__(self, previous, next, message):
@@ -361,22 +276,16 @@ to create specific exception classes for different error conditions::
            self.next = next
            self.message = message
 
-Most exceptions are defined with names that end in "Error", similar to the
-naming of the standard exceptions.
+In genere si fa in modo che le eccezioni personalizzate abbiano nomi che finiscono in "Error", analogamente ai nomi delle eccezioni standard.
 
-Many standard modules define their own exceptions to report errors that may
-occur in functions they define.  More information on classes is presented in
-chapter :ref:`tut-classes`.
-
+Molti moduli della libreria standard definiscono eccezioni proprie, per segnalare errori che possono verificarsi nelle funzioni che contengono. Per altre informazioni sulle classi, si veda la sezione :ref:`tut-classes`.
 
 .. _tut-cleanup:
 
-Defining Clean-up Actions
-=========================
+Definire azioni di chiusura
+===========================
 
-The :keyword:`try` statement has another optional clause which is intended to
-define clean-up actions that must be executed under all circumstances.  For
-example::
+L'istruzione :keyword:`try` prevede un'altra clausola opzionale che permette di definire azioni di chiusura e pulizia che devono essere eseguite in qualsiasi circostanza. Per esempio::
 
    >>> try:
    ...     raise KeyboardInterrupt
@@ -388,35 +297,18 @@ example::
      File "<stdin>", line 2, in <module>
    KeyboardInterrupt
 
-If a :keyword:`finally` clause is present, the :keyword:`!finally`
-clause will execute as the last task before the :keyword:`try`
-statement completes. The :keyword:`!finally` clause runs whether or
-not the :keyword:`!try` statement produces an exception. The following
-points discuss more complex cases when an exception occurs:
+Se è presente una clausola :keyword:`finally`, questa verrà eseguita come ultima cosa, prima che il keyword:`try` sia completato. Il blocco :keyword:`finally` viene eseguito in ogni caso, indipendentemente dal fatto che il codice nel :keyword:`!try` emetta un'eccezione o no. Approfondiamo nel dettaglio alcuni casi complessi:
 
-* If an exception occurs during execution of the :keyword:`!try`
-  clause, the exception may be handled by an :keyword:`except`
-  clause. If the exception is not handled by an :keyword:`!except`
-  clause, the exception is re-raised after the :keyword:`!finally`
-  clause has been executed.
+* Se si incontra un'eccezione durante l'esecuzione del blocco :keyword:`!try`, l'eccezione potrebbe essere gestita da un blocco :keyword:`except`. Se l'eccezione non è gestita, allora viene rilanciata dopo l'esecuzione del blocco :keyword:`!finally`.
 
-* An exception could occur during execution of an :keyword:`!except`
-  or :keyword:`!else` clause. Again, the exception is re-raised after
-  the :keyword:`!finally` clause has been executed.
+* L'eccezione potrebbe accadere durante l'esecuzione di una clausola :keyword:`!except` o :keyword:`!else`. Anche in questo caso l'eccezione è rilanciata dopo l'esecuzione del blocco :keyword:`!finally`. 
 
-* If the :keyword:`!try` statement reaches a :keyword:`break`,
-  :keyword:`continue` or :keyword:`return` statement, the
-  :keyword:`!finally` clause will execute just prior to the
-  :keyword:`!break`, :keyword:`!continue` or :keyword:`!return`
-  statement's execution.
+* Se il codice del blocco :keyword:`!try` raggiunge un'istruzione :keyword:`break`,
+  :keyword:`continue` o :keyword:`return`, allora la clausola :keyword:`!finally` sarà eseguita immediatamente prima di queste istruzioni. 
+  
+* Se entrambi i blocchi :keyword:`!try` e :keyword:`!finally` comprendono un'istruzione :keyword:`!return`, allora il valore restituito sarà quello del :keyword:`!finally`, non quello del :keyword:`!try`. 
 
-* If a :keyword:`!finally` clause includes a :keyword:`!return`
-  statement, the returned value will be the one from the
-  :keyword:`!finally` clause's :keyword:`!return` statement, not the
-  value from the :keyword:`!try` clause's :keyword:`!return`
-  statement.
-
-For example::
+Per esempio::
 
    >>> def bool_return():
    ...     try:
@@ -427,66 +319,49 @@ For example::
    >>> bool_return()
    False
 
-A more complicated example::
+Un esempio più complesso::
 
    >>> def divide(x, y):
    ...     try:
    ...         result = x / y
    ...     except ZeroDivisionError:
-   ...         print("division by zero!")
+   ...         print("divisione per zero!")
    ...     else:
-   ...         print("result is", result)
+   ...         print("il risultato è", result)
    ...     finally:
-   ...         print("executing finally clause")
+   ...         print("eseguo la clausola finally")
    ...
    >>> divide(2, 1)
-   result is 2.0
-   executing finally clause
+   il risultato è 2.0
+   eseguo la clausola finally
    >>> divide(2, 0)
-   division by zero!
-   executing finally clause
+   divisione per zero!
+   eseguo la clausola finally
    >>> divide("2", "1")
-   executing finally clause
+   eseguo la clausola finally
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
      File "<stdin>", line 3, in divide
    TypeError: unsupported operand type(s) for /: 'str' and 'str'
 
-As you can see, the :keyword:`finally` clause is executed in any event.  The
-:exc:`TypeError` raised by dividing two strings is not handled by the
-:keyword:`except` clause and therefore re-raised after the :keyword:`!finally`
-clause has been executed.
+Come si può vedere, il blocco :keyword:`finally` è eseguito in ogni caso. Il :exc:`TypeError` emesso quando si cerca di dividere due stringhe non è gestito dalla clausola :keyword:`except` e quindi viene rilanciato, una volta che il :keyword:`!finally` è stata eseguito. 
 
-In real world applications, the :keyword:`finally` clause is useful for
-releasing external resources (such as files or network connections), regardless
-of whether the use of the resource was successful.
-
+In uno scenario concreto, la clausola :keyword:`finally` è utile per rilasciare le risorse esterne (come una connessione a un file o a un database), indipendentemente dal fatto che l'utilizzo sia andato a buon fine. 
 
 .. _tut-cleanup-with:
 
-Predefined Clean-up Actions
-===========================
+Azioni di chiusura predefinite
+==============================
 
-Some objects define standard clean-up actions to be undertaken when the object
-is no longer needed, regardless of whether or not the operation using the object
-succeeded or failed. Look at the following example, which tries to open a file
-and print its contents to the screen. ::
+Alcuni oggetti definiscono delle operazioni di chiusura e pulizia, quando non sono più necessari, indipendentemente dal fatto che l'utilizzo dell'oggetto sia andato a buon fine oppure no. Si consideri il seguente esempio, che cerca di aprire un file e scriverne il contenuto sullo schermo::
 
    for line in open("myfile.txt"):
        print(line, end="")
 
-The problem with this code is that it leaves the file open for an indeterminate
-amount of time after this part of the code has finished executing.
-This is not an issue in simple scripts, but can be a problem for larger
-applications. The :keyword:`with` statement allows objects like files to be
-used in a way that ensures they are always cleaned up promptly and correctly. ::
+Il problema qui è che lasciamo il file aperto per un tempo indeterminato, dopo che questa parte del codice è stata eseguita. Questo non è grave per un semplice script, ma diventa un problema per le applicazioni più grandi. L'istruzione :keyword:`with` consente di usare oggetti come i file in modo tale da assicurarsi sempre le opportune operazioni di chiusura e pulizia. ::
 
    with open("myfile.txt") as f:
        for line in f:
            print(line, end="")
 
-After the statement is executed, the file *f* is always closed, even if a
-problem was encountered while processing the lines. Objects which, like files,
-provide predefined clean-up actions will indicate this in their documentation.
-
-
+Dopo che l'istruzione è stata eseguita, il file *f* viene sempre chiuso, anche nel caso in cui, processandolo, si dovesse incontrare una condizione di errore. Se un oggetto definisce, come i file, delle operazioni di chiusura predefinite, questo viene indicato nella sua documentazione. 
