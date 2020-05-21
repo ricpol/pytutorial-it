@@ -1,169 +1,68 @@
 .. _tut-classes:
 
-*******
-Classes
-*******
+******
+Classi
+******
 
-Classes provide a means of bundling data and functionality together.  Creating
-a new class creates a new *type* of object, allowing new *instances* of that
-type to be made.  Each class instance can have attributes attached to it for
-maintaining its state.  Class instances can also have methods (defined by its
-class) for modifying its state.
+Le classi servono a unire insieme dati e funzionalità. Creare una classe equivale a creare un nuovo *tipo*, a partire dal quale possono essere create nuove *istanze* (oggetti). Ciascuna istanza può avere degli attributi suoi propri, che ne *mantengono* lo stato. Le istanze possono anche avere dei metodi (definiti nella classe) che ne *modificano* lo stato. 
 
-Compared with other programming languages, Python's class mechanism adds classes
-with a minimum of new syntax and semantics.  It is a mixture of the class
-mechanisms found in C++ and Modula-3.  Python classes provide all the standard
-features of Object Oriented Programming: the class inheritance mechanism allows
-multiple base classes, a derived class can override any methods of its base
-class or classes, and a method can call the method of a base class with the same
-name.  Objects can contain arbitrary amounts and kinds of data.  As is true for
-modules, classes partake of the dynamic nature of Python: they are created at
-runtime, and can be modified further after creation.
+A differenza di altri linguaggi di programmazione, il meccanismo delle classi in Python aggiunge pochissima sintassi e semantica: è un misto delle classi che si possono trovare in C++ e in Modula-3. Le classi Python forniscono tutti gli strumenti standard della programmazione a oggetti (OOP): il meccanismo dell'ereditarietà consente di avere più di una classe-base, una sotto-classe può sovrascrivere i metodi della sua (o delle sue) classe-madre, e un metodo può invocare il metodo della classe-madre con lo stesso nome. Gli oggetti possono contenere quanti dati si desidera. Proprio come i moduli, le classi partecipano della natura dinamica di Python: sono create a *runtime* e possono essere modificate ulteriormente dopo la loro creazione. 
 
-In C++ terminology, normally class members (including the data members) are
-*public* (except see below :ref:`tut-private`), and all member functions are
-*virtual*.  As in Modula-3, there are no shorthands for referencing the object's
-members from its methods: the method function is declared with an explicit first
-argument representing the object, which is provided implicitly by the call.  As
-in Smalltalk, classes themselves are objects.  This provides semantics for
-importing and renaming.  Unlike C++ and Modula-3, built-in types can be used as
-base classes for extension by the user.  Also, like in C++, most built-in
-operators with special syntax (arithmetic operators, subscripting etc.) can be
-redefined for class instances.
+Usando la terminologia di C++, di solito i membri di una classe (inclusi i dati) sono *pubblici* (a eccezione di quanto spiegato in :ref:`tut-private`) e tutte le funzioni interne sono *virtuali*. Come in Modula-3, non ci sono scorciatoie per referenziare i membri di un oggetto dall'interno dei suoi metodi: un metodo è chiamato con un primo argomento esplicito che rappresenta l'oggetto stesso, che è fornito implicitamente dalla chiamata. Le classi sono oggetti esse stesse, come in Smalltalk: questo permette la semantica per l'importazione e la rinomina. A differenza di C++ e Modula-3, i tipi predefiniti possono essere usati come classi-base che l'utente può estendere. Inoltre, come in C++, la maggior parte degli operatori predefiniti che godono di sintassi speciale (gli operatori aritmetici, l'indicizzazione, etc.) possono essere ridefiniti per le istanze delle classi. 
 
-(Lacking universally accepted terminology to talk about classes, I will make
-occasional use of Smalltalk and C++ terms.  I would use Modula-3 terms, since
-its object-oriented semantics are closer to those of Python than C++, but I
-expect that few readers have heard of it.)
-
+(Dal momento che non esiste una terminologia universale per le classi, utilizziamo occasionalmente il lessico di C++ e Smalltalk. Sarebbe preferibile usare il lessico di Modula-3 che, rispetto a C++, è più simile a Python per quel che riguarda gli oggetti: ma sospetto che pochi lettori abbiano familiarità con questo linguaggio.)
 
 .. _tut-object:
 
-A Word About Names and Objects
-==============================
+A proposito di nomi e oggetti
+=============================
 
-Objects have individuality, and multiple names (in multiple scopes) can be bound
-to the same object.  This is known as aliasing in other languages.  This is
-usually not appreciated on a first glance at Python, and can be safely ignored
-when dealing with immutable basic types (numbers, strings, tuples).  However,
-aliasing has a possibly surprising effect on the semantics of Python code
-involving mutable objects such as lists, dictionaries, and most other types.
-This is usually used to the benefit of the program, since aliases behave like
-pointers in some respects.  For example, passing an object is cheap since only a
-pointer is passed by the implementation; and if a function modifies an object
-passed as an argument, the caller will see the change --- this eliminates the
-need for two different argument passing mechanisms as in Pascal.
-
+Gli oggetti hanno una identità univoca e più di un nome (in più di uno *scope*) può essere collegato allo stesso oggetto: è ciò che in altri linguaggi si chiama *aliasing*. Questa caratteristica, a prima vista, non è sempre apprezzata in Python e può tranquillamente essere ignorata quando si gestiscono oggetti di tipo immutabile (numeri, stringhe, tuple). Tuttavia, lo *aliasing* può avere effetti imprevisti sulla semantica del codice Python che maneggia oggetti mutabili come liste, dizionari e la maggior parte degli altri tipi. Di solito questi effetti sono sfruttati positivamente dal programma, dal momento che lo *aliasing* è in qualche modo simile ai puntatori. Per esempio, passare un oggetto è più economico, dal momento che l'implementazione sottostante deve solo passare un puntatore; e se una funzione modifica un oggetto passato come argomento, il codice chiamante vedrà le modifiche: questo elimina la necessità di un doppio meccanismo di passaggio degli argomenti, come avviene in Pascal. 
 
 .. _tut-scopes:
 
-Python Scopes and Namespaces
-============================
+*Scope* e *namespace* in Python
+===============================
 
-Before introducing classes, I first have to tell you something about Python's
-scope rules.  Class definitions play some neat tricks with namespaces, and you
-need to know how scopes and namespaces work to fully understand what's going on.
-Incidentally, knowledge about this subject is useful for any advanced Python
-programmer.
+Prima di affrontare le classi, dobbiamo parlare delle regole degli *scope* in Python. [#]_ Le classi manipolano i *namespace* in modo sottile ed è necessario sapere come funzionano *scope* e *namespace* per capire che cosa succede davvero. D'altra parte, la comprensione di questi argomenti è utile in qualsiasi applicazione avanzata di Python. 
 
-Let's begin with some definitions.
+Iniziamo con alcune definizioni.
 
-A *namespace* is a mapping from names to objects.  Most namespaces are currently
-implemented as Python dictionaries, but that's normally not noticeable in any
-way (except for performance), and it may change in the future.  Examples of
-namespaces are: the set of built-in names (containing functions such as :func:`abs`, and
-built-in exception names); the global names in a module; and the local names in
-a function invocation.  In a sense the set of attributes of an object also form
-a namespace.  The important thing to know about namespaces is that there is
-absolutely no relation between names in different namespaces; for instance, two
-different modules may both define a function ``maximize`` without confusion ---
-users of the modules must prefix it with the module name.
+Un *namespace* è una mappatura che collega nomi a oggetti. Di solito i *namespace* sono attualmente implementati come dizionari (per ragioni di performance), ma dall'esterno questo non si vede e potrebbe cambiare in futuro. Esempi di *namespace* sono l'insieme dei nomi predefiniti (che comprende funzioni come :func:`abs` e i nomi delle eccezioni predefinite); i nomi globali di un modulo; i nomi locali a una chiamata di funzione. In un certo senso, l'insieme degli attributi di un oggetto è anch'esso un *namespace*. La cosa fondamentale da capire sui *namespace* è che non c'è assolutamente nessuna relazione tra i nomi di diversi *namespace*. Per esempio, due moduli diversi potrebbero definire entrambi una funzione ``maximize`` senza nessuna confusione: gli utenti dei due moduli devono riferirsi a questa premettendo il nome del modulo. 
 
-By the way, I use the word *attribute* for any name following a dot --- for
-example, in the expression ``z.real``, ``real`` is an attribute of the object
-``z``.  Strictly speaking, references to names in modules are attribute
-references: in the expression ``modname.funcname``, ``modname`` is a module
-object and ``funcname`` is an attribute of it.  In this case there happens to be
-a straightforward mapping between the module's attributes and the global names
-defined in the module: they share the same namespace!  [#]_
+A proposito: usiamo il termine *attributo* per qualsiasi nome che segue un punto: per esempio, nell'espressione ``z.real``, ``real`` è un attributo dell'oggetto ``z``. Tecnicamente, un riferimento a un nome in un modulo è un riferimento a un *attributo* di quel modulo: nell'espressione ``modname.funcname``, ``modname`` è un oggetto-modulo e ``funcname`` è un suo attributo. In questo caso c'è una corrispondenza ovvia tra gli attributi del modulo e i nomi globali definiti nel modulo: condividono lo stesso *namespace*! [#]_
 
-Attributes may be read-only or writable.  In the latter case, assignment to
-attributes is possible.  Module attributes are writable: you can write
-``modname.the_answer = 42``.  Writable attributes may also be deleted with the
-:keyword:`del` statement.  For example, ``del modname.the_answer`` will remove
-the attribute :attr:`the_answer` from the object named by ``modname``.
+Gli attributi possono essere di sola lettura o scrivibili: a questi ultimi è possibile assegnare dei valori. Gli attributi dei moduli sono scrivibili: potete scrivere ``modname.the_answer = 42``. Gli attributi scrivibili sono anche eliminabili con l'istruzione :keyword:`del`. Per esempio, ``del modname.the_answer`` rimuoverà l'attributo :attr:`the_answer` dall'oggetto ``modname``.
 
-Namespaces are created at different moments and have different lifetimes.  The
-namespace containing the built-in names is created when the Python interpreter
-starts up, and is never deleted.  The global namespace for a module is created
-when the module definition is read in; normally, module namespaces also last
-until the interpreter quits.  The statements executed by the top-level
-invocation of the interpreter, either read from a script file or interactively,
-are considered part of a module called :mod:`__main__`, so they have their own
-global namespace.  (The built-in names actually also live in a module; this is
-called :mod:`builtins`.)
+I *namespace* sono creati in momenti diversi e hanno cicli di vita diversi. Il *namespace* che contiene i nomi predefiniti è creato dall'interprete Python all'avvio e non viene mai distrutto. Il *namespace* globale di un modulo è creato al momento della lettura delle definizioni del modulo; anche questi di solito durano fin quando l'interprete è in esecuzione. Le istruzioni eseguite all'invocazione dell'interprete, sia perché sono lette da un file *script* sia quelle eseguite in modalità interattiva, sono considerate parte di un modulo chiamato :mod:`__main__`, e quindi hanno un loro *namespace* globale. (I nomi predefiniti, in effetti, vivono anch'essi in un modulo: questo si chiama :mod:`builtins`.)
 
-The local namespace for a function is created when the function is called, and
-deleted when the function returns or raises an exception that is not handled
-within the function.  (Actually, forgetting would be a better way to describe
-what actually happens.)  Of course, recursive invocations each have their own
-local namespace.
+Il *namespace* locale di una funzione viene creato al momento di chiamare la funzione e distrutto quando la funzione restituisce il suo risultato o emette un'eccezione che non viene gestita all'interno della funzione. (In realtà, "dimenticato" è un termine più appropriato per descrivere quello che accade.) Naturalmente le invocazioni ricorsive hanno ciascuna il proprio *namespace*.
 
-A *scope* is a textual region of a Python program where a namespace is directly
-accessible.  "Directly accessible" here means that an unqualified reference to a
-name attempts to find the name in the namespace.
+Uno *scope* è una regione di codice Python, all'interno del programma, dove il *namespace* è direttamente accessibile. Con "direttamente accessibile" intendiamo che un riferimento *non qualificato* (senza ricorrere alla notazione col punto) a un nome riesce effettivamente a raggiungere il nome nel *namespace*. 
 
-Although scopes are determined statically, they are used dynamically. At any
-time during execution, there are at least three nested scopes whose namespaces
-are directly accessible:
+Anche se gli *scope* sono determinati in modo statico, sono usati in modo dinamico. In qualsiasi momento durante l'esecuzione del programma esistono almeno tre *scope* annidati, i cui *namespace* sono direttamente accessibili:
 
-* the innermost scope, which is searched first, contains the local names
-* the scopes of any enclosing functions, which are searched starting with the
-  nearest enclosing scope, contains non-local, but also non-global names
-* the next-to-last scope contains the current module's global names
-* the outermost scope (searched last) is the namespace containing built-in names
+* lo *scope* più interno, dove un nome è cercato per prima cosa, contiene i nomi locali; 
+* gli *scope* di ogni eventuale funzione di ordine superiore, che sono ricercati dal più prossimo al più lontano, contengono nomi non-locali ma anche non-globali;
+* il penultimo *scope* più lontano contiene i nomi globali del modulo corrente;
+* lo *scope* più generale (dove il nome è cercato per ultimo) è il *namespace* che contiene i nomi predefiniti.
 
-If a name is declared global, then all references and assignments go directly to
-the middle scope containing the module's global names.  To rebind variables
-found outside of the innermost scope, the :keyword:`nonlocal` statement can be
-used; if not declared nonlocal, those variables are read-only (an attempt to
-write to such a variable will simply create a *new* local variable in the
-innermost scope, leaving the identically named outer variable unchanged).
+Se un nome è dichiarato *global*, allora tutti i riferimento a questo puntano direttamente allo *scope* intermedio che contiene i nomi globali del moduli. Per ri-collegare variabili che si trovano fuori dallo *scope* più interno, potete usare l'istruzione :keyword:`nonlocal`. Se dichiarata *nonlocal*, una variabile è di sola lettura: tentare di scrivere in questa variabile non farà altro che creare un *nuova* variabile nello *scope* locale, lasciando immutata la variabile esterna con il medesimo nome. 
 
-Usually, the local scope references the local names of the (textually) current
-function.  Outside functions, the local scope references the same namespace as
-the global scope: the module's namespace. Class definitions place yet another
-namespace in the local scope.
+In genere lo *scope* locale "vede" i nomi locali al codice della funzione corrente. Al di fuori di una funzione, lo *scope* locale vede lo stesso *namespace* dello *scope* globale: ovvero, il *namespace* del modulo.  
 
-It is important to realize that scopes are determined textually: the global
-scope of a function defined in a module is that module's namespace, no matter
-from where or by what alias the function is called.  On the other hand, the
-actual search for names is done dynamically, at run time --- however, the
-language definition is evolving towards static name resolution, at "compile"
-time, so don't rely on dynamic name resolution!  (In fact, local variables are
-already determined statically.)
+È importante capire che gli *scope* sono determinati "dal testo del codice". Lo *scope* globale di una funzione definita in un modulo è il *namespace* di quel modulo: non importa da dove è chiamata la funzione, o con quale alias. Ma d'altro canto, la *ricerca* di un nome avviene dinamicamente, a *runtime*. È anche vero che l'architettura del linguaggio evolve verso la risoluzione statica dei nomi, a *compile time*, quindi non dovreste fare affidamento sulla risoluzione dinamica dei nomi (e in effetti, le variabili locali sono già determinate in modo statico).
 
-A special quirk of Python is that -- if no :keyword:`global` or :keyword:`nonlocal`
-statement is in effect -- assignments to names always go into the innermost scope.
-Assignments do not copy data --- they just bind names to objects.  The same is true
-for deletions: the statement ``del x`` removes the binding of ``x`` from the
-namespace referenced by the local scope.  In fact, all operations that introduce
-new names use the local scope: in particular, :keyword:`import` statements and
-function definitions bind the module or function name in the local scope.
+Una peculiarità di Python è che, in assenza di istruzioni :keyword:`global` o :keyword:`nonlocal`, gli assegnamenti alle variabili sono sempre indirizzati allo *scope* più interno. Gli assegnamenti non copiano i dati, collegano semplicemente i nomi agli oggetti. Lo stesso vale per le eliminazioni: l'istruzione ``del x`` rimuove il collegamento di ``x`` dal *namespace* ricercato dallo *scope* locale. In effetti, tutte le operazioni che introducono nomi nuovi utilizzano lo *scope* locale: in particolare, le istruzioni :keyword:`import` e le definizioni di funzione collegano il nome del modulo o della funzione allo *scope* locale. 
 
-The :keyword:`global` statement can be used to indicate that particular
-variables live in the global scope and should be rebound there; the
-:keyword:`nonlocal` statement indicates that particular variables live in
-an enclosing scope and should be rebound there.
+L'istruzione :keyword:`global` può essere usata per indicare che una particolare variabile vive nello *scope* globale e dovrebbe essere ri-collegata lì; l'istruzione :keyword:`nonlocal` indica che una particolare variabile vive nel *namespace* di ordine superiore e dovrebbe essere ri-collegata lì. 
 
 .. _tut-scopeexample:
 
-Scopes and Namespaces Example
------------------------------
+Esempi di *scope* e *namespace*
+-------------------------------
 
-This is an example demonstrating how to reference the different scopes and
-namespaces, and how :keyword:`global` and :keyword:`nonlocal` affect variable
-binding::
+Questo esempio dimostra come riferirsi ai diversi *scope* e *namespace* e come :keyword:`global` e :keyword:`nonlocal` influiscono sul collegamento delle variabili. ::
 
    def scope_test():
        def do_local():
@@ -179,48 +78,41 @@ binding::
 
        spam = "test spam"
        do_local()
-       print("After local assignment:", spam)
+       print("Dopo un'assegnazione locale:", spam)
        do_nonlocal()
-       print("After nonlocal assignment:", spam)
+       print("Dopo un'assegnazione 'nonlocal':", spam)
        do_global()
-       print("After global assignment:", spam)
+       print("Dopo un'assegnazione 'global':", spam)
 
    scope_test()
-   print("In global scope:", spam)
+   print("Nello scope globale:", spam)
 
-The output of the example code is:
+L'output di questo esempio è:
 
 .. code-block:: none
 
-   After local assignment: test spam
-   After nonlocal assignment: nonlocal spam
-   After global assignment: nonlocal spam
-   In global scope: global spam
+   Dopo un'assegnazione locale: test spam
+   Dopo un'assegnazione 'nonlocal': nonlocal spam
+   Dopo un'assegnazione 'global': nonlocal spam
+   Nello scope globale: global spam
 
-Note how the *local* assignment (which is default) didn't change *scope_test*\'s
-binding of *spam*.  The :keyword:`nonlocal` assignment changed *scope_test*\'s
-binding of *spam*, and the :keyword:`global` assignment changed the module-level
-binding.
+Si noti che l'assegnazione *locale* (che è il comportamento di default) non cambia il collegamento della variabile *spam* della funzione *scope_test*. D'altra parte l'assegnamento :keyword:`nonlocal` cambia il collegamento dello *spam* di *test_spam*, e l'assegnamento :keyword:`global` cambia il collegamento dello *spam* del modulo. 
 
-You can also see that there was no previous binding for *spam* before the
-:keyword:`global` assignment.
-
+Si noti inoltre che non esisteva un collegamento per la variabile *spam* prima dell'assegnamento :keyword:`global`.
 
 .. _tut-firstclasses:
 
-A First Look at Classes
-=======================
+Introduzione alle classi
+========================
 
-Classes introduce a little bit of new syntax, three new object types, and some
-new semantics.
-
+Le classi introducono qualche nuovo aspetto nella sintassi, tre tipi di oggetto nuovi e della nuova semantica. 
 
 .. _tut-classdefinition:
 
-Class Definition Syntax
------------------------
+Sintassi della definizione di una classe
+----------------------------------------
 
-The simplest form of class definition looks like this::
+Questa è la forma più semplice di definizione di una classe::
 
    class ClassName:
        <statement-1>
@@ -229,82 +121,48 @@ The simplest form of class definition looks like this::
        .
        <statement-N>
 
-Class definitions, like function definitions (:keyword:`def` statements) must be
-executed before they have any effect.  (You could conceivably place a class
-definition in a branch of an :keyword:`if` statement, or inside a function.)
+La definizione delle classi, come quella delle funzioni (l'istruzione :keyword:`def`) deve essere *eseguita* prima di avere qualsiasi effetto. (Si potrebbe anche collocare la definizione in un ramo di un'istruzione :keyword:`if`, o all'interno di una funzione.)
 
-In practice, the statements inside a class definition will usually be function
-definitions, but other statements are allowed, and sometimes useful --- we'll
-come back to this later.  The function definitions inside a class normally have
-a peculiar form of argument list, dictated by the calling conventions for
-methods --- again, this is explained later.
+In pratica, le istruzioni all'interno di una definizione di classe sono in genere definizioni di funzione: ma sono permesse anche altre istruzioni, e talvolta sono anzi utili (ne riparleremo in seguito). Le definizioni di funzione all'interno della classe di solito hanno una particolare lista di parametri, dovuta alle convenzioni di chiamata per i metodi (di nuovo, ne riparleremo). 
 
-When a class definition is entered, a new namespace is created, and used as the
-local scope --- thus, all assignments to local variables go into this new
-namespace.  In particular, function definitions bind the name of the new
-function here.
+Quando il flusso di esecuzione del codice entra nella definizione della classe, un nuovo *namespace* viene creato e usato come *scope* locale: ovvero, tutte le successive assegnazioni di variabili locale finiscono in questo nuovo *namespace*. In particolare, le definizioni di funzione collegano qui il nome della funzione. 
 
-When a class definition is left normally (via the end), a *class object* is
-created.  This is basically a wrapper around the contents of the namespace
-created by the class definition; we'll learn more about class objects in the
-next section.  The original local scope (the one in effect just before the class
-definition was entered) is reinstated, and the class object is bound here to the
-class name given in the class definition header (:class:`ClassName` in the
-example).
-
+Quando si esce dalla definizione della classe nel modo normale (perché il flusso di esecuzione abbandona la classe), viene creato un *oggetto-classe*. Questo oggetto è in sostanza un "contenitore" per il contenuto del *namespace* creato dalla definizione della classe: diremo di più sugli oggetti-classe nella prossima sezione. Lo *scope* locale originario (quello che era attivo subito prima di entrare nella definizione della classe) viene ripristinato e l'oggetto-classe viene collegato in questo *namespace* al nome fornito nell'intestazione della definizione della classe (nel nostro esempio, :class:`ClassName`).
 
 .. _tut-classobjects:
 
-Class Objects
--------------
+Gli oggetti-classe
+------------------
 
-Class objects support two kinds of operations: attribute references and
-instantiation.
+Gli oggetti-classe supportano due tipi di operazione: il riferimento agli attributi e l'istanziamento. 
 
-*Attribute references* use the standard syntax used for all attribute references
-in Python: ``obj.name``.  Valid attribute names are all the names that were in
-the class's namespace when the class object was created.  So, if the class
-definition looked like this::
+Il riferimento agli attributi utilizza la normale sintassi che si usa per queste operazioni in Python: ``obj.name``. Un nome di attributo è valido se era nel *namespace* della classe al momento della creazione dell'oggetto-classe. Quindi, se una definizione di classe è fatta così, ::
 
    class MyClass:
-       """A simple example class"""
+       """Un semplice esempio di classe."""
        i = 12345
 
        def f(self):
            return 'hello world'
 
-then ``MyClass.i`` and ``MyClass.f`` are valid attribute references, returning
-an integer and a function object, respectively. Class attributes can also be
-assigned to, so you can change the value of ``MyClass.i`` by assignment.
-:attr:`__doc__` is also a valid attribute, returning the docstring belonging to
-the class: ``"A simple example class"``.
+allora ``MyClass.i`` e ``MyClass.f`` sono riferimenti validi agli attributi, e restituiscono un intero e un oggetto-funzione rispettivamente. Gli attributi della classe possono anche essere assegnati, ovvero potete cambiare il valore di ``MyClass.i`` con un assegnamento. Anche :attr:`__doc__` è un attributo valido, e restituisce la docstring della classe (``"Un semplice esempio di classe."``)
 
-Class *instantiation* uses function notation.  Just pretend that the class
-object is a parameterless function that returns a new instance of the class.
-For example (assuming the above class)::
+Lo *istanziamento* usa invece la notazione di chiamata di funzione. Fate finta che la classe sia una funzione senza parametri che restituisce una nuova istanza della classe. Per esempio, con riferimento alla classe dell'esempio precedente, ::
 
    x = MyClass()
 
-creates a new *instance* of the class and assigns this object to the local
-variable ``x``.
+crea una nuova *istanza* della classe e assegna questo oggetto alla variabile locale ``x``.
 
-The instantiation operation ("calling" a class object) creates an empty object.
-Many classes like to create objects with instances customized to a specific
-initial state. Therefore a class may define a special method named
-:meth:`__init__`, like this::
+L'operazione di istanziamento ("invocare" un oggetto-classe) crea un oggetto vuoto. Molto spesso le classi preferiscono creare istanze predisposte con uno specifico stato iniziale. Per questo è possibile definire nella classe un metodo speciale chiamato :meth:`__init__`, così::
 
    def __init__(self):
        self.data = []
 
-When a class defines an :meth:`__init__` method, class instantiation
-automatically invokes :meth:`__init__` for the newly-created class instance.  So
-in this example, a new, initialized instance can be obtained by::
+Se la classe definisce un metodo :meth:`__init__` allora l'operazione di istanziamento lo invoca automaticamente per l'istanza appena creata. Quindi nel nostro esempio, una nuova istanza già inizializzata può essere ottenuta con::
 
    x = MyClass()
 
-Of course, the :meth:`__init__` method may have arguments for greater
-flexibility.  In that case, arguments given to the class instantiation operator
-are passed on to :meth:`__init__`.  For example, ::
+Naturalmente il metodo :meth:`__init__` può essere reso più flessibile dotandolo di parametri. In questo caso gli argomenti passati all'istanziamento della classe sono trasferiti al metodo :meth:`__init__`. Per esempio::
 
    >>> class Complex:
    ...     def __init__(self, realpart, imagpart):
@@ -315,21 +173,14 @@ are passed on to :meth:`__init__`.  For example, ::
    >>> x.r, x.i
    (3.0, -4.5)
 
-
 .. _tut-instanceobjects:
 
-Instance Objects
-----------------
+Oggetti-istanza
+---------------
 
-Now what can we do with instance objects?  The only operations understood by
-instance objects are attribute references.  There are two kinds of valid
-attribute names: data attributes and methods.
+Che cosa possiamo fare con gli oggetti-istanza? L'unica operazione possibile con questi oggetti è il riferimento agli attributi. Ci sono due tipi di nomi di attributo validi: i *dati* e i *metodi*. 
 
-*data attributes* correspond to "instance variables" in Smalltalk, and to "data
-members" in C++.  Data attributes need not be declared; like local variables,
-they spring into existence when they are first assigned to.  For example, if
-``x`` is the instance of :class:`MyClass` created above, the following piece of
-code will print the value ``16``, without leaving a trace::
+I *dati* corrispondono alle "variabili di istanza" di Smalltalk e ai "data members" di C++. Gli attributi-dati non devono essere dichiarati: proprio come le variabili locali, iniziano a esistere nel momento in cui sono assegnati per la prima volta. Per esempio, se ``x`` è una istanza della classe :class:`MyClass` che abbiamo definito sopra, questo codice scriverà il valore "16" senza lasciar traccia::
 
    x.counter = 1
    while x.counter < 10:
@@ -337,102 +188,65 @@ code will print the value ``16``, without leaving a trace::
    print(x.counter)
    del x.counter
 
-The other kind of instance attribute reference is a *method*. A method is a
-function that "belongs to" an object.  (In Python, the term method is not unique
-to class instances: other object types can have methods as well.  For example,
-list objects have methods called append, insert, remove, sort, and so on.
-However, in the following discussion, we'll use the term method exclusively to
-mean methods of class instance objects, unless explicitly stated otherwise.)
+L'altro tipo di attributo dell'istanza è il *metodo*. Un metodo è una funzione che "appartiene" all'oggetto-istanza. (In Python, il termine "metodo" non si usa solo in relazione alle istanze delle classi: anche altri tipi di oggetti possono avere dei metodi. Per esempio, gli oggetti-lista hanno metodi come *append*, *insert*, *remove*, *sort* e così via. In ogni caso, nel resto di questo capitolo, useremo "metodo" solo per riferirci ai metodi degli oggetti-istanza di una classe, a meno che non sia specificato diversamente.)
 
 .. index:: object: method
 
-Valid method names of an instance object depend on its class.  By definition,
-all attributes of a class that are function  objects define corresponding
-methods of its instances.  So in our example, ``x.f`` is a valid method
-reference, since ``MyClass.f`` is a function, but ``x.i`` is not, since
-``MyClass.i`` is not.  But ``x.f`` is not the same thing as ``MyClass.f`` --- it
-is a *method object*, not a function object.
-
+I nomi validi per i metodi di un'istanza dipendono dalla sua classe. Per definizione, tutti gli attributi della classe che corrispondono a degli oggetti-funzione sono metodi della sua istanza. E quindi nel nostro esempio ``x.f`` è un riferimento valido al metodo, dal momento che ``MyClass.f`` è una funzione; ma ``x.i`` non lo è, perché ``MyClass.i`` non è una funzione. Tuttavia ``x.f`` *non è* la stessa cosa di ``MyClass.f``: il primo è un oggetto-metodo, il secondo è un oggetto-funzione. 
 
 .. _tut-methodobjects:
 
-Method Objects
+Oggetti-metodo
 --------------
 
-Usually, a method is called right after it is bound::
+Di solito un metodo viene invocato non appena è stato collegato::
 
    x.f()
 
-In the :class:`MyClass` example, this will return the string ``'hello world'``.
-However, it is not necessary to call a method right away: ``x.f`` is a method
-object, and can be stored away and called at a later time.  For example::
+Nell'esempio di :class:`MyClass`, questa chiamata restituirà la stringa ``'hello world'``. Tuttavia non è necessario invocare il metodo immediatamente: ``x.f`` è un oggetto-metodo che può essere "conservato" e chiamato più tardi. Per esempio, ::
 
    xf = x.f
    while True:
        print(xf())
 
-will continue to print ``hello world`` until the end of time.
+continuerà a scrivere ``hello world`` fino alla fine del mondo.
 
-What exactly happens when a method is called?  You may have noticed that
-``x.f()`` was called without an argument above, even though the function
-definition for :meth:`f` specified an argument.  What happened to the argument?
-Surely Python raises an exception when a function that requires an argument is
-called without any --- even if the argument isn't actually used...
+Che cosa succede di preciso quando un metodo è invocato? Avrete notato che l'invocazione ``x.f()`` è stata fatta senza passare argomenti, anche se la definizione di :meth:`f` specifica in effetti un parametro. Che cosa succede a questo? Certamente Python emette un'eccezione se una funzione che richiede un argomento è invocata senza passarlo, anche se poi l'argomento non dovesse essere usato nella funzione stessa...
 
-Actually, you may have guessed the answer: the special thing about methods is
-that the instance object is passed as the first argument of the function.  In our
-example, the call ``x.f()`` is exactly equivalent to ``MyClass.f(x)``.  In
-general, calling a method with a list of *n* arguments is equivalent to calling
-the corresponding function with an argument list that is created by inserting
-the method's instance object before the first argument.
+In realtà probabilmente avrete indovinato la risposta: la peculiarità dei metodi è che l'oggetto-istanza è passato automaticamente come primo argomento della funzione. Nel nostro esempio, la chiamata ``x.f()`` è esattamente equivalente a ``MyClass.f(x)``. In generale, invocare un metodo con una lista di *n* argomenti è equivalente a chiamare la corrispondente funzione con una lista di argomenti identica, ma che inserisce al primo posto l'oggetto-istanza. 
 
-If you still don't understand how methods work, a look at the implementation can
-perhaps clarify matters.  When a non-data attribute of an instance is
-referenced, the instance's class is searched.  If the name denotes a valid class
-attribute that is a function object, a method object is created by packing
-(pointers to) the instance object and the function object just found together in
-an abstract object: this is the method object.  When the method object is called
-with an argument list, a new argument list is constructed from the instance
-object and the argument list, and the function object is called with this new
-argument list.
-
+Se non riuscite a comprendere esattamente come funziona, può essere utile dare un'occhiata all'implementazione. Quando referenziamo un attributo (che non sia un dato) di una classe, il nome viene cercato nell'istanza della classe. Se il nome corrisponde a un attributo che è un oggetto-funzione, allora un oggetto-metodo viene creato mettendo insieme (puntatori a) l'oggetto-istanza e l'oggetto-funzione appena trovato, per formare un nuovo oggetto astratto: l'oggetto-metodo, appunto. Quando l'oggetto-metodo è invocato con una lista di argomenti, una nuova lista viene creata unendola all'oggetto-istanza: l'oggetto-funzione viene chiamato con questa nuova lista di argomenti. 
 
 .. _tut-class-and-instance-variables:
 
-Class and Instance Variables
-----------------------------
+Variabili di classe e di istanza
+--------------------------------
 
-Generally speaking, instance variables are for data unique to each instance
-and class variables are for attributes and methods shared by all instances
-of the class::
+In generale, le variabili di istanza sono per i dati che devono restare unici per ciascuna istanza; le variabili di classe sono per attributi e metodi condivisi tra tutte le istanze della classe::
 
     class Dog:
 
-        kind = 'canine'         # class variable shared by all instances
+        kind = 'canine'         # variabile di classe condivisa tra le istanze
 
         def __init__(self, name):
-            self.name = name    # instance variable unique to each instance
+            self.name = name    # variabile di istanza unica per ciascuna istanza
 
     >>> d = Dog('Fido')
     >>> e = Dog('Buddy')
-    >>> d.kind                  # shared by all dogs
+    >>> d.kind                  # condivisa tra tutti i cani
     'canine'
-    >>> e.kind                  # shared by all dogs
+    >>> e.kind                  # condivisa tra tutti i cani
     'canine'
-    >>> d.name                  # unique to d
+    >>> d.name                  # unica per d
     'Fido'
-    >>> e.name                  # unique to e
+    >>> e.name                  # unica per e
     'Buddy'
 
-As discussed in :ref:`tut-object`, shared data can have possibly surprising
-effects with involving :term:`mutable` objects such as lists and dictionaries.
-For example, the *tricks* list in the following code should not be used as a
-class variable because just a single list would be shared by all *Dog*
-instances::
+Come abbiamo visto in :ref:`tut-object`, i dati condivisi possono avere comportamenti sorprendenti quando sono oggetti :term:`mutabili<mutable>` come liste e dizionari. Nell'esempio che segue, la lista *tricks* non dovrebbe essere utilizzata come una variabile di classe, perché una singola lista verrebbe condivisa tra tutte le istanze di *Dog*:: 
 
     class Dog:
 
-        tricks = []             # mistaken use of a class variable
+        tricks = []             # uso sbagliato di una variabile di classe
 
         def __init__(self, name):
             self.name = name
@@ -444,16 +258,16 @@ instances::
     >>> e = Dog('Buddy')
     >>> d.add_trick('roll over')
     >>> e.add_trick('play dead')
-    >>> d.tricks                # unexpectedly shared by all dogs
+    >>> d.tricks                # inaspettata condivisione tra tutte le istanze
     ['roll over', 'play dead']
 
-Correct design of the class should use an instance variable instead::
+Il design corretto per la classe prevede l'uso di una variabile *di istanza*, invece::
 
     class Dog:
 
         def __init__(self, name):
             self.name = name
-            self.tricks = []    # creates a new empty list for each dog
+            self.tricks = []    # crea una lista vuota per ciascuna istanza
 
         def add_trick(self, trick):
             self.tricks.append(trick)
@@ -467,16 +281,14 @@ Correct design of the class should use an instance variable instead::
     >>> e.tricks
     ['play dead']
 
-
 .. _tut-remarks:
 
-Random Remarks
-==============
+Osservazioni varie
+==================
 
 .. These should perhaps be placed more carefully...
 
-If the same attribute name occurs in both an instance and in a class,
-then attribute lookup prioritizes the instance::
+Se lo stesso nome è usato per un attributo di classe e uno di istanza, allora il meccanismo di ricerca dà priorità all'attributo di istanza::
 
     >>> class Warehouse:
             purpose = 'storage'
@@ -490,37 +302,17 @@ then attribute lookup prioritizes the instance::
     >>> print(w2.purpose, w2.region)
     storage east
 
-Data attributes may be referenced by methods as well as by ordinary users
-("clients") of an object.  In other words, classes are not usable to implement
-pure abstract data types.  In fact, nothing in Python makes it possible to
-enforce data hiding --- it is all based upon convention.  (On the other hand,
-the Python implementation, written in C, can completely hide implementation
-details and control access to an object if necessary; this can be used by
-extensions to Python written in C.)
+Gli attributi che sono dati possono essere referenziati anche dai metodi, oltre che dai normali "clienti" (utilizzatori) di un oggetto. In altre parole, le classi non sono adatte a implementare tipi di dati astratti. In effetti, non è in alcun modo possibile in Python garantire la protezione di un dato: questo può essere solo basato su convenzioni. (D'altro canto, la *implementazione* di Python, scritta in C, può nascondere completamente i dettagli di implementazione e controllare l'accesso a un oggetto, se necessario: si può sfruttare questo aspetto scrivendo delle estensioni di Python in C.)
 
-Clients should use data attributes with care --- clients may mess up invariants
-maintained by the methods by stamping on their data attributes.  Note that
-clients may add data attributes of their own to an instance object without
-affecting the validity of the methods, as long as name conflicts are avoided ---
-again, a naming convention can save a lot of headaches here.
+I "clienti" dovrebbero fare attenzione a usare gli attributi-dati: potrebbero scompaginare delle invarianti utilizzate dai metodi, sovrascrivendole con i loro attributi-dati. Si noti che i clienti possono aggiungere dati per conto proprio a un oggetto-istanza, senza compromettere il funzionamento dei metodi, fintanto che non ci sono conflitti tra i nomi. Ancora una volta, l'uso di una convenzione per i nomi può risparmiare molti grattacapi. 
 
-There is no shorthand for referencing data attributes (or other methods!) from
-within methods.  I find that this actually increases the readability of methods:
-there is no chance of confusing local variables and instance variables when
-glancing through a method.
+Non ci sono particolari scorciatoie per referenziare dati (o metodi) dall'interno dei metodi. Riteniamo che in questo modo il codice sia più leggibile: non c'è la possibilità di confondere variabili locali e variabili di istanza quando si scorre con l'occhio il codice di un metodo. 
 
-Often, the first argument of a method is called ``self``.  This is nothing more
-than a convention: the name ``self`` has absolutely no special meaning to
-Python.  Note, however, that by not following the convention your code may be
-less readable to other Python programmers, and it is also conceivable that a
-*class browser* program might be written that relies upon such a convention.
+Di solito il primo parametro di un metodo viene chiamato ``self``. Si tratta solo di una convenzione: il nome di per sé non ha alcun significato speciale per Python. Notate tuttavia che non seguire questa convenzione rende il vostro codice meno leggibile per gli altri programmatori Python; è anche probabile che gli strumenti di introspezione del codice si basino sul rispetto di questa convenzione. 
 
-Any function object that is a class attribute defines a method for instances of
-that class.  It is not necessary that the function definition is textually
-enclosed in the class definition: assigning a function object to a local
-variable in the class is also ok.  For example::
+Ogni oggetto-funzione che sia un attributo di classe definisce un oggetto-metodo per l'istanza di quella classe. Non è necessario che il codice della funzione sia fisicamente contenuto all'interno della definizione della classe: si può anche assegnare una variabile locale a un oggetto-funzione esterno. Per esempio::
 
-   # Function defined outside the class
+   # Una funzione definita all'esterno della classe
    def f1(self, x, y):
        return min(x, x+y)
 
@@ -532,13 +324,9 @@ variable in the class is also ok.  For example::
 
        h = g
 
-Now ``f``, ``g`` and ``h`` are all attributes of class :class:`C` that refer to
-function objects, and consequently they are all methods of instances of
-:class:`C` --- ``h`` being exactly equivalent to ``g``.  Note that this practice
-usually only serves to confuse the reader of a program.
+Adesso ``f``, ``g`` e ``h`` sono tutti attributi della classe :class:`C`, che si riferiscono a oggetti-funzione: di conseguenza sono anche tutti metodi delle istanze della classe; ``h`` sarà esattamente equivalente a ``g``. Si noti però che questa pratica in genere confonde solo le idee a chi deve leggere il codice.
 
-Methods may call other methods by using method attributes of the ``self``
-argument::
+I metodi possono invocare altri metodi usando gli attributi-metodo del loro parametro ``self``::
 
    class Bag:
        def __init__(self):
@@ -551,28 +339,16 @@ argument::
            self.add(x)
            self.add(x)
 
-Methods may reference global names in the same way as ordinary functions.  The
-global scope associated with a method is the module containing its
-definition.  (A class is never used as a global scope.)  While one
-rarely encounters a good reason for using global data in a method, there are
-many legitimate uses of the global scope: for one thing, functions and modules
-imported into the global scope can be used by methods, as well as functions and
-classes defined in it.  Usually, the class containing the method is itself
-defined in this global scope, and in the next section we'll find some good
-reasons why a method would want to reference its own class.
+I metodi possono accedere ai nomi globali nello stesso modo delle funzioni ordinarie. Lo *scope* globale associato a un metodo è il modulo che contiene la definizione. (Una classe non è mai utilizzata come *scope* globale.) Anche se di rado esiste una ragione valida per accedere a un *dato* globale dall'interno di un metodo, ci sono comunque motivi validi per usare lo *scope* globale: per cominciare, le funzioni e i moduli importati nello *scope* globale possono essere usate dai metodi, così come le funzioni e le classi ivi definite. In genere la classe che contiene il metodo è essa stessa definita nello *scope* globale, e nella prossima sezione vedremo dei buoni motivi per cui un metodo potrebbe voler accedere al nome della sua stessa classe. 
 
-Each value is an object, and therefore has a *class* (also called its *type*).
-It is stored as ``object.__class__``.
-
+Ogni valore è un oggetto e di conseguenza ha una *classe*, che è chiamata il suo *tipo*. Il nome della classe/tipo è conservato in ``object.__class__``.
 
 .. _tut-inheritance:
 
-Inheritance
-===========
+Ereditarietà
+============
 
-Of course, a language feature would not be worthy of the name "class" without
-supporting inheritance.  The syntax for a derived class definition looks like
-this::
+Naturalmente una classe non sarebbe degna di questo nome se non supportasse l'ereditarietà. La sintassi per definire una sotto-classe è questa::
 
    class DerivedClassName(BaseClassName):
        <statement-1>
@@ -581,58 +357,32 @@ this::
        .
        <statement-N>
 
-The name :class:`BaseClassName` must be defined in a scope containing the
-derived class definition.  In place of a base class name, other arbitrary
-expressions are also allowed.  This can be useful, for example, when the base
-class is defined in another module::
+Il nome della classe-madre :class:`BaseClassName` deve essere definito in uno *scope* che contiene la definizione della sotto-classe. Al posto del nome della classe-madre è anche consentito inserire un'espressione arbitraria. Questo è utile, per esempio, quando la classe-madre è definita in un altro modulo::
 
    class DerivedClassName(modname.BaseClassName):
 
-Execution of a derived class definition proceeds the same as for a base class.
-When the class object is constructed, the base class is remembered.  This is
-used for resolving attribute references: if a requested attribute is not found
-in the class, the search proceeds to look in the base class.  This rule is
-applied recursively if the base class itself is derived from some other class.
+L'esecuzione della definizione di una sotto-classe è simile a quella della classe-madre. Al momento della sua costruzione, l'oggetto-classe ricorda la sua classe-madre. In questo modo può risolvere i riferimenti agli attributi: se viene richiesto un attributo che non si trova nella classe, la ricerca procede nella classe-madre. Il meccanismo si applica ricorsivamente, se la classe-madre a sua volta deriva da qualche altra classe.
 
-There's nothing special about instantiation of derived classes:
-``DerivedClassName()`` creates a new instance of the class.  Method references
-are resolved as follows: the corresponding class attribute is searched,
-descending down the chain of base classes if necessary, and the method reference
-is valid if this yields a function object.
+Non vi è nulla di speciale nell'istanziare una sotto-classe: ``DerivedClassName()`` crea una nuova istanza della classe. I riferimenti ai metodi sono risolti così: si cerca il corrispondente attributo di classe, scendendo lungo la catena delle classi-madri se necessario; il riferimento al metodo è valido se il nome trovato corrisponde a un oggetto-funzione. 
 
-Derived classes may override methods of their base classes.  Because methods
-have no special privileges when calling other methods of the same object, a
-method of a base class that calls another method defined in the same base class
-may end up calling a method of a derived class that overrides it.  (For C++
-programmers: all methods in Python are effectively ``virtual``.)
+Le sotto-classi possono sovrascrivere i metodi delle loro classi-madri. Dal momento che i metodi non hanno privilegi speciali quando chiamano altri metodi dello stesso oggetto, un metodo in una classe-madre che chiama un altro metodo definito nella stessa classe potrebbe finire per chiamare in realtà un metodo sovrascritto in una sotto-classe. (Per i programmatori C++: tutti i metodi in Python sono ``virtual``.)
 
-An overriding method in a derived class may in fact want to extend rather than
-simply replace the base class method of the same name. There is a simple way to
-call the base class method directly: just call ``BaseClassName.methodname(self,
-arguments)``.  This is occasionally useful to clients as well.  (Note that this
-only works if the base class is accessible as ``BaseClassName`` in the global
-scope.)
+Un metodo di una sotto-classe potrebbe voler *estendere* invece di semplicemente rimpiazzare il metodo della classe-madre con lo stesso nome. Per chiamare il metodo della classe-madre, semplicemente basta chiamare ``BaseClassName.methodname(self, arguments)``. Talvolta questa tecnica può servire anche al codice "cliente". (Si noti però che questo funziona solo se la classe-madre è accessibile nello *scope* globale come ``BaseClassName``.)
 
-Python has two built-in functions that work with inheritance:
+Python ha due funzioni predefinite che si occupano di ereditarietà:
 
-* Use :func:`isinstance` to check an instance's type: ``isinstance(obj, int)``
-  will be ``True`` only if ``obj.__class__`` is :class:`int` or some class
-  derived from :class:`int`.
+* :func:`isinstance` controlla il tipo di un'istanza: ``isinstance(obj, int)``
+  restituirà ``True`` se ``obj.__class__`` è un :class:`int` o qualcosa derivato da :class:`int`.
 
-* Use :func:`issubclass` to check class inheritance: ``issubclass(bool, int)``
-  is ``True`` since :class:`bool` is a subclass of :class:`int`.  However,
-  ``issubclass(float, int)`` is ``False`` since :class:`float` is not a
-  subclass of :class:`int`.
-
-
+* :func:`issubclass` controlla l'ereditarietà di una classe: ``issubclass(bool, int)``
+  restituisce ``True``, dal momento che la classe :class:`bool` è una sotto-classe di :class:`int`.  Al contrario, ``issubclass(float, int)`` è ``False`` perché :class:`float` non è una sotto-classe di :class:`int`.
 
 .. _tut-multiple:
 
-Multiple Inheritance
---------------------
+Ereditarietà multipla
+---------------------
 
-Python supports a form of multiple inheritance as well.  A class definition with
-multiple base classes looks like this::
+Python supporta anche una forma di ereditarietà multipla. Una classe con più di una classe-madre si può scrivere così::
 
    class DerivedClassName(Base1, Base2, Base3):
        <statement-1>
@@ -641,59 +391,25 @@ multiple base classes looks like this::
        .
        <statement-N>
 
-For most purposes, in the simplest cases, you can think of the search for
-attributes inherited from a parent class as depth-first, left-to-right, not
-searching twice in the same class where there is an overlap in the hierarchy.
-Thus, if an attribute is not found in :class:`DerivedClassName`, it is searched
-for in :class:`Base1`, then (recursively) in the base classes of :class:`Base1`,
-and if it was not found there, it was searched for in :class:`Base2`, and so on.
+Nei casi più semplici e per la maggior parte degli scenari di utilizzo, potete assumere che la ricerca di un attributo ereditato proceda da sinistra a destra, con una "ricerca in profondità", e senza cercare una seconda volta nella stessa classe quando le gerarchie si sovrappongono. Quindi, se un attributo non viene trovato in :class:`DerivedClassName`, lo si cerca in :class:`Base1`, quindi ricorsivamente nelle classi-madre di :class:`Base1`, quindi in :class:`Base2` e così via. 
 
-In fact, it is slightly more complex than that; the method resolution order
-changes dynamically to support cooperative calls to :func:`super`.  This
-approach is known in some other multiple-inheritance languages as
-call-next-method and is more powerful than the super call found in
-single-inheritance languages.
+In realtà le cose sono leggermente più complicate; il meccanismo di ricerca dei metodi cambia dinamicamente per supportare chiamate cooperative alla funzione :func:`super`. Questo approccio è noto come "call-next-method" in alcuni linguaggi dotati di ereditarietà multipla e offre più possibilità rispetto al *super* dei linguaggi con ereditarietà semplice. 
 
-Dynamic ordering is necessary because all cases of multiple inheritance exhibit
-one or more diamond relationships (where at least one of the parent classes
-can be accessed through multiple paths from the bottommost class).  For example,
-all classes inherit from :class:`object`, so any case of multiple inheritance
-provides more than one path to reach :class:`object`.  To keep the base classes
-from being accessed more than once, the dynamic algorithm linearizes the search
-order in a way that preserves the left-to-right ordering specified in each
-class, that calls each parent only once, and that is monotonic (meaning that a
-class can be subclassed without affecting the precedence order of its parents).
-Taken together, these properties make it possible to design reliable and
-extensible classes with multiple inheritance.  For more detail, see
-https://www.python.org/download/releases/2.3/mro/.
-
+La ricerca con ordinamento dinamico si rende necessaria perché tutte le ereditarietà multiple finiscono per avere una o più gerarchie "a rombo": ovvero, almeno una delle classi-madre può essere raggiunta in più di un modo a partire dalla sotto-classe. Per esempio, in Python tutte le classi ereditano da :class:`object`, quindi tutti gli schemi di ereditarietà multipla devono per forza prevedere più di un percorso per arrivare a :class:`object`. Per evitare di cercare più di una volta nelle classi-madre, l'algoritmo dinamico traccia un percorso di ricerca lineare tale da preservare il principio "da sinistra a destra", da raggiungere ciascuna classe-madre una sola volta, e da essere monotonico (ovvero, è possibile creare una sotto-classe senza influenzare il percorso di ricerca già esistente per la gerarchia superiore). Queste proprietà, nel loro insieme, rendono possibile la progettazione di classi affidabili ed estensibili in un contesto di ereditarietà multipla. Per ulteriori dettagli, si veda https://www.python.org/download/releases/2.3/mro/.
 
 .. _tut-private:
 
-Private Variables
+Variabili private
 =================
 
-"Private" instance variables that cannot be accessed except from inside an
-object don't exist in Python.  However, there is a convention that is followed
-by most Python code: a name prefixed with an underscore (e.g. ``_spam``) should
-be treated as a non-public part of the API (whether it is a function, a method
-or a data member).  It should be considered an implementation detail and subject
-to change without notice.
+In Python non esiste il concetto di istanza "privata" di una variabile, che è accessibile solo dall'interno del suo oggetto. Tuttavia esiste una convenzione, adottata quasi ovunque nel codice scritto in Python: un nome che inizia con il "trattino basso" (per esempio ``_spam``) dovrebbe essere trattato come una componente non-pubblica della API (che sia una funzione, un metodo o un dato). Dovrebbe essere considerato come un dettaglio di implementazione, suscettibile di essere modificato in futuro senza preavviso. 
 
 .. index::
    pair: name; mangling
 
-Since there is a valid use-case for class-private members (namely to avoid name
-clashes of names with names defined by subclasses), there is limited support for
-such a mechanism, called :dfn:`name mangling`.  Any identifier of the form
-``__spam`` (at least two leading underscores, at most one trailing underscore)
-is textually replaced with ``_classname__spam``, where ``classname`` is the
-current class name with leading underscore(s) stripped.  This mangling is done
-without regard to the syntactic position of the identifier, as long as it
-occurs within the definition of a class.
+Esiste almeno uno scenario reale in cui è desiderabile disporre di una variabile privata: quando si vogliono evitare conflitti con nomi definiti dalle sotto-classi. Python fornisce un supporto limitato per questa necessità, attraverso il :dfn:`name mangling`. Tutti i nomi che hanno almeno due "trattini bassi" iniziali e non più di un "trattino basso" finale (come ``__spam``) sono rimpiazzati con ``_classname__spam``, dove ``classname`` è il nome della classe corrente senza trattini bassi iniziali. Questa manipolazione avviene per tutti gli identificatori di questo tipo, indipendentemente dalla loro posizione, purché siano definiti all'interno della classe. 
 
-Name mangling is helpful for letting subclasses override methods without
-breaking intraclass method calls.  For example::
+La manipolazione dei nomi permette alle sotto-classi di sovrascrivere un metodo senza comprometterne l'invocazione da un'altra classe. Per esempio::
 
    class Mapping:
        def __init__(self, iterable):
@@ -704,75 +420,54 @@ breaking intraclass method calls.  For example::
            for item in iterable:
                self.items_list.append(item)
 
-       __update = update   # private copy of original update() method
+       __update = update   # una copia privata del metodo update()
 
    class MappingSubclass(Mapping):
 
        def update(self, keys, values):
-           # provides new signature for update()
-           # but does not break __init__()
+           # sovrascrive update() con una nuova *signature*
+           # ma non rompe il funzionamento della chiamata in __init__()
            for item in zip(keys, values):
                self.items_list.append(item)
 
-The above example would work even if ``MappingSubclass`` were to introduce a
-``__update`` identifier since it is replaced with ``_Mapping__update`` in the
-``Mapping`` class  and ``_MappingSubclass__update`` in the ``MappingSubclass``
-class respectively.
+Questo esempio funzionerebbe anche se ``MappingSubclass`` volesse introdurre un suo ``__update``, dal momento che sarebbe rimpiazzato con ``_Mapping__update`` nella classe-madre e con ``_MappingSubclass__update`` nella sotto-classe.
 
-Note that the mangling rules are designed mostly to avoid accidents; it still is
-possible to access or modify a variable that is considered private.  This can
-even be useful in special circumstances, such as in the debugger.
+Si noti che il meccanismo del *mangling* vuole essere soprattutto un modo per evitare conflitti di nomi: è comunque sempre possibile accedere o modificare una variabile "privata". Questo può essere anzi utile in talune circostanze, per esempio in un debugger. 
 
-Notice that code passed to ``exec()`` or ``eval()`` does not consider the
-classname of the invoking class to be the current class; this is similar to the
-effect of the ``global`` statement, the effect of which is likewise restricted
-to code that is byte-compiled together.  The same restriction applies to
-``getattr()``, ``setattr()`` and ``delattr()``, as well as when referencing
-``__dict__`` directly.
-
+Si noti inoltre che il codice passato alle funzioni ``exec()`` o ``eval()`` non considera la classe che invoca il metodo come la classe "corrente" e quindi non usa quel nome per il *mangling*; è un effetto simile a quello dell'istruzione ``global``, che infatti, anch'essa, vale solo nel codice che è stato compilato insieme (nel senso di *byte-compiled*). Lo stesso vale per ``getattr()``, ``setattr()`` e ``delattr()``, e anche quando si utilizza direttamente ``__dict__``.
 
 .. _tut-odds:
 
-Odds and Ends
-=============
+Note varie
+==========
 
-Sometimes it is useful to have a data type similar to the Pascal "record" or C
-"struct", bundling together a few named data items.  An empty class definition
-will do nicely::
+Può essere utile talvolta disporre di una struttura-dati simile al "record" di Pascal o a "struct" in C, impacchettando insieme alcuni dati referenziati con variabili. Si può usare una classe vuota::
 
    class Employee:
        pass
 
-   john = Employee()  # Create an empty employee record
+   john = Employee()  # Crea una scheda di impiegato vuota
 
-   # Fill the fields of the record
+   # Riempie i campi della scheda
    john.name = 'John Doe'
    john.dept = 'computer lab'
    john.salary = 1000
 
-A piece of Python code that expects a particular abstract data type can often be
-passed a class that emulates the methods of that data type instead.  For
-instance, if you have a function that formats some data from a file object, you
-can define a class with methods :meth:`read` and :meth:`!readline` that get the
-data from a string buffer instead, and pass it as an argument.
+Se una sezione di codice Python si aspetta di ricevere uno specifico tipo di dato astratto, le si può passare invece una classe che emula i metodi di quel tipo di dato. Per esempio, se avete una funzione che formatta dei dati provenienti da un file di testo, potete definire una classe con dei metodi :meth:`read` e :meth:`!readline` che invece prelevano i dati da una stringa-buffer, e passare questa alla funzione come argomento. 
 
 .. (Unfortunately, this technique has its limitations: a class can't define
    operations that are accessed by special syntax such as sequence subscripting
    or arithmetic operators, and assigning such a "pseudo-file" to sys.stdin will
    not cause the interpreter to read further input from it.)
 
-Instance method objects have attributes, too: ``m.__self__`` is the instance
-object with the method :meth:`m`, and ``m.__func__`` is the function object
-corresponding to the method.
-
+Gli oggetti-metodi di istanza hanno a loro volta degli attributi: ``m.__self__`` è l'oggetto-istanza che possiede il metodo :meth:`m`, e ``m.__func__`` è l'oggetto-funzione corrispondente al metodo.
 
 .. _tut-iterators:
 
-Iterators
+Iteratori
 =========
 
-By now you have probably noticed that most container objects can be looped over
-using a :keyword:`for` statement::
+Avrete probabilmente già notato che è possibile iterare su molti oggetti contenitori con l'istruzione :keyword:`for`::
 
    for element in [1, 2, 3]:
        print(element)
@@ -785,14 +480,7 @@ using a :keyword:`for` statement::
    for line in open("myfile.txt"):
        print(line, end='')
 
-This style of access is clear, concise, and convenient.  The use of iterators
-pervades and unifies Python.  Behind the scenes, the :keyword:`for` statement
-calls :func:`iter` on the container object.  The function returns an iterator
-object that defines the method :meth:`~iterator.__next__` which accesses
-elements in the container one at a time.  When there are no more elements,
-:meth:`~iterator.__next__` raises a :exc:`StopIteration` exception which tells the
-:keyword:`!for` loop to terminate.  You can call the :meth:`~iterator.__next__` method
-using the :func:`next` built-in function; this example shows how it all works::
+Questo modo di accesso è chiaro, conciso, efficiente. L'uso degli iteratori è onnipresente in Python. Dietro le quinte, l'istruzione :keyword:`for` chiama la funzione :func:`iter` dell'oggetto contenitore. La funzione restituisce un oggetto iteratore, che a sua volta definisce il metodo :meth:`~iterator.__next__`, che accede agli elementi del contenitore, uno alla volta. Quando gli elementi sono finiti, :meth:`~iterator.__next__` emette un'eccezione :exc:`StopIteration`, che comunica all'istruzione :keyword:`!for` di terminare. Potete chiamare direttamente il metodo :meth:`~iterator.__next__` usando la funzione predefinita :func:`next`. Questo esempio spiega come funziona il meccanismo::
 
    >>> s = 'abc'
    >>> it = iter(s)
@@ -810,13 +498,10 @@ using the :func:`next` built-in function; this example shows how it all works::
        next(it)
    StopIteration
 
-Having seen the mechanics behind the iterator protocol, it is easy to add
-iterator behavior to your classes.  Define an :meth:`__iter__` method which
-returns an object with a :meth:`~iterator.__next__` method.  If the class
-defines :meth:`__next__`, then :meth:`__iter__` can just return ``self``::
+Conoscendo il meccanismo che governa il comportamento degli iteratori, è facile aggiungere questa funzionalità alle vostre classi. Occorre definire un metodo :meth:`__iter__` che restituisce un oggetto a sua volta dotato di un metodo :meth:`~iterator.__next__`. Se la classe definisce già :meth:`__next__`, allora :meth:`__iter__` può limitarsi a restituire ``self``::
 
    class Reverse:
-       """Iterator for looping over a sequence backwards."""
+       """Un iteratore che cicla all'indietro su una sequenza."""
        def __init__(self, data):
            self.data = data
            self.index = len(data)
@@ -843,18 +528,12 @@ defines :meth:`__next__`, then :meth:`__iter__` can just return ``self``::
    p
    s
 
-
 .. _tut-generators:
 
-Generators
+Generatori
 ==========
 
-:term:`Generator`\s are a simple and powerful tool for creating iterators.  They
-are written like regular functions but use the :keyword:`yield` statement
-whenever they want to return data.  Each time :func:`next` is called on it, the
-generator resumes where it left off (it remembers all the data values and which
-statement was last executed).  An example shows that generators can be trivially
-easy to create::
+Un :term:`generatore<generator>` è uno strumento semplice e potente per creare iteratori. I generatori sono definiti come normali funzioni che però utilizzano l'istruzione :keyword:`yield` quando vogliono restituire dei dati. Ogni volta che la funzione :func:`next` viene chiamata su un generatore, questo riprende l'esecuzione da dove l'aveva interrotta (ricorda tutti i valori in sospeso e qual è stata l'ultima istruzione eseguita). Ecco un esempio che mostra come creare un generatore può essere molto semplice::
 
    def reverse(data):
        for index in range(len(data)-1, -1, -1):
@@ -870,42 +549,27 @@ easy to create::
    o
    g
 
-Anything that can be done with generators can also be done with class-based
-iterators as described in the previous section.  What makes generators so
-compact is that the :meth:`__iter__` and :meth:`~generator.__next__` methods
-are created automatically.
+Tutto ciò che può essere fatto con un generatore può anche essere fatto con un iteratore in una classe, come visto nel paragrafo precedente. I generatori però sono più compatti grazie al fatto che i metodi :meth:`__iter__` e :meth:`~generator.__next__` vengono creati automaticamente.
 
-Another key feature is that the local variables and execution state are
-automatically saved between calls.  This made the function easier to write and
-much more clear than an approach using instance variables like ``self.index``
-and ``self.data``.
+Un altro vantaggio importante è che le variabili locali e lo stato dell'esecuzione vengono salvati tra una chiamata e l'altra. In questo modo scrivere la funzione è più facile e molto più chiaro, rispetto a dover usare variabili di istanza come ``self.index`` e ``self.data``.
 
-In addition to automatic method creation and saving program state, when
-generators terminate, they automatically raise :exc:`StopIteration`. In
-combination, these features make it easy to create iterators with no more effort
-than writing a regular function.
-
+Oltre alla creazione automatica dei metodi e alla persistenza dello stato del programma, un generatore emette automaticamente un'eccezione :exc:`StopIteration` quando termina. Combinate insieme, queste caratteristiche permettono di creare iteratori con la stessa facilità con cui si scrive una normale funzione. 
 
 .. _tut-genexps:
 
-Generator Expressions
-=====================
+Espressioni-generatore
+======================
 
-Some simple generators can be coded succinctly as expressions using a syntax
-similar to list comprehensions but with parentheses instead of square brackets.
-These expressions are designed for situations where the generator is used right
-away by an enclosing function.  Generator expressions are more compact but less
-versatile than full generator definitions and tend to be more memory friendly
-than equivalent list comprehensions.
+Alcuni semplici generatori possono essere scritti in modo sintetico come delle espressioni, usando una sintassi simile a quella delle *list comprehension*, ma con le parentesi tonde invece delle parentesi quadre. Queste espressioni sono adatte alle situazioni in cui il generatore è consumato immediatamente da una funzione di ordine superiore. Le espressioni-generatore sono più compatte, ma meno versatili rispetto a un normale generatore; tendono a consumare meno memoria dell'equivalente *list comprehension*. 
 
-Examples::
+Esempi::
 
-   >>> sum(i*i for i in range(10))                 # sum of squares
+   >>> sum(i*i for i in range(10))                 # somma di quadrati
    285
 
    >>> xvec = [10, 20, 30]
    >>> yvec = [7, 5, 3]
-   >>> sum(x*y for x,y in zip(xvec, yvec))         # dot product
+   >>> sum(x*y for x,y in zip(xvec, yvec))         # prodotto scalare
    260
 
    >>> unique_words = set(word for line in page  for word in line.split())
@@ -917,11 +581,10 @@ Examples::
    ['f', 'l', 'o', 'g']
 
 
+.. only:: html
 
-.. rubric:: Footnotes
+    .. rubric:: Footnotes
 
-.. [#] Except for one thing.  Module objects have a secret read-only attribute called
-   :attr:`~object.__dict__` which returns the dictionary used to implement the module's
-   namespace; the name :attr:`~object.__dict__` is an attribute but not a global name.
-   Obviously, using this violates the abstraction of namespace implementation, and
-   should be restricted to things like post-mortem debuggers.
+.. [#] ndT: in questa traduzione rifiutiamo con decisione la consueta, orribile restituzione di *scope* (area in cui una variabile è visibile: dal Greco *skopein*, osservare) con l'Italiano "scopo" (fine, proposito: dal Latino *scopus*, bersaglio). Lasciamo inalterato *scope* e, per contiguità, non traduciamo neppure *namespace* (che di solito è reso in modo più accettabile con "spazio dei nomi").
+
+.. [#] Tranne che per una cosa. Gli oggetti-modulo hanno un attributo di sola lettura nascosto, che si chiama :attr:`~object.__dict__`: è il dizionario usato per implementare il *namespace* del modulo. Il nome :attr:`~object.__dict__` è un attributo del modulo, ma non un suo nome globale. Naturalmente questa è un'eccezione nell'implementazione astratta dei *namespace* e dovrebbe essere usata solo da strumenti come i *debugger* post-mortem. 
