@@ -1,53 +1,26 @@
 .. _tut-interacting:
 
-**************************************************
-Interactive Input Editing and History Substitution
-**************************************************
+*****************************************************
+Editing e history substitution nell'input interattivo
+*****************************************************
 
-Some versions of the Python interpreter support editing of the current input
-line and history substitution, similar to facilities found in the Korn shell and
-the GNU Bash shell.  This is implemented using the `GNU Readline`_ library,
-which supports various styles of editing.  This library has its own
-documentation which we won't duplicate here.
-
+Alcune versioni dell'interprete Python supportano l'editing dell'input corrente e la *history substitution*, in modo analogo alle shell Korn e GNU Bash. Questa possibilità è implementata con la libreria `GNU Readline`_, che supporta diversi stili di editing e che ha una sua documentazione, che pertanto non ripetiamo in questa sede. 
 
 .. _tut-keybindings:
 
-Tab Completion and History Editing
-==================================
+Tab completion e history editing
+================================
 
-Completion of variable and module names is
-:ref:`automatically enabled <rlcompleter-config>` at interpreter startup so
-that the :kbd:`Tab` key invokes the completion function; it looks at
-Python statement names, the current local variables, and the available
-module names.  For dotted expressions such as ``string.a``, it will evaluate
-the expression up to the final ``'.'`` and then suggest completions from
-the attributes of the resulting object.  Note that this may execute
-application-defined code if an object with a :meth:`__getattr__` method
-is part of the expression.  The default configuration also saves your
-history into a file named :file:`.python_history` in your user directory.
-The history will be available again during the next interactive interpreter
-session.
-
+Il completamento delle variabili e dei nomi dei moduli è :ref:`abilitato automaticamente<rlcompleter-config>` all'avvio dell'interprete, così che il tasto :kbd:`Tab` invoca la funzione di *completion* cercando tra i nomi delle istruzioni, le variabili locali e i nomi dei moduli disponibili. Le espressioni con il punto, come ``string.a``, sono valutate fino al punto finale; quindi vengono suggeriti completamenti tratti dagli attributi dell'oggetto risultante. Si noti che così facendo è possibile che sia eseguito del codice dell'applicazione, se l'espressione comprende un oggetto con un metodo :meth:`__getattr__` definito. La configurazione di default salva inoltre la storia dei comandi in un file :file:`.python_history` nella vostra directory home. La storia sarà nuovamente disponibile nella prossima sessione dell'interprete. 
 
 .. _tut-commentary:
 
-Alternatives to the Interactive Interpreter
-===========================================
+Alternative all'interprete interattivo
+======================================
 
-This facility is an enormous step forward compared to earlier versions of the
-interpreter; however, some wishes are left: It would be nice if the proper
-indentation were suggested on continuation lines (the parser knows if an indent
-token is required next).  The completion mechanism might use the interpreter's
-symbol table.  A command to check (or even suggest) matching parentheses,
-quotes, etc., would also be useful.
+Queste funzionalità costituiscono un grande passo avanti rispetto alle prime versioni dell'interprete. Tuttavia, alcune cose restano irrisolte: sarebbe utile presentare un rientro adeguato per le linee di continuazione, dal momento che l'interprete riconosce se il prossimo *token* richiede un rientro. Il meccanismo di completamento potrebbe utilizzare la tabella dei simboli dell'interprete. Sarebbe anche utile avere un comando per controllare o suggerire il bilanciamento delle parentesi, degli apici etc. 
 
-One alternative enhanced interactive interpreter that has been around for quite
-some time is IPython_, which features tab completion, object exploration and
-advanced history management.  It can also be thoroughly customized and embedded
-into other applications.  Another similar enhanced interactive environment is
-bpython_.
-
+Un'alternativa potenziata per l'interprete interattivo, disponibile da parecchi anni, è IPython_ che supporta la *tab completion*, l'esplorazione degli oggetti e la gestione avanzata della storia dei comandi. Può anche essere personalizzato in molti aspetti e incorporato in altre applicazioni. Un ambiente di sviluppo simile è bpython_.
 
 .. _GNU Readline: https://tiswww.case.edu/php/chet/readline/rltop.html
 .. _IPython: https://ipython.org/
