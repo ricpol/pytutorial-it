@@ -1,76 +1,40 @@
 .. _tut-whatnow:
 
 *********
-What Now?
+E adesso?
 *********
 
-Reading this tutorial has probably reinforced your interest in using Python ---
-you should be eager to apply Python to solving your real-world problems. Where
-should you go to learn more?
+Dopo aver letto questo tutorial il vostro interesse per Python sarà probabilmente cresciuto: siete ansiosi di usare Python in qualche progetto reale. Come dovreste procedere adesso, per saperne di più?
 
-This tutorial is part of Python's documentation set.   Some other documents in
-the set are:
+Questo tutorial fa parte della documentazione ufficiale di Python. Altre sezioni della documentazione sono:
 
-* :ref:`library-index`:
+* :ref:`La libreria standard<library-index>`: sfogliate questo manuale, che fornisce una documentazione completa (anche se sintetica) per tipi, funzioni e moduli della libreria standard. La distribuzione di Python contiene *molte cose*. Ci sono moduli per leggere le caselle di posta Unix, ricevere documenti via HTTP, generare numeri casuali, leggere le opzioni della riga di comando, scrivere programmi grafici, comprimere dati e molto altro ancora. Un'occhiata veloce a questa documentazione dovrebbe bastare per farsi un'idea di che cosa è disponibile. 
 
-  You should browse through this manual, which gives complete (though terse)
-  reference material about types, functions, and the modules in the standard
-  library.  The standard Python distribution includes a *lot* of additional code.
-  There are modules to read Unix mailboxes, retrieve documents via HTTP, generate
-  random numbers, parse command-line options, write CGI programs, compress data,
-  and many other tasks. Skimming through the Library Reference will give you an
-  idea of what's available.
+* :ref:`Installare i moduli Python<installing-index>` spiega come installare moduli aggiuntivi scritti da altri programmatori Python. 
 
-* :ref:`installing-index` explains how to install additional modules written
-  by other Python users.
+* :ref:`La guida di riferimento del linguaggio<reference-index>` è una spiegazione dettagliata della sintassi e della semantica di Python: è una lettura non facile, ma molto utile come guida del linguaggio in sé. 
 
-* :ref:`reference-index`: A detailed explanation of Python's syntax and
-  semantics.  It's heavy reading, but is useful as a complete guide to the
-  language itself.
+Altro materiale su Python:
 
-More Python resources:
+* https://www.python.org:  il sito web di Python. Contiene codice, documentazione e indicazioni per altri contenuti su Python in giro per il web. Questo sito ha dei *mirror* in vari posti nel mondo: Europa, Giappone, Australia etc. Il *mirror* potrebbe essere più veloce del sito principale, dipende dalla vostra posizione geografica. 
 
-* https://www.python.org:  The major Python Web site.  It contains code,
-  documentation, and pointers to Python-related pages around the Web.  This Web
-  site is mirrored in various places around the world, such as Europe, Japan, and
-  Australia; a mirror may be faster than the main site, depending on your
-  geographical location.
+* https://docs.python.org:  accesso rapido alla documentazione di Python. 
 
-* https://docs.python.org:  Fast access to Python's  documentation.
+* https://pypi.org: il Python Package Index, un tempo chiamato anche "Cheese Shop" [#]_, è un indice di moduli creati da programmatori Python e disponibili per il download. Una volta che siete pronti a rilasciare il vostro codice, potete registrarvi qui, in modo che altri possano trovare il vostro lavoro. 
 
-* https://pypi.org: The Python Package Index, previously also nicknamed
-  the Cheese Shop [#]_, is an index of user-created Python modules that are available
-  for download.  Once you begin releasing code, you can register it here so that
-  others can find it.
+* https://code.activestate.com/recipes/langs/python/: il "Python Cookbook" è una notevole raccolta di esempi, moduli più complessi e script utili. I contributi più interessanti sono raccolti in un libro omonimo (O'Reilly & Associates, ISBN 0-596-00797-3).
 
-* https://code.activestate.com/recipes/langs/python/: The Python Cookbook is a
-  sizable collection of code examples, larger modules, and useful scripts.
-  Particularly notable contributions are collected in a book also titled Python
-  Cookbook (O'Reilly & Associates, ISBN 0-596-00797-3.)
+* http://www.pyvideo.org raccoglie video su Python, da convegni e incontri di *user-group*.
 
-* http://www.pyvideo.org collects links to Python-related videos from
-  conferences and user-group meetings.
+* https://scipy.org: il progetto "Scientific Python" comprende moduli per calcoli e manipolazioni performanti su array, oltre a moltissimi moduli di algebra lineare, trasformata di Fourier, risolutori non-lineari, distribuzioni di numeri casuali, analisi statistica e altro ancora. 
 
-* https://scipy.org: The Scientific Python project includes modules for fast
-  array computations and manipulations plus a host of packages for such
-  things as linear algebra, Fourier transforms, non-linear solvers,
-  random number distributions, statistical analysis and the like.
+Per domande su Python e per segnalare problemi, potete postare nel newsgroup
+:newsgroup:`comp.lang.python`, o alla mailing list python-list@python.org: sono collegati tra loro, quindi un messaggio spedito all'uno sarà automaticamente inoltrato all'altro. Ci sono centinaia di post ogni giorno, con domande (e riposte), suggerimenti per nuove funzionalità, annunci di nuovi progetti. Gli archivi sono disponibili su https://mail.python.org/pipermail/.
 
-For Python-related questions and problem reports, you can post to the newsgroup
-:newsgroup:`comp.lang.python`, or send them to the mailing list at
-python-list@python.org.  The newsgroup and mailing list are gatewayed, so
-messages posted to one will automatically be forwarded to the other.  There are
-hundreds of postings a day, asking (and
-answering) questions, suggesting new features, and announcing new modules.
-Mailing list archives are available at https://mail.python.org/pipermail/.
+Prima di inviare un messaggio, assicuratevi di aver letto la lista di :ref:`domande frequenti<faq-index>` (FAQ). Qui trovano risposta le domande poste più spesso, e potrebbe trovarsi anche la soluzione al vostro problema.
 
-Before posting, be sure to check the list of
-:ref:`Frequently Asked Questions <faq-index>` (also called the FAQ).  The
-FAQ answers many of the questions that come up again and again, and may
-already contain the solution for your problem.
+.. only:: html
 
-.. rubric:: Footnotes
+  .. rubric:: Note
 
-.. [#] "Cheese Shop" is a Monty Python's sketch: a customer enters a cheese shop,
-   but whatever cheese he asks for, the clerk says it's missing.
-
+.. [#] "Cheese Shop" è uno sketch dei Monty Python: un cliente entra in un negozio di formaggi ma qualunque formaggio desidera, il commesso risponde che ne è sprovvisto.
