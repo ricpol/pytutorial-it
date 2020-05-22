@@ -1,80 +1,46 @@
-
 .. _tut-venv:
 
-*********************************
-Virtual Environments and Packages
-*********************************
+*****************************
+Virtual environment e package
+*****************************
 
-Introduction
+Introduzione
 ============
 
-Python applications will often use packages and modules that don't
-come as part of the standard library.  Applications will sometimes
-need a specific version of a library, because the application may
-require that a particular bug has been fixed or the application may be
-written using an obsolete version of the library's interface.
+I programmi Python usano spesso moduli e package che non sono compresi nella libreria standard. Inoltre le applicazioni talvolta hanno bisogno di una specifica versione di una libreria, perché è necessario che un certo baco sia stato risolto, oppure perché fa uso di una vecchia versione dell'interfaccia della libreria. 
 
-This means it may not be possible for one Python installation to meet
-the requirements of every application.  If application A needs version
-1.0 of a particular module but application B needs version 2.0, then
-the requirements are in conflict and installing either version 1.0 or 2.0
-will leave one application unable to run.
+Ciò vuol dire che non è possibile che una singola installazione di Python possa venire incontro alle esigenze di ogni possibile applicazione. Se il programma A richiede la versione 1.0 di un certo modulo, ma il programma B ha bisogno della 2.0, queste necessità sono in conflitto e installare una delle due versioni non permetterà all'altro programma di funzionare correttamente.
 
-The solution for this problem is to create a :term:`virtual environment`, a
-self-contained directory tree that contains a Python installation for a
-particular version of Python, plus a number of additional packages.
+La soluzione è creare un :term:`virtual environment`, ovvero una directory auto-sufficiente che contiene una installazione di Python, per una particolare versione di Python, e inoltre un certo numero di pacchetti aggiuntivi.
 
-Different applications can then use different virtual environments.
-To resolve the earlier example of conflicting requirements,
-application A can have its own virtual environment with version 1.0
-installed while application B has another virtual environment with version 2.0.
-If application B requires a library be upgraded to version 3.0, this will
-not affect application A's environment.
+Programmi diversi possono usare virtual environment diversi. Per risolvere il problema di richieste in conflitto dell'esempio precedente, il programma A può avere il suo environment con la versione 1.0 installate, mentre il programma B avrà un altro virtual environment con la versione 2.0. Se in seguito B richiede un aggiornamento della libreria alla versione 3.0, ciò non avrà conseguenze sull'environment di A. 
 
-
-Creating Virtual Environments
+Creare un virtual environment
 =============================
 
-The module used to create and manage virtual environments is called
-:mod:`venv`.  :mod:`venv` will usually install the most recent version of
-Python that you have available. If you have multiple versions of Python on your
-system, you can select a specific Python version by running ``python3`` or
-whichever version you want.
+:mod:`venv` è il modulo usato per creare e gestire virtual environment. :mod:`venv` installa in genere la versione più recente di Python che avete disponibile. Se avete installato più versioni di Python nel vostro sistema, potete selezionarne una in particolare invocando ``python3`` o qualsiasi versione desiderate.
 
-To create a virtual environment, decide upon a directory where you want to
-place it, and run the :mod:`venv` module as a script with the directory path::
+Per creare un virtual environment, decidete in quale directory volete collocarlo e avviate il modulo :mod:`venv` come uno script, passando il percorso della directory scelta::
 
    python3 -m venv tutorial-env
 
-This will create the ``tutorial-env`` directory if it doesn't exist,
-and also create directories inside it containing a copy of the Python
-interpreter, the standard library, and various supporting files.
+Questo crea la directory ``tutorial-env`` se non esiste; inoltre crea al suo interno le directory che contengono una copia dell'interprete Python, la libreria standard e diversi file di corredo.
 
-A common directory location for a virtual environment is ``.venv``.
-This name keeps the directory typically hidden in your shell and thus
-out of the way while giving it a name that explains why the directory
-exists. It also prevents clashing with ``.env`` environment variable
-definition files that some tooling supports.
+Un luogo comune per conservare i virtual environment è ``.venv``: questo nome mantiene la directory nascosta nella shell in modo che non sia d'impiccio, e al contempo dice chiaramente a che cosa serve la directory. Inoltre evita conflitti con i file ``.env`` di definizione delle variabili d'ambiente, che qualche tool supporta. 
 
-Once you've created a virtual environment, you may activate it.
+Creato il virtual environment, non resta che attivarlo. 
 
-On Windows, run::
+Su Windows invocate::
 
   tutorial-env\Scripts\activate.bat
 
-On Unix or MacOS, run::
+Su Unix o MacOS::
 
   source tutorial-env/bin/activate
 
-(This script is written for the bash shell.  If you use the
-:program:`csh` or :program:`fish` shells, there are alternate
-``activate.csh`` and ``activate.fish`` scripts you should use
-instead.)
+(Lo script è scritto per la bash shell. Se usate :program:`csh` o :program:`fish`, usate invece gli script alternativi ``activate.csh`` o ``activate.fish``.)
 
-Activating the virtual environment will change your shell's prompt to show what
-virtual environment you're using, and modify the environment so that running
-``python`` will get you that particular version and installation of Python.
-For example:
+Attivare il virtual environment cambia il prompt della shell per mostrare il nome dell'environment in uso; modifica inoltre l'ambiente di lavoro in modo che invocare ``python`` restituisce quella particolare versione e installazione dell'interprete. Per esempio:
 
 .. code-block:: bash
 
@@ -89,14 +55,11 @@ For example:
   >>>
 
 
-Managing Packages with pip
-==========================
+Gestire i pacchetti con Pip
+===========================
 
-You can install, upgrade, and remove packages using a program called
-:program:`pip`.  By default ``pip`` will install packages from the Python
-Package Index, <https://pypi.org>.  You can browse the Python
-Package Index by going to it in your web browser, or you can use ``pip``'s
-limited search feature:
+Potete installare, aggiornare, rimuovere package usando un programma chiamato :program:`pip`.  Per default ``pip`` installerà pacchetti pubblicati sul `Python
+Package Index <https://pypi.org>`_. Potete cercare nel PyPI con il vostro browser o usando le funzioni di ricerca di Pip:
 
 .. code-block:: bash
 
@@ -108,11 +71,10 @@ limited search feature:
   PyAstronomy            - A collection of astronomy related tools for Python.
   ...
 
-``pip`` has a number of subcommands: "search", "install", "uninstall",
-"freeze", etc.  (Consult the :ref:`installing-index` guide for
-complete documentation for ``pip``.)
+``pip`` offre un numero di comandi interni: "search", "install", "uninstall",
+"freeze", etc.  (Si veda la guida a :ref:`Installare moduli Python<installing-index>` per la documentazione completa di ``pip``.)
 
-You can install the latest version of a package by specifying a package's name:
+Per installare l'ultima versione disponibile di un package, basta specificare il suo nome:
 
 .. code-block:: bash
 
@@ -123,8 +85,7 @@ You can install the latest version of a package by specifying a package's name:
     Running setup.py install for novas
   Successfully installed novas-3.1.1.3
 
-You can also install a specific version of a package by giving the
-package name  followed by ``==`` and the version number:
+Potete anche installare una versione specifica, indicando il nome seguito da ``==`` e il numero di versione:
 
 .. code-block:: bash
 
@@ -134,10 +95,7 @@ package name  followed by ``==`` and the version number:
   Installing collected packages: requests
   Successfully installed requests-2.6.0
 
-If you re-run this command, ``pip`` will notice that the requested
-version is already installed and do nothing.  You can supply a
-different version number to get that version, or you can run ``pip
-install --upgrade`` to upgrade the package to the latest version:
+Se eseguite due volte questo comando, ``pip`` vi informerà che la versione richiesta è già presente e non farà nient'altro. Potete indicare un altro numero di versione per ottenere quella, oppure eseguire ``pip install --upgrade`` per aggiornare il pacchetto all'ultima versione:
 
 .. code-block:: bash
 
@@ -149,10 +107,9 @@ install --upgrade`` to upgrade the package to the latest version:
         Successfully uninstalled requests-2.6.0
   Successfully installed requests-2.7.0
 
-``pip uninstall`` followed by one or more package names will remove the
-packages from the virtual environment.
+``pip uninstall`` seguito dal nome di uno o più pacchetti li rimuoverà dal virtual environment. 
 
-``pip show`` will display information about a particular package:
+``pip show`` visualizza informazioni su un particolare pacchetto:
 
 .. code-block:: bash
 
@@ -169,8 +126,7 @@ packages from the virtual environment.
   Location: /Users/akuchling/envs/tutorial-env/lib/python3.4/site-packages
   Requires:
 
-``pip list`` will display all of the packages installed in the virtual
-environment:
+``pip list`` elenca tutti i pacchetti installati in un virtual environment:
 
 .. code-block:: bash
 
@@ -181,9 +137,7 @@ environment:
   requests (2.7.0)
   setuptools (16.0)
 
-``pip freeze`` will produce a similar list of the installed packages,
-but the output uses the format that ``pip install`` expects.
-A common convention is to put this list in a ``requirements.txt`` file:
+``pip freeze`` produce una lista simile di pacchetti installati, ma usa un formato che può essere letto da ``pip install``. Una convenzione molto usata è di collocare questa lista in un file ``requirements.txt``:
 
 .. code-block:: bash
 
@@ -193,9 +147,7 @@ A common convention is to put this list in a ``requirements.txt`` file:
   numpy==1.9.2
   requests==2.7.0
 
-The ``requirements.txt`` can then be committed to version control and
-shipped as part of an application.  Users can then install all the
-necessary packages with ``install -r``:
+Il file ``requirements.txt`` può essere incluso nel controllo di versione e distribuito come parte dell'applicazione. Gli utenti possono poi usarlo per installare tutti i pacchetti necessari con ``install -r``:
 
 .. code-block:: bash
 
@@ -210,7 +162,4 @@ necessary packages with ``install -r``:
     Running setup.py install for novas
   Successfully installed novas-3.1.1.3 numpy-1.9.2 requests-2.7.0
 
-``pip`` has many more options.  Consult the :ref:`installing-index`
-guide for complete documentation for ``pip``.  When you've written
-a package and want to make it available on the Python Package Index,
-consult the :ref:`distributing-index` guide.
+``pip`` ha molte altre opzioni. Consultate la guida a :ref:`Installare moduli Python<installing-index>` per la documentazione completa di ``pip``.  Se avete scritto un package Python e volete pubblicarlo sul Python Package Index, leggete la guida a :ref:`Distribuire moduli Python<distributing-index>`.
