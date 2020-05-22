@@ -1,29 +1,23 @@
 .. _tut-brieftourtwo:
 
-**********************************************
-Brief Tour of the Standard Library --- Part II
-**********************************************
+*******************************************
+Una breve visita alla libreria standard - 2
+*******************************************
 
-This second tour covers more advanced modules that support professional
-programming needs.  These modules rarely occur in small scripts.
-
+Questa seconda parte del tour presenta strumenti più avanzati che supportano le esigenze dei programmi professionali. Di rado ce n'è bisogno per un piccolo script. 
 
 .. _tut-output-formatting:
 
-Output Formatting
-=================
+Formattazione dell'output
+=========================
 
-The :mod:`reprlib` module provides a version of :func:`repr` customized for
-abbreviated displays of large or deeply nested containers::
+Il modulo :mod:`reprlib` presenta una versione della funzione predefinita :func:`repr`, adattata per visualizzare in forma abbreviata le collezioni molto grandi o con molti livelli di annidamento::
 
    >>> import reprlib
    >>> reprlib.repr(set('supercalifragilisticexpialidocious'))
    "{'a', 'c', 'd', 'e', 'f', 'g', ...}"
 
-The :mod:`pprint` module offers more sophisticated control over printing both
-built-in and user defined objects in a way that is readable by the interpreter.
-When the result is longer than one line, the "pretty printer" adds line breaks
-and indentation to more clearly reveal data structure::
+:mod:`pprint` permette un controllo più raffinato sulla scrittura di oggetti predefiniti o creati dall'utente, in un modo che resti leggibile dall'interprete. Quando il risultato è più lungo di una riga, il *pretty printer* aggiunge interruzioni di riga e rientri per rendere più chiara la struttura dei dati::
 
    >>> import pprint
    >>> t = [[[['black', 'cyan'], 'white', ['green', 'red']], [['magenta',
@@ -36,28 +30,25 @@ and indentation to more clearly reveal data structure::
      [['magenta', 'yellow'],
       'blue']]]
 
-The :mod:`textwrap` module formats paragraphs of text to fit a given screen
-width::
+:mod:`textwrap` formatta i paragrafi di testo in modo che rispettino una determinata larghezza dello schermo::
 
    >>> import textwrap
-   >>> doc = """The wrap() method is just like fill() except that it returns
-   ... a list of strings instead of one big string with newlines to separate
-   ... the wrapped lines."""
+   >>> doc = """Il metodo wrap() è come fill(), tranne che restituisce una 
+   ... lista di stringhe, invece di una sola stringa lunga con gli a-capo 
+   ... che separano le righe processate."""
    ...
    >>> print(textwrap.fill(doc, width=40))
-   The wrap() method is just like fill()
-   except that it returns a list of strings
-   instead of one big string with newlines
-   to separate the wrapped lines.
+   Il metodo wrap() è come fill(), tranne
+   che restituisce una lista di stringhe,
+   invece di una sola stringa lunga con gli
+   a-capo che separano le righe processate.
 
-The :mod:`locale` module accesses a database of culture specific data formats.
-The grouping attribute of locale's format function provides a direct way of
-formatting numbers with group separators::
+Il modulo :mod:`locale` accede al database dei formati "culturali" specifici per i dati. Per esempio, l'attributo *grouping* della funzione localizzata *format* permette di formattare i numeri con i separatori di gruppo corretti::
 
    >>> import locale
    >>> locale.setlocale(locale.LC_ALL, 'English_United States.1252')
    'English_United States.1252'
-   >>> conv = locale.localeconv()          # get a mapping of conventions
+   >>> conv = locale.localeconv()  # un mapping delle convenzioni applicabili
    >>> x = 1234567.8
    >>> locale.format("%d", x, grouping=True)
    '1,234,567'
@@ -65,31 +56,21 @@ formatting numbers with group separators::
    ...                      conv['frac_digits'], x), grouping=True)
    '$1,234,567.80'
 
-
 .. _tut-templating:
 
-Templating
-==========
+Template
+========
 
-The :mod:`string` module includes a versatile :class:`~string.Template` class
-with a simplified syntax suitable for editing by end-users.  This allows users
-to customize their applications without having to alter the application.
+Il modulo :mod:`string` include una versatile classe :class:`~string.Template`, con una sintassi semplice, adatta a essere modificata dagli utenti finali. In questo modo gli utenti possono personalizzare il programma senza doverne alterare il codice. 
 
-The format uses placeholder names formed by ``$`` with valid Python identifiers
-(alphanumeric characters and underscores).  Surrounding the placeholder with
-braces allows it to be followed by more alphanumeric letters with no intervening
-spaces.  Writing ``$$`` creates a single escaped ``$``::
+Il formato utilizza dei nomi segnaposto composti da ``$`` con un identificatore Python valido (ovvero, caratteri alfanumerici e trattini bassi). Se il segnaposto è inserito tra parentesi, è possibile aggiungere dei caratteri immediatamente dopo, senza spazio in mezzo. Un ``$$`` è lo *escape* che produce un singolo ``$``::
 
    >>> from string import Template
    >>> t = Template('${village}folk send $$10 to $cause.')
    >>> t.substitute(village='Nottingham', cause='the ditch fund')
    'Nottinghamfolk send $10 to the ditch fund.'
 
-The :meth:`~string.Template.substitute` method raises a :exc:`KeyError` when a
-placeholder is not supplied in a dictionary or a keyword argument.  For
-mail-merge style applications, user supplied data may be incomplete and the
-:meth:`~string.Template.safe_substitute` method may be more appropriate ---
-it will leave placeholders unchanged if data is missing::
+Il metodo :meth:`~string.Template.substitute` emette un :exc:`KeyError` quando il segnaposto non è "alimentato" da un dizionario o un argomento *keyword*. Per le applicazioni di tipo "stampa unione", i dati forniti potrebbero essere incompleti e quindi potrebbe essere più appropriato il metodo :meth:`~string.Template.safe_substitute` che lascia semplicemente il segnaposto, quando il dato manca::
 
    >>> t = Template('Return the $item to $owner.')
    >>> d = dict(item='unladen swallow')
@@ -100,9 +81,7 @@ it will leave placeholders unchanged if data is missing::
    >>> t.safe_substitute(d)
    'Return the unladen swallow to $owner.'
 
-Template subclasses can specify a custom delimiter.  For example, a batch
-renaming utility for a photo browser may elect to use percent signs for
-placeholders such as the current date, image sequence number, or file format::
+Una sotto-classe di *Template* può specificare un delimitatore arbitrario. Per esempio, un tool per la rinomina automatica di una collezione di foto potrebbe decidere di usare il simbolo di percentuale per segnaposti come la data corrente, un numero progressivo, un formato di file e così via::
 
    >>> import time, os.path
    >>> photofiles = ['img_1074.jpg', 'img_1076.jpg', 'img_1077.jpg']
@@ -122,23 +101,14 @@ placeholders such as the current date, image sequence number, or file format::
    img_1076.jpg --> Ashley_1.jpg
    img_1077.jpg --> Ashley_2.jpg
 
-Another application for templating is separating program logic from the details
-of multiple output formats.  This makes it possible to substitute custom
-templates for XML files, plain text reports, and HTML web reports.
-
+Un altro scenario in cui i template sono utili è per separare la logica del programma dai dettagli di ciascun formato di output. In questo modo è possibile per esempio sostituire template personalizzati per file XML, output di solo testo o report in HTML. 
 
 .. _tut-binary-formats:
 
-Working with Binary Data Record Layouts
-=======================================
+Formati per campi di dati binari
+================================
 
-The :mod:`struct` module provides :func:`~struct.pack` and
-:func:`~struct.unpack` functions for working with variable length binary
-record formats.  The following example shows
-how to loop through header information in a ZIP file without using the
-:mod:`zipfile` module.  Pack codes ``"H"`` and ``"I"`` represent two and four
-byte unsigned numbers respectively.  The ``"<"`` indicates that they are
-standard size and in little-endian byte order::
+Il modulo :mod:`struct` ha le funzioni :func:`~struct.pack` e :func:`~struct.unpack` che consentono di lavorare con record di dati binari di lunghezza variabile. Questo esempio mostra come iterare sullo *header* di un file ZIP, senza usare il modulo :mod:`zipfile`.  I codici ``"H"`` e ``"I"`` indicano un numero di due e quattro byte senza segno. Il segno ``"<"`` indica che si tratta di numeri di larghezza standard e ordinamento *little-endian*::
 
    import struct
 
@@ -146,7 +116,7 @@ standard size and in little-endian byte order::
        data = f.read()
 
    start = 0
-   for i in range(3):                      # show the first 3 file headers
+   for i in range(3):                      # mostra i primi 3 headers
        start += 14
        fields = struct.unpack('<IIIHH', data[start:start+16])
        crc32, comp_size, uncomp_size, filenamesize, extra_size = fields
@@ -157,21 +127,16 @@ standard size and in little-endian byte order::
        extra = data[start:start+extra_size]
        print(filename, hex(crc32), comp_size, uncomp_size)
 
-       start += extra_size + comp_size     # skip to the next header
-
+       start += extra_size + comp_size     # salta allo header successivo
 
 .. _tut-multi-threading:
 
 Multi-threading
 ===============
 
-Threading is a technique for decoupling tasks which are not sequentially
-dependent.  Threads can be used to improve the responsiveness of applications
-that accept user input while other tasks run in the background.  A related use
-case is running I/O in parallel with computations in another thread.
+Il *threading* è una tecnica per separare *task* che non dipendono da un'esecuzione sequenziale. Si possono usare i thread per migliorare la reattività delle applicazioni che devono ricevere input dall'utente mentre svolgono altri compiti in background. Un caso d'uso simile è la necessità di compiere operazioni di input/output in parallelo con dei calcoli in un altro thread. 
 
-The following code shows how the high level :mod:`threading` module can run
-tasks in background while the main program continues to run::
+Questo esempio mostra come l'interfaccia di alto livello del modulo :mod:`threading` permette di eseguire compiti in background mentre il programma principale continua a essere attivo::
 
    import threading, zipfile
 
@@ -191,29 +156,19 @@ tasks in background while the main program continues to run::
    background.start()
    print('The main program continues to run in foreground.')
 
-   background.join()    # Wait for the background task to finish
+   background.join()    # aspetta che i compiti in background finiscano
    print('Main program waited until background was done.')
 
-The principal challenge of multi-threaded applications is coordinating threads
-that share data or other resources.  To that end, the threading module provides
-a number of synchronization primitives including locks, events, condition
-variables, and semaphores.
+La sfida principale dei programmi multi-threading è di coordinare i thread che devono condividere dati o altre risorse. Per questo, il modulo *threading* mette a disposizione diverse primitive di sincronizzazione come lock, eventi, condizioni e semafori.
 
-While those tools are powerful, minor design errors can result in problems that
-are difficult to reproduce.  So, the preferred approach to task coordination is
-to concentrate all access to a resource in a single thread and then use the
-:mod:`queue` module to feed that thread with requests from other threads.
-Applications using :class:`~queue.Queue` objects for inter-thread communication and
-coordination are easier to design, more readable, and more reliable.
-
+Anche con questi strumenti raffinati, piccoli errori di design possono causare problemi difficili da riprodurre. Di conseguenza, l'approccio più usato consiste nel concentrare tutte le operazioni di accesso alla risorsa in un solo thread, e quindi usare il modulo :mod:`queue` per far giungere a quel thread le richieste degli altri. Usare oggetti :class:`~queue.Queue` per le comunicazioni tra thread porta a scrivere applicazioni più semplici da progettare, più leggibili e affidabili.
 
 .. _tut-logging:
 
 Logging
 =======
 
-The :mod:`logging` module offers a full featured and flexible logging system.
-At its simplest, log messages are sent to a file or to ``sys.stderr``::
+Il modulo :mod:`logging` offre un sistema di logging completo e flessibile. Nella forma più semplici, un messaggio di log è inviato a un file o a ``sys.stderr``::
 
    import logging
    logging.debug('Debugging information')
@@ -222,7 +177,7 @@ At its simplest, log messages are sent to a file or to ``sys.stderr``::
    logging.error('Error occurred')
    logging.critical('Critical error -- shutting down')
 
-This produces the following output:
+Questo produce l'output:
 
 .. code-block:: none
 
@@ -230,34 +185,20 @@ This produces the following output:
    ERROR:root:Error occurred
    CRITICAL:root:Critical error -- shutting down
 
-By default, informational and debugging messages are suppressed and the output
-is sent to standard error.  Other output options include routing messages
-through email, datagrams, sockets, or to an HTTP Server.  New filters can select
-different routing based on message priority: :const:`~logging.DEBUG`,
+I messaggi di informazione e debug sono soppressi di default, quando l'output è inviato allo *standard error*. Altre opzioni per l'output comprendono l'invio di messaggi tramite email, *datagram*, socket, o a un server HTTP. Un filtro può scegliere la modalità di invio in base alla priorità del messaggio: :const:`~logging.DEBUG`,
 :const:`~logging.INFO`, :const:`~logging.WARNING`, :const:`~logging.ERROR`,
-and :const:`~logging.CRITICAL`.
+e :const:`~logging.CRITICAL`.
 
-The logging system can be configured directly from Python or can be loaded from
-a user editable configuration file for customized logging without altering the
-application.
-
+Il sistema di logging è configurabile direttamente da Python, o può essere inizializzato da un file di configurazione modificabile dall'utente, per personalizzare il sistema senza alterare il codice dell'applicazione. 
 
 .. _tut-weak-references:
 
 Weak References
 ===============
 
-Python does automatic memory management (reference counting for most objects and
-:term:`garbage collection` to eliminate cycles).  The memory is freed shortly
-after the last reference to it has been eliminated.
+Python gestisce automaticamente la memoria, facendo *reference counting* per gli oggetti e usando il :term:`garbage collection` per eliminarli. La memoria viene liberata poco dopo che l'ultimo riferimento all'oggetto è stato cancellato. 
 
-This approach works fine for most applications but occasionally there is a need
-to track objects only as long as they are being used by something else.
-Unfortunately, just tracking them creates a reference that makes them permanent.
-The :mod:`weakref` module provides tools for tracking objects without creating a
-reference.  When the object is no longer needed, it is automatically removed
-from a weakref table and a callback is triggered for weakref objects.  Typical
-applications include caching objects that are expensive to create::
+Questo approccio funziona bene nella maggior parte dei casi, ma talvolta si rende necessario tracciare un oggetto per tutto il tempo in cui è usato da qualcun altro. Purtroppo, questo tracciamento comporta la creazione di un riferimento, cosa che rende l'oggetto permanente. Il modulo :mod:`weakref` permette invece di tracciare oggetti senza per questo dover creare riferimenti. Quando non c'è più bisogno dell'oggetto, questo viene automaticamente rimosso dal registro delle *weak references* e un callback viene invocato per l'oggetto *weakref*. Questo meccanismo viene usato, per esempio, per conservare in cache gli oggetti costosi da creare::
 
    >>> import weakref, gc
    >>> class A:
@@ -266,37 +207,30 @@ applications include caching objects that are expensive to create::
    ...     def __repr__(self):
    ...         return str(self.value)
    ...
-   >>> a = A(10)                   # create a reference
+   >>> a = A(10)                   # crea un riferimento
    >>> d = weakref.WeakValueDictionary()
-   >>> d['primary'] = a            # does not create a reference
-   >>> d['primary']                # fetch the object if it is still alive
+   >>> d['primary'] = a            # non crea un riferimento
+   >>> d['primary']                # raggiunge l'oggetto se è ancora in vita
    10
-   >>> del a                       # remove the one reference
-   >>> gc.collect()                # run garbage collection right away
+   >>> del a                       # elimina il riferimento
+   >>> gc.collect()                # aziona subito il garbage collector
    0
-   >>> d['primary']                # entry was automatically removed
+   >>> d['primary']                # la chiave è stata rimossa automaticamente
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
-       d['primary']                # entry was automatically removed
+       d['primary']                # la chiave è stata rimossa automaticamente
      File "C:/python310/lib/weakref.py", line 46, in __getitem__
        o = self.data[key]()
    KeyError: 'primary'
 
-
 .. _tut-list-tools:
 
-Tools for Working with Lists
-============================
+Strumenti per lavorare con le liste
+===================================
 
-Many data structure needs can be met with the built-in list type. However,
-sometimes there is a need for alternative implementations with different
-performance trade-offs.
+Il tipo predefinito "lista" può soddisfare le esigenze di molte strutture-dati. Tuttavia occasionalmente c'è bisogno di un'implementazione alternativa con un altri vantaggi e svantaggi in termini di performance. 
 
-The :mod:`array` module provides an :class:`~array.array()` object that is like
-a list that stores only homogeneous data and stores it more compactly.  The
-following example shows an array of numbers stored as two byte unsigned binary
-numbers (typecode ``"H"``) rather than the usual 16 bytes per entry for regular
-lists of Python int objects::
+Il modulo :mod:`array` ha una classe :class:`~array.array()` simile a una lista che conserva i dati in modo più compatto, ma solo se sono di un medesimo tipo. L'esempio che segue mostra un array i cui elementi sono conservati come numeri binari di due byte senza segno (codice ``"H"``), invece dei consueti 16 byte che sarebbero impiegati da una normale lista Python::
 
    >>> from array import array
    >>> a = array('H', [4000, 10, 700, 22222])
@@ -305,10 +239,7 @@ lists of Python int objects::
    >>> a[1:3]
    array('H', [10, 700])
 
-The :mod:`collections` module provides a :class:`~collections.deque()` object
-that is like a list with faster appends and pops from the left side but slower
-lookups in the middle. These objects are well suited for implementing queues
-and breadth first tree searches::
+Il modulo :mod:`collections` ha un oggetto :class:`~collections.deque()` simile a una lista, che permette *append* e *pop* rapidi a entrambi gli estremi, ma accessi più lenti al centro. Questi oggetti vanno bene per implementare code e ricerche in ampiezza nei grafi::
 
    >>> from collections import deque
    >>> d = deque(["task1", "task2", "task3"])
@@ -326,9 +257,7 @@ and breadth first tree searches::
                return m
            unsearched.append(m)
 
-In addition to alternative list implementations, the library also offers other
-tools such as the :mod:`bisect` module with functions for manipulating sorted
-lists::
+Oltre a implementazioni alternative per le liste, la libreria standard contiene anche altri strumenti, come il modulo :mod:`bisect` che può manipolare le liste ordinate::
 
    >>> import bisect
    >>> scores = [(100, 'perl'), (200, 'tcl'), (400, 'lua'), (500, 'python')]
@@ -336,39 +265,29 @@ lists::
    >>> scores
    [(100, 'perl'), (200, 'tcl'), (300, 'ruby'), (400, 'lua'), (500, 'python')]
 
-The :mod:`heapq` module provides functions for implementing heaps based on
-regular lists.  The lowest valued entry is always kept at position zero.  This
-is useful for applications which repeatedly access the smallest element but do
-not want to run a full list sort::
+Il modulo :mod:`heapq` implementa *heap* a partire da normali liste. Il valore più basso è sempre mantenuto all'inizio. Ciò è utile per le applicazioni che hanno bisogno di accedere spesso all'elemento più piccolo, senza dover ordinare tutta la lista per trovarlo::
 
    >>> from heapq import heapify, heappop, heappush
    >>> data = [1, 3, 5, 7, 9, 2, 4, 6, 8, 0]
-   >>> heapify(data)                      # rearrange the list into heap order
-   >>> heappush(data, -5)                 # add a new entry
-   >>> [heappop(data) for i in range(3)]  # fetch the three smallest entries
+   >>> heapify(data)                      # ordina la lista come heap
+   >>> heappush(data, -5)                 # aggiunge un valore
+   >>> [heappop(data) for i in range(3)]  # produce i tre valori più piccoli
    [-5, 0, 1]
-
 
 .. _tut-decimal-fp:
 
-Decimal Floating Point Arithmetic
-=================================
+Aritmetica decimale in virgola mobile
+=====================================
 
-The :mod:`decimal` module offers a :class:`~decimal.Decimal` datatype for
-decimal floating point arithmetic.  Compared to the built-in :class:`float`
-implementation of binary floating point, the class is especially helpful for
+Il modulo :mod:`decimal` offre un tipo :class:`~decimal.Decimal` per operare con i numeri decimali. In confronto con il tipo predefinito :class:`float` che implementa un numero binario in virgola mobile, questa classe è conveniente per 
 
-* financial applications and other uses which require exact decimal
-  representation,
-* control over precision,
-* control over rounding to meet legal or regulatory requirements,
-* tracking of significant decimal places, or
-* applications where the user expects the results to match calculations done by
-  hand.
+* le applicazioni finanziarie, o quando è richiesta una rappresentazione decimale esatta,
+* avere più controllo sulla precisione,
+* avere più controllo sull'arrotondamento per esigenze legali o normative,
+* mantenere le cifre decimali significative, 
+* le applicazioni dove il risultato deve essere uguale al conto fatto a mano.
 
-For example, calculating a 5% tax on a 70 cent phone charge gives different
-results in decimal floating point and binary floating point. The difference
-becomes significant if the results are rounded to the nearest cent::
+Per esempio, calcolare il 5% di tasse su 70 centesimi di costo telefonico fornisce un risultato diverso in virgola mobile decimale o binaria. La differenza diventa importante se il risultato è arrotondato al centesimo più vicino::
 
    >>> from decimal import *
    >>> round(Decimal('0.70') * Decimal('1.05'), 2)
@@ -376,15 +295,9 @@ becomes significant if the results are rounded to the nearest cent::
    >>> round(.70 * 1.05, 2)
    0.73
 
-The :class:`~decimal.Decimal` result keeps a trailing zero, automatically
-inferring four place significance from multiplicands with two place
-significance.  Decimal reproduces mathematics as done by hand and avoids
-issues that can arise when binary floating point cannot exactly represent
-decimal quantities.
+I risultati in :class:`~decimal.Decimal` mantengono gli zero finali, conservando quattro decimali significativi da una moltiplicazione tra numeri con due decimali significativi. Il modulo *decimal* riproduce il risultato dei calcoli fatti a mano ed evita i problemi che nascono quando una quantità binaria in virgola mobile non può rappresentare esattamente una quantità decimale. 
 
-Exact representation enables the :class:`~decimal.Decimal` class to perform
-modulo calculations and equality tests that are unsuitable for binary floating
-point::
+Usare una rappresentazione esatta permette a :class:`~decimal.Decimal` di calcolare i resti precisamente, e di effettuare test di uguaglianza che fallirebbero con la rappresentazione binaria in virgola mobile::
 
    >>> Decimal('1.00') % Decimal('.10')
    Decimal('0.00')
@@ -396,10 +309,8 @@ point::
    >>> sum([0.1]*10) == 1.0
    False
 
-The :mod:`decimal` module provides arithmetic with as much precision as needed::
+Il modulo :mod:`decimal` permette di svolgere calcoli con tutta la precisione richiesta::
 
    >>> getcontext().prec = 36
    >>> Decimal(1) / Decimal(7)
    Decimal('0.142857142857142857142857142857142857')
-
-
