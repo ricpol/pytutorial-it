@@ -27,7 +27,7 @@ Forse l'istruzione più famosa è la :keyword:`if`. Per esempio::
    ...
    More
 
-Possono esserci nessuna, una o più sezioni :keyword:`elif` e la sezione :keyword:`else` è opzionale. La parola riservata ':keyword:`!elif`' è una scorciatoia per "else if", e permette di evitare troppi livelli di rientro. Una sequenza :keyword:`!if` ... :keyword:`!elif` ... :keyword:`!elif` ... sostituisce le istruzioni ``switch`` o
+Possono esserci nessuna, una o più sezioni :keyword:`elif` e la sezione :keyword:`else` è opzionale. La parola riservata ':keyword:`!elif`' è una scorciatoia per "else if", e permette di evitare troppi livelli annidati. Una sequenza :keyword:`!if` ... :keyword:`!elif` ... :keyword:`!elif` ... sostituisce le istruzioni ``switch`` o
 ``case`` tipiche di altri linguaggi.
 
 .. _tut-for:
@@ -111,12 +111,12 @@ Se cercate semplicemente di "stampare" un intervallo, succede una cosa strana::
 
 L'oggetto restituito da :func:`range` si comporta in modo simile a una lista, ma in effetti non lo è. In realtà è un oggetto che restituisce l'elemento successivo della sequenza desiderata, quando vi iterate sopra, ma non *crea* davvero la lista, per risparmiare spazio. 
 
-Chiamiamo :term:`iterabile<iterable>` un oggetto di questo tipo: ovvero, un oggetto adatto a essere usato da funzioni e costrutti che si aspettano qualcosa da cui ottenere via via elementi successivi, finché ce ne sono. Abbiamo visto che l'istruzione :keyword:`for` è un costrutto di questo tipo; invece, un esempio di funzione che accetta un iterabile come parametro è :func:`sum`::
+Chiamiamo :term:`iterabile<iterable>` un oggetto di questo tipo: ovvero, un oggetto adatto a essere usato da funzioni e costrutti che si aspettano qualcosa da cui ottenere via via elementi successivi, finché ce ne sono. Abbiamo visto che l'istruzione :keyword:`for` è un costrutto di questo tipo; invece, un esempio di funzione che accetta un iterabile come argomento è :func:`sum`::
 
     >>> sum(range(4))  # 0 + 1 + 2 + 3
     6
 
-Vedremo più in là altri esempi di funzioni che restituiscono degli iterabili, o che accettano iterabili come parametro. Infine, se siete curiosi di sapere come si può ottenere una lista da un :func:`range`, ecco la risposta::
+Vedremo più in là altri esempi di funzioni che restituiscono degli iterabili, o che accettano iterabili come argomento. Infine, se siete curiosi di sapere come si può ottenere una lista da un :func:`range`, ecco la risposta::
 
    >>> list(range(4))
    [0, 1, 2, 3]
@@ -225,7 +225,7 @@ Opzionalmente, la prima istruzione della funzione può essere una stringa non as
 
 I parametri *reali* (gli argomenti [#]_) di una funzione sono introdotti nella tabella dei simboli locali nel momento in cui la funzione è chiamata. Quindi, gli argomenti sono "passati per valore" (dove però il "valore" è sempre un *riferimento* all'oggetto, non il valore dell'oggetto). [#]_ Quando una funzione chiama un'altra funzione, una nuova tabella di simboli è creata per quella chiamata. 
 
-La *definizione* della funzione inserisce il nome della funzione nella tabella dei simboli corrente. Il valore assegnato al nome della funzione ha un tipo riconosciuto dall'interprete come una funzione definita dall'utente. Questo valore può essere assegnato a un altro nome, che a questo punto può essere utilizzato come la funzione stessa. Questo meccanismo consente di rinominare le cose::
+La *definizione* della funzione inserisce il nome della funzione nella tabella dei simboli corrente. Il valore assegnato al nome della funzione ha un tipo riconosciuto dall'interprete come un oggetto-funzione definita dall'utente. Questo valore può essere assegnato a un altro nome, che a questo punto può essere utilizzato come la funzione stessa. Questo meccanismo consente di rinominare le cose::
 
    >>> fib
    <function fib at 10042ed0>
@@ -519,7 +519,6 @@ Non c'è modo di chiamare la funzione e farle restituire ``True``: infatti la ch
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
     TypeError: foo() got multiple values for argument 'name'
-    >>>
 
 Tuttavia, se usiamo il segno ``/`` per specificare i parametri solo posizionali, allora diventa possibile usare ``name`` come parametro posizionale e allo stesso tempo mettere ``'name'`` tra gli argomenti keyword::
 
@@ -629,7 +628,7 @@ Stringhe di documentazione
 
 Ci sono alcune convenzioni sul contenuto e la formattazione di una stringa di documentazione. 
 
-La prima riga dovrebbe essere un conciso riepilogo dello scopo dell'oggetto documentato. Per brevità, non dovrebbe dichiarare esplicitamente il nome dell'oggetto o il suo tipo, dal momento che queste informazioni si possono ottenere in altro modo (a meno che il nome non sia un verbo che descrive l'azione della funzione - *questo naturalmente è più facile in Inglese, ndT*). La riga dovrebbe iniziare con la lettera maiuscola e finire con un punto. 
+La prima riga dovrebbe essere un sintetico riepilogo dello scopo dell'oggetto documentato. Per brevità, non dovrebbe dichiarare esplicitamente il nome dell'oggetto o il suo tipo, dal momento che queste informazioni si possono ottenere in altro modo (a meno che il nome non sia un verbo che descrive l'azione della funzione - *questo naturalmente è più facile in Inglese, ndT*). La riga dovrebbe iniziare con la lettera maiuscola e finire con un punto. 
 
 Se la stringa ha più di una riga, la seconda dovrebbe essere vuota, in modo da separare visivamente il sommario dal resto della documentazione. Le righe successive dovrebbero contenere uno o più paragrafi che descrivono come si deve usare l'oggetto, i suoi *side-effect*, etc. 
 
@@ -684,15 +683,15 @@ Intermezzo: stile per il codice
 
 Prima di iniziare a scrivere codice Python più lungo e complesso, è arrivato il momento di affrontare il tema dello "stile" del codice. Molti linguaggi possono essere scritti (o più precisamente, *formattati*) usando stili diversi; alcuni più leggibili di altri. È sempre una buona idea facilitare la lettura del vostro codice per gli altri, e per questo adottare uno stile chiaro aiuta moltissimo. 
 
-Nel mondo Python, la :pep:`8` si è affermata come la guida di stile da usare per molti progetti: promuove uno stile molto leggibile e scorrevole all'occhio. Tutti i programmatori Python dovrebbero leggerla prima o poi; sintetizziamo qui i punti più importanti per voi:  
+Nel mondo Python, la :pep:`8` si è affermata come la guida di stile usata in molti progetti: promuove uno stile molto leggibile e scorrevole all'occhio. Tutti i programmatori Python dovrebbero leggerla prima o poi; sintetizziamo qui i punti più importanti per voi:  
 
 * I rientri si fanno con 4 spazi, non con le tabulazioni. 
 
-   4 spazi sono un buon compromesso tra rientri più stretti (che permettono più livelli di annidamento) e più larghi (che sono più facile da leggere). Le tabulazioni fanno solo confusione ed è meglio non usarle. 
+   4 spazi sono un buon compromesso tra rientri più stretti (che permettono più livelli di annidamento) e più larghi (che sono più facili da leggere). Le tabulazioni fanno solo confusione ed è meglio non usarle. 
    
 * Le righe non devono superare i 79 caratteri.
 
-   Questo è per aiutare gli utenti con schermi piccoli, e rende possibile affiancare due file di codice su quelli più grandi. 
+   Questo è per aiutare gli utenti con schermi piccoli e rende possibile affiancare due file di codice su quelli più grandi. 
 
 * Lasciate una riga vuota per separare le funzioni e le classi, e anche i blocchi di codice più grandi all'interno delle funzioni. 
 

@@ -185,7 +185,7 @@ Ecco lo stesso esempio dei quadrati e dei cubi, formattato manualmente::
 
 Si noti che il singolo spazio aggiunto tra le colonne è dovuto al modo in cui funziona :func:`print`, che aggiunge sempre uno spazio tra i suoi argomenti.
 
-Il metodo :meth:`str.rjust` giustifica a destra una stringa rispetto a un campo di determinata lunghezza, aggiungendo gli spazi necessari a sinistra. Esistono metodi analoghi :meth:`str.ljust` e :meth:`str.center`. Questi metodi producono output, si limitano a restituire una nuova stringa. Se la stringa da giustificare è troppo lunga rispetto al campo, non la troncano ma si limitano a restituirla inalterata: questo scompaginerà il vostro output, ma è senz'altro meglio dell'alternativa, ovvero alterare il dato. (Se davvero preferite troncare, potete fare un sezionamento, per esempio ``x.ljust(n)[:n]``.)
+Il metodo :meth:`str.rjust` giustifica a destra una stringa rispetto a un campo di determinata lunghezza, aggiungendo gli spazi necessari a sinistra. Esistono metodi analoghi :meth:`str.ljust` e :meth:`str.center`. Questi metodi non producono output, si limitano a restituire una nuova stringa. Se la stringa da giustificare è troppo lunga rispetto al campo, non la troncano ma si limitano a restituirla inalterata: questo scompaginerà il vostro output, ma è senz'altro meglio dell'alternativa, ovvero alterare il dato. (Se davvero preferite troncare, potete fare un sezionamento, per esempio ``x.ljust(n)[:n]``.)
 
 Un altro metodo, :meth:`str.zfill`, completa una stringa numerica con degli "0" a sinistra. Inoltre capisce quando trova il segno positivo o negativo::
 
@@ -216,7 +216,7 @@ Leggere e scrivere files
    builtin: open
    object: file
 
-La funzione :func:`open` resituisce un :term:`oggetto-file<file object>` e si usa in genere con due argomenti: ``open(filename, mode)``.
+La funzione :func:`open` restituisce un :term:`oggetto-file<file object>` e si usa in genere con due argomenti: ``open(filename, mode)``.
 
 ::
 
@@ -233,7 +233,7 @@ In genere i file sono aperti in modalità testuale (:dfn:`text mode`), il che si
 
 In modalità testuale, Python, in lettura, converte a ``\n`` gli "a-capo" caratteristici della piattaforma (``\n`` su Unix, ``\r\n`` su Windows). In scrittura, tutti gli ``\n`` sono ri-convertiti secondo la convenzione della piattaforma. Queste modifiche dietro le quinte vanno bene per i file di testo, ma corrompono i dati binari di un file :file:`JPEG` o :file:`EXE`. Occorre prestare attenzione ad aprire questi file solo in modalità binaria. 
 
-È buona pratica usare la parola-chiave :keyword:`with` quando si deve gestire un oggetto-file. In questo modo il vantaggio è che il file verrà sempre chiuso al termine delle operazioni, anche se nel frattempo dovesse essere emessa un'eccezione. Usare :keyword:`!with` è anche più sintetico del corrispondente blocco :keyword:`try`\ -\ :keyword:`finally`::
+È buona pratica usare l'istruzione :keyword:`with` quando si deve gestire un oggetto-file. In questo modo il vantaggio è che il file verrà sempre chiuso al termine delle operazioni, anche se nel frattempo dovesse essere emessa un'eccezione. Usare :keyword:`!with` è anche più sintetico del corrispondente blocco :keyword:`try`\ -\ :keyword:`finally`::
 
     >>> with open('workfile') as f:
     ...     read_data = f.read()

@@ -50,7 +50,7 @@ Sono molte più cifre di quelle di cui la gente ha bisogno. Python preferisce ma
 
 Bisogna però ricordare che, anche se il risultato visualizzato assomiglia al valore esatto di 1/10, il valore *memorizzato* è quello della frazione binaria più prossima. 
 
-Un aspetto interessante è che ci sono molti numeri decimali che condividono la rappresentazione della stessa frazione binaria più prossima. Per esempio, i numeri ``0.1`` e ``0.10000000000000001`` e ``0.1000000000000000055511151231257827021181583404541015625`` sono tutti approssimati da ``3602879701896397 / 2 ** 55``.  Dal momento che tutti questi valori decimali condividono la stessa approssimazione, ciascuno di essi potrebbe essere visualizzato preservando l'invariante ``eval(repr(x)) == x``.
+Un aspetto interessante è che ci sono molti numeri decimali che condividono la rappresentazione della stessa frazione binaria più prossima. Per esempio, i numeri ``0.1`` e ``0.10000000000000001`` e ``0.1000000000000000055511151231257827021181583404541015625`` sono tutti approssimati da ``3602879701896397 / 2 ** 55``. Dal momento che tutti questi valori decimali condividono la stessa approssimazione, ciascuno di essi potrebbe essere visualizzato preservando l'invariante ``eval(repr(x)) == x``.
 
 Molti anni fa, il prompt di Python e la funzione predefinita :func:`repr` sceglievano tra le possibili rappresentazioni quella con 17 cifre significative, ``0.10000000000000001``. A partire da Python 3.1, sulla maggior parte delle piattaforme Python è in grado di scegliere quella più breve e visualizza semplicemente ``0.1``.
 
@@ -86,7 +86,7 @@ Anche se i numeri non possono avvicinarsi di più al loro valore reale, la funzi
 
 L'aritmetica binaria in virgola mobile presenta molte sorprese come questa. Spieghiamo nel dettaglio il problema di "0.1" nella sezione successiva. Si veda `The Perils of Floating Point <http://www.lahey.com/float.htm>`_ per un elenco più completo di altri inciampi frequenti. 
 
-Come si usa concludere, "non ci sono risposte facili". Tuttavia non bisogna neppure avere troppa paura della virgola! Gli errori nelle operazioni decimali in Python sono ereditati dall'architettura in virgola mobile sottostante, e sulle macchine moderne questi sono dell'ordine di una parte su 2\*\*53 per ciascuna operazione. È più che adeguato per la maggior parte degli scenari, ma dovete tener presente che non si tratta di aritmetica decimale e che ciascuna nuova operazione può accumulare un nuovo errore di arrotondamento. 
+Come si usa concludere, "non ci sono risposte facili". Tuttavia non bisogna neppure avere troppa paura della virgola! Gli errori nelle operazioni decimali in Python sono ereditati dall'architettura in virgola mobile sottostante, e sulle macchine moderne questi sono dell'ordine di una parte su 2\*\*53 per ciascuna operazione. È più che adeguato nella maggior parte dei casi, ma dovete tener presente che non si tratta di aritmetica decimale e che ciascuna nuova operazione può accumulare un nuovo errore di arrotondamento. 
 
 Anche se esistono dei casi estremi, nella vita di tutti i giorni l'aritmetica in virgola mobile si comporta come ci si aspetta, se si arrotonda semplicemente il risultato finale al numero di decimali che si desidera. Di solito basta la funzione :func:`str`; per un controllo più fine si può usare il metodo :meth:`str.format` e la sua :ref:`sintassi di formattazione<formatstrings>`.
 
@@ -159,7 +159,7 @@ Dal momento che il resto è maggiore della metà di 10, la migliore approssimazi
    >>> q+1
    7205759403792794
 
-Quindi la migliore approssimazione possibile di 1/10 come numero in "doppia precisione" IEEE-754 è::
+Quindi la migliore approssimazione possibile di 1/10 come numero in doppia precisione IEEE-754 è::
 
    7205759403792794 / 2 ** 56
 

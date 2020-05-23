@@ -6,7 +6,7 @@ Moduli
 
 Se chiudete l'interprete di Python e poi vi rientrate, non ritroverete le definizioni che avevate impostato (funzioni e variabili). Di conseguenza, se volete scrivere un programma più lungo, vi conviene usare un editor di testo per preparare le istruzioni per l'interprete, e invocarlo poi con il file risultante come input. In questo modo avete creato uno *script*. Quando poi il vostro programma diventa più lungo, potreste volerlo dividere in diversi file più maneggevoli. Potreste anche voler usare in diversi programmi le stesse funzioni utili che avete scritto, senza bisogno di copiarle tutte le volte. 
 
-A questo scopo, in Python potete mettere delle definizioni in un file e usarle poi in uno script o nella sessione interattiva dell'interprete. Un file di questo tipo è un *modulo*; le definizioni di un modulo possono essere *importate* in altri moduli o nel modulo *principale* (ovvero, l'insieme delle variabili a cui avete accesso da uno script eseguito, o dalla modalità interattiva).
+A questo scopo, in Python potete mettere le definizioni in un file e usarle poi in uno script o nella sessione interattiva dell'interprete. Un file di questo tipo è un *modulo*; le definizioni di un modulo possono essere *importate* in altri moduli o nel modulo *principale* (ovvero, l'insieme delle variabili a cui avete accesso da uno script quando è eseguito, o dalla modalità interattiva).
 
 Un modulo è un file che contiene definizioni e istruzioni Python. Il nome del file è quello del modulo più il suffisso :file:`.py`. Dentro il modulo, il nome è disponibile come valore della variabile globale ``__name__`` (una stringa). Per esempio, usate il vostro editor preferito per creare un file dal nome :file:`fibo.py` nella directory corrente, che contiene questo::
 
@@ -31,7 +31,7 @@ Adesso entrate nell'interprete interattivo dei comandi e importate questo modulo
 
    >>> import fibo
 
-Questa istruzione non inserisce i nomi delle funzioni definite in ``fibo`` direttamente nella tabella dei simboli corrente; piuttosto, vi inserisce il nome del modulo ``fibo``. Usando il nome del modulo potete accedere alle funzioni che contiene::
+Questa istruzione non inserisce i nomi delle funzioni definite in ``fibo`` direttamente nella tabella dei simboli corrente; invece, vi inserisce il nome del modulo ``fibo``. Usando il nome del modulo potete accedere alle funzioni che contiene::
 
    >>> fibo.fib(1000)
    0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
@@ -93,7 +93,7 @@ Si può anche usare in combinazione con la parola-chiave :keyword:`from`, con ef
 
 .. note::
 
-   Per ragioni di efficienza, ogni modulo è importato solo una volta nella sessione dell'interprete. Di conseguenza, se modificate il vostro modulo, dovete riavviare l'interprete. In alternativa, se si tratta di un modulo che state testando interattivamente, potete usare la funzione :func:`importlib.reload`, ovvero scrivere ``import importlib; importlib.reload(modulename)``.
+   Per ragioni di efficienza, ogni modulo è importato solo una volta nella sessione dell'interprete. Di conseguenza, se nel frattempo modificate il vostro modulo, dovete riavviare l'interprete. In alternativa, se si tratta di un modulo che state testando interattivamente, potete usare la funzione :func:`importlib.reload`, ovvero scrivere ``import importlib; importlib.reload(modulename)``.
 
 .. _tut-modulesasscripts:
 
@@ -274,7 +274,7 @@ Si noti che nell'elenco compaiono tutti i tipi di nomi: variabili, moduli, funzi
 Package
 =======
 
-I package sono un modo di strutturare il *namespace* di un modulo Python usando la "notazione col punto". Per esempio, il nome :mod:`A.B` indica un sotto-modulo ``B`` all'interno di un package ``A``. Proprio come i moduli permettono a diversi autori di non doversi preoccupare dei nomi *di variabili* usati in altri moduli, così i package permettono agli autori di package con molti moduli, come NumPy o Pillow, di non doversi preoccupare dei nomi *dei moduli* usati da altri. 
+I package sono un modo di strutturare il *namespace* di un modulo Python usando la "notazione col punto". Per esempio, il nome :mod:`A.B` indica un sotto-modulo ``B`` all'interno di un package ``A``. Proprio come i moduli permettono a diversi autori di non doversi preoccupare dei nomi *di variabile* usati in altri moduli, così i package permettono agli autori di package con molti moduli, come NumPy o Pillow, di non doversi preoccupare dei nomi *dei moduli* usati da altri. 
 
 Immaginate di voler costruire una collezione di moduli (un package) per la gestione di suoni e file sonori. Ci sono diversi formati di file sonori (di solito sono riconoscibili dalle estensioni, per esempio :file:`.wav`, :file:`.aiff`, :file:`.au`): quindi avrete bisogno di creare e mantenere una raccolta crescente di moduli per la conversione tra i vari formati. Ci sono poi molte diverse operazioni che si possono fare sui suoni (mixare, aggiungere eco, equalizzare, creare un effetto stereo artificiale): quindi dovrete scrivere una serie interminabile di moduli che implementano queste operazioni. Ecco una possibile struttura per il vostro package (espressa in forma di gerarchia del file system):
 
@@ -343,7 +343,7 @@ Importare \* da un package
 
 .. index:: single: __all__
 
-Che cosa succede quando scriviamo ``from sound.effects import *``? Idealmente, ci si potrebbe aspettare che questa istruzione provochi una scansione nel file system, trovi i moduli presenti nel package e li importi tutti in un colpo solo. Questo però potrebbe richiedere molto tempo, e importare un sotto-modulo potrebbe causare *side-effect* indesiderati, che dovrebbero verificarsi solo quando il modulo è importato direttamente. 
+Che cosa succede quando scriviamo ``from sound.effects import *``? Idealmente, ci si potrebbe aspettare che questa istruzione provochi una scansione nel file system, trovi i moduli presenti nel package e li importi tutti in un colpo solo. Questo però potrebbe richiedere molto tempo e importare un sotto-modulo potrebbe causare *side-effect* indesiderati, che dovrebbero verificarsi solo quando il modulo è importato direttamente. 
 
 L'unica soluzione è che l'autore del package fornisca un indice esplicito del suo contenuto. L'istruzione :keyword:`import` segue questa convenzione: se il modulo :file:`__init__.py` di un package definisce una lista col nome ``__all__``, allora considera questa come l'indice dei moduli che dovrebbero essere importati da un ``from package import *``. È compito dell'autore aggiornare la lista quando rilascia una nuova versione del package. Un autore potrebbe anche non fornire la lista, se decide che non può essere utile importare "\*" dal suo package. Per esempio, il file :file:`sound/effects/__init__.py` potrebbe contenere questo codice::
 
@@ -351,7 +351,7 @@ L'unica soluzione è che l'autore del package fornisca un indice esplicito del s
 
 In questo modo, ``from sound.effects import *`` importerebbe i tre moduli indicati del package :mod:`sound`.
 
-Se ``__all__`` non è definito, allora l'istruzione ``from sound.effects import *`` *non* importa comunque tutti i moduli del package :mod:`sound.effects` nel *namespace* corrente. Si limita a garantire che il package :mod:`sound.effects` è stato effettivamente importato (eventualmente eseguendo il codice trovato nel file :file:`__init__.py`) e quindi importa tutti i nomi definiti nel package: questo comprende tutti i nomi definiti (e i moduli esplicitamente importati) nel :file:`__init__.py`. Include anche tutti i moduli del package che sono stati esplicitamente importati in precedenza. Si consideri questo codice::
+Se ``__all__`` non è definito, allora l'istruzione ``from sound.effects import *`` *non* importa comunque tutti i moduli del package :mod:`sound.effects` nel *namespace* corrente. Si limita a garantire che il package :mod:`sound.effects` sia stato effettivamente importato (eventualmente eseguendo il codice trovato nel file :file:`__init__.py`) e quindi importa tutti i nomi definiti nel package: questo comprende tutti i nomi definiti (e i moduli esplicitamente importati) nel :file:`__init__.py`. Include anche tutti i moduli del package che sono stati esplicitamente importati in precedenza. Si consideri questo codice::
 
    import sound.effects.echo
    import sound.effects.surround
@@ -362,20 +362,20 @@ In questo esempio, i moduli :mod:`echo` e :mod:`surround` sono importati nel *na
 Anche se alcuni moduli sono progettati per esportare solo alcuni nomi, secondo certi criteri, quando importate con ``import *``, questa è comunque considerata una cattiva pratica nel codice "di produzione". 
 
 Ricordate che non c'è niente di male a importare ``from package import
-specific_submodule``. In effetti questo è il modo raccomandato, a meno che il modulo importatore non stia anche importando un altro modulo con lo stesso nome, da un altro package. 
+specific_submodule``. In effetti questo è il modo raccomandato, a meno che il modulo importatore non stia anche importando un altro modulo con lo stesso nome da un altro package. 
 
 Riferimenti intra-package
 -------------------------
 
 Quando i package contengono a loro volta dei sub-package (come nel caso del nostro esempio :mod:`sound`), potete usare gli import *assoluti* per riferirvi a moduli di package "cugini". Per esempio, se il modulo :mod:`sound.filters.vocoder` ha bisogno di usare il modulo :mod:`echo` nel package :mod:`sound.effects`, può importarlo con ``from sound.effects import echo``.
 
-Potete anche usare gli import *relativi*, negli import del tipo ``from module import name``. Gli import relativi usano dei punti iniziali per indicare il package corrente e genitore interessati dall'import. Dal modulo :mod:`surround`, per esempio, potreste importare::
+Potete anche usare gli import *relativi*, negli import del tipo ``from module import name``. Gli import relativi usano una notazione con punti iniziali per indicare il package corrente e genitore interessati dall'import. Dal modulo :mod:`surround`, per esempio, potreste importare::
 
    from . import echo
    from .. import formats
    from ..filters import equalizer
 
-Si noti che gli import relativi si basano sul nome del modulo importatore. Siccome il nome del modulo principale è sempre ``"__main__"``, i moduli intesi per essere usati come script (il modulo principale di un'applicazione Python) devono sempre usare gli import assoluti. 
+Si noti che gli import relativi si basano sul nome del modulo importatore. Siccome il nome del modulo principale è sempre ``"__main__"``, i moduli intesi per essere usati come script (come il modulo principale di un'applicazione Python) devono sempre usare gli import assoluti. 
 
 Package in directory multiple
 -----------------------------

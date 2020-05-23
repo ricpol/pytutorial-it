@@ -3,8 +3,8 @@
 .. la breve introduzione è stata spostata in un topic iniziale di appetite.rst
 .. perché altrimenti il builder latex entra in confusione... 
 
-Il tutorial di Python tradotto.
--------------------------------
+Il tutorial di Python.
+----------------------
 
 .. toctree::
    :numbered:

@@ -7,11 +7,11 @@ Virtual environment e package
 Introduzione
 ============
 
-I programmi Python usano spesso moduli e package che non sono compresi nella libreria standard. Inoltre le applicazioni talvolta hanno bisogno di una specifica versione di una libreria, perché è necessario che un certo baco sia stato risolto, oppure perché fa uso di una vecchia versione dell'interfaccia della libreria. 
+I programmi Python usano spesso moduli e package che non sono compresi nella libreria standard. Inoltre le applicazioni talvolta hanno bisogno di una specifica versione di una libreria, perché è necessario che un certo baco sia stato risolto, oppure perché fanno uso di una vecchia versione dell'interfaccia della libreria. 
 
 Ciò vuol dire che non è possibile che una singola installazione di Python possa venire incontro alle esigenze di ogni possibile applicazione. Se il programma A richiede la versione 1.0 di un certo modulo, ma il programma B ha bisogno della 2.0, queste necessità sono in conflitto e installare una delle due versioni non permetterà all'altro programma di funzionare correttamente.
 
-La soluzione è creare un :term:`virtual environment`, ovvero una directory auto-sufficiente che contiene una installazione di Python, per una particolare versione di Python, e inoltre un certo numero di pacchetti aggiuntivi.
+La soluzione è creare un :term:`virtual environment`, ovvero una directory auto-sufficiente che contiene una installazione di Python, per una particolare versione di Python, oltre a un certo numero di pacchetti aggiuntivi.
 
 Programmi diversi possono usare virtual environment diversi. Per risolvere il problema di richieste in conflitto dell'esempio precedente, il programma A può avere il suo environment con la versione 1.0 installate, mentre il programma B avrà un altro virtual environment con la versione 2.0. Se in seguito B richiede un aggiornamento della libreria alla versione 3.0, ciò non avrà conseguenze sull'environment di A. 
 
@@ -40,7 +40,7 @@ Su Unix o MacOS::
 
 (Lo script è scritto per la bash shell. Se usate :program:`csh` o :program:`fish`, usate invece gli script alternativi ``activate.csh`` o ``activate.fish``.)
 
-Attivare il virtual environment cambia il prompt della shell per mostrare il nome dell'environment in uso; modifica inoltre l'ambiente di lavoro in modo che invocare ``python`` restituisce quella particolare versione e installazione dell'interprete. Per esempio:
+Attivare il virtual environment cambia il prompt della shell per mostrare il nome dell'environment in uso; modifica inoltre l'ambiente di lavoro in modo che invocare ``python`` restituisca quella particolare versione e installazione dell'interprete. Per esempio:
 
 .. code-block:: bash
 
@@ -107,7 +107,7 @@ Se eseguite due volte questo comando, ``pip`` vi informerà che la versione rich
         Successfully uninstalled requests-2.6.0
   Successfully installed requests-2.7.0
 
-``pip uninstall`` seguito dal nome di uno o più pacchetti li rimuoverà dal virtual environment. 
+``pip uninstall``, seguito dal nome di uno o più pacchetti, li rimuoverà dal virtual environment. 
 
 ``pip show`` visualizza informazioni su un particolare pacchetto:
 

@@ -19,7 +19,7 @@ Gli errori di sintassi, noti anche come errori di parsing, sono forse l'inciampo
                       ^
    SyntaxError: invalid syntax
 
-Il parser riporta la riga sbagliata e mostra una piccola "freccia" che indica il primo punto in cui l'errore è stato rilevato. L'errore è causato (o almeno rilevato) all'elemento che *precede* la freccia: nell'esempio qui sopra, l'errore è rilevato alla funzione :func:`print`, perché mancano i "due punti" (``':'``) prima. Anche il nome del file e la riga sono riportati, in modo da sapere dove guardare, se l'input proviene da uno script. 
+Il parser riporta la riga sbagliata e mostra una piccola "freccia" che indica il primo punto in cui l'errore è stato rilevato. L'errore è causato (o almeno rilevato) dall'elemento che *precede* la freccia: nell'esempio qui sopra, l'errore è rilevato nella funzione :func:`print`, perché mancano i "due punti" (``':'``) prima. Anche il nome del file e la riga sono riportati, in modo da sapere dove guardare, se l'input proviene da uno script. 
 
 .. _tut-exceptions:
 
@@ -41,7 +41,7 @@ Anche quando un'istruzione o un'espressione sono corretti dal punto di vista sin
      File "<stdin>", line 1, in <module>
    TypeError: Can't convert 'int' object to str implicitly
 
-L'ultima riga del messaggio d'errore ci dice che cosa è successo. Gli oggetti-eccezioni possono avere diversi tipi, e la prima parte del messaggio riporta il tipo: negli esempi qui sopra, :exc:`ZeroDivisionError`, :exc:`NameError` e :exc:`TypeError`. La stringa mostrata come tipo è il nome dell'eccezione predefinita incontrata. Questo succede per tutte le eccezioni predefinite, ma potrebbe non esserlo per le eccezioni definite dall'utente (anche se è comunque una convenzione utile). I nomi delle eccezioni standard sono identificatori predefiniti, ma non parole-chiave riservate. 
+L'ultima riga del messaggio d'errore ci dice che cosa è successo. Gli oggetti-eccezioni possono avere diversi tipi, e la prima parte del messaggio riporta il tipo: negli esempi qui sopra, :exc:`ZeroDivisionError`, :exc:`NameError` e :exc:`TypeError`. La stringa mostrata come tipo è il nome dell'eccezione predefinita incontrata. Questo succede per tutte le eccezioni predefinite, ma potrebbe essere diverso per le eccezioni definite dall'utente (anche se è comunque una convenzione utile). I nomi delle eccezioni standard sono identificatori predefiniti, ma non parole-chiave riservate. 
 
 Il resto della riga fornisce dettagli che dipendono dal tipo dell'eccezione e da che cosa l'ha causata. 
 
@@ -64,7 +64,7 @@ I programmi possono gestire delle eccezioni specifiche. Nell'esempio che segue, 
    ...         print("Oops!  That was no valid number.  Try again...")
    ...
 
-L'istruzione :keyword:`try` funziona in questo modo.
+L'istruzione :keyword:`try` funziona in questo modo:
 
 * Per prima cosa, viene eseguito il blocco *try*, ovvero le istruzioni tra il :keyword:`try` e lo :keyword:`except`.
 
@@ -100,9 +100,9 @@ Un'eccezione specificata in una clausola :keyword:`except` è compatibile con l'
        except B:
            print("B")
 
-Si noti che, mettendo le clausole *except* in ordine inverso (con ``except B`` al primo posto), l'output prodotto sarebbe B, B, B: la prima clausola *except* in grado di gestire l'eccezione viene eseguita. 
+Si noti che, mettendo le clausole *except* in ordine inverso (con ``except B`` al primo posto), l'output prodotto sarebbe B, B, B: viene eseguita la prima clausola *except* in grado di gestire l'eccezione. 
 
-È possibile omettere il nome dell'eccezione nell'ultima clausola *except*, in modo che serva da ultima risorsa. Questa strategia va però usata con cautela, dal momento che è facile mascherare in questo modo un errore di programmazione. È anche possibile scrivere un messaggio di errore e quindi ri-emettere l'eccezione, in modo che il codice chiamante possa eventualmente gestirla::
+È possibile omettere il nome dell'eccezione nell'ultima clausola *except*, in modo che serva come risorsa estrema. Questa strategia va però usata con cautela, dal momento che è facile mascherare in questo modo un errore di programmazione. È anche possibile scrivere un messaggio di errore e quindi ri-emettere l'eccezione, in modo che il codice chiamante possa eventualmente gestirla::
 
    import sys
 
@@ -131,18 +131,18 @@ L'istruzione :keyword:`try` ... :keyword:`except` prevede una clausola opzionale
 
 Usare :keyword:`!else` è preferibile a inserire del codice in più nel :keyword:`try`, perché in questo modo si evita di intercettare accidentalmente delle eccezioni emesse dal codice che non si intendeva proteggere nella clausola *try*. 
 
-Quando si verifica un'eccezione, può avere un valore associato, detto anche *argomento* dell'eccezione. La presenza e il tipo di questo argomento dipende dall'eccezione. 
+Quando si verifica un'eccezione, questa può avere un valore associato, detto anche *argomento* dell'eccezione. La presenza e il tipo di questo argomento dipende dall'eccezione. 
 
 La clausola *except* può specificare una variabile dopo il nome dell'eccezione. La variabile è legata all'istanza dell'eccezione, e i suoi argomenti sono conservati in ``instance.args``. Per comodità, l'istanza dell'eccezione definisce un metodo :meth:`__str__` tale per cui gli argomenti possono essere scritti direttamente, senza doversi riferire a ``.args``. È possibile anche istanziare l'eccezione prima di emetterla, in modo da aggiungere gli attributi desiderati::
 
    >>> try:
    ...     raise Exception('spam', 'eggs')
    ... except Exception as inst:
-   ...     print(type(inst))    # the exception instance
-   ...     print(inst.args)     # arguments stored in .args
-   ...     print(inst)          # __str__ allows args to be printed directly,
-   ...                          # but may be overridden in exception subclasses
-   ...     x, y = inst.args     # unpack args
+   ...     print(type(inst))    # l'istanza dell'eccezione
+   ...     print(inst.args)     # gli argomenti conservati in .args
+   ...     print(inst)          # __str__ scrive direttamente gli argomenti
+   ...                          # ma può essere sovrascritto nelle sottoclassi
+   ...     x, y = inst.args     # spacchettiamo gli argomenti
    ...     print('x =', x)
    ...     print('y =', y)
    ...
@@ -303,8 +303,7 @@ Se è presente una clausola :keyword:`finally`, questa verrà eseguita come ulti
 
 * L'eccezione potrebbe accadere durante l'esecuzione di una clausola :keyword:`!except` o :keyword:`!else`. Anche in questo caso l'eccezione è rilanciata dopo l'esecuzione del blocco :keyword:`!finally`. 
 
-* Se il codice del blocco :keyword:`!try` raggiunge un'istruzione :keyword:`break`,
-  :keyword:`continue` o :keyword:`return`, allora la clausola :keyword:`!finally` sarà eseguita immediatamente prima di queste istruzioni. 
+* Se il codice del blocco :keyword:`!try` raggiunge un'istruzione :keyword:`break` :keyword:`continue` o :keyword:`return`, allora la clausola :keyword:`!finally` sarà eseguita immediatamente prima di queste istruzioni. 
   
 * Se entrambi i blocchi :keyword:`!try` e :keyword:`!finally` comprendono un'istruzione :keyword:`!return`, allora il valore restituito sarà quello del :keyword:`!finally`, non quello del :keyword:`!try`. 
 
@@ -344,7 +343,7 @@ Un esempio più complesso::
      File "<stdin>", line 3, in divide
    TypeError: unsupported operand type(s) for /: 'str' and 'str'
 
-Come si può vedere, il blocco :keyword:`finally` è eseguito in ogni caso. Il :exc:`TypeError` emesso quando si cerca di dividere due stringhe non è gestito dalla clausola :keyword:`except` e quindi viene rilanciato, una volta che il :keyword:`!finally` è stata eseguito. 
+Come si può vedere, il blocco :keyword:`finally` è eseguito in ogni caso. Il :exc:`TypeError` emesso quando si cerca di dividere due stringhe non è gestito dalla clausola :keyword:`except` e quindi viene rilanciato, una volta che il :keyword:`!finally` è stato eseguito. 
 
 In uno scenario concreto, la clausola :keyword:`finally` è utile per rilasciare le risorse esterne (come una connessione a un file o a un database), indipendentemente dal fatto che l'utilizzo sia andato a buon fine. 
 

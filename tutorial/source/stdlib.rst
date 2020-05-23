@@ -236,7 +236,7 @@ Controllo di qualità
 
 Una strada per scrivere codice di alta qualità è quella di scrivere dei test per ciascuna funzione, man mano che viene sviluppata, e di eseguire i test con una certa frequenza durante il processo di sviluppo. 
 
-Il modulo :mod:`doctest` è uno strumento per scansionare un modulo e validare i test che sono contenuti nella sue docstring. Creare un test è questione di un semplice copia-e-incolla nella docstring dell'invocazione e del risultato atteso. Questo migliora la documentazione, fornendo un esempio di utilizzo per l'utente, e permette a *doctest* di garantire che il codice resti fedele a quanto documentato::
+Il modulo :mod:`doctest` è uno strumento per scansionare un modulo e validare i test che sono contenuti nelle sue docstring. Creare un test è questione di un semplice copia-e-incolla, nella docstring, dell'invocazione e del risultato atteso. In questo modo si migliora la documentazione, fornendo un esempio di utilizzo per l'utente, e si permette a *doctest* di garantire che il codice resti fedele a quanto documentato::
 
    def average(values):
        """Restituisce la media aritmetica di una lista di numeri.
@@ -249,7 +249,7 @@ Il modulo :mod:`doctest` è uno strumento per scansionare un modulo e validare i
    import doctest
    doctest.testmod()   # valida automaticamente i test inclusi
 
-Il modulo :mod:`unittest` non è di immediato utilizzo come :mod:`doctest`, ma permette di mantenere in file separati una raccolta più completa di test::
+Il modulo :mod:`unittest` non è di immediato utilizzo come :mod:`doctest`, ma permette di mantenere una raccolta più completa di test in file separati::
 
    import unittest
 

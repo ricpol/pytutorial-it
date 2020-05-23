@@ -4,7 +4,7 @@
 Una breve visita alla libreria standard - 2
 *******************************************
 
-Questa seconda parte del tour presenta strumenti più avanzati che supportano le esigenze dei programmi professionali. Di rado ce n'è bisogno per un piccolo script. 
+Questa seconda parte del tour presenta strumenti più avanzati che supportano le esigenze dei programmi professionali. Di rado ce n'è bisogno per i piccoli script. 
 
 .. _tut-output-formatting:
 
@@ -17,7 +17,7 @@ Il modulo :mod:`reprlib` presenta una versione della funzione predefinita :func:
    >>> reprlib.repr(set('supercalifragilisticexpialidocious'))
    "{'a', 'c', 'd', 'e', 'f', 'g', ...}"
 
-:mod:`pprint` permette un controllo più raffinato sulla scrittura di oggetti predefiniti o creati dall'utente, in un modo che resti leggibile dall'interprete. Quando il risultato è più lungo di una riga, il *pretty printer* aggiunge interruzioni di riga e rientri per rendere più chiara la struttura dei dati::
+:mod:`pprint` permette un controllo più raffinato sulla scrittura di oggetti predefiniti o creati dall'utente, in modo che l'output resti leggibile dall'interprete. Quando il risultato è più lungo di una riga, il *pretty printer* aggiunge interruzioni di riga e rientri per rendere più chiara la struttura dei dati::
 
    >>> import pprint
    >>> t = [[[['black', 'cyan'], 'white', ['green', 'red']], [['magenta',
@@ -161,14 +161,14 @@ Questo esempio mostra come l'interfaccia di alto livello del modulo :mod:`thread
 
 La sfida principale dei programmi multi-threading è di coordinare i thread che devono condividere dati o altre risorse. Per questo, il modulo *threading* mette a disposizione diverse primitive di sincronizzazione come lock, eventi, condizioni e semafori.
 
-Anche con questi strumenti raffinati, piccoli errori di design possono causare problemi difficili da riprodurre. Di conseguenza, l'approccio più usato consiste nel concentrare tutte le operazioni di accesso alla risorsa in un solo thread, e quindi usare il modulo :mod:`queue` per far giungere a quel thread le richieste degli altri. Usare oggetti :class:`~queue.Queue` per le comunicazioni tra thread porta a scrivere applicazioni più semplici da progettare, più leggibili e affidabili.
+Anche con questi strumenti raffinati, piccoli errori di design possono causare problemi difficili da riprodurre. Di conseguenza, l'approccio più usato consiste nel concentrare tutte le operazioni di accesso alla risorsa in un solo thread, e quindi usare il modulo :mod:`queue` per fare arrivare a quel thread le richieste degli altri. Usare oggetti :class:`~queue.Queue` per le comunicazioni tra thread porta a scrivere applicazioni più semplici da progettare, più leggibili e affidabili.
 
 .. _tut-logging:
 
 Logging
 =======
 
-Il modulo :mod:`logging` offre un sistema di logging completo e flessibile. Nella forma più semplici, un messaggio di log è inviato a un file o a ``sys.stderr``::
+Il modulo :mod:`logging` offre un sistema di logging completo e flessibile. Nella forma più semplice, un messaggio di log è inviato a un file o a ``sys.stderr``::
 
    import logging
    logging.debug('Debugging information')
@@ -228,7 +228,7 @@ Questo approccio funziona bene nella maggior parte dei casi, ma talvolta si rend
 Strumenti per lavorare con le liste
 ===================================
 
-Il tipo predefinito "lista" può soddisfare le esigenze di molte strutture-dati. Tuttavia occasionalmente c'è bisogno di un'implementazione alternativa con un altri vantaggi e svantaggi in termini di performance. 
+Il tipo predefinito "lista" può soddisfare le esigenze di molte strutture-dati. Tuttavia occasionalmente c'è bisogno di un'implementazione alternativa con altri vantaggi e svantaggi in termini di performance. 
 
 Il modulo :mod:`array` ha una classe :class:`~array.array()` simile a una lista che conserva i dati in modo più compatto, ma solo se sono di un medesimo tipo. L'esempio che segue mostra un array i cui elementi sono conservati come numeri binari di due byte senza segno (codice ``"H"``), invece dei consueti 16 byte che sarebbero impiegati da una normale lista Python::
 
@@ -279,13 +279,13 @@ Il modulo :mod:`heapq` implementa *heap* a partire da normali liste. Il valore p
 Aritmetica decimale in virgola mobile
 =====================================
 
-Il modulo :mod:`decimal` offre un tipo :class:`~decimal.Decimal` per operare con i numeri decimali. In confronto con il tipo predefinito :class:`float` che implementa un numero binario in virgola mobile, questa classe è conveniente per 
+Il modulo :mod:`decimal` offre un tipo :class:`~decimal.Decimal` per operare con i numeri decimali in virgola mobile. In confronto con il tipo predefinito :class:`float` che implementa un numero *binario* in virgola mobile, questa classe è conveniente per 
 
 * le applicazioni finanziarie, o quando è richiesta una rappresentazione decimale esatta,
 * avere più controllo sulla precisione,
 * avere più controllo sull'arrotondamento per esigenze legali o normative,
 * mantenere le cifre decimali significative, 
-* le applicazioni dove il risultato deve essere uguale al conto fatto a mano.
+* le applicazioni dove il risultato deve essere uguale al calcolo fatto a mano.
 
 Per esempio, calcolare il 5% di tasse su 70 centesimi di costo telefonico fornisce un risultato diverso in virgola mobile decimale o binaria. La differenza diventa importante se il risultato è arrotondato al centesimo più vicino::
 
@@ -297,7 +297,7 @@ Per esempio, calcolare il 5% di tasse su 70 centesimi di costo telefonico fornis
 
 I risultati in :class:`~decimal.Decimal` mantengono gli zero finali, conservando quattro decimali significativi da una moltiplicazione tra numeri con due decimali significativi. Il modulo *decimal* riproduce il risultato dei calcoli fatti a mano ed evita i problemi che nascono quando una quantità binaria in virgola mobile non può rappresentare esattamente una quantità decimale. 
 
-Usare una rappresentazione esatta permette a :class:`~decimal.Decimal` di calcolare i resti precisamente, e di effettuare test di uguaglianza che fallirebbero con la rappresentazione binaria in virgola mobile::
+Usare una rappresentazione esatta permette a :class:`~decimal.Decimal` di calcolare i resti precisamente e di effettuare test di uguaglianza che fallirebbero con la rappresentazione binaria in virgola mobile::
 
    >>> Decimal('1.00') % Decimal('.10')
    Decimal('0.00')

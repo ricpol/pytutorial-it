@@ -56,7 +56,6 @@ Il tipo di dato "lista" ha diverse funzionalità ulteriori. Ecco un elenco di tu
 
    Restituisce il numero di volte che *x* appare nella lista.
 
-
 .. method:: list.sort(key=None, reverse=False)
    :noindex:
 
@@ -66,7 +65,6 @@ Il tipo di dato "lista" ha diverse funzionalità ulteriori. Ecco un elenco di tu
    :noindex:
 
    Capovolge sul posto gli elementi della lista.
-
 
 .. method:: list.copy()
    :noindex:
@@ -171,7 +169,7 @@ o, in modo equivalente::
 
    squares = [x**2 for x in range(10)]
 
-che è più conciso e leggibile.
+che è più sintetico e leggibile.
 
 Una *list comprehension* è racchiusa tra parentesi quadre; contiene un'espressione, seguita da una clausola :keyword:`!for`, seguita da zero o più clausole :keyword:`!for` o :keyword:`!if`. Il risultato è una nuova lista costruita valutando l'espressione nel contesto delle clausole :keyword:`!for` e :keyword:`!if` che la seguono. Per esempio, questa *list comprehension* produce una combinazione degli elementi di due liste, se non sono uguali::
 
@@ -279,7 +277,7 @@ Si veda :ref:`tut-unpacking-arguments` per l'uso dell'asterisco in questa chiama
 L'istruzione :keyword:`!del`
 ============================
 
-L'istruzione :keyword:`del` consente di rimuovere un elemento da una lista, data la sua posizione, anziché il valore. È differente dal metodo :meth:`pop`, che restituisce il valore dell'elemento rimosso. L'istruzione :keyword:`del` può anche essere usata per rimuovere una sezione della lista, o svuotare l'intera lista (come abbiamo già fatto assegnando una lista vuota alla sezione). Per esempio::
+L'istruzione :keyword:`del` consente di rimuovere un elemento da una lista, data la sua posizione anziché il valore. È differente dal metodo :meth:`pop`, che restituisce il valore dell'elemento rimosso. L'istruzione :keyword:`del` può anche essere usata per rimuovere una sezione della lista, o svuotare l'intera lista (come abbiamo già fatto assegnando una lista vuota alla sezione). Per esempio::
 
    >>> a = [-1, 1, 66.25, 333, 333, 1234.5]
    >>> del a[0]
@@ -330,7 +328,7 @@ Come si può vedere, le tuple in output sono sempre scritte con le parentesi, in
 
 Anche se le tuple possono sembrare simili alle liste, sono usate in contesti diversi e per scopi diversi. Le tuple sono :term:`immutabili<immutable>` e di solito ospitano una collezione di elementi eterogenei, a cui si può accedere tramite "spacchettamento" (vedi oltre) o indici, o anche attributi, nel caso di una :func:`namedtuples <collections.namedtuple>`. Le liste sono :term:`mutabili<mutable>` e di solito ospitano elementi omogenei, a cui si accede iterando sulla lista. 
 
-Le tuple che hanno nessuno o un elemento pongono un problema di costruzione: la sintassi prevede un paio di stranezze per risolvere questi casi. Le tuple vuote si creano con una coppia di parentesi, senza nulla dentro. Le tuple con un solo elemento hanno una virgola finale (non è sufficiente mettere il valore tra parentesi per creare una tupla). Non è bello da vedere, ma funziona. Per esempio::
+Le tuple che hanno zero o un elemento pongono un problema di costruzione: la sintassi prevede due piccole stranezze per risolvere questi casi. Le tuple vuote si creano con una coppia di parentesi, senza nulla dentro. Le tuple con un solo elemento hanno una virgola finale (non è sufficiente mettere il valore tra parentesi per creare una tupla). Non è bello da vedere, ma funziona. Per esempio::
 
    >>> empty = ()
    >>> singleton = 'hello',    # <-- notare la virgola finale
@@ -354,7 +352,7 @@ Set
 
 Python ha un tipo di dato per i *set*. Un set è una collezione non ordinata senza elementi duplicati. Tra gli utilizzi più frequenti vi sono i test di appartenenza e l'eliminazione dei duplicati. I set supportano anche le operazioni matematiche di unione, intersezione, differenza e differenza simmetrica. 
 
-Per creare un set si può usare la funzione :func:`set` o le parentesi graffe. Si noti che per creare un set vuoto occorre usare ``set()``, non ``{}``: questo infatti crea un *dizionario* vuoto, come vedremo nella prossima parte. 
+Per creare un set si può usare la funzione :func:`set` o le parentesi graffe. Si noti che per creare un set vuoto occorre usare ``set()``, non ``{}``: questo infatti crea un *dizionario* vuoto, come vedremo nella prossima sezione. 
 
 Ecco una breve dimostrazione::
 
@@ -392,11 +390,11 @@ Analogamente alle :ref:`list comprehensions <tut-listcomps>`, esistono le *set c
 Dizionari
 =========
 
-Un altro utile tipo predefinito in Python è il *dizionario* (si veda :ref:`Tipi di mapping - dizionari<typesmapping>`). I dizionari sono anche chiamati "array associativi" o "memorie associative" in altri linguaggi. A differenza delle sequenze ceh sono indicizzate con intervalli numerici, i dizionari sono indicizzati con *chiavi*; le chiavi possono essere di qualsiasi tipo immutabile: stringhe e numeri sono sempre adatti come chiavi. Le tuple possono essere usate come chiavi, se contengono solo stringhe, numeri o altre tuple; se una tupla contiene qualsiasi altro oggetto mutabile, direttamente o indirettamente, allora non può fungere da chiave per un dizionario. Non potete usare le liste come chiavi, dal momento che queste possono essere modificate sul posto con l'assegnamento a un indice, il sezionamento o metodi come :meth:`append` e :meth:`extend`.
+Un altro utile tipo predefinito in Python è il *dizionario* (si veda :ref:`Tipi di mapping - dizionari<typesmapping>`). I dizionari sono anche chiamati "array associativi" o "memorie associative" in altri linguaggi. A differenza delle sequenze che sono indicizzate con intervalli numerici, i dizionari sono indicizzati con *chiavi*; le chiavi possono essere di qualsiasi tipo immutabile: stringhe e numeri sono sempre adatti come chiavi. Le tuple possono essere usate come chiavi, se contengono solo stringhe, numeri o altre tuple; se una tupla contiene qualsiasi altro oggetto mutabile, direttamente o indirettamente, allora non può fungere da chiave per un dizionario. Non potete usare le liste come chiavi, dal momento che queste possono essere modificate sul posto con l'assegnamento a un indice, il sezionamento o metodi come :meth:`append` e :meth:`extend`.
 
-Conviene pensare a un dizionario come a una collezione di coppie *chiave: valore*, con il requisito che le chiavi devono essere univoche all'interno del dizionario. Una coppia di parentesi graffe crea un dizionario vuoto: ``{}``. Per inizializzare il dizionario, è possibile inserire nelle parentesi delle coppie *chiave: valore*; questo è anche il modo in cui i dizionari sono scritti in output. 
+Conviene pensare a un dizionario come a una collezione di coppie *chiave: valore*, con il requisito che le chiavi devono essere univoche all'interno del dizionario. Una coppia di parentesi graffe crea un dizionario vuoto: ``{}``. Per inizializzare il dizionario è possibile inserire nelle parentesi delle coppie *chiave: valore*; questo è anche il modo in cui i dizionari sono scritti in output. 
 
-Le operazioni principali con i dizionari sono conservare un valore accoppiandolo a una chiave, e estrarre il valore data la chiave. È inoltre possibile cancellare una coppia *chiave: valore* con ``del``. Se si accoppia un valore a una chiave già in uso, il vecchio valore viene sovrascritto. Estrarre un valore con una chiave inesistente produce un errore. 
+Le operazioni principali con i dizionari sono: conservare un valore accoppiandolo a una chiave; ed estrarre il valore data la chiave. È inoltre possibile cancellare una coppia *chiave: valore* con ``del``. Se si accoppia un valore a una chiave già in uso, il vecchio valore viene sovrascritto. Estrarre un valore con una chiave inesistente produce un errore. 
 
 Usare ``list(d)`` su un dizionario restituisce una lista di tutte le chiavi usate nel dizionario, in ordine di inserimento (se le preferite ordinate, potete invece usare ``sorted(d)``). Per sapere se una chiave è presente in un dizionario, usate la parola-chiave :keyword:`in`.
 
@@ -470,7 +468,7 @@ Per iterare su due o più sequenze contemporaneamente, queste possono essere acc
    What is your quest?  It is the holy grail.
    What is your favorite color?  It is blue.
 
-Per iterare su una sequenza in ordine inverso, si scrive l'iterazione in avanti e su questa si chiama la funzione :func:`reversed`::
+Per iterare su una sequenza in ordine inverso, si scrive l'iterazione in avanti e su questa si chiama poi la funzione :func:`reversed`::
 
    >>> for i in reversed(range(1, 10, 2)):
    ...     print(i)
@@ -546,7 +544,7 @@ Si noti che in Python, a differenza di C, un assegnamento dentro un'espressione 
 Confronto di sequenze e altri tipi
 ==================================
 
-In genere è possibile confrontare un oggetto-sequenza con una sequenza dello stesso tipo. Il confronto è fatto in ordine *lessicografico*: prima sono confrontati i primi due elementi tra loro, e se sono diversi questo determina l'esito del confronto; se sono uguali, si confrontano i secondi elementi e così via, fino a quando una delle due sequenze termina. Se due elementi da confrontare sono essi stessi delle sequenze, viene effettuato un confronto lessicografico tra questi, ricorsivamente. Se tutti gli elementi sono uguali fra loro, le sequenze sono considerate uguali. Se una sequenza è una sotto-sequenza iniziale di un'altra, è la sequenza più breve a risultare la minore nel confronto. L'ordine lessicografico per le stringhe usa i code point Unicode per confrontare i singoli caratteri. Ecco alcuni esempi di confronto tra sequenze dello stesso tipo::
+In genere è possibile confrontare un oggetto-sequenza con una sequenza dello stesso tipo. Il confronto è fatto in ordine *lessicografico*: prima sono confrontati i primi due elementi tra loro; se sono diversi questo determina l'esito del confronto; se sono uguali, si confrontano i secondi elementi e così via, fino a quando una delle due sequenze termina. Se due elementi da confrontare sono essi stessi delle sequenze, viene effettuato un confronto lessicografico tra questi, ricorsivamente. Se tutti gli elementi sono uguali fra loro, le sequenze sono considerate uguali. Se una sequenza è una sotto-sequenza iniziale di un'altra, è la sequenza più breve a risultare la minore nel confronto. L'ordine lessicografico per le stringhe usa i *code point* Unicode per confrontare i singoli caratteri. Ecco alcuni esempi di confronto tra sequenze dello stesso tipo::
 
    (1, 2, 3)              < (1, 2, 4)
    [1, 2, 3]              < [1, 2, 4]

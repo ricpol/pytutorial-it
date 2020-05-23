@@ -4,7 +4,7 @@
 Un'introduzione informale a Python
 **********************************
 
-Negli esempi che seguono, l'input e l'output si distinguono dalla presenza o assenza del *prompt* (:term:`>>>` e :term:`...`). Per riprodurre gli esempi, quando appare il prompt dovete inserire tutto ciò che segue; le righe che non hanno il prompt sono l'output dell'interprete. Si noti che quando una riga riporta solo il prompt secondario senza nient'altro, significa che dovete inserire una riga vuota: questo serve a terminare un'istruzione multi-linea. 
+Negli esempi che seguono, l'input e l'output si distinguono dalla presenza o assenza del *prompt* (:term:`>>>` e :term:`...`). Per riprodurre gli esempi, quando appare il prompt dovete inserire tutto ciò che segue nella riga; le righe che non hanno il prompt sono l'output dell'interprete. Si noti che quando una riga riporta solo il prompt secondario senza nient'altro, significa che dovete inserire una riga vuota: questo serve a terminare un'istruzione multi-linea. 
 
 .. index:: single: # (hash); comment
 
@@ -14,7 +14,7 @@ Ecco alcuni esempi::
 
    # questo è il primo commento
    spam = 1  # e questo è il secondo
-             # ... ed ecco il terzp!
+             # ... ed ecco il terzo!
    text = "# Questo non è un commento perché è dentro una stringa."
 
 .. _tut-calculator:
@@ -318,7 +318,7 @@ Come le stringhe e tutti gli altri tipi di :term:`sequenza<sequence>`, le liste 
    >>> squares[-3:]  # la sezione restituisce una nuova lista
    [9, 16, 25]
 
-Tutte le operazioni di sezionamento restituiscono una nuova lista che contiene gli elementi richiesti. Ciò significa che la sezione dell'esempio seguente restituisce una :ref:`shallow copy <shallow_vs_deep_copy>` della lista::
+Tutte le operazioni di sezionamento restituiscono una nuova lista che contiene gli elementi richiesti. Ciò significa che la sezione dell'esempio seguente restituisce una :ref:`copia per indirizzo<shallow_vs_deep_copy>` della lista::
 
    >>> squares[:]
    [1, 4, 9, 16, 25]

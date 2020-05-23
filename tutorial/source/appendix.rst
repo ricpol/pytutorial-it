@@ -75,4 +75,4 @@ Il modulo :mod:`sitecustomize` funziona allo stesso modo, ma viene creato di sol
 
    .. rubric:: Note
 
-.. [#] A problem with the GNU Readline package may prevent this.
+.. [#] Un problema della libreria GNU Readline potrebbe impedirlo.

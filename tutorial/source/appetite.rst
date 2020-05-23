@@ -16,7 +16,7 @@
 
     Python è un linguaggio di programmazione molto produttivo e semplice da imparare. È dotato di efficienti strutture-dati di alto livello e propone un approccio alla programmazione a oggetti semplice ma efficace. La sua sintassi elegante e la tipizzazione dinamica, oltre al fatto di essere un linguaggio interpretato, ne fanno uno strumento ideale per lo *scripting* e lo sviluppo rapido di applicazioni, in molti campi e su molte piattaforme. 
 
-    L'interprete di Python e la sua vasta libreria standard sono disponibili nel sito web https://www.python.org/, sotto forma sia di codice sorgente sia di eseguibile binario, per tutte le piattaforme più diffuse, e possono essere liberamente redistribuiti. Il sito, inoltre, ospita direttamente o indirizza verso molti altri moduli Python, programmi e strumenti sviluppati da terze parti, e documentazione aggiuntiva. 
+    L'interprete di Python e la sua vasta libreria standard sono disponibili sul sito web https://www.python.org/, sotto forma sia di codice sorgente sia di eseguibile binario, per tutte le piattaforme più diffuse, e possono essere liberamente redistribuiti. Il sito, inoltre, ospita direttamente o indirizza verso molti altri moduli Python, programmi e strumenti sviluppati da terze parti e documentazione aggiuntiva. 
 
     L'interprete Python si può estendere facilmente con nuove funzioni e tipi di dati implementati in C o C++ (o altri linguaggi interfacciabili con C). Python è inoltre adatto come linguaggio integrato per estendere e personalizzare altre applicazioni. 
 
@@ -24,7 +24,7 @@
 
     Per una descrizione delle funzionalità e dei moduli, si veda la documentazione della :ref:`libreria standard<library-index>`. :ref:`La guida di riferimento del linguaggio<reference-index>` approfondisce in modo formale la struttura di Python. Per scrivere estensioni in C o C++ si può consultare la guida su come :ref:`estendere e incorporare Python <extending-index>` e il manuale delle :ref:`API C di Python<c-api-index>`. Ci sono poi molti libri dedicati all'approfondimento di Python.
 
-    Questo tutorial non vuole essere una descrizione esaustiva che copre ogni singola funzionalità, o anche solo tutte quelle comuni. Piuttosto, è un'introduzione agli aspetti più notevoli di Python e può dare un'idea dello stile e del "sapore" del linguaggio. Dopo averlo letto, sarete in grado di leggere e scrivere moduli e programmi in Python, e sarete pronti ad approfondire i diversi moduli contenuti nella :ref:`libreria standard<library-index>`.
+    Questo tutorial non vuole essere una descrizione esauriente che copre ogni singola funzionalità, o anche solo quelle comuni. Piuttosto, è un'introduzione agli aspetti più notevoli di Python e può dare un'idea dello stile e del "gusto" del linguaggio. Dopo averlo letto, sarete in grado di leggere e scrivere moduli e programmi in Python, e sarete pronti ad approfondire i diversi moduli contenuti nella :ref:`libreria standard<library-index>`.
 
     Vale anche la pena di dare un'occhiata al :ref:`glossario<glossary>`.
 
@@ -42,7 +42,7 @@ Allora Python è proprio il linguaggio che fa per voi.
 
 Per alcuni di questi compiti potrebbe bastare uno script della shell di Unix o un *batch file* di Windows: gli script però vanno bene per spostare i file e modificare i dati testuali, non sono adatti alle applicazioni grafiche o ai giochi. Potreste scrivere un programma in C, C++ o Java, ma questo richiederebbe molto tempo di sviluppo anche solo per arrivare a una prima bozza. Python è più semplice, è disponibile su Windows, Mac OS X e Unix, e vi aiuterà a finire il lavoro più in fretta.  
 
-Python è semplice da usare, ma è un linguaggio di programmazione serio che offre molta più struttura e supporto per programmi di grandi dimensioni, rispetto a uno script della shell o un batch file. D'altra parte, Python ha anche molta più gestione delle eccezioni di C; essendo poi un linguaggio *particolarmente* "di alto livello", include tipi di dati di alto livello, con la flessibilità delle sue liste e dizionari. Grazie alle sue strutture-dati più astratte, Python si può usare in campi applicativi molto più vasti rispetto ad Awk o anche a Perl, pur mantenendo la stessa semplicità d'uso di questi linguaggi. 
+Python è semplice da usare, ma è un linguaggio di programmazione serio che offre molta più struttura e supporto per programmi di grandi dimensioni, rispetto a uno script della shell o un batch file. D'altra parte, Python ha anche molta più gestione delle eccezioni rispetto a C; essendo poi un linguaggio *particolarmente* "di alto livello", include tipi di dati di alto livello e flessibili, come le sue liste e dizionari. Grazie alle sue strutture-dati più astratte, Python si può usare in campi applicativi molto più vasti rispetto ad Awk o anche a Perl, pur mantenendo la stessa semplicità d'uso di questi linguaggi. 
 
 Python vi consente di dividere il vostro programma in moduli che possono essere riutilizzati in altri programmi. Include già una vasta collezione di moduli standard, che potete usare come base per il vostro lavoro, o come esempi per imparare la programmazione in Python. Questi moduli, tra l'altro, offrono soluzioni per l'input/output dei file, le chiamate di sistema, i socket e perfino interfacce per *toolkit* grafici come Tk. 
 
