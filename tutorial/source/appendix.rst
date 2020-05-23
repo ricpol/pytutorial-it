@@ -1,92 +1,53 @@
 .. _tut-appendix:
 
-********
-Appendix
-********
-
+*********
+Appendice
+*********
 
 .. _tut-interac:
 
-Interactive Mode
-================
+Modalità interattiva
+====================
 
 .. _tut-error:
 
-Error Handling
---------------
+Gestione degli errori
+---------------------
 
-When an error occurs, the interpreter prints an error message and a stack trace.
-In interactive mode, it then returns to the primary prompt; when input came from
-a file, it exits with a nonzero exit status after printing the stack trace.
-(Exceptions handled by an :keyword:`except` clause in a :keyword:`try` statement
-are not errors in this context.)  Some errors are unconditionally fatal and
-cause an exit with a nonzero exit; this applies to internal inconsistencies and
-some cases of running out of memory.  All error messages are written to the
-standard error stream; normal output from executed commands is written to
-standard output.
+Quando si verifica un errore, l'interprete emette un messaggio di errore e uno *stack trace*. In modalità interattiva, ritorna quindi al prompt primario; se l'input arriva da un file, esce con *exit status* non-zero dopo aver visualizzato lo *stack trace*. (Le eccezioni gestite da una clausola :keyword:`except` all'interno di un'istruzione :keyword:`try` non sono "errori" in questo contesto.) Alcuni errori sono irrimediabilmente fatali e comportano l'uscita con *exit-status* non-zero: per esempio inconsistenze interne, o alcune situazioni di esaurimento della memoria disponibile. Tutti i messaggi di errore sono scritti nello *standard error*; l'output normale delle istruzioni eseguite è scritto nello *standard output*. 
 
-Typing the interrupt character (usually :kbd:`Control-C` or :kbd:`Delete`) to the primary or
-secondary prompt cancels the input and returns to the primary prompt. [#]_
-Typing an interrupt while a command is executing raises the
-:exc:`KeyboardInterrupt` exception, which may be handled by a :keyword:`try`
-statement.
-
+Inserire il carattere di interruzione (di solito :kbd:`Control-C` o :kbd:`Delete`) al prompt primario o secondario cancella l'input e ritorna al prompt primario. [#]_ Inserire un'interruzione mentre un'istruzione è in esecuzione emette l'eccezione :exc:`KeyboardInterrupt`, che può essere gestita da un'istruzione :keyword:`try`.
 
 .. _tut-scripts:
 
-Executable Python Scripts
--------------------------
+Script Python eseguibili
+------------------------
 
-On BSD'ish Unix systems, Python scripts can be made directly executable, like
-shell scripts, by putting the line ::
+Sui sistemi Unix/BSD, gli script Python possono essere resi direttamente eseguibili, come gli script della shell, con la riga ::
 
    #!/usr/bin/env python3.5
 
-(assuming that the interpreter is on the user's :envvar:`PATH`) at the beginning
-of the script and giving the file an executable mode.  The ``#!`` must be the
-first two characters of the file.  On some platforms, this first line must end
-with a Unix-style line ending (``'\n'``), not a Windows (``'\r\n'``) line
-ending.  Note that the hash, or pound, character, ``'#'``, is used to start a
-comment in Python.
+all'inizio dello script (si assume che l'interprete sia nella :envvar:`PATH` di sistema dell'utente) e dando al file modalità eseguibile. I caratteri ``#!`` devono essere esattamente all'inizio del file. Su alcune piattaforme, questa prima riga deve terminare con un "a-capo" in stile Unix (``'\n'``) e non Windows (``'\r\n'``). Si noti che il cancelletto ``'#'`` viene usato in Python per iniziare un commento.
 
-The script can be given an executable mode, or permission, using the
-:program:`chmod` command.
+Si può dare al file dello script modalità eseguibile con il comando :program:`chmod`.
 
 .. code-block:: shell-session
 
    $ chmod +x myscript.py
 
-On Windows systems, there is no notion of an "executable mode".  The Python
-installer automatically associates ``.py`` files with ``python.exe`` so that
-a double-click on a Python file will run it as a script.  The extension can
-also be ``.pyw``, in that case, the console window that normally appears is
-suppressed.
-
+Su Windows non esiste la nozione di "modalità eseguibile". L'installazione di Python associa automaticamente le estensioni dei file ``.py`` con ``python.exe``, in modo che fare doppio clic sul file lo esegue come script. L'estensione può anche essere ``.pyw``: in questo caso la finestra della console che appare normalmente non viene mostrata. 
 
 .. _tut-startup:
 
-The Interactive Startup File
+Il file di avvio interattivo
 ----------------------------
 
-When you use Python interactively, it is frequently handy to have some standard
-commands executed every time the interpreter is started.  You can do this by
-setting an environment variable named :envvar:`PYTHONSTARTUP` to the name of a
-file containing your start-up commands.  This is similar to the :file:`.profile`
-feature of the Unix shells.
+Quando usate Python interattivamente, può far comodo che alcuni comandi standard siano eseguiti automaticamente ogni volta che l'interprete viene avviato. Questo si può fare creando una variabile d'ambiente :envvar:`PYTHONSTARTUP` che contiene il nome di un file con i vostri comandi di avvio. È simile a un file :file:`.profile` per le shell di Unix. 
 
-This file is only read in interactive sessions, not when Python reads commands
-from a script, and not when :file:`/dev/tty` is given as the explicit source of
-commands (which otherwise behaves like an interactive session).  It is executed
-in the same namespace where interactive commands are executed, so that objects
-that it defines or imports can be used without qualification in the interactive
-session. You can also change the prompts ``sys.ps1`` and ``sys.ps2`` in this
-file.
+Questo file viene preso in considerazione solo per le sessioni interattive, non quando Python legge l'input da uno script, e non quando :file:`/dev/tty` è indicato esplicitamente come sorgente per le istruzioni (altrimenti il terminale si comporta come una normale sessione interattiva). Il file è eseguito nello stesso *namespace* dei comandi interattivi, quindi gli oggetti che definisce possono essere importati come nomi non qualificati nella sessione dell'interprete. In questo file potete anche cambiare i prompt ``sys.ps1`` e ``sys.ps2``.
 
-If you want to read an additional start-up file from the current directory, you
-can program this in the global start-up file using code like ``if
-os.path.isfile('.pythonrc.py'): exec(open('.pythonrc.py').read())``.
-If you want to use the startup file in a script, you must do this explicitly
-in the script::
+Se volete leggere un file di avvio aggiuntivo nella directory corrente, potete farlo nel file di avvio principale con del codice come ``if
+os.path.isfile('.pythonrc.py'): exec(open('.pythonrc.py').read())``. Se volete usare il file di avvio in uno script, dovete farlo in modo esplicito nello script::
 
    import os
    filename = os.environ.get('PYTHONSTARTUP')
@@ -95,30 +56,23 @@ in the script::
            startup_file = fobj.read()
        exec(startup_file)
 
-
 .. _tut-customize:
 
-The Customization Modules
--------------------------
+Personalizzare l'installazione
+------------------------------
 
-Python provides two hooks to let you customize it: :mod:`sitecustomize` and
-:mod:`usercustomize`.  To see how it works, you need first to find the location
-of your user site-packages directory.  Start Python and run this code::
+Python mette a disposizione due strumenti che vi consentono di personalizzarlo: i moduli :mod:`sitecustomize` e :mod:`usercustomize`. Per vederli in azione, dovete per prima cosa ricavare la collocazione della vostra directory *site-packages*. Avviate Python ed eseguite questo codice::
 
    >>> import site
    >>> site.getusersitepackages()
    '/home/user/.local/lib/python3.5/site-packages'
 
-Now you can create a file named :file:`usercustomize.py` in that directory and
-put anything you want in it.  It will affect every invocation of Python, unless
-it is started with the :option:`-s` option to disable the automatic import.
+Adesso potete creare un file :file:`usercustomize.py` in questa directory e collocarvi qualsiasi istruzione. Questo avrà effetto su qualsiasi invocazione di Python, a meno che non venga passata l'opzione :option:`-s` per disabilitarne l'importazione automatica. 
 
-:mod:`sitecustomize` works in the same way, but is typically created by an
-administrator of the computer in the global site-packages directory, and is
-imported before :mod:`usercustomize`.  See the documentation of the :mod:`site`
-module for more details.
+Il modulo :mod:`sitecustomize` funziona allo stesso modo, ma viene creato di solito da un amministratore del computer nella directory *site-packages* globale, ed è importato *prima* di :mod:`usercustomize`. Si veda la documentazione del modulo :mod:`site` per ulteriori informazioni. 
 
+.. only:: html
 
-.. rubric:: Footnotes
+   .. rubric:: Note
 
 .. [#] A problem with the GNU Readline package may prevent this.
