@@ -5,8 +5,6 @@ Questa è una traduzione italiana del `Tutorial ufficiale di Python <https://doc
 
 La traduzione è mantenuta in sincrono con le modifiche fatte `nella repository originale <https://github.com/python/cpython/tree/master/Doc/tutorial>`_. 
 
-Attualmente, la traduzione è aggiornata al 1 Maggio 2020. 
-
 (c) dell'originale: 2001-2020 Python Software Foundation. All rights reserved.
 (c) della traduzione: 2020 Riccardo Polignieri. Tutti i diritti riservati.
 
