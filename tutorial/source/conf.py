@@ -17,12 +17,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Python Tutorial Tradotto'
+project = 'Il tutorial di Python'
 copyright = '2020, Riccardo Polignieri'
 author = 'Riccardo Polignieri'
 
-# The full version, including alpha/beta/rc tags
-release = '0'
+# we don't need version number - we just track Python releases
+release = ''
 
 master_doc = 'index'
 
@@ -77,7 +77,7 @@ latex_elements = {
 }
 
 latex_documents = [
-    (master_doc, 'pytutorial-it.tex', 'Il tutorial di Python tradotto',
+    (master_doc, 'pytutorial-it.tex', 'Il tutorial di Python',
      'Riccardo Polignieri', 'manual', False),
 ]
 
