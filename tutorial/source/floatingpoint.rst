@@ -1,202 +1,125 @@
-.. testsetup::
-
-    import math
-
 .. _tut-fp-issues:
 
-**************************************************
-Floating Point Arithmetic:  Issues and Limitations
-**************************************************
+***********************************************
+Aritmetica in virgola mobile: problemi e limiti
+***********************************************
 
 .. sectionauthor:: Tim Peters <tim_one@users.sourceforge.net>
 
-
-Floating-point numbers are represented in computer hardware as base 2 (binary)
-fractions.  For example, the decimal fraction ::
+I computer rappresentano i numeri in virgola mobile come frazioni binarie. Per esempio, la frazione decimale [#]_ ::
 
    0.125
 
-has value 1/10 + 2/100 + 5/1000, and in the same way the binary fraction ::
+vale 1/10 + 2/100 + 5/1000, e allo stesso modo la frazione binaria ::
 
    0.001
 
-has value 0/2 + 0/4 + 1/8.  These two fractions have identical values, the only
-real difference being that the first is written in base 10 fractional notation,
-and the second in base 2.
+vale 0/2 + 0/4 + 1/8.  Queste due frazioni hanno lo stesso valore: l'unica differenza è che una è espressa come frazione in base 10, l'altra come frazione in base 2.
 
-Unfortunately, most decimal fractions cannot be represented exactly as binary
-fractions.  A consequence is that, in general, the decimal floating-point
-numbers you enter are only approximated by the binary floating-point numbers
-actually stored in the machine.
+Purtroppo molte frazioni decimali non possono essere rappresentate in modo esatto come frazioni binarie. Una conseguenza di ciò è che, in generale, i numeri con la virgola decimali che inserite possono essere rappresentati nel computer solo in modo approssimato come numeri binari con la virgola. 
 
-The problem is easier to understand at first in base 10.  Consider the fraction
-1/3.  You can approximate that as a base 10 fraction::
+Il problema è più facile da capire in base 10. Si consideri la frazione 1/3. Si può approssimare in base 10::
 
    0.3
 
-or, better, ::
+o meglio, ::
 
    0.33
 
-or, better, ::
+o meglio, ::
 
    0.333
 
-and so on.  No matter how many digits you're willing to write down, the result
-will never be exactly 1/3, but will be an increasingly better approximation of
-1/3.
+e così via. Non importa quante cifre decimali si vogliono scrivere, il risultato non sarà mai esattamente 1/3, ma un'approssimazione sempre migliore di 1/3.
 
-In the same way, no matter how many base 2 digits you're willing to use, the
-decimal value 0.1 cannot be represented exactly as a base 2 fraction.  In base
-2, 1/10 is the infinitely repeating fraction ::
+Allo stesso modo, non importa quante cifre si scrivono, ma il valore decimale 0.1 non può essere rappresentato esattamente in base 2. Il valore 1/10 in base 2 è la frazione periodica ::
 
    0.0001100110011001100110011001100110011001100110011...
 
-Stop at any finite number of bits, and you get an approximation.  On most
-machines today, floats are approximated using a binary fraction with
-the numerator using the first 53 bits starting with the most significant bit and
-with the denominator as a power of two.  In the case of 1/10, the binary fraction
-is ``3602879701896397 / 2 ** 55`` which is close to but not exactly
-equal to the true value of 1/10.
+Se arrestiamo lo sviluppo a un numero qualsiasi di cifre, otteniamo un'approssimazione. Sui computer moderni i numeri con la virgola sono rappresentati con una frazione binaria dove il numeratore usa i primi 53 bit, partendo dal bit più significativo, e il denominatore è una potenza di 2. Nel caso di 1/10, la frazione binaria è ``3602879701896397 / 2 ** 55``: vicina, ma non esattamente uguale al vero valore di 1/10. 
 
-Many users are not aware of the approximation because of the way values are
-displayed.  Python only prints a decimal approximation to the true decimal
-value of the binary approximation stored by the machine.  On most machines, if
-Python were to print the true decimal value of the binary approximation stored
-for 0.1, it would have to display ::
+Molti utenti non si accorgono di questa approssimazione perché le cifre visualizzate non sono abbastanza. Python scrive un'approssimazione decimale del vero valore che internamente è rappresentato come un'approssimazione binaria. Sulla maggior parte dei computer, se Python dovesse scrivere il valore decimale esatto dell'approssimazione binaria interna di 0.1, dovrebbe farci vedere ::
 
    >>> 0.1
    0.1000000000000000055511151231257827021181583404541015625
 
-That is more digits than most people find useful, so Python keeps the number
-of digits manageable by displaying a rounded value instead ::
+Sono molte più cifre di quelle di cui la gente ha bisogno. Python preferisce mantenere un numero gestibile di cifre decimali, visualizzando un valore approssimato::
 
    >>> 1 / 10
    0.1
 
-Just remember, even though the printed result looks like the exact value
-of 1/10, the actual stored value is the nearest representable binary fraction.
+Bisogna però ricordare che, anche se il risultato visualizzato assomiglia al valore esatto di 1/10, il valore *memorizzato* è quello della frazione binaria più prossima. 
 
-Interestingly, there are many different decimal numbers that share the same
-nearest approximate binary fraction.  For example, the numbers ``0.1`` and
-``0.10000000000000001`` and
-``0.1000000000000000055511151231257827021181583404541015625`` are all
-approximated by ``3602879701896397 / 2 ** 55``.  Since all of these decimal
-values share the same approximation, any one of them could be displayed
-while still preserving the invariant ``eval(repr(x)) == x``.
+Un aspetto interessante è che ci sono molti numeri decimali che condividono la rappresentazione della stessa frazione binaria più prossima. Per esempio, i numeri ``0.1`` e ``0.10000000000000001`` e ``0.1000000000000000055511151231257827021181583404541015625`` sono tutti approssimati da ``3602879701896397 / 2 ** 55``.  Dal momento che tutti questi valori decimali condividono la stessa approssimazione, ciascuno di essi potrebbe essere visualizzato preservando l'invariante ``eval(repr(x)) == x``.
 
-Historically, the Python prompt and built-in :func:`repr` function would choose
-the one with 17 significant digits, ``0.10000000000000001``.   Starting with
-Python 3.1, Python (on most systems) is now able to choose the shortest of
-these and simply display ``0.1``.
+Molti anni fa, il prompt di Python e la funzione predefinita :func:`repr` sceglievano tra le possibili rappresentazioni quella con 17 cifre significative, ``0.10000000000000001``. A partire da Python 3.1, sulla maggior parte delle piattaforme Python è in grado di scegliere quella più breve e visualizza semplicemente ``0.1``.
 
-Note that this is in the very nature of binary floating-point: this is not a bug
-in Python, and it is not a bug in your code either.  You'll see the same kind of
-thing in all languages that support your hardware's floating-point arithmetic
-(although some languages may not *display* the difference by default, or in all
-output modes).
+Si noti che questo comportamento è dovuto alla natura intrinseca dell'aritmetica binaria in virgola mobile: non è un baco di Python e non è neppure un baco nel vostro codice. Avreste lo stesso risultato con tutti i linguaggi che si appoggiano all'aritmetica in virgola mobile del vostro hardware (anche se un linguaggio potrebbe non *visualizzare* la differenza di default, oppure non in tutte le modalità di output). 
 
-For more pleasant output, you may wish to use string formatting to produce a limited number of significant digits::
+Per ottenere un output più semplice, potete usare la formattazione delle stringhe per limitare il numero delle cifre significative::
 
-   >>> format(math.pi, '.12g')  # give 12 significant digits
+   >>> format(math.pi, '.12g')  # produce 12 cifre significative
    '3.14159265359'
 
-   >>> format(math.pi, '.2f')   # give 2 digits after the point
+   >>> format(math.pi, '.2f')   # produce 2 cifre significative dopo la virgola
    '3.14'
 
    >>> repr(math.pi)
    '3.141592653589793'
 
+È importante capire che, in un certo senso, si tratta di un'illusione: state semplicemente arrotondando la *visualizzazione* del vero valore conservato dal computer. 
 
-It's important to realize that this is, in a real sense, an illusion: you're
-simply rounding the *display* of the true machine value.
-
-One illusion may beget another.  For example, since 0.1 is not exactly 1/10,
-summing three values of 0.1 may not yield exactly 0.3, either::
+Un'illusione può portare a un'altra illusione. Per esempio, siccome 0.1 non è esattamente 1/10, sommare tre volte 0.1 potrebbe non dare 0.3::
 
    >>> .1 + .1 + .1 == .3
    False
 
-Also, since the 0.1 cannot get any closer to the exact value of 1/10 and
-0.3 cannot get any closer to the exact value of 3/10, then pre-rounding with
-:func:`round` function cannot help::
+Inoltre, siccome 0.1 non può avvicinarsi ulteriormente al valore esatto di 1/10 e 0.3 non può avvicinarsi di più a 3/10, arrotondare preventivamente con la funzione :func:`round` non è una soluzione::
 
    >>> round(.1, 1) + round(.1, 1) + round(.1, 1) == round(.3, 1)
    False
 
-Though the numbers cannot be made closer to their intended exact values,
-the :func:`round` function can be useful for post-rounding so that results
-with inexact values become comparable to one another::
+Anche se i numeri non possono avvicinarsi di più al loro valore reale, la funzione :func:`round` può essere utile comunque per arrotondare *dopo*, in modo da rendere confrontabili i risultati approssimati::
 
     >>> round(.1 + .1 + .1, 10) == round(.3, 10)
     True
 
-Binary floating-point arithmetic holds many surprises like this.  The problem
-with "0.1" is explained in precise detail below, in the "Representation Error"
-section.  See `The Perils of Floating Point <http://www.lahey.com/float.htm>`_
-for a more complete account of other common surprises.
+L'aritmetica binaria in virgola mobile presenta molte sorprese come questa. Spieghiamo nel dettaglio il problema di "0.1" nella sezione successiva. Si veda `The Perils of Floating Point <http://www.lahey.com/float.htm>`_ per un elenco più completo di altri inciampi frequenti. 
 
-As that says near the end, "there are no easy answers."  Still, don't be unduly
-wary of floating-point!  The errors in Python float operations are inherited
-from the floating-point hardware, and on most machines are on the order of no
-more than 1 part in 2\*\*53 per operation.  That's more than adequate for most
-tasks, but you do need to keep in mind that it's not decimal arithmetic and
-that every float operation can suffer a new rounding error.
+Come si usa concludere, "non ci sono risposte facili". Tuttavia non bisogna neppure avere troppa paura della virgola! Gli errori nelle operazioni decimali in Python sono ereditati dall'architettura in virgola mobile sottostante, e sulle macchine moderne questi sono dell'ordine di una parte su 2\*\*53 per ciascuna operazione. È più che adeguato per la maggior parte degli scenari, ma dovete tener presente che non si tratta di aritmetica decimale e che ciascuna nuova operazione può accumulare un nuovo errore di arrotondamento. 
 
-While pathological cases do exist, for most casual use of floating-point
-arithmetic you'll see the result you expect in the end if you simply round the
-display of your final results to the number of decimal digits you expect.
-:func:`str` usually suffices, and for finer control see the :meth:`str.format`
-method's format specifiers in :ref:`formatstrings`.
+Anche se esistono dei casi estremi, nella vita di tutti i giorni l'aritmetica in virgola mobile si comporta come ci si aspetta, se si arrotonda semplicemente il risultato finale al numero di decimali che si desidera. Di solito basta la funzione :func:`str`; per un controllo più fine si può usare il metodo :meth:`str.format` e la sua :ref:`sintassi di formattazione<formatstrings>`.
 
-For use cases which require exact decimal representation, try using the
-:mod:`decimal` module which implements decimal arithmetic suitable for
-accounting applications and high-precision applications.
+Per gli scenari dove è richiesta una rappresentazione decimale esatta, potete usare il modulo :mod:`decimal`, che implementa l'aritmetica decimale adatta per la contabilità e i programmi che fanno calcoli di alta precisione. 
 
-Another form of exact arithmetic is supported by the :mod:`fractions` module
-which implements arithmetic based on rational numbers (so the numbers like
-1/3 can be represented exactly).
+Una forma alternativa di aritmetica esatta è quella del modulo :mod:`fractions`, che implementa l'aritmetica dei numeri razionali (così che numeri come 1/3 possano essere espressi in modo esatto).
 
-If you are a heavy user of floating point operations you should take a look
-at the Numerical Python package and many other packages for mathematical and
-statistical operations supplied by the SciPy project. See <https://scipy.org>.
+Se fate un uso massiccio di operazioni in virgola mobile potreste voler considerare il pacchetto Numerical Python (NumPy) e i molti altri package di interesse matematico e statistico compresi nel progetto `SciPy <https://scipy.org>`_.
 
-Python provides tools that may help on those rare occasions when you really
-*do* want to know the exact value of a float.  The
-:meth:`float.as_integer_ratio` method expresses the value of a float as a
-fraction::
+Python fornisce degli strumenti utili per le rare occasioni in cui davvero volete conoscere il valore esatto di un *float*. Il metodo :meth:`float.as_integer_ratio` esprime il valore del numero sotto forma di frazione::
 
    >>> x = 3.14159
    >>> x.as_integer_ratio()
    (3537115888337719, 1125899906842624)
 
-Since the ratio is exact, it can be used to losslessly recreate the
-original value::
+Siccome il rapporto è un valore esatto, può essere usato per ricreare il valore originario senza perdita di precisione::
 
     >>> x == 3537115888337719 / 1125899906842624
     True
 
-The :meth:`float.hex` method expresses a float in hexadecimal (base
-16), again giving the exact value stored by your computer::
+Il metodo :meth:`float.hex` esprime il numero in notazione esadecimale (base 16), restituendo il valore esatto conservato nel computer::
 
    >>> x.hex()
    '0x1.921f9f01b866ep+1'
 
-This precise hexadecimal representation can be used to reconstruct
-the float value exactly::
+Anche questa rappresentazione esadecimale è precisa e può essere usata per ricostruire il numero originale::
 
     >>> x == float.fromhex('0x1.921f9f01b866ep+1')
     True
 
-Since the representation is exact, it is useful for reliably porting values
-across different versions of Python (platform independence) and exchanging
-data with other languages that support the same format (such as Java and C99).
+Dal momento che questa rappresentazione è esatta, può essere usata per trasportare il valore in modo affidabile tra diverse versioni di Python (su diverse piattaforme) e per scambiare dati con altri linguaggi che supportano lo stesso formato (come Java e C99).
 
-Another helpful tool is the :func:`math.fsum` function which helps mitigate
-loss-of-precision during summation.  It tracks "lost digits" as values are
-added onto a running total.  That can make a difference in overall accuracy
-so that the errors do not accumulate to the point where they affect the
-final total:
+Un altro strumento utile è la funzione :func:`math.fsum`, che aiuta ad alleviare il problema della perdita di precisione durante la somma. Questa funzione tiene traccia dei "decimali perduti" man mano che i valori sono aggiunti al totale. Questo può fare la differenza nella precisione complessiva, evitando che gli errori si accumulino al punto di influenzare il risultato finale::
 
    >>> sum([0.1] * 10) == 1.0
    False
@@ -205,84 +128,63 @@ final total:
 
 .. _tut-fp-error:
 
-Representation Error
-====================
+Errore di rappresentazione
+==========================
 
-This section explains the "0.1" example in detail, and shows how you can perform
-an exact analysis of cases like this yourself.  Basic familiarity with binary
-floating-point representation is assumed.
+Questa sezione spiega in dettaglio l'esempio di "0.1" visto sopra e mostra come eseguire un'analisi di casi del genere. Si assume che il lettore abbia una conoscenza di base della rappresentazione binaria in virgola mobile. 
 
-:dfn:`Representation error` refers to the fact that some (most, actually)
-decimal fractions cannot be represented exactly as binary (base 2) fractions.
-This is the chief reason why Python (or Perl, C, C++, Java, Fortran, and many
-others) often won't display the exact decimal number you expect.
+Con "errore di rappresentazione" si intende il fatto che alcune frazioni decimali (la maggior parte, in effetti) non possono essere rappresentate in modo esatto come frazioni binarie (in base 2). Questo è il motivo di fondo per cui Python (o Perl, C, C++, Java, Fortran e molti altri) talvolta non visualizzano esattamente il numero decimale che uno si aspetta. 
 
-Why is that?  1/10 is not exactly representable as a binary fraction. Almost all
-machines today (November 2000) use IEEE-754 floating point arithmetic, and
-almost all platforms map Python floats to IEEE-754 "double precision".  754
-doubles contain 53 bits of precision, so on input the computer strives to
-convert 0.1 to the closest fraction it can of the form *J*/2**\ *N* where *J* is
-an integer containing exactly 53 bits.  Rewriting ::
+Perché succede? 1/10 non può essere rappresentato come una frazione binaria. Quasi tutti i computer oggi (novembre 2000) usano l'aritmetica in virgola mobile IEEE-754 e in quasi tutte le piattaforme un *float* di Python è implementato come un numero "in doppia precisione" IEEE-754. Questi numeri hanno una precisione di 53 bit, quindi il computer in ingresso cerca di convertire 0.1 alla frazione più vicina che riesce a ottenere nella forma *J*/2**\ *N* dove *J* è un intero che contiene esattamente 53 bit. Quindi, scrivendo ::
 
    1 / 10 ~= J / (2**N)
 
-as ::
+come ::
 
    J ~= 2**N / 10
 
-and recalling that *J* has exactly 53 bits (is ``>= 2**52`` but ``< 2**53``),
-the best value for *N* is 56::
+e ricordando che *J* ha esattamente 53 bit (ovvero è ``>= 2**52`` ma ``< 2**53``), il miglior valore per *N* è 56::
 
     >>> 2**52 <=  2**56 // 10  < 2**53
     True
 
-That is, 56 is the only value for *N* that leaves *J* with exactly 53 bits.  The
-best possible value for *J* is then that quotient rounded::
+Ovvero, 56 è l'unico valore di *N* che permette a *J* di avere esattamente 53 bit. Il miglior valore di *J* è di conseguenza il quoziente arrotondato::
 
    >>> q, r = divmod(2**56, 10)
    >>> r
    6
 
-Since the remainder is more than half of 10, the best approximation is obtained
-by rounding up::
+Dal momento che il resto è maggiore della metà di 10, la migliore approssimazione si ottiene arrotondando verso l'alto::
 
    >>> q+1
    7205759403792794
 
-Therefore the best possible approximation to 1/10 in 754 double precision is::
+Quindi la migliore approssimazione possibile di 1/10 come numero in "doppia precisione" IEEE-754 è::
 
    7205759403792794 / 2 ** 56
 
-Dividing both the numerator and denominator by two reduces the fraction to::
+Dividere numeratore e denominatore per due riduce la frazione a::
 
    3602879701896397 / 2 ** 55
 
-Note that since we rounded up, this is actually a little bit larger than 1/10;
-if we had not rounded up, the quotient would have been a little bit smaller than
-1/10.  But in no case can it be *exactly* 1/10!
+Si noti che, avendo arrotondato verso l'alto, questo numero è leggermente più grande di 1/10; se avessimo arrotondato verso il basso, sarebbe più piccolo. Comunque in nessun caso potrebbe essere *esattamente* 1/10.
 
-So the computer never "sees" 1/10:  what it sees is the exact fraction given
-above, the best 754 double approximation it can get::
+Il computer quindi non "vede" mai 1/10: vede piuttosto la frazione esatta che abbiamo ricavato qui sopra, ovvero la migliore approssimazione IEEE-754 che può ottenere::
 
    >>> 0.1 * 2 ** 55
    3602879701896397.0
 
-If we multiply that fraction by 10\*\*55, we can see the value out to
-55 decimal digits::
+Se moltiplichiamo la frazione per 10\*\*55, possiamo vedere il valore che si sviluppa per 55 cifre decimali::
 
    >>> 3602879701896397 * 10 ** 55 // 2 ** 55
    1000000000000000055511151231257827021181583404541015625
 
-meaning that the exact number stored in the computer is equal to
-the decimal value 0.1000000000000000055511151231257827021181583404541015625.
-Instead of displaying the full decimal value, many languages (including
-older versions of Python), round the result to 17 significant digits::
+Questo vuol dire che il numero esatto conservato internamente è uguale al valore decimale 0.1000000000000000055511151231257827021181583404541015625. Invece di visualizzare il valore decimale per intero, molti linguaggi (incluse le vecchie versioni di Python) lo arrotondano a 17 cifre significative::
 
    >>> format(0.1, '.17f')
    '0.10000000000000001'
 
-The :mod:`fractions` and :mod:`decimal` modules make these calculations
-easy::
+I moduli :mod:`fractions` e :mod:`decimal` facilitano questi calcoli::
 
    >>> from decimal import Decimal
    >>> from fractions import Fraction
@@ -298,3 +200,9 @@ easy::
 
    >>> format(Decimal.from_float(0.1), '.17')
    '0.10000000000000001'
+
+.. only:: html
+
+   .. rubric:: Note
+
+.. [#] ndT: i numeri "con la virgola" in Inglese (e in Python, e in qualsiasi linguaggio di programmazione) si scrivono naturalmente "con il punto". *Virgola mobile* in Inglese è *floating point*. 
