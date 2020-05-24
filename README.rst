@@ -5,11 +5,19 @@ Questa è una traduzione italiana del `Tutorial ufficiale di Python <https://doc
 
 Potete leggere la traduzione, in formato Html, Pdf o Epub, su ReadTheDocs: https://pytutorial-it.readthedocs.io.
 
-La traduzione è mantenuta in sincrono con le modifiche fatte `nella repository originale <https://github.com/python/cpython/tree/master/Doc/tutorial>`_. 
+Esistono tre traduzioni leggermente differenti, in altrettante branch, che sono mantenute in sincrono con le successive release di Python e della sua documentazione:
 
-(c) dell'originale: 2001-2020 Python Software Foundation. All rights reserved.
+* per la versione stabile `3.8 <https://docs.python.org/3.8/tutorial/index.html>`_;
 
-(c) della traduzione: 2020 Riccardo Polignieri. Tutti i diritti riservati.
+* per la versione in pre-release `3.9 <https://docs.python.org/3.9/tutorial/index.html>`_;
+
+* per la versione "più aggiornata", che corrisponde alle ultime modifiche fatte nel  `master branch <https://github.com/python/cpython/tree/master/Doc/tutorial>`_. 
+
+Su ReadTheDocs è possibile selezionare la versione desiderata.
+
+Copyright dell'originale: 2001-2020 Python Software Foundation. All rights reserved.
+
+Copyright della traduzione: 2020 Riccardo Polignieri. Tutti i diritti riservati.
 
 Licenza d'uso dell'originale: vedi https://github.com/python/cpython/blob/master/LICENSE
 
