@@ -51,6 +51,9 @@ Se siete abituati a Pascal o a C, troverete l'istruzione :keyword:`for` in Pytho
 
 Il codice che *modifica* una collezione mentre itera sulla stessa può essere complicato da scrivere correttamente. Di solito è più semplice iterare su una *copia* della collezione, o crearne una nuova::
 
+    # Una collezione di esempio
+    users = {'Hans': 'active', 'Eleonore': 'inactive', 'Keitaro': 'active'}
+    
     # Strategia: iterare su una copia
     for user, status in users.copy().items():
         if status == 'inactive':
