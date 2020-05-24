@@ -219,7 +219,7 @@ Questo approccio funziona bene nella maggior parte dei casi, ma talvolta si rend
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
        d['primary']                # la chiave è stata rimossa automaticamente
-     File "C:/python310/lib/weakref.py", line 46, in __getitem__
+     File "C:/python39/lib/weakref.py", line 46, in __getitem__
        o = self.data[key]()
    KeyError: 'primary'
 

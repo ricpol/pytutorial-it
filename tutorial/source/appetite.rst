@@ -1,9 +1,9 @@
 
 .. topic:: Nota per la traduzione italiana.
 
-    Questa è una traduzione del `Tutorial ufficiale <https://docs.python.org/3/tutorial/index.html>`_ della documentazione di Python, mantenuta in sincrono con il testo della `repository GitHub <https://github.com/python/cpython/tree/master/Doc/tutorial>`_.
+    Questa è una traduzione del `Tutorial ufficiale <https://docs.python.org/3.9/tutorial/index.html>`_ della documentazione di Python, mantenuta in sincrono con il testo della `repository GitHub <https://github.com/python/cpython/tree/3.9/Doc/tutorial>`_.
 
-    Questo testo è aggiornato al `23 maggio 2020 <https://github.com/python/cpython/commit/6fad3e6b49f6a9f8b8a6635c41371e4451479f86#diff-8f5d4d54eb7fab60cb04633e721f6328>`_.
+    Questa è la traduzione della **versione "pre-release" del Tutorial per Python 3.9**, ed è aggiornata al `18 maggio 2020 <https://github.com/python/cpython/commit/eefd4e033334a2a1d3929d0f7978469e5b5c4e56#diff-8f5d4d54eb7fab60cb04633e721f6328>`_.
 
     Gli esempi *non* sono tradotti, perché il codice dovrebbe sempre essere scritto in Inglese. Tuttavia i commenti all'interno del codice sono tradotti e così pure le stringhe, quando il loro contenuto è utile alla comprensione del tutorial.
     

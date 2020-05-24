@@ -13,7 +13,7 @@ Il modulo :mod:`os` contiene moltissime funzioni per interagire con il sistema o
 
    >>> import os
    >>> os.getcwd()      # restituisce la directory corrente
-   'C:\\Python310'
+   'C:\\Python39'
    >>> os.chdir('/server/accesslogs')   # cambia la directory corrente
    >>> os.system('mkdir today')   # esegue "mkdir" nella shell di sistema
    0
