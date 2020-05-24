@@ -482,19 +482,6 @@ Per iterare su una sequenza in ordine inverso, si scrive l'iterazione in avanti 
 Per iterare su una sequenza in modo ordinato, usate la funzione :func:`sorted` che restituisce una nuova lista ordinata, lasciando inalterato l'originale::
 
    >>> basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
-   >>> for i in sorted(basket):
-   ...     print(i)
-   ...
-   apple
-   apple
-   banana
-   orange
-   orange
-   pear
-
-Usate la funzione :func:`set` su una sequenza per eliminare i duplicati. Combinare :func:`sorted` con :func:`set` è un modo idiomatico per iterare sugli elementi unici di una sequenza in ordine alfabetico::
-
-   >>> basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
    >>> for f in sorted(set(basket)):
    ...     print(f)
    ...

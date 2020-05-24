@@ -195,47 +195,6 @@ Se avete bisogno di rilevare soltanto un'eccezione, ma non intendete davvero ges
      File "<stdin>", line 2, in <module>
    NameError: HiThere
 
-.. _tut-exception-chaining:
-
-Concatenamento di eccezioni
-===========================
-
-L'istruzione :keyword:`raise` accetta un'opzione :keyword:`from` che consente di concatenare due eccezioni, impostando l'attributo ``__cause__`` dell'eccezione che viene emessa. Per esempio::
-
-    raise RuntimeError from OSError
-
-Questo è utile per trasformare un'eccezione in un'altra. Per esempio::
-
-    >>> def func():
-    ...    raise IOError
-    ...
-    >>> try:
-    ...     func()
-    ... except IOError as exc:
-    ...     raise RuntimeError('Failed to open database') from exc
-    ...
-    Traceback (most recent call last):
-      File "<stdin>", line 2, in <module>
-      File "<stdin>", line 2, in func
-    OSError
-    <BLANKLINE>
-    The above exception was the direct cause of the following exception:
-    <BLANKLINE>
-    Traceback (most recent call last):
-      File "<stdin>", line 4, in <module>
-    RuntimeError
-
-L'espressione che segue il :keyword:`from` deve essere o un'eccezione, o ``None``. Il concatenamento delle eccezioni avviene automaticamente quando un'eccezione viene emessa da dentro il gestore di un'altra eccezione, o nella clausola :keyword:`finally`. L'idioma ``from None`` disabilita il concatenamento::
-
-    >>> try:
-    ...     open('database.sqlite')
-    ... except IOError:
-    ...     raise RuntimeError from None
-    ...
-    Traceback (most recent call last):
-      File "<stdin>", line 4, in <module>
-    RuntimeError
-
 .. _tut-userexceptions:
 
 Eccezioni personalizzate
