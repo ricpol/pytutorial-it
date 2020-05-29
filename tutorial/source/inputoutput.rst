@@ -199,7 +199,7 @@ Un altro metodo, :meth:`str.zfill`, completa una stringa numerica con degli "0" 
 Vecchio metodo di formattazione
 -------------------------------
 
-L'operatore ``%`` può anche essere usato per la formattazione delle stringhe. Interpreta l'operando di destra più o meno come la funzione C :c:func:`sprintf`, applicando la formattazione alla stringa di sinistra e restituendo la stringa formattata. Per esempio::
+L'operatore ``%`` (modulo) può anche essere usato per la formattazione delle stringhe. Data la sintassi ``'stringa' % valori``, le occorrenze di ``%`` in ``'stringa'`` sono rimpiazzate da zero o più elementi di ``valori``. Questa operazione viene chiamata comunemente "interpolazione di stringa". Per esempio::
 
    >>> import math
    >>> print('The value of pi is approximately %5.3f.' % math.pi)

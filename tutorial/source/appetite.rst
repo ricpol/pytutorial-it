@@ -3,7 +3,7 @@
 
     Questa è una traduzione del `Tutorial ufficiale <https://docs.python.org/3/tutorial/index.html>`_ della documentazione di Python, mantenuta in sincrono con il testo della `repository GitHub <https://github.com/python/cpython/tree/master/Doc/tutorial>`_.
 
-    Questa è la traduzione della **versione "di sviluppo" del Tutorial**, corrispondente al "master branch" della repository, ed è aggiornata al `23 maggio 2020 <https://github.com/python/cpython/commit/6fad3e6b49f6a9f8b8a6635c41371e4451479f86#diff-8f5d4d54eb7fab60cb04633e721f6328>`_.
+    Questa è la traduzione della **versione "di sviluppo" del Tutorial**, corrispondente al "master branch" della repository, ed è aggiornata al `28 maggio 2020 <https://github.com/python/cpython/commit/eaca2aa117d663acf8160a0b4543ee2c7006fcc7#diff-8f5d4d54eb7fab60cb04633e721f6328>`_.
 
     Gli esempi *non* sono tradotti, perché il codice dovrebbe sempre essere scritto in Inglese. Tuttavia i commenti all'interno del codice sono tradotti e così pure le stringhe, quando il loro contenuto è utile alla comprensione del tutorial.
     
