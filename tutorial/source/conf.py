@@ -78,7 +78,7 @@ latex_elements = {
 
 latex_documents = [
     (master_doc, 'pytutorial-it.tex', 'Il tutorial di Python',
-     'Riccardo Polignieri', 'manual', False),
+     'traduzione a cura di Riccardo Polignieri', 'manual', False),
 ]
 
 latex_toplevel_sectioning = 'chapter'
