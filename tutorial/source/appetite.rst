@@ -5,6 +5,8 @@
 
     Questa è la traduzione della **versione "pre-release" del Tutorial per Python 3.9**, ed è aggiornata al `28 maggio 2020 <https://github.com/python/cpython/commit/d23ee5d652ba69a32504dac43131be782b6afdc7#diff-8f5d4d54eb7fab60cb04633e721f6328>`_.
 
+    La repository GitHub di questo progetto `si trova qui <https://github.com/ricpol/pytutorial-it>`_: potete essere informati sugli aggiornamenti mettendo una "star" alla repository. Ogni collaborazione è gradita: se intendete partecipare, leggete prima il file `CONTRIBUTING.rst <https://github.com/ricpol/pytutorial-it/blob/master/CONTRIBUTING.rst>`_. 
+    
     Gli esempi *non* sono tradotti, perché il codice dovrebbe sempre essere scritto in Inglese. Tuttavia i commenti all'interno del codice sono tradotti e così pure le stringhe, quando il loro contenuto è utile alla comprensione del tutorial.
     
     *(traduzione a cura di Riccardo Polignieri)*
