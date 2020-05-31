@@ -5,6 +5,8 @@
 
     Questa è la traduzione della **versione "di sviluppo" del Tutorial**, corrispondente al "master branch" della repository, ed è aggiornata al `28 maggio 2020 <https://github.com/python/cpython/commit/eaca2aa117d663acf8160a0b4543ee2c7006fcc7#diff-8f5d4d54eb7fab60cb04633e721f6328>`_.
 
+    La repository GitHub di questo progetto `si trova qui <https://github.com/ricpol/pytutorial-it>`_: potete essere informati sugli aggiornamenti mettendo una "star" alla repository. Ogni collaborazione è gradita: se intendete partecipare, leggete prima il file `CONTRIBUTING.rst <https://github.com/ricpol/pytutorial-it/blob/master/CONTRIBUTING.rst>`_. 
+
     Gli esempi *non* sono tradotti, perché il codice dovrebbe sempre essere scritto in Inglese. Tuttavia i commenti all'interno del codice sono tradotti e così pure le stringhe, quando il loro contenuto è utile alla comprensione del tutorial.
     
     *(traduzione a cura di Riccardo Polignieri)*
