@@ -26,8 +26,6 @@ Per creare un virtual environment, decidete in quale directory volete collocarlo
 
 Questo crea la directory ``tutorial-env`` se non esiste; inoltre crea al suo interno le directory che contengono una copia dell'interprete Python, la libreria standard e diversi file di corredo.
 
-Un luogo comune per conservare i virtual environment è ``.venv``: questo nome mantiene la directory nascosta nella shell in modo che non sia d'impiccio, e al contempo dice chiaramente a che cosa serve la directory. Inoltre evita conflitti con i file ``.env`` di definizione delle variabili d'ambiente, che qualche tool supporta. 
-
 Creato il virtual environment, non resta che attivarlo. 
 
 Su Windows invocate::
@@ -78,7 +76,7 @@ Per installare l'ultima versione disponibile di un package, basta specificare il
 
 .. code-block:: bash
 
-  (tutorial-env) $ python -m pip install novas
+  (tutorial-env) $ pip install novas
   Collecting novas
     Downloading novas-3.1.1.3.tar.gz (136kB)
   Installing collected packages: novas
@@ -89,7 +87,7 @@ Potete anche installare una versione specifica, indicando il nome seguito da ``=
 
 .. code-block:: bash
 
-  (tutorial-env) $ python -m pip install requests==2.6.0
+  (tutorial-env) $ pip install requests==2.6.0
   Collecting requests==2.6.0
     Using cached requests-2.6.0-py2.py3-none-any.whl
   Installing collected packages: requests
@@ -99,7 +97,7 @@ Se eseguite due volte questo comando, ``pip`` vi informerà che la versione rich
 
 .. code-block:: bash
 
-  (tutorial-env) $ python -m pip install --upgrade requests
+  (tutorial-env) $ pip install --upgrade requests
   Collecting requests
   Installing collected packages: requests
     Found existing installation: requests 2.6.0
@@ -151,7 +149,7 @@ Il file ``requirements.txt`` può essere incluso nel controllo di versione e dis
 
 .. code-block:: bash
 
-  (tutorial-env) $ python -m pip install -r requirements.txt
+  (tutorial-env) $ pip install -r requirements.txt
   Collecting novas==3.1.1.3 (from -r requirements.txt (line 1))
     ...
   Collecting numpy==1.9.2 (from -r requirements.txt (line 2))

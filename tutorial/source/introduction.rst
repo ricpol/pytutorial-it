@@ -318,7 +318,7 @@ Come le stringhe e tutti gli altri tipi di :term:`sequenza<sequence>`, le liste 
    >>> squares[-3:]  # la sezione restituisce una nuova lista
    [9, 16, 25]
 
-Tutte le operazioni di sezionamento restituiscono una nuova lista che contiene gli elementi richiesti. Ciò significa che la sezione dell'esempio seguente restituisce una :ref:`copia per indirizzo<shallow_vs_deep_copy>` della lista::
+Tutte le operazioni di sezionamento restituiscono una nuova lista che contiene gli elementi richiesti. Ciò significa che la sezione dell'esempio seguente restituisce una copia per indirizzo della lista::
 
    >>> squares[:]
    [1, 4, 9, 16, 25]

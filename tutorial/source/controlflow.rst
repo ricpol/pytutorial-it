@@ -49,21 +49,16 @@ Se siete abituati a Pascal o a C, troverete l'istruzione :keyword:`for` in Pytho
    window 6
    defenestrate 12
 
-Il codice che *modifica* una collezione mentre itera sulla stessa può essere complicato da scrivere correttamente. Di solito è più semplice iterare su una *copia* della collezione, o crearne una nuova::
+Se occorre modificare una sequenza su cui si sta iterando (per esempio per duplicare certi elementi), è consigliabile farne prima una copia. Iterare su una sequenza non produce automaticamente una copia. Un modo semplice per farlo è usare il sezionamento::
 
-    # Una collezione di esempio
-    users = {'Hans': 'active', 'Eleonore': 'inactive', 'Keitaro': 'active'}
-    
-    # Strategia: iterare su una copia
-    for user, status in users.copy().items():
-        if status == 'inactive':
-            del users[user]
+   >>> for w in words[:]:  # Itera su una copia dell'intera lista
+   ...     if len(w) > 6:
+   ...         words.insert(0, w)
+   ...
+   >>> words
+   ['defenestrate', 'cat', 'window', 'defenestrate']
 
-    # Strategia: creare una nuova collezione
-    active_users = {}
-    for user, status in users.items():
-        if status == 'active':
-            active_users[user] = status
+Se avessimo usato ``for w in words:``, questo esempio avrebbe cercato di creare una lista infinita, continuando a inserire ``defenestrate`` per sempre. 
 
 .. _tut-range:
 
@@ -114,17 +109,12 @@ Se cercate semplicemente di "stampare" un intervallo, succede una cosa strana::
 
 L'oggetto restituito da :func:`range` si comporta in modo simile a una lista, ma in effetti non lo è. In realtà è un oggetto che restituisce l'elemento successivo della sequenza desiderata, quando vi iterate sopra, ma non *crea* davvero la lista, per risparmiare spazio. 
 
-Chiamiamo :term:`iterabile<iterable>` un oggetto di questo tipo: ovvero, un oggetto adatto a essere usato da funzioni e costrutti che si aspettano qualcosa da cui ottenere via via elementi successivi, finché ce ne sono. Abbiamo visto che l'istruzione :keyword:`for` è un costrutto di questo tipo; invece, un esempio di funzione che accetta un iterabile come argomento è :func:`sum`::
+Chiamiamo :term:`iterabile<iterable>` un oggetto di questo tipo: ovvero, un oggetto adatto a essere usato da funzioni e costrutti che si aspettano qualcosa da cui ottenere via via elementi successivi, finché ce ne sono. Abbiamo visto che l'istruzione :keyword:`for` è un *iteratore* di questo tipo; un altro è la funzione :func:`list`, che crea liste a partire da *iterabili*::
 
-    >>> sum(range(4))  # 0 + 1 + 2 + 3
-    6
+   >>> list(range(5))
+   [0, 1, 2, 3, 4]
 
-Vedremo più in là altri esempi di funzioni che restituiscono degli iterabili, o che accettano iterabili come argomento. Infine, se siete curiosi di sapere come si può ottenere una lista da un :func:`range`, ecco la risposta::
-
-   >>> list(range(4))
-   [0, 1, 2, 3]
-
-Nel capitolo :ref:`tut-structures` approfondiremo ancora la funzione :func:`list`.
+Vedremo più in là altri esempi di funzioni che restituiscono degli iterabili, o che accettano iterabili come argomento.
 
 .. _tut-break:
 
@@ -133,7 +123,7 @@ Le istruzioni :keyword:`!break` e :keyword:`!continue`, e la clausola :keyword:`
 
 L'istruzione :keyword:`break` come in C, "salta fuori" dal ciclo :keyword:`for` o :keyword:`while` più interno in cui è inserita.
 
-Le istruzioni di iterazione possono avere una clausola :keyword:`!else`: questa viene eseguita quando il ciclo termina perché l'iterabile si è esaurito (in un :keyword:`for`), o perché la condizione è divenuta "falsa" (in un :keyword:`while`); non viene però eseguita quando il ciclo termina a causa di una istruzione :keyword:`break`. Per esempio, il ciclo seguente ricerca i numeri primi::
+Le istruzioni di iterazione possono avere una clausola :keyword:`!else`: questa viene eseguita quando il ciclo termina perché la lista si è esaurita (in un :keyword:`for`), o perché la condizione è divenuta "falsa" (in un :keyword:`while`); non viene però eseguita quando il ciclo termina a causa di una istruzione :keyword:`break`. Per esempio, il ciclo seguente ricerca i numeri primi::
 
    >>> for n in range(2, 10):
    ...     for x in range(2, n):
@@ -408,143 +398,6 @@ e naturalmente restituirebbe questo:
    sketch : Cheese Shop Sketch
 
 Si noti che l'ordine in cui sono scritti gli argomenti corrisponde sempre a quello in cui li abbiamo inseriti nella chiamata di funzione. 
-
-Parametri speciali
-------------------
-
-Gli argomenti possono essere passati a una funzione Python per *posizione*, oppure esplicitamente in modo *keyword*. Per ragioni di leggibilità e performance, è una buona idea regolamentare i modi in cui si possono passare gli argomenti, così che basti solo un'occhiata alla definizione della funzione per capire se i vari elementi sono passati per posizione, per *keyword* o in entrambi i modi. 
-
-Una definizione di funzione potrebbe essere così:
-
-.. code-block:: none
-
-   def f(pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2):
-         -----------    ----------     ----------
-           |             |                  |
-           |        posizionali o keyword   |
-           |                                - solo keyword
-            -- solo posizionali
-
-dove ``/`` e ``*`` sono opzionali. Se vengono usati, questi simboli distinguono il tipo di parametro a seconda di come l'argomento può essere passato alla funzione: solo posizionale, posizione o keyword, solo keyword. Gli argomenti keyword sono detti anche "passati per nome". 
-
--------------------------------
-Parametri posizionali o keyword
--------------------------------
-
-Se ``/`` e ``*`` non compaiono nella definizione della funzione, allora gli argomenti possono essere passati per posizione o per nome (keyword).
-
---------------------------
-Parametri solo posizionali
---------------------------
-
-Volendo specificare più in dettaglio, è possibile marcare certi parametri come *solo posizionali*. Per i parametri solo posizionali, l'ordine in cui sono elencati deve essere rispettato e non possono essere passati per nome. I parametri solo posizionali sono messi prima del segno ``/``, che è usato per separarli logicamente dagli altri parametri. Se non c'è il segno ``/`` nella definizione della funzione, allora non ci sono parametri solo posizionali. 
-
-I parametri che vengono dopo il ``/`` possono essere *posizionali o keyword*, oppure *solo keyword*. 
-
-----------------------
-Parametri solo keyword
-----------------------
-
-Per marcare i parametri come "solo keyword", indicando quindi che gli argomenti corrispondenti possono essere passati solo per nome, mettete un segno ``*`` nella lista dei parametri, subito prima del primo parametro "solo keyword".
-
-------
-Esempi
-------
-
-Si considerino queste definizioni di funzione, facendo attenzione ai segni ``/`` e ``*``::
-
-   >>> def standard_arg(arg):
-   ...     print(arg)
-   ...
-   >>> def pos_only_arg(arg, /):
-   ...     print(arg)
-   ...
-   >>> def kwd_only_arg(*, arg):
-   ...     print(arg)
-   ...
-   >>> def combined_example(pos_only, /, standard, *, kwd_only):
-   ...     print(pos_only, standard, kwd_only)
-
-La prima, ``standard_arg``, ha la forma più comune e non pone alcuna restrizione al modo di chiamare la funzione. Gli argomenti possono essere passati indifferentemente per posizione o per nome::
-
-   >>> standard_arg(2)
-   2
-
-   >>> standard_arg(arg=2)
-   2
-
-La seconda funzione, ``pos_only_arg``, può solo passare gli argomenti per posizione, come prescrive il segno ``/`` nella sua definizione::
-
-   >>> pos_only_arg(1)
-   1
-
-   >>> pos_only_arg(arg=1)
-   Traceback (most recent call last):
-     File "<stdin>", line 1, in <module>
-   TypeError: pos_only_arg() got an unexpected keyword argument 'arg'
-
-La terza, ``kwd_only_args``, permette solo di passare gli argomenti per nome, avendo il segno ``*`` nella definizione::
-
-   >>> kwd_only_arg(3)
-   Traceback (most recent call last):
-     File "<stdin>", line 1, in <module>
-   TypeError: kwd_only_arg() takes 0 positional arguments but 1 was given
-
-   >>> kwd_only_arg(arg=3)
-   3
-
-L'ultima utilizza tutte e tre le convenzioni per la chiamata, nella stessa definizione::
-
-   >>> combined_example(1, 2, 3)
-   Traceback (most recent call last):
-     File "<stdin>", line 1, in <module>
-   TypeError: combined_example() takes 2 positional arguments but 3 were given
-
-   >>> combined_example(1, 2, kwd_only=3)
-   1 2 3
-
-   >>> combined_example(1, standard=2, kwd_only=3)
-   1 2 3
-
-   >>> combined_example(pos_only=1, standard=2, kwd_only=3)
-   Traceback (most recent call last):
-     File "<stdin>", line 1, in <module>
-   TypeError: combined_example() got an unexpected keyword argument 'pos_only'
-
-Infine, si consideri questa definizione di funzione, che presenta un potenziale conflitto tra il parametro posizionale ``name`` e un ``**kwds`` che potrebbe a sua volta contenere ``name`` tra le sue chiavi::
-
-    def foo(name, **kwds):
-        return 'name' in kwds
-
-Non c'è modo di chiamare la funzione e farle restituire ``True``: infatti la chiave ``'name'`` sarà sempre collegata al primo argomento, mai a ``**kwds``. Per esempio::
-
-    >>> foo(1, **{'name': 2})
-    Traceback (most recent call last):
-      File "<stdin>", line 1, in <module>
-    TypeError: foo() got multiple values for argument 'name'
-
-Tuttavia, se usiamo il segno ``/`` per specificare i parametri solo posizionali, allora diventa possibile usare ``name`` come parametro posizionale e allo stesso tempo mettere ``'name'`` tra gli argomenti keyword::
-
-    def foo(name, /, **kwds):
-        return 'name' in kwds
-    >>> foo(1, **{'name': 2})
-    True
-
-In altre parole, i nomi dei parametri posizionali possono essere usati in ``**kwds`` senza pericolo di ambiguità.
-
--------------
-Ricapitolando
--------------
-
-Scegliere che tipo di parametri impiegare nella definizione di una funzione dipende dalla necessità::
-
-   def f(pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2):
-
-Qualche indicazione:
-
-* Usate i parametri solo posizionali se volete che il nome dei parametri non sia disponibile per l'utente. Questo è utile quando i nomi non hanno un significato particolare, o se volete che l'ordine dei parametri sia obbligato, o se avete bisogno anche di qualche parametro keyword oltre a quelli posizionali. 
-* Usate i parametri solo keyword quando i nomi hanno un significato e la definizione della funzione è più chiara esplicitando i nomi, o se volete impedire che l'utente possa affidarsi all'ordine degli argomenti passati. 
-* Dal punto di vista dell'interfaccia, usate i parametri solo posizionali per prevenire che un cambiamento futuro nel nome del parametro modifichi la API della funzione. 
 
 .. _tut-arbitraryargs:
 

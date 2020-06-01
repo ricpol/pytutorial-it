@@ -96,8 +96,6 @@ Un esempio che utilizza molti metodi delle liste::
 
 Avrete notato che i metodi come ``insert``, ``remove`` o ``sort``, che modificano soltanto la lista, non hanno valore di ritorno -- ovvero, restituiscono il ``None`` di default. [1]_  Questo è un principio di design che vale per tutte le strutture-dati mutabili in Python.
 
-Un'altra cosa da osservare è che non tutti i dati possono essere ordinati o confrontati. Per esempio, ``[None, 'hello', 10]`` non può essere ordinato perché gli interi non possono essere confrontati con le stringhe e *None* non si può confrontare con altri tipi di dato. Inoltre, ci sono alcuni tipi che non hanno un ordinamento predefinito: per esempio, ``3+4j < 5+7j`` non è una comparazione valida.
-
 .. _tut-lists-as-stacks:
 
 Usare le liste come pile
@@ -482,19 +480,6 @@ Per iterare su una sequenza in ordine inverso, si scrive l'iterazione in avanti 
 Per iterare su una sequenza in modo ordinato, usate la funzione :func:`sorted` che restituisce una nuova lista ordinata, lasciando inalterato l'originale::
 
    >>> basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
-   >>> for i in sorted(basket):
-   ...     print(i)
-   ...
-   apple
-   apple
-   banana
-   orange
-   orange
-   pear
-
-Usate la funzione :func:`set` su una sequenza per eliminare i duplicati. Combinare :func:`sorted` con :func:`set` è un modo idiomatico per iterare sugli elementi unici di una sequenza in ordine alfabetico::
-
-   >>> basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
    >>> for f in sorted(set(basket)):
    ...     print(f)
    ...
@@ -537,14 +522,14 @@ Gli operatori booleani ``and`` e ``or`` sono detti "operatori corto-circuito": i
    >>> non_null
    'Trondheim'
 
-Si noti che in Python, a differenza di C, un assegnamento dentro un'espressione può essere fatto solo esplicitamente con il :ref:`walrus operator <why-can-t-i-use-an-assignment-in-an-expression>` ``:=``. Questo evita una serie di problemi comuni che si incontrano programmando in C: scrivere per sbaglio ``=`` in un'espressione, quando si intende ``==``. 
+Si noti che in Python, a differenza di C, non può essere fatto un assegnamento dentro un'espressione. I programmatori C forse si lamentereanno, ma questo evita una serie di problemi comuni che si incontrano in C: scrivere per sbaglio ``=`` in un'espressione, quando si intende ``==``. 
 
 .. _tut-comparing:
 
 Confronto di sequenze e altri tipi
 ==================================
 
-In genere è possibile confrontare un oggetto-sequenza con una sequenza dello stesso tipo. Il confronto è fatto in ordine *lessicografico*: prima sono confrontati i primi due elementi tra loro; se sono diversi questo determina l'esito del confronto; se sono uguali, si confrontano i secondi elementi e così via, fino a quando una delle due sequenze termina. Se due elementi da confrontare sono essi stessi delle sequenze, viene effettuato un confronto lessicografico tra questi, ricorsivamente. Se tutti gli elementi sono uguali fra loro, le sequenze sono considerate uguali. Se una sequenza è una sotto-sequenza iniziale di un'altra, è la sequenza più breve a risultare la minore nel confronto. L'ordine lessicografico per le stringhe usa i *code point* Unicode per confrontare i singoli caratteri. Ecco alcuni esempi di confronto tra sequenze dello stesso tipo::
+Potete confrontare un oggetto-sequenza con una sequenza dello stesso tipo. Il confronto è fatto in ordine *lessicografico*: prima sono confrontati i primi due elementi tra loro; se sono diversi questo determina l'esito del confronto; se sono uguali, si confrontano i secondi elementi e così via, fino a quando una delle due sequenze termina. Se due elementi da confrontare sono essi stessi delle sequenze, viene effettuato un confronto lessicografico tra questi, ricorsivamente. Se tutti gli elementi sono uguali fra loro, le sequenze sono considerate uguali. Se una sequenza è una sotto-sequenza iniziale di un'altra, è la sequenza più breve a risultare la minore nel confronto. L'ordine lessicografico per le stringhe usa i *code point* Unicode per confrontare i singoli caratteri. Ecco alcuni esempi di confronto tra sequenze dello stesso tipo::
 
    (1, 2, 3)              < (1, 2, 4)
    [1, 2, 3]              < [1, 2, 4]
