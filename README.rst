@@ -5,7 +5,9 @@ Questa è una traduzione italiana del `Tutorial ufficiale di Python <https://doc
 
 Potete leggere la traduzione, in formato Html, Pdf o Epub, su ReadTheDocs: https://pytutorial-it.readthedocs.io.
 
-Esistono tre traduzioni leggermente differenti, in altrettante branch, che sono mantenute in sincrono con le successive release di Python e della sua documentazione:
+Esistono quattro traduzioni leggermente differenti, in altrettanti branch, che sono mantenute in sincrono con le successive release di Python e della sua documentazione:
+
+* per la versione legacy `3.7 <https://docs.python.org/3.7/tutorial/index.html>`_;
 
 * per la versione stabile `3.8 <https://docs.python.org/3.8/tutorial/index.html>`_;
 
