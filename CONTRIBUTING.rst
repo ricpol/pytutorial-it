@@ -38,9 +38,9 @@ Tuttavia è possibile che, in futuro, io possa distrarmi o essere occupato in
 altre faccende e che quindi la traduzione resti indietro. Inoltre restano 
 comunque dei punti in sospeso: per esempio, 
 
-* sarebbe opportuno creare (e mantenere) una versione anche per Python 3.7 
-  e possibilmente anche Python 3.6. L'ideale sarebbe avere una versione per 
-  ciascuna versione ancora ufficialmente supportata di Python.
+* sarebbe opportuno creare (e mantenere) una versione anche per Python 3.6. 
+  L'ideale sarebbe avere una versione per ciascuna versione ancora 
+  ufficialmente supportata di Python.
 
 * sarebbe molto bello tradurre anche qualche documento ulteriore, oltre al 
   tutorial: per esempio sono molto tentato dagli 
@@ -80,12 +80,15 @@ dovrebbe essere fatto anche  un *commit* per aggiornare la traduzione (a meno
 che, come capita spesso, la modifica non sia solo una questione di ortografia 
 nell'originale). 
 
-In particolare, ci sono (attualmente) tre versioni della traduzione, che 
+In particolare, ci sono (attualmente) quattro versioni della traduzione, che 
 corrispondono ad altrettanti *branch* sia in questo progetto sia ovviamente 
 nella repository originale: 
 
-* la versione "stabile" per Python 3.8: l'elenco dei *commit* su questo 
-  *branch* può essere visto 
+* la versione "legacy" per Python 3.7: l'elenco di *commit* su questo *branch* 
+  può essere visto 
+  `qui <https://github.com/python/cpython/commits/3.7/Doc/tutorial>`_;
+
+* la versione "stabile" per Python 3.8: l'elenco dei *commit* relativi si trova 
   `qui <https://github.com/python/cpython/commits/3.8/Doc/tutorial>`_;
 
 * la versione in "pre-release" per Python 3.9: l'elenco dei *commit* 
