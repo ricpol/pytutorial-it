@@ -3,7 +3,7 @@
 
     Questa è una traduzione del `Tutorial ufficiale <https://docs.python.org/3.9/tutorial/index.html>`_ della documentazione di Python, mantenuta in sincrono con il testo della `repository GitHub <https://github.com/python/cpython/tree/3.9/Doc/tutorial>`_.
 
-    Questa è la traduzione della **versione "pre-release" del Tutorial per Python 3.9**, ed è aggiornata al `28 maggio 2020 <https://github.com/python/cpython/commit/d23ee5d652ba69a32504dac43131be782b6afdc7#diff-8f5d4d54eb7fab60cb04633e721f6328>`_.
+    Questa è la traduzione della **versione "pre-release" del Tutorial per Python 3.9**, ed è aggiornata al `6 luglio  2020 <https://github.com/python/cpython/commit/00c09f06a4cf1e352c6ab0c9b9e6074e52f44ae1>`_.
 
     La repository GitHub di questo progetto `si trova qui <https://github.com/ricpol/pytutorial-it>`_: potete essere informati sugli aggiornamenti mettendo una "star" alla repository. Ogni collaborazione è gradita: se intendete partecipare, leggete prima il file `CONTRIBUTING.rst <https://github.com/ricpol/pytutorial-it/blob/master/CONTRIBUTING.rst>`_. 
     
