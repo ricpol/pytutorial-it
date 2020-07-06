@@ -3,7 +3,7 @@
 
     Questa è una traduzione del `Tutorial ufficiale <https://docs.python.org/3.8/tutorial/index.html>`_ della documentazione di Python, mantenuta in sincrono con il testo della `repository GitHub <https://github.com/python/cpython/tree/3.8/Doc/tutorial>`_.
 
-    Questa è la traduzione della **versione "stabile" del Tutorial per Python 3.8**, ed è aggiornata al `28 maggio 2020 <https://github.com/python/cpython/commit/c0c5db54cf9243ee3d6bd4c0306c6ba39db186c3#diff-8f5d4d54eb7fab60cb04633e721f6328>`_.
+    Questa è la traduzione della **versione "stabile" del Tutorial per Python 3.8**, ed è aggiornata al `6 luglio 2020 <https://github.com/python/cpython/commit/6790f9badda47c7aa0fe4b0b5f090d6ca0c477d5>`_.
 
     La repository GitHub di questo progetto `si trova qui <https://github.com/ricpol/pytutorial-it>`_: potete essere informati sugli aggiornamenti mettendo una "star" alla repository. Ogni collaborazione è gradita: se intendete partecipare, leggete prima il file `CONTRIBUTING.rst <https://github.com/ricpol/pytutorial-it/blob/master/CONTRIBUTING.rst>`_. 
     
