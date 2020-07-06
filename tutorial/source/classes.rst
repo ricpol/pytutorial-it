@@ -40,7 +40,7 @@ Il *namespace* locale di una funzione viene creato al momento di chiamare la fun
 
 Uno *scope* è una regione di codice Python, all'interno del programma, dove il *namespace* è direttamente accessibile. Con "direttamente accessibile" intendiamo che un riferimento *non qualificato* (senza ricorrere alla notazione col punto) a un nome riesce effettivamente a raggiungere quel nome nel *namespace*. 
 
-Anche se gli *scope* sono determinati in modo statico, sono usati in modo dinamico. In qualsiasi momento durante l'esecuzione del programma esistono almeno tre *scope* annidati, i cui *namespace* sono direttamente accessibili:
+Anche se gli *scope* sono determinati in modo statico, sono usati in modo dinamico. In qualsiasi momento durante l'esecuzione del programma esistono tre o quattro *scope* annidati, i cui *namespace* sono direttamente accessibili:
 
 * lo *scope* più interno, dove un nome è cercato per prima cosa, contiene i nomi locali; 
 * gli *scope* di ogni eventuale funzione di ordine superiore, che sono ricercati dal più prossimo al più lontano, contengono nomi non-locali ma anche non-globali;

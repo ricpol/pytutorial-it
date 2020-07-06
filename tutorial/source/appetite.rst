@@ -3,7 +3,7 @@
 
     Questa è una traduzione del `Tutorial ufficiale <https://docs.python.org/3/tutorial/index.html>`_ della documentazione di Python, mantenuta in sincrono con il testo della `repository GitHub <https://github.com/python/cpython/tree/master/Doc/tutorial>`_.
 
-    Questa è la traduzione della **versione "di sviluppo" del Tutorial**, corrispondente al "master branch" della repository, ed è aggiornata al `28 maggio 2020 <https://github.com/python/cpython/commit/eaca2aa117d663acf8160a0b4543ee2c7006fcc7#diff-8f5d4d54eb7fab60cb04633e721f6328>`_.
+    Questa è la traduzione della **versione "di sviluppo" del Tutorial**, corrispondente al "master branch" della repository, ed è aggiornata al `6 luglio 2020 <https://github.com/python/cpython/commit/d12af71047f0eae86440654d3ea74c032c7c3558>`_.
 
     La repository GitHub di questo progetto `si trova qui <https://github.com/ricpol/pytutorial-it>`_: potete essere informati sugli aggiornamenti mettendo una "star" alla repository. Ogni collaborazione è gradita: se intendete partecipare, leggete prima il file `CONTRIBUTING.rst <https://github.com/ricpol/pytutorial-it/blob/master/CONTRIBUTING.rst>`_. 
 

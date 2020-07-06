@@ -228,7 +228,7 @@ Opzionalmente, la prima istruzione della funzione può essere una stringa non as
 
 I parametri *reali* (gli argomenti [#]_) di una funzione sono introdotti nella tabella dei simboli locali nel momento in cui la funzione è chiamata. Quindi, gli argomenti sono "passati per valore" (dove però il "valore" è sempre un *riferimento* all'oggetto, non il valore dell'oggetto). [#]_ Quando una funzione chiama un'altra funzione, una nuova tabella di simboli è creata per quella chiamata. 
 
-La *definizione* della funzione inserisce il nome della funzione nella tabella dei simboli corrente. Il valore assegnato al nome della funzione ha un tipo riconosciuto dall'interprete come un oggetto-funzione definita dall'utente. Questo valore può essere assegnato a un altro nome, che a questo punto può essere utilizzato come la funzione stessa. Questo meccanismo consente di rinominare le cose::
+La *definizione* della funzione associa il nome della funzione con l'oggetto-funzione nella tabella dei simboli corrente. L'interprete riconosce l'oggetto a cui punta il nome come un oggetto-funzione definito dall'utente. Anche altri nomi possono puntare al medesimo oggetto-funzione e possono essere usati per accedere alla funzione::
 
    >>> fib
    <function fib at 10042ed0>
