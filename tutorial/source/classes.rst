@@ -962,7 +962,7 @@ Esempi::
 
 .. only:: html
 
-    .. rubric:: Footnotes
+    .. rubric:: Note
 
 .. [#] ndT: in questa traduzione rifiutiamo con decisione la consueta, 
    orribile restituzione di *scope* (area in cui una variabile è visibile: dal 
