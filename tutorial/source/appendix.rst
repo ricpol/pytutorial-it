@@ -14,40 +14,78 @@ Modalità interattiva
 Gestione degli errori
 ---------------------
 
-Quando si verifica un errore, l'interprete emette un messaggio di errore e uno *stack trace*. In modalità interattiva, ritorna quindi al prompt primario; se l'input arriva da un file, esce con *exit status* non-zero dopo aver visualizzato lo *stack trace*. (Le eccezioni gestite da una clausola :keyword:`except` all'interno di un'istruzione :keyword:`try` non sono "errori" in questo contesto.) Alcuni errori sono irrimediabilmente fatali e comportano l'uscita con *exit-status* non-zero: per esempio inconsistenze interne, o alcune situazioni di esaurimento della memoria disponibile. Tutti i messaggi di errore sono scritti nello *standard error*; l'output normale delle istruzioni eseguite è scritto nello *standard output*. 
+Quando si verifica un errore, l'interprete emette un messaggio di errore e uno 
+*stack trace*. In modalità interattiva, ritorna quindi al prompt primario; se 
+l'input arriva da un file, esce con *exit status* non-zero dopo aver 
+visualizzato lo *stack trace*. (Le eccezioni gestite da una clausola 
+:keyword:`except` all'interno di un'istruzione :keyword:`try` non sono 
+"errori" in questo contesto.) Alcuni errori sono irrimediabilmente fatali e 
+comportano l'uscita con *exit-status* non-zero: per esempio inconsistenze 
+interne, o alcune situazioni di esaurimento della memoria disponibile. Tutti i 
+messaggi di errore sono scritti nello *standard error*; l'output normale delle 
+istruzioni eseguite è scritto nello *standard output*. 
 
-Inserire il carattere di interruzione (di solito :kbd:`Control-C` o :kbd:`Delete`) al prompt primario o secondario cancella l'input e ritorna al prompt primario. [#]_ Inserire un'interruzione mentre un'istruzione è in esecuzione emette l'eccezione :exc:`KeyboardInterrupt`, che può essere gestita da un'istruzione :keyword:`try`.
+Inserire il carattere di interruzione (di solito :kbd:`Control-C` o 
+:kbd:`Delete`) al prompt primario o secondario cancella l'input e ritorna al 
+prompt primario. [#]_ Inserire un'interruzione mentre un'istruzione è in 
+esecuzione emette l'eccezione :exc:`KeyboardInterrupt`, che può essere gestita 
+da un'istruzione :keyword:`try`.
 
 .. _tut-scripts:
 
 Script Python eseguibili
 ------------------------
 
-Sui sistemi Unix/BSD, gli script Python possono essere resi direttamente eseguibili, come gli script della shell, con la riga ::
+Sui sistemi Unix/BSD, gli script Python possono essere resi direttamente 
+eseguibili, come gli script della shell, con la riga ::
 
    #!/usr/bin/env python3.5
 
-all'inizio dello script (si assume che l'interprete sia nella :envvar:`PATH` di sistema dell'utente) e dando al file modalità eseguibile. I caratteri ``#!`` devono essere esattamente all'inizio del file. Su alcune piattaforme, questa prima riga deve terminare con un "a-capo" in stile Unix (``'\n'``) e non Windows (``'\r\n'``). Si noti che il cancelletto ``'#'`` viene usato in Python per iniziare un commento.
+all'inizio dello script (si assume che l'interprete sia nella :envvar:`PATH` 
+di sistema dell'utente) e dando al file modalità eseguibile. I caratteri 
+``#!`` devono essere esattamente all'inizio del file. Su alcune piattaforme, 
+questa prima riga deve terminare con un "a-capo" in stile Unix (``'\n'``) e 
+non Windows (``'\r\n'``). Si noti che il cancelletto ``'#'`` viene usato in 
+Python per iniziare un commento.
 
-Si può dare al file dello script modalità eseguibile con il comando :program:`chmod`.
+Si può dare al file dello script modalità eseguibile con il comando 
+:program:`chmod`.
 
 .. code-block:: shell-session
 
    $ chmod +x myscript.py
 
-Su Windows non esiste la nozione di "modalità eseguibile". L'installazione di Python associa automaticamente le estensioni dei file ``.py`` con ``python.exe``, in modo che fare doppio clic sul file lo esegue come script. L'estensione può anche essere ``.pyw``: in questo caso la finestra della console che appare normalmente non viene mostrata. 
+Su Windows non esiste la nozione di "modalità eseguibile". L'installazione di 
+Python associa automaticamente le estensioni dei file ``.py`` con 
+``python.exe``, in modo che fare doppio clic sul file lo esegue come script. 
+L'estensione può anche essere ``.pyw``: in questo caso la finestra della 
+console che appare normalmente non viene mostrata. 
 
 .. _tut-startup:
 
 Il file di avvio interattivo
 ----------------------------
 
-Quando usate Python interattivamente, può far comodo che alcuni comandi standard siano eseguiti automaticamente ogni volta che l'interprete viene avviato. Questo si può fare creando una variabile d'ambiente :envvar:`PYTHONSTARTUP` che contiene il nome di un file con i vostri comandi di avvio. È simile a un file :file:`.profile` per le shell di Unix. 
+Quando usate Python interattivamente, può far comodo che alcuni comandi 
+standard siano eseguiti automaticamente ogni volta che l'interprete viene 
+avviato. Questo si può fare creando una variabile d'ambiente 
+:envvar:`PYTHONSTARTUP` che contiene il nome di un file con i vostri comandi 
+di avvio. È simile a un file :file:`.profile` per le shell di Unix. 
 
-Questo file viene preso in considerazione solo per le sessioni interattive, non quando Python legge l'input da uno script, e non quando :file:`/dev/tty` è indicato esplicitamente come sorgente per le istruzioni (altrimenti il terminale si comporta come una normale sessione interattiva). Il file è eseguito nello stesso *namespace* dei comandi interattivi, quindi gli oggetti che definisce possono essere importati come nomi non qualificati nella sessione dell'interprete. In questo file potete anche cambiare i prompt ``sys.ps1`` e ``sys.ps2``.
+Questo file viene preso in considerazione solo per le sessioni interattive, 
+non quando Python legge l'input da uno script, e non quando :file:`/dev/tty` 
+è indicato esplicitamente come sorgente per le istruzioni (altrimenti il 
+terminale si comporta come una normale sessione interattiva). Il file è 
+eseguito nello stesso *namespace* dei comandi interattivi, quindi gli oggetti 
+che definisce possono essere importati come nomi non qualificati nella 
+sessione dell'interprete. In questo file potete anche cambiare i prompt 
+``sys.ps1`` e ``sys.ps2``.
 
-Se volete leggere un file di avvio aggiuntivo nella directory corrente, potete farlo nel file di avvio principale con del codice come ``if
-os.path.isfile('.pythonrc.py'): exec(open('.pythonrc.py').read())``. Se volete usare il file di avvio in uno script, dovete farlo in modo esplicito nello script::
+Se volete leggere un file di avvio aggiuntivo nella directory corrente, potete 
+farlo nel file di avvio principale con del codice come 
+``if os.path.isfile('.pythonrc.py'): exec(open('.pythonrc.py').read())``. 
+Se volete usare il file di avvio in uno script, dovete farlo in modo esplicito 
+nello script::
 
    import os
    filename = os.environ.get('PYTHONSTARTUP')
@@ -61,15 +99,24 @@ os.path.isfile('.pythonrc.py'): exec(open('.pythonrc.py').read())``. Se volete u
 Personalizzare l'installazione
 ------------------------------
 
-Python mette a disposizione due strumenti che vi consentono di personalizzarlo: i moduli :mod:`sitecustomize` e :mod:`usercustomize`. Per vederli in azione, dovete per prima cosa ricavare la collocazione della vostra directory *site-packages*. Avviate Python ed eseguite questo codice::
+Python mette a disposizione due strumenti che vi consentono di 
+personalizzarlo: i moduli :mod:`sitecustomize` e :mod:`usercustomize`. Per 
+vederli in azione, dovete per prima cosa ricavare la collocazione della vostra 
+directory *site-packages*. Avviate Python ed eseguite questo codice::
 
    >>> import site
    >>> site.getusersitepackages()
    '/home/user/.local/lib/python3.5/site-packages'
 
-Adesso potete creare un file :file:`usercustomize.py` in questa directory e collocarvi qualsiasi istruzione. Questo avrà effetto su qualsiasi invocazione di Python, a meno che non venga passata l'opzione :option:`-s` per disabilitarne l'importazione automatica. 
+Adesso potete creare un file :file:`usercustomize.py` in questa directory e 
+collocarvi qualsiasi istruzione. Questo avrà effetto su qualsiasi invocazione 
+di Python, a meno che non venga passata l'opzione :option:`-s` per 
+disabilitarne l'importazione automatica. 
 
-Il modulo :mod:`sitecustomize` funziona allo stesso modo, ma viene creato di solito da un amministratore del computer nella directory *site-packages* globale, ed è importato *prima* di :mod:`usercustomize`. Si veda la documentazione del modulo :mod:`site` per ulteriori informazioni. 
+Il modulo :mod:`sitecustomize` funziona allo stesso modo, ma viene creato di 
+solito da un amministratore del computer nella directory *site-packages* 
+globale, ed è importato *prima* di :mod:`usercustomize`. Si veda la 
+documentazione del modulo :mod:`site` per ulteriori informazioni. 
 
 .. only:: html
 
