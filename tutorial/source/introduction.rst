@@ -4,11 +4,23 @@
 Un'introduzione informale a Python
 **********************************
 
-Negli esempi che seguono, l'input e l'output si distinguono dalla presenza o assenza del *prompt* (:term:`>>>` e :term:`...`). Per riprodurre gli esempi, quando appare il prompt dovete inserire tutto ciò che segue nella riga; le righe che non hanno il prompt sono l'output dell'interprete. Si noti che quando una riga riporta solo il prompt secondario senza nient'altro, significa che dovete inserire una riga vuota: questo serve a terminare un'istruzione multi-linea. 
+Negli esempi che seguono, l'input e l'output si distinguono dalla presenza o 
+assenza del *prompt* (:term:`>>>` e :term:`...`). Per riprodurre gli esempi, 
+quando appare il prompt dovete inserire tutto ciò che segue nella riga; le 
+righe che non hanno il prompt sono l'output dell'interprete. Si noti che 
+quando una riga riporta solo il prompt secondario senza nient'altro, significa 
+che dovete inserire una riga vuota: questo serve a terminare un'istruzione 
+multi-linea. 
 
 .. index:: single: # (hash); comment
 
-Molti esempi nella documentazione, anche quelli da inserire nell'interprete interattivo, includono dei commenti. I commenti in Python iniziano con il "cancelletto" ``#`` e comprendono tutto il resto della riga. Un commento può partire all'inizio della riga o dopo uno spazio, ma non può essere inserito all'interno di una stringa: un cancelletto dentro una stringa è solo un cancelletto. Siccome i commenti servono a spiegare il codice, ma non sono processati da Python, non dovete copiarli quando provate gli esempi. 
+Molti esempi nella documentazione, anche quelli da inserire nell'interprete 
+interattivo, includono dei commenti. I commenti in Python iniziano con il 
+"cancelletto" ``#`` e comprendono tutto il resto della riga. Un commento può 
+partire all'inizio della riga o dopo uno spazio, ma non può essere inserito 
+all'interno di una stringa: un cancelletto dentro una stringa è solo un 
+cancelletto. Siccome i commenti servono a spiegare il codice, ma non sono 
+processati da Python, non dovete copiarli quando provate gli esempi. 
 
 Ecco alcuni esempi::
 
@@ -22,14 +34,19 @@ Ecco alcuni esempi::
 Usare Python come una calcolatrice
 ==================================
 
-Proviamo qualche semplice istruzione Python. Avviate l'interprete e aspettate il prompt primario ``>>>`` (non dovrebbe volerci molto). 
+Proviamo qualche semplice istruzione Python. Avviate l'interprete e aspettate 
+il prompt primario ``>>>`` (non dovrebbe volerci molto). 
 
 .. _tut-numbers:
 
 Numeri
 ------
 
-L'interprete funziona come una semplice calcolatrice: potete inserire un'espressione e lui restituirà il suo valore. La sintassi delle espressioni è banale: gli operatori ``+``, ``-``, ``*`` e ``/`` funzionano come negli altri linguaggi (Pascal o C, per esempio); le parentesi (``()``) si possono usare per i raggruppamenti. Per esempio::
+L'interprete funziona come una semplice calcolatrice: potete inserire 
+un'espressione e lui restituirà il suo valore. La sintassi delle espressioni 
+è banale: gli operatori ``+``, ``-``, ``*`` e ``/`` funzionano come negli 
+altri linguaggi (Pascal o C, per esempio); le parentesi (``()``) si possono 
+usare per i raggruppamenti. Per esempio::
 
    >>> 2 + 2
    4
@@ -40,9 +57,14 @@ L'interprete funziona come una semplice calcolatrice: potete inserire un'espress
    >>> 8 / 5  # dividere produce sempre un numero con la virgola
    1.6
 
-I numeri interi (per es. ``2``, ``4``, ``20``) hanno il tipo :class:`int`, quelli frazionari (es. ``5.0``, ``1.6``) hanno il tipo :class:`float`. Vedremo altri tipi numerici più avanti in questo tutorial. 
+I numeri interi (per es. ``2``, ``4``, ``20``) hanno il tipo :class:`int`, 
+quelli frazionari (es. ``5.0``, ``1.6``) hanno il tipo :class:`float`. Vedremo 
+altri tipi numerici più avanti in questo tutorial. 
 
-La divisione (``/``) restituisce sempre un numero *float*. Per :term:`arrotondare<floor division>` e ottenere un intero, scartando la parte frazionaria, potete usare l'operatore ``//``. Per ottenere il resto usate ``%``::
+La divisione (``/``) restituisce sempre un numero *float*. Per 
+:term:`arrotondare<floor division>` e ottenere un intero, scartando la parte 
+frazionaria, potete usare l'operatore ``//``. Per ottenere il resto usate 
+``%``::
 
    >>> 17 / 3  # la divisione normale restituisce un float
    5.666666666666667
@@ -61,26 +83,33 @@ Con Python è possibile usare l'operatore ``**`` per calcolare le potenze [#]_::
    >>> 2 ** 7  # 2 alla settima
    128
 
-Il segno di "uguale" (``=``) viene usato per assegnare un valore a una variabile. Nessun risultato viene mostrato prima del successivo prompt interattivo::
+Il segno di "uguale" (``=``) viene usato per assegnare un valore a una 
+variabile. Nessun risultato viene mostrato prima del successivo prompt 
+interattivo::
 
    >>> width = 20
    >>> height = 5 * 9
    >>> width * height
    900
 
-Cercare di usare una variabile non "definita" (che non ha un valore assegnato), produce un errore::
+Cercare di usare una variabile non "definita" (che non ha un valore 
+assegnato), produce un errore::
 
    >>> n  # cerco di accedere a una variabile non definita
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
    NameError: name 'n' is not defined
 
-I numeri "con la virgola" (float) sono pienamente supportati; le operazioni che coinvolgono operandi di tipo misto convertono automaticamente gli interi in float::
+I numeri "con la virgola" (float) sono pienamente supportati; le operazioni 
+che coinvolgono operandi di tipo misto convertono automaticamente gli interi 
+in float::
 
    >>> 4 * 3.75 - 1
    14.0
 
-In modalità interattiva, l'ultima espressione restituita è assegnata alla variabile ``_``. Ciò vuol dire che, quando usate Python come una calcolatrice, è più semplice riportare i risultati, per esempio::
+In modalità interattiva, l'ultima espressione restituita è assegnata alla 
+variabile ``_``. Ciò vuol dire che, quando usate Python come una calcolatrice, 
+è più semplice riportare i risultati, per esempio::
 
    >>> tax = 12.5 / 100
    >>> price = 100.50
@@ -91,16 +120,25 @@ In modalità interattiva, l'ultima espressione restituita è assegnata alla vari
    >>> round(_, 2)
    113.06
 
-Questa variabile dovrebbe essere considerata di sola lettura. Non cercate di assegnare esplicitamente un valore a ``_``: avreste creato una variabile locale con lo stesso nome, che maschera la quella predefinita, con il suo comportamento speciale. 
+Questa variabile dovrebbe essere considerata di sola lettura. Non cercate di 
+assegnare esplicitamente un valore a ``_``: avreste creato una variabile 
+locale con lo stesso nome, che maschera la quella predefinita, con il suo 
+comportamento speciale. 
 
-Oltre a :class:`int` e :class:`float`, Python supporta altri tipi numerici, come :class:`~decimal.Decimal` e :class:`~fractions.Fraction`. Python ha anche il supporto per i :ref:`numeri complessi <typesnumeric>` e usa il suffisso ``j`` o ``J`` per la parte immaginaria (e.g. ``3+5j``).
+Oltre a :class:`int` e :class:`float`, Python supporta altri tipi numerici, 
+come :class:`~decimal.Decimal` e :class:`~fractions.Fraction`. Python ha anche 
+il supporto per i :ref:`numeri complessi <typesnumeric>` e usa il suffisso 
+``j`` o ``J`` per la parte immaginaria (e.g. ``3+5j``).
 
 .. _tut-strings:
 
 Stringhe
 --------
 
-Oltre ai numeri, Python può manipolare le stringhe, che si possono esprimere in molti modi. Potete delimitarle con apici singoli (``'...'``) o doppi (``"..."``): funzionano allo stesso modo [#]_. Usate ``\`` (*backslash*) per fare *escaping* degli apici::
+Oltre ai numeri, Python può manipolare le stringhe, che si possono esprimere 
+in molti modi. Potete delimitarle con apici singoli (``'...'``) o doppi 
+(``"..."``): funzionano allo stesso modo [#]_. Usate ``\`` (*backslash*) per 
+fare *escaping* degli apici::
 
    >>> 'spam eggs'  # apici singoli
    'spam eggs'
@@ -115,7 +153,13 @@ Oltre ai numeri, Python può manipolare le stringhe, che si possono esprimere in
    >>> '"Isn\'t," they said.'
    '"Isn\'t," they said.'
 
-Nell'output dell'interprete interattivo, le stringhe sono chiuse tra apici e i caratteri speciali sono resi con il *backslash* di *escape*. A volte l'output può sembrare diverso dall'input, perché gli apici possono cambiare, ma le due versioni sono equivalenti. La stringa è chiusa nei doppi apici se contiene un apice singolo e nessun apice doppio; altrimenti è delimitata da apici singoli. La funzione :func:`print` produce un output più leggibile perché omette gli apici iniziali e finali, e "stampa" anche i caratteri speciali::
+Nell'output dell'interprete interattivo, le stringhe sono chiuse tra apici e i 
+caratteri speciali sono resi con il *backslash* di *escape*. A volte l'output 
+può sembrare diverso dall'input, perché gli apici possono cambiare, ma le due 
+versioni sono equivalenti. La stringa è chiusa nei doppi apici se contiene un 
+apice singolo e nessun apice doppio; altrimenti è delimitata da apici singoli. 
+La funzione :func:`print` produce un output più leggibile perché omette gli 
+apici iniziali e finali, e "stampa" anche i caratteri speciali::
 
    >>> '"Isn\'t," they said.'
    '"Isn\'t," they said.'
@@ -128,7 +172,9 @@ Nell'output dell'interprete interattivo, le stringhe sono chiuse tra apici e i c
    First line.
    Second line.
 
-Se non volete che il carattere dopo un *backslash* ``\`` sia interpretato come un carattere speciale, potete usare le *raw strings* con il prefisso ``r`` prima dell'apice iniziale::
+Se non volete che il carattere dopo un *backslash* ``\`` sia interpretato come 
+un carattere speciale, potete usare le *raw strings* con il prefisso ``r`` 
+prima dell'apice iniziale::
 
    >>> print('C:\some\name')  # qui \n vuol dire "a-capo"!
    C:\some
@@ -136,7 +182,10 @@ Se non volete che il carattere dopo un *backslash* ``\`` sia interpretato come u
    >>> print(r'C:\some\name')  # si noti la r iniziale
    C:\some\name
 
-Le stringhe possono occupare più di una riga. Un modo per ottenere questo è usare gli apici tripli: ``"""..."""`` o ``'''...'''``. Gli "a-capo" sono inclusi automaticamente nelle stringhe, ma è possibile evitarlo aggiungendo un *backslash* ``\`` alla fine della riga. Questo esempio::
+Le stringhe possono occupare più di una riga. Un modo per ottenere questo è 
+usare gli apici tripli: ``"""..."""`` o ``'''...'''``. Gli "a-capo" sono 
+inclusi automaticamente nelle stringhe, ma è possibile evitarlo aggiungendo un 
+*backslash* ``\`` alla fine della riga. Questo esempio::
 
    print("""\
    Usage: thingy [OPTIONS]
@@ -152,13 +201,15 @@ produce questo output (si noti che lo "a-capo" iniziale non è incluso):
         -h                        Display this usage message
         -H hostname               Hostname to connect to
 
-Potete concatenare ("incollare insieme") le stringhe con l'operatore ``+`` e ripeterle con il ``*``::
+Potete concatenare ("incollare insieme") le stringhe con l'operatore ``+`` e 
+ripeterle con il ``*``::
 
    >>> # 3 volte 'un', seguito da 'ium'
    >>> 3 * 'un' + 'ium'
    'unununium'
 
-Due o più stringhe (racchiuse tra apici) una accanto all'altra sono automaticamente concatenate. ::
+Due o più stringhe (racchiuse tra apici) una accanto all'altra sono 
+automaticamente concatenate. ::
 
    >>> 'Py' 'thon'
    'Python'
@@ -170,7 +221,8 @@ Questo torna utile quando volete spezzare una stringa lunga::
    >>> text
    'Mettete diverse stringhe tra parentesi per unirle insieme.'
 
-Questo però funziona solo con le stringhe "pure", non con le variabili o le espressioni::
+Questo però funziona solo con le stringhe "pure", non con le variabili o le 
+espressioni::
 
    >>> prefix = 'Py'
    >>> prefix 'thon'  # non potete concatenare una variabile e una stringa
@@ -184,12 +236,15 @@ Questo però funziona solo con le stringhe "pure", non con le variabili o le esp
                       ^
    SyntaxError: invalid syntax
 
-Per concatenare le variabili, o una variabile con una stringa, usate l'operatore ``+``::
+Per concatenare le variabili, o una variabile con una stringa, usate 
+l'operatore ``+``::
 
    >>> prefix + 'thon'
    'Python'
 
-Le stringhe possono essere *indicizzate* (indirizzate): il primo carattere ha indice 0. Non esiste un tipo di dato separato per rappresentare un carattere; un carattere è semplicemente una stringa di lunghezza uno::
+Le stringhe possono essere *indicizzate* (indirizzate): il primo carattere ha 
+indice 0. Non esiste un tipo di dato separato per rappresentare un carattere; 
+un carattere è semplicemente una stringa di lunghezza uno::
 
    >>> word = 'Python'
    >>> word[0]  # il carattere in posizione 0
@@ -208,21 +263,26 @@ Gli indici possono anche essere negativi, contando a partire da destra::
 
 Si noti che, siccome -0 è lo stesso di 0, gli indici negativi partono da -1. 
 
-Oltre agli indici, è anche consentito *sezionare* (*slicing*). Se gli indici restituiscono un singolo carattere, le sezioni vi permettono di estrarre sotto-stringhe::
+Oltre agli indici, è anche consentito *sezionare* (*slicing*). Se gli indici 
+restituiscono un singolo carattere, le sezioni vi permettono di estrarre 
+sotto-stringhe::
 
    >>> word[0:2]  # i caratteri dalla posizione 0 inclusa a 2 esclusa
    'Py'
    >>> word[2:5]  # i caratteri dalla posizione 2 inclusa a 5 esclusa
    'tho'
 
-Si noti che l'inizio è sempre incluso, la fine è esclusa. Questo fa sì che ``s[:i] + s[i:]`` sia sempre uguale a ``s``::
+Si noti che l'inizio è sempre incluso, la fine è esclusa. Questo fa sì che 
+``s[:i] + s[i:]`` sia sempre uguale a ``s``::
 
    >>> word[:2] + word[2:]
    'Python'
    >>> word[:4] + word[4:]
    'Python'
 
-Gli indici delle sezioni hanno dei pratici valori di default: se si omette il primo indice, vuol dire "0"; se si omette il secondo, vuol dire "la lunghezza della stringa". ::
+Gli indici delle sezioni hanno dei pratici valori di default: se si omette il 
+primo indice, vuol dire "0"; se si omette il secondo, vuol dire "la lunghezza 
+della stringa". ::
 
    >>> word[:2]   # i caratteri dall'inizio alla posizione 2 esclusa
    'Py'
@@ -231,7 +291,10 @@ Gli indici delle sezioni hanno dei pratici valori di default: se si omette il pr
    >>> word[-2:]  # i caratteri dalla penultima posizione inclusa alla fine
    'on'
 
-Un trucco per ricordare come funzionano le sezioni è pensare che gli indici puntino tra un carattere e l'altro, con lo spazio a sinistra del primo carattere che vale 0. Allora, lo spazio a destra dell'ultimo carattere di una stringa di lunghezza *n* avrà indice *n*. Per esempio::
+Un trucco per ricordare come funzionano le sezioni è pensare che gli indici 
+puntino tra un carattere e l'altro, con lo spazio a sinistra del primo 
+carattere che vale 0. Allora, lo spazio a destra dell'ultimo carattere di una 
+stringa di lunghezza *n* avrà indice *n*. Per esempio::
 
     +---+---+---+---+---+---+
     | P | y | t | h | o | n |
@@ -239,9 +302,14 @@ Un trucco per ricordare come funzionano le sezioni è pensare che gli indici pun
     0   1   2   3   4   5   6
    -6  -5  -4  -3  -2  -1
 
-I numeri della prima riga sono le posizioni degli indici 0...6 della stringa; la seconda riga riporta i corrispondenti indici negativi. La sezione da *i* a *j* è composta da tutti i caratteri che stanno tra gli spazi numerati da *i* a *j*. 
+I numeri della prima riga sono le posizioni degli indici 0...6 della stringa; 
+la seconda riga riporta i corrispondenti indici negativi. La sezione da *i* a 
+*j* è composta da tutti i caratteri che stanno tra gli spazi numerati da *i* a 
+*j*. 
 
-Per gli indici non-negativi, la lunghezza di una sezione è la differenza tra gli indici, se entrambi non escono dai limiti della stringa. Per esempio, la lunghezza di ``word[1:3]`` è 2.
+Per gli indici non-negativi, la lunghezza di una sezione è la differenza tra 
+gli indici, se entrambi non escono dai limiti della stringa. Per esempio, la 
+lunghezza di ``word[1:3]`` è 2.
 
 Se usate un indice troppo grande, otterrete un errore::
 
@@ -250,14 +318,17 @@ Se usate un indice troppo grande, otterrete un errore::
      File "<stdin>", line 1, in <module>
    IndexError: string index out of range
 
-Tuttavia, gli indici che escono dai limiti sono comunque consentiti, quando li usiamo per estrarre una sezione::
+Tuttavia, gli indici che escono dai limiti sono comunque consentiti, quando li 
+usiamo per estrarre una sezione::
 
    >>> word[4:42]
    'on'
    >>> word[42:]
    ''
 
-Le stringhe in Python non possono essere modificate: sono :term:`immutabili<immutable>`. Di conseguenza, assegnare alla posizione di un indice produce un errore::
+Le stringhe in Python non possono essere modificate: sono 
+:term:`immutabili<immutable>`. Di conseguenza, assegnare alla posizione di un 
+indice produce un errore::
 
    >>> word[0] = 'J'
    Traceback (most recent call last):
@@ -284,10 +355,12 @@ La funzione predefinita :func:`len` restituisce la lunghezza di una stringa::
 .. seealso::
 
    :ref:`Sequenze di testo - str<textseq>`
-      Le stringhe sono esempi del tipo di dati *sequenza*, e supportano le comuni operazioni possibili con le sequenze.
+      Le stringhe sono esempi del tipo di dati *sequenza*, e supportano le 
+      comuni operazioni possibili con le sequenze.
 
    :ref:`Metodi per le stringhe<string-methods>`
-      Le stringhe hanno un gran numero di metodi per manipolazioni di base e ricerca.
+      Le stringhe hanno un gran numero di metodi per manipolazioni di base e 
+      ricerca.
 
    :ref:`Stringhe formattate<f-strings>`
       Le stringhe possono includere delle espressioni al loro interno. 
@@ -296,20 +369,26 @@ La funzione predefinita :func:`len` restituisce la lunghezza di una stringa::
       Informazioni sulla formattazione delle stringhe con :meth:`str.format`.
 
    :ref:`Formattazione in stile printf<old-string-formatting>`
-      Il vecchio modo di formattare, con l'operatore ``%`` a destra della stringa. 
+      Il vecchio modo di formattare, con l'operatore ``%`` a destra della 
+      stringa. 
 
 .. _tut-lists:
 
 Liste
 -----
 
-Python ha alcuni tipi di dati *composti*, che servono a raggruppare insieme altri dati. Il più versatile di questo è la *lista*, che si può scrivere come un elenco di valori (elementi) separati da virgola e racchiusi tra parentesi quadre. Le liste possono contenere valori di tipo diverso, anche se di solito tutti gli elementi hanno lo stesso tipo. ::
+Python ha alcuni tipi di dati *composti*, che servono a raggruppare insieme 
+altri dati. Il più versatile di questo è la *lista*, che si può scrivere come 
+un elenco di valori (elementi) separati da virgola e racchiusi tra parentesi 
+quadre. Le liste possono contenere valori di tipo diverso, anche se di solito 
+tutti gli elementi hanno lo stesso tipo. ::
 
    >>> squares = [1, 4, 9, 16, 25]
    >>> squares
    [1, 4, 9, 16, 25]
 
-Come le stringhe e tutti gli altri tipi di :term:`sequenza<sequence>`, le liste possono essere indicizzate e sezionate::
+Come le stringhe e tutti gli altri tipi di :term:`sequenza<sequence>`, le 
+liste possono essere indicizzate e sezionate::
 
    >>> squares[0]  # l'indice restituisce l'elemento
    1
@@ -318,7 +397,9 @@ Come le stringhe e tutti gli altri tipi di :term:`sequenza<sequence>`, le liste 
    >>> squares[-3:]  # la sezione restituisce una nuova lista
    [9, 16, 25]
 
-Tutte le operazioni di sezionamento restituiscono una nuova lista che contiene gli elementi richiesti. Ciò significa che la sezione dell'esempio seguente restituisce una :ref:`copia per indirizzo<shallow_vs_deep_copy>` della lista::
+Tutte le operazioni di sezionamento restituiscono una nuova lista che contiene 
+gli elementi richiesti. Ciò significa che la sezione dell'esempio seguente 
+restituisce una :ref:`copia per indirizzo<shallow_vs_deep_copy>` della lista::
 
    >>> squares[:]
    [1, 4, 9, 16, 25]
@@ -328,7 +409,9 @@ Le liste supportano anche operazioni come il concatenamento::
    >>> squares + [36, 49, 64, 81, 100]
    [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 
-A differenza delle stringhe che sono :term:`immutabili<immutable>` le liste sono un tipo :term:`mutabile<mutable>`, per cui è possibile cambiare il loro contenuto::
+A differenza delle stringhe che sono :term:`immutabili<immutable>` le liste 
+sono un tipo :term:`mutabile<mutable>`, per cui è possibile cambiare il loro 
+contenuto::
 
     >>> cubes = [1, 8, 27, 65, 125]  # c'è qualcosa di sbagliato
     >>> 4 ** 3  # 4 al cubo fa 64, non 65!
@@ -337,14 +420,16 @@ A differenza delle stringhe che sono :term:`immutabili<immutable>` le liste sono
     >>> cubes
     [1, 8, 27, 64, 125]
 
-Potete anche aggiungere nuovi elementi alla fine della lista, con il metodo :meth:`~list.append` (parleremo meglio dei metodi più tardi)::
+Potete anche aggiungere nuovi elementi alla fine della lista, con il metodo 
+:meth:`~list.append` (parleremo meglio dei metodi più tardi)::
 
    >>> cubes.append(216)  # aggiunge il cubo di 6
    >>> cubes.append(7 ** 3)  # e il cubo di 7
    >>> cubes
    [1, 8, 27, 64, 125, 216, 343]
 
-È possibile inoltre assegnare a una sezione, cosa che può anche cambiare la dimensione della lista o svuotarla del tutto::
+È possibile inoltre assegnare a una sezione, cosa che può anche cambiare la 
+dimensione della lista o svuotarla del tutto::
 
    >>> letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
    >>> letters
@@ -368,7 +453,8 @@ La funzione predefinita :func:`len` si applica anche alle liste::
    >>> len(letters)
    4
 
-È possibile *annidare* le liste, ovvero creare liste dentro altre liste. Per esempio::
+È possibile *annidare* le liste, ovvero creare liste dentro altre liste. Per 
+esempio::
 
    >>> a = ['a', 'b', 'c']
    >>> n = [1, 2, 3]
@@ -385,7 +471,10 @@ La funzione predefinita :func:`len` si applica anche alle liste::
 I primi passi verso la programmazione
 =====================================
 
-Certamente possiamo usare Python per compiti più complessi che sommare due più due. Per esempio, possiamo scrivere i primi numeri della `serie di Fibonacci <https://en.wikipedia.org/wiki/Fibonacci_number>`_ in questo modo::
+Certamente possiamo usare Python per compiti più complessi che sommare due più 
+due. Per esempio, possiamo scrivere i primi numeri della 
+`serie di Fibonacci <https://en.wikipedia.org/wiki/Fibonacci_number>`_ in 
+questo modo::
 
    >>> # serie di Fibonacci:
    ... # la somma di due elementi è l'elemento seguente
@@ -404,19 +493,46 @@ Certamente possiamo usare Python per compiti più complessi che sommare due più
 
 Questo esempio introduce diversi aspetti nuovi.
 
-* La prima riga contiene un *assegnamento multiplo*: le variabili ``a`` e ``b`` ottengono simultaneamente i valori 0 e 1. Nell'ultima riga il trucco si ripete, mostrando così che le espressioni nella parte destra sono tutte valutate *prima* che l'assegnamento abbia luogo. Le espressioni della parte destra sono valutate nell'ordine, da sinistra a destra. 
+* La prima riga contiene un *assegnamento multiplo*: le variabili ``a`` e 
+  ``b`` ottengono simultaneamente i valori 0 e 1. Nell'ultima riga il trucco 
+  si ripete, mostrando così che le espressioni nella parte destra sono tutte 
+  valutate *prima* che l'assegnamento abbia luogo. Le espressioni della parte 
+  destra sono valutate nell'ordine, da sinistra a destra. 
 
-* Un ciclo :keyword:`while` viene eseguito fin quando la condizione (in questo caso, ``a < 10``) resta verificata. In Python, come in C, tutti gli interi tranne lo zero sono "veri". Lo zero è "falso". La condizione può anche riguardare una stringa o una lista, o in effetti qualsiasi sequenza. Tutto ciò che ha lunghezza non-nulla è "vero"; le sequenza vuote sono "false". Il test usato in questo esempio è una semplice comparazione. Gli operatori standard per la comparazione sono gli stessi di C: ``<`` (minore di), ``>`` (maggiore di), ``==`` (uguale a), ``<=`` (minore o uguale a), ``>=`` (maggiore o uguale a) e ``!=`` (diverso da).
+* Un ciclo :keyword:`while` viene eseguito fin quando la condizione (in questo 
+  caso, ``a < 10``) resta verificata. In Python, come in C, tutti gli interi 
+  tranne lo zero sono "veri". Lo zero è "falso". La condizione può anche 
+  riguardare una stringa o una lista, o in effetti qualsiasi sequenza. Tutto 
+  ciò che ha lunghezza non-nulla è "vero"; le sequenza vuote sono "false". Il 
+  test usato in questo esempio è una semplice comparazione. Gli operatori 
+  standard per la comparazione sono gli stessi di C: ``<`` (minore di), ``>`` 
+  (maggiore di), ``==`` (uguale a), ``<=`` (minore o uguale a), ``>=`` 
+  (maggiore o uguale a) e ``!=`` (diverso da).
 
-* Il *corpo* del ciclo è *rientrato*: il rientro è il modo di Python per raggruppare le istruzioni. In modalità interattiva, dovete inserire una tabulazione o degli spazi per ciascuna riga rientrata. In realtà, preparerete le istruzioni più complicate in un editor da programmatore: tutti gli editor validi hanno la funzione di rientro automatico. Quando inserite un'istruzione composta in modalità interattiva, dovete concluderla con una riga bianca per indicare che è terminata, dal momento che il parser non può indovinare quando avete inserito l'ultima riga. Si noti che ciascuna riga all'interno di un blocco deve essere rientrata della stessa misura. 
+* Il *corpo* del ciclo è *rientrato*: il rientro è il modo di Python per 
+  raggruppare le istruzioni. In modalità interattiva, dovete inserire una 
+  tabulazione o degli spazi per ciascuna riga rientrata. In realtà, 
+  preparerete le istruzioni più complicate in un editor da programmatore: 
+  tutti gli editor validi hanno la funzione di rientro automatico. Quando 
+  inserite un'istruzione composta in modalità interattiva, dovete concluderla 
+  con una riga bianca per indicare che è terminata, dal momento che il parser 
+  non può indovinare quando avete inserito l'ultima riga. Si noti che ciascuna 
+  riga all'interno di un blocco deve essere rientrata della stessa misura. 
 
-* La funzione :func:`print` scrive il valore del parametro o dei parametri che le passate. È diverso da scrivere semplicemente l'espressione da calcolare (come avete fatto prima nell'esempio della calcolatrice), in quanto :func:`print` può gestire più parametri, numeri con la virgola e stringhe. Le stringhe sono stampate senza apici; tra ciascun parametro viene inserito uno spazio, per permettervi di formattare l'output in modo elegante, così::
+* La funzione :func:`print` scrive il valore del parametro o dei parametri che 
+  le passate. È diverso da scrivere semplicemente l'espressione da calcolare 
+  (come avete fatto prima nell'esempio della calcolatrice), in quanto 
+  :func:`print` può gestire più parametri, numeri con la virgola e stringhe. 
+  Le stringhe sono stampate senza apici; tra ciascun parametro viene inserito 
+  uno spazio, per permettervi di formattare l'output in modo elegante, così::
 
      >>> i = 256*256
      >>> print('Il valore di i è', i)
      Il valore di i è 65536
 
-  Potete usare il parametro *keyword* "end" per evitare l'inserimento di una riga vuota dopo ciascun output, o per terminare l'output con una stringa diversa::
+  Potete usare il parametro *keyword* "end" per evitare l'inserimento di una 
+  riga vuota dopo ciascun output, o per terminare l'output con una stringa 
+  diversa::
 
      >>> a, b = 0, 1
      >>> while a < 1000:
@@ -429,6 +545,12 @@ Questo esempio introduce diversi aspetti nuovi.
 
    .. rubric:: Note
 
-.. [#] Dal momento che ``**`` ha una priorità più alta di ``-``, ``-3**2`` sarà interpretato come ``-(3**2)`` ovvero ``-9``.  Per evitare questo e ottenere invece ``9``, potete usare ``(-3)**2``.
+.. [#] Dal momento che ``**`` ha una priorità più alta di ``-``, ``-3**2`` 
+   sarà interpretato come ``-(3**2)`` ovvero ``-9``.  Per evitare questo e 
+   ottenere invece ``9``, potete usare ``(-3)**2``.
 
-.. [#] A differenza di altri linguaggi, i caratteri speciali come ``\n`` hanno lo stesso significato con apici singoli (``'...'``) o doppi (``"..."``). L'unica differenza tra i due è che all'interno di apici singoli non c'è bisogno di fare *escaping* di ``"`` (ma occorre farlo per ``\'``) e viceversa.
+.. [#] A differenza di altri linguaggi, i caratteri speciali come ``\n`` hanno 
+   lo stesso significato con apici singoli (``'...'``) o doppi (``"..."``). 
+   L'unica differenza tra i due è che all'interno di apici singoli non c'è 
+   bisogno di fare *escaping* di ``"`` (ma occorre farlo per ``\'``) e 
+   viceversa.
