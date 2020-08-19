@@ -7,24 +7,47 @@ Virtual environment e package
 Introduzione
 ============
 
-I programmi Python usano spesso moduli e package che non sono compresi nella libreria standard. Inoltre le applicazioni talvolta hanno bisogno di una specifica versione di una libreria, perché è necessario che un certo baco sia stato risolto, oppure perché fanno uso di una vecchia versione dell'interfaccia della libreria. 
+I programmi Python usano spesso moduli e package che non sono compresi nella 
+libreria standard. Inoltre le applicazioni talvolta hanno bisogno di una 
+specifica versione di una libreria, perché è necessario che un certo baco sia 
+stato risolto, oppure perché fanno uso di una vecchia versione 
+dell'interfaccia della libreria. 
 
-Ciò vuol dire che non è possibile che una singola installazione di Python possa venire incontro alle esigenze di ogni possibile applicazione. Se il programma A richiede la versione 1.0 di un certo modulo, ma il programma B ha bisogno della 2.0, queste necessità sono in conflitto e installare una delle due versioni non permetterà all'altro programma di funzionare correttamente.
+Ciò vuol dire che non è possibile che una singola installazione di Python 
+possa venire incontro alle esigenze di ogni possibile applicazione. Se il 
+programma A richiede la versione 1.0 di un certo modulo, ma il programma B ha 
+bisogno della 2.0, queste necessità sono in conflitto e installare una delle 
+due versioni non permetterà all'altro programma di funzionare correttamente.
 
-La soluzione è creare un :term:`virtual environment`, ovvero una directory auto-sufficiente che contiene una installazione di Python, per una particolare versione di Python, oltre a un certo numero di pacchetti aggiuntivi.
+La soluzione è creare un :term:`virtual environment`, ovvero una directory 
+auto-sufficiente che contiene una installazione di Python, per una particolare 
+versione di Python, oltre a un certo numero di pacchetti aggiuntivi.
 
-Programmi diversi possono usare virtual environment diversi. Per risolvere il problema di richieste in conflitto dell'esempio precedente, il programma A può avere il suo environment con la versione 1.0 installate, mentre il programma B avrà un altro virtual environment con la versione 2.0. Se in seguito B richiede un aggiornamento della libreria alla versione 3.0, ciò non avrà conseguenze sull'environment di A. 
+Programmi diversi possono usare virtual environment diversi. Per risolvere il 
+problema di richieste in conflitto dell'esempio precedente, il programma A può 
+avere il suo environment con la versione 1.0 installate, mentre il programma B 
+avrà un altro virtual environment con la versione 2.0. Se in seguito B 
+richiede un aggiornamento della libreria alla versione 3.0, ciò non avrà 
+conseguenze sull'environment di A. 
 
 Creare un virtual environment
 =============================
 
-:mod:`venv` è il modulo usato per creare e gestire virtual environment. :mod:`venv` installa in genere la versione più recente di Python che avete disponibile. Se avete installato più versioni di Python nel vostro sistema, potete selezionarne una in particolare invocando ``python3`` o qualsiasi versione desiderate.
+:mod:`venv` è il modulo usato per creare e gestire virtual environment. 
+:mod:`venv` installa in genere la versione più recente di Python che avete 
+disponibile. Se avete installato più versioni di Python nel vostro sistema, 
+potete selezionarne una in particolare invocando ``python3`` o qualsiasi 
+versione desiderate.
 
-Per creare un virtual environment, decidete in quale directory volete collocarlo e avviate il modulo :mod:`venv` come uno script, passando il percorso della directory scelta::
+Per creare un virtual environment, decidete in quale directory volete 
+collocarlo e avviate il modulo :mod:`venv` come uno script, passando il 
+percorso della directory scelta::
 
    python3 -m venv tutorial-env
 
-Questo crea la directory ``tutorial-env`` se non esiste; inoltre crea al suo interno le directory che contengono una copia dell'interprete Python, la libreria standard e diversi file di corredo.
+Questo crea la directory ``tutorial-env`` se non esiste; inoltre crea al suo 
+interno le directory che contengono una copia dell'interprete Python, la 
+libreria standard e diversi file di corredo.
 
 Creato il virtual environment, non resta che attivarlo. 
 
@@ -36,9 +59,14 @@ Su Unix o MacOS::
 
   source tutorial-env/bin/activate
 
-(Lo script è scritto per la bash shell. Se usate :program:`csh` o :program:`fish`, usate invece gli script alternativi ``activate.csh`` o ``activate.fish``.)
+(Lo script è scritto per la bash shell. Se usate :program:`csh` o 
+:program:`fish`, usate invece gli script alternativi ``activate.csh`` o 
+``activate.fish``.)
 
-Attivare il virtual environment cambia il prompt della shell per mostrare il nome dell'environment in uso; modifica inoltre l'ambiente di lavoro in modo che invocare ``python`` restituisca quella particolare versione e installazione dell'interprete. Per esempio:
+Attivare il virtual environment cambia il prompt della shell per mostrare il 
+nome dell'environment in uso; modifica inoltre l'ambiente di lavoro in modo 
+che invocare ``python`` restituisca quella particolare versione e 
+installazione dell'interprete. Per esempio:
 
 .. code-block:: bash
 
@@ -56,8 +84,10 @@ Attivare il virtual environment cambia il prompt della shell per mostrare il nom
 Gestire i pacchetti con Pip
 ===========================
 
-Potete installare, aggiornare, rimuovere package usando un programma chiamato :program:`pip`.  Per default ``pip`` installerà pacchetti pubblicati sul `Python
-Package Index <https://pypi.org>`_. Potete cercare nel PyPI con il vostro browser o usando le funzioni di ricerca di Pip:
+Potete installare, aggiornare, rimuovere package usando un programma chiamato 
+:program:`pip`.  Per default ``pip`` installerà pacchetti pubblicati sul 
+`Python Package Index <https://pypi.org>`_. Potete cercare nel PyPI con il 
+vostro browser o usando le funzioni di ricerca di Pip:
 
 .. code-block:: bash
 
@@ -70,9 +100,12 @@ Package Index <https://pypi.org>`_. Potete cercare nel PyPI con il vostro browse
   ...
 
 ``pip`` offre un numero di comandi interni: "search", "install", "uninstall",
-"freeze", etc.  (Si veda la guida a :ref:`Installare moduli Python<installing-index>` per la documentazione completa di ``pip``.)
+"freeze", etc.  (Si veda la guida a 
+:ref:`Installare moduli Python<installing-index>` per la documentazione 
+completa di ``pip``.)
 
-Per installare l'ultima versione disponibile di un package, basta specificare il suo nome:
+Per installare l'ultima versione disponibile di un package, basta specificare 
+il suo nome:
 
 .. code-block:: bash
 
@@ -83,7 +116,8 @@ Per installare l'ultima versione disponibile di un package, basta specificare il
     Running setup.py install for novas
   Successfully installed novas-3.1.1.3
 
-Potete anche installare una versione specifica, indicando il nome seguito da ``==`` e il numero di versione:
+Potete anche installare una versione specifica, indicando il nome seguito da 
+``==`` e il numero di versione:
 
 .. code-block:: bash
 
@@ -93,7 +127,10 @@ Potete anche installare una versione specifica, indicando il nome seguito da ``=
   Installing collected packages: requests
   Successfully installed requests-2.6.0
 
-Se eseguite due volte questo comando, ``pip`` vi informerà che la versione richiesta è già presente e non farà nient'altro. Potete indicare un altro numero di versione per ottenere quella, oppure eseguire ``pip install --upgrade`` per aggiornare il pacchetto all'ultima versione:
+Se eseguite due volte questo comando, ``pip`` vi informerà che la versione 
+richiesta è già presente e non farà nient'altro. Potete indicare un altro 
+numero di versione per ottenere quella, oppure eseguire 
+``pip install --upgrade`` per aggiornare il pacchetto all'ultima versione:
 
 .. code-block:: bash
 
@@ -105,7 +142,8 @@ Se eseguite due volte questo comando, ``pip`` vi informerà che la versione rich
         Successfully uninstalled requests-2.6.0
   Successfully installed requests-2.7.0
 
-``pip uninstall``, seguito dal nome di uno o più pacchetti, li rimuoverà dal virtual environment. 
+``pip uninstall``, seguito dal nome di uno o più pacchetti, li rimuoverà dal 
+virtual environment. 
 
 ``pip show`` visualizza informazioni su un particolare pacchetto:
 
@@ -135,7 +173,9 @@ Se eseguite due volte questo comando, ``pip`` vi informerà che la versione rich
   requests (2.7.0)
   setuptools (16.0)
 
-``pip freeze`` produce una lista simile di pacchetti installati, ma usa un formato che può essere letto da ``pip install``. Una convenzione molto usata è di collocare questa lista in un file ``requirements.txt``:
+``pip freeze`` produce una lista simile di pacchetti installati, ma usa un 
+formato che può essere letto da ``pip install``. Una convenzione molto usata è 
+di collocare questa lista in un file ``requirements.txt``:
 
 .. code-block:: bash
 
@@ -145,7 +185,9 @@ Se eseguite due volte questo comando, ``pip`` vi informerà che la versione rich
   numpy==1.9.2
   requests==2.7.0
 
-Il file ``requirements.txt`` può essere incluso nel controllo di versione e distribuito come parte dell'applicazione. Gli utenti possono poi usarlo per installare tutti i pacchetti necessari con ``install -r``:
+Il file ``requirements.txt`` può essere incluso nel controllo di versione e 
+distribuito come parte dell'applicazione. Gli utenti possono poi usarlo per 
+installare tutti i pacchetti necessari con ``install -r``:
 
 .. code-block:: bash
 
@@ -160,4 +202,8 @@ Il file ``requirements.txt`` può essere incluso nel controllo di versione e dis
     Running setup.py install for novas
   Successfully installed novas-3.1.1.3 numpy-1.9.2 requests-2.7.0
 
-``pip`` ha molte altre opzioni. Consultate la guida a :ref:`Installare moduli Python<installing-index>` per la documentazione completa di ``pip``.  Se avete scritto un package Python e volete pubblicarlo sul Python Package Index, leggete la guida a :ref:`Distribuire moduli Python<distributing-index>`.
+``pip`` ha molte altre opzioni. Consultate la guida a 
+:ref:`Installare moduli Python<installing-index>` per la documentazione 
+completa di ``pip``.  Se avete scritto un package Python e volete pubblicarlo 
+sul Python Package Index, leggete la guida a 
+:ref:`Distribuire moduli Python<distributing-index>`.

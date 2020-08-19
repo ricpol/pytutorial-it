@@ -197,11 +197,6 @@ In particolare, negli esempi di codice:
 * traduci le altre eventuali stringhe *solo* se sono importanti a chiarire 
   l'esempio; se sono solo "di colore", non tradurle. 
 
-Attualmente le righe non sono interrotte al 79esimo carattere, come sarebbe 
-opportuno: questo vuol dire che dovrai impostare il *word wrap* nel tuo 
-editor. Per il momento usa anche tu questa convenzione. Prima o poi farò 
-un passaggio di "pretty printing" su tutti i testi...
-
 Solo se traduci una intera sezione nuova (capita raramente...), allora puoi 
 aggiungere il tuo nome direttamente nel testo: immediatamente prima della 
 nuova sezione, aggiungi una nota così ``.. traduttore: Tizio Caio``. In ogni 
