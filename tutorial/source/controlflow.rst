@@ -833,7 +833,7 @@ deve usare l'oggetto, i suoi *side-effect*, etc.
 Il parser di Python non elimina lo spazio dei rientri da una stringa 
 multi-riga: di conseguenza i *tool* che processano la documentazione dovranno 
 compiere questa operazione, se lo desiderano. Per questo occorre utilizzare 
-una convenzione: la prima riga non vuota *dopo* la riga iniziale determina la 
+una convenzione: la prima riga non vuota *dopo* la riga iniziale determina lo 
 spazio di rientro per tutto il resto della stringa. (Non possiamo usare la 
 prima riga, perché di solito inizia con gli apici e quindi la stringa in sé 
 non ha nessun rientro apparente.) Lo spazio "equivalente" a questo rientro 
