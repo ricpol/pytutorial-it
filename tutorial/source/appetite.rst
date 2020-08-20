@@ -8,7 +8,7 @@
 
     Questa è la traduzione della **versione "stabile" del Tutorial per Python 
     3.8**, ed è aggiornata al 
-    `6 luglio 2020 <https://github.com/python/cpython/commit/6790f9badda47c7aa0fe4b0b5f090d6ca0c477d5>`_.
+    `20 agosto 2020 <https://github.com/python/cpython/commits/3.8/Doc/tutorial>`_.
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: potete essere 
