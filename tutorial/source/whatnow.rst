@@ -43,10 +43,10 @@ Altro materiale su Python:
   vostro codice, potete registrarvi qui, in modo che altri possano trovare il 
   vostro lavoro. 
 
-* https://code.activestate.com/recipes/langs/python/: il "Python Cookbook" è 
-  una notevole raccolta di esempi, moduli più complessi e script utili. I 
-  contributi più interessanti sono raccolti nel libro omonimo (O'Reilly & 
-  Associates, ISBN 0-596-00797-3).
+* https://github.com/ActiveState/code/tree/master/recipes/python/: il "Python 
+  Cookbook" è una notevole raccolta di esempi, moduli più complessi e script 
+  utili. I contributi più interessanti sono raccolti nel libro omonimo 
+  (O'Reilly & Associates, ISBN 0-596-00797-3).
 
 * http://www.pyvideo.org raccoglie video su Python, da convegni e incontri di 
   *user-group*.
