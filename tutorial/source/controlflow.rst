@@ -206,15 +206,15 @@ successiva iterazione del ciclo::
     ...     if num % 2 == 0:
     ...         print("Trovato un numero pari", num)
     ...         continue
-    ...     print("Trovato un numero", num)
+    ...     print("Trovato un numero dispari", num)
     Trovato un numero pari 2
-    Trovato un numero 3
+    Trovato un numero dispari 3
     Trovato un numero pari 4
-    Trovato un numero 5
+    Trovato un numero dispari 5
     Trovato un numero pari 6
-    Trovato un numero 7
+    Trovato un numero dispari 7
     Trovato un numero pari 8
-    Trovato un numero 9
+    Trovato un numero dispari 9
 
 .. _tut-pass:
 
