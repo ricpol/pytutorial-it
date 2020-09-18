@@ -43,7 +43,7 @@ Altro materiale su Python:
   vostro codice, potete registrarvi qui, in modo che altri possano trovare il 
   vostro lavoro. 
 
-* https://github.com/ActiveState/code/tree/master/recipes/python/: il "Python 
+* https://github.com/ActiveState/code/tree/master/recipes/Python/: il "Python 
   Cookbook" è una notevole raccolta di esempi, moduli più complessi e script 
   utili. I contributi più interessanti sono raccolti nel libro omonimo 
   (O'Reilly & Associates, ISBN 0-596-00797-3).
