@@ -8,7 +8,7 @@
 
     Questa è la traduzione della **versione "di sviluppo" del Tutorial**, 
     corrispondente al "master branch" della repository, ed è aggiornata al 
-    `15 settembre  2020 <https://github.com/python/cpython/commits/master/Doc/tutorial>`_.
+    `27 settembre  2020 <https://github.com/python/cpython/commits/master/Doc/tutorial>`_.
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: 
