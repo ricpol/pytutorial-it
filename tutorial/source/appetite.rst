@@ -9,6 +9,8 @@
     Questa è la traduzione della **versione "stabile" del Tutorial per Python 
     3.8**, ed è aggiornata al 
     `15 settembre 2020 <https://github.com/python/cpython/commits/3.8/Doc/tutorial>`_.
+    Raccomandiamo comunque di installare l'ultima versione di Python (3.9) 
+    e di seguire il tutorial per quella versione. 
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: potete essere 
