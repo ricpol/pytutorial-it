@@ -11,7 +11,7 @@ Esistono quattro traduzioni leggermente differenti, in altrettanti branch, che s
 
 * per la versione stabile `3.8 <https://docs.python.org/3.8/tutorial/index.html>`_;
 
-* per la versione in pre-release `3.9 <https://docs.python.org/3.9/tutorial/index.html>`_;
+* per la versione stabile `3.9 <https://docs.python.org/3.9/tutorial/index.html>`_;
 
 * per la versione "più aggiornata", che corrisponde alle ultime modifiche fatte nel  `master branch <https://github.com/python/cpython/tree/master/Doc/tutorial>`_. 
 
