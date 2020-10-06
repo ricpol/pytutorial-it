@@ -6,7 +6,7 @@
     della documentazione di Python, mantenuta in sincrono con il testo della 
     `repository GitHub <https://github.com/python/cpython/tree/3.9/Doc/tutorial>`_.
 
-    Questa è la traduzione della **versione "pre-release" del Tutorial per 
+    Questa è la traduzione della **versione "stabile" del Tutorial per 
     Python 3.9**, ed è aggiornata al 
     `15 settembre 2020 <https://github.com/python/cpython/commits/3.9/Doc/tutorial>`_.
 
