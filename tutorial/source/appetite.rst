@@ -9,7 +9,7 @@
     Questa è la traduzione della **versione "di sviluppo" del Tutorial**, 
     corrispondente a Python 3.10 e al "master branch" della repository, 
     ed è aggiornata al 
-    `2 ottobre  2020 <https://github.com/python/cpython/commits/master/Doc/tutorial>`_.
+    `6 novembre  2020 <https://github.com/python/cpython/commits/master/Doc/tutorial>`_.
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: 
