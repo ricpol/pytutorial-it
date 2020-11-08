@@ -282,10 +282,10 @@ Concatenamento di eccezioni
 ===========================
 
 L'istruzione :keyword:`raise` accetta un'opzione :keyword:`from` che consente 
-di concatenare due eccezioni, impostando l'attributo ``__cause__`` 
-dell'eccezione che viene emessa. Per esempio::
+di concatenare due eccezioni. Per esempio::
 
-    raise RuntimeError from OSError
+    # exc deve essere l'istanza di una eccezione, o None
+    raise RuntimeError from exc
 
 Questo è utile per trasformare un'eccezione in un'altra. Per esempio::
 
@@ -306,12 +306,11 @@ Questo è utile per trasformare un'eccezione in un'altra. Per esempio::
     <BLANKLINE>
     Traceback (most recent call last):
       File "<stdin>", line 4, in <module>
-    RuntimeError
+    RuntimeError: Failed to open database
 
-L'espressione che segue il :keyword:`from` deve essere o un'eccezione, o 
-``None``. Il concatenamento delle eccezioni avviene automaticamente quando 
-un'eccezione viene emessa da dentro il gestore di un'altra eccezione, o nella 
-clausola :keyword:`finally`. L'idioma ``from None`` disabilita il 
+Il concatenamento delle eccezioni avviene automaticamente quando 
+un'eccezione viene emessa da dentro una clausola :keyword:`except` oppure 
+:keyword:`finally`. L'idioma ``from None`` disabilita il 
 concatenamento::
 
     >>> try:
@@ -322,6 +321,9 @@ concatenamento::
     Traceback (most recent call last):
       File "<stdin>", line 4, in <module>
     RuntimeError
+
+Per ulteriori informazioni sul meccanismo del concatenamento, si veda 
+la sezione sulle :ref:`Eccezioni predefinite <bltin-exceptions>`.
 
 .. _tut-userexceptions:
 
