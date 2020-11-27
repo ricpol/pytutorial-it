@@ -332,12 +332,15 @@ blocco :keyword:`try`\ -\ :keyword:`finally`::
     True
 
 Se non usate :keyword:`with`, allora dovreste chiamare ``f.close()`` per 
-chiudere il file e liberare immediatamente le risorse di sistema collegate. Se 
-non chiudete esplicitamente il file, il *garbage collector* di Python prima o 
-poi distruggerà l'oggetto e chiuderà il file per voi, ma questo potrebbe 
-restare aperto per molto tempo. Un rischio ulteriore è che diverse 
-implementazioni di Python potrebbero effettuare questa operazione in tempi 
-diversi. 
+chiudere il file e liberare immediatamente le risorse di sistema collegate. 
+
+.. warning::
+   Chiamare ``f.write()`` senza usare :keyword:`!with` o chiamare 
+   ``f.close()`` **potrebbe** comportare che gli argomenti di ``f.write()`` 
+   non siano scritti completamente nel file su disco, anche se il programma 
+   dovesse terminare senza problemi. 
+
+.. See also https://bugs.python.org/issue17852 
 
 Una volta chiuso il file, sia con un'istruzione :keyword:`with` sia chiamando 
 ``f.close()``, ogni tentativo di usarlo di nuovo fallirà automaticamente::
