@@ -72,7 +72,7 @@ tutti i metodi disponibili per gli oggetti-lista:
 
    Restituisce il numero di volte che *x* appare nella lista.
 
-.. method:: list.sort(key=None, reverse=False)
+.. method:: list.sort(*, key=None, reverse=False)
    :noindex:
 
    Ordina sul posto gli elementi della lista. I parametri possono essere usati 
