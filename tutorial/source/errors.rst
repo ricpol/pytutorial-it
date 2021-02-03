@@ -102,15 +102,15 @@ L'istruzione :keyword:`try` funziona in questo modo:
 * Se nessuna eccezione viene incontrata, il blocco *except* non viene eseguito 
   e l'esecuzione dell'istruzione :keyword:`try` termina così.
 
-* Se durante l'esecuzione del blocco *try* viene incontrata un'eccezione, le 
-  eventuali istruzioni rimanenti del blocco vengono saltate. Quindi, se il 
-  tipo dell'eccezione coincide con quella nominata dopo la parola-chiave 
-  :keyword:`except`, allora viene eseguito il blocco *except*. Quindi 
-  l'esecuzione prosegue normalmente con ciò che segue l'istruzione 
-  :keyword:`try`.
+* Se durante l'esecuzione del blocco :keyword:`try` viene incontrata
+  un'eccezione, le eventuali istruzioni rimanenti del blocco vengono saltate. 
+  Quindi, se il tipo dell'eccezione coincide con quella nominata dopo la 
+  parola-chiave :keyword:`except`, allora viene eseguita la sezione *except*. 
+  Quindi l'esecuzione prosegue normalmente con ciò che segue il blocco
+  try/exept.
 
-* Se viene incontrata un'eccezione che non corrisponde a quella prevista nel 
-  blocco *except*, allora l'eccezione è passata ad eventuali altre istruzioni 
+* Se viene incontrata un'eccezione che non corrisponde a quella prevista nella 
+  sezione *except*, allora l'eccezione è passata ad eventuali altre istruzioni 
   :keyword:`try` annidate di livello superiore; se nessun gestore viene 
   trovato, l'eccezione è *non gestita*: a questo punto l'esecuzione del 
   programma si arresta con il messaggio di errore visto sopra. 
