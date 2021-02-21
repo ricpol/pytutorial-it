@@ -294,8 +294,8 @@ I parametri *reali* (gli argomenti [#]_) di una funzione sono introdotti nella
 tabella dei simboli locali nel momento in cui la funzione è chiamata. Quindi, 
 gli argomenti sono "passati per valore" (dove però il "valore" è sempre un 
 *riferimento* all'oggetto, non il valore dell'oggetto). [#]_ Quando una 
-funzione chiama un'altra funzione, una nuova tabella di simboli è creata per 
-quella chiamata. 
+funzione chiama un'altra funzione, o sé stessa ricorsivamente, una nuova tabella 
+di simboli è creata per quella chiamata. 
 
 La *definizione* della funzione associa il nome della funzione con 
 l'oggetto-funzione nella tabella dei simboli corrente. L'interprete riconosce 
