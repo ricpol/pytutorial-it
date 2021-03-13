@@ -250,8 +250,8 @@ termini più astratti. Il :keyword:`!pass` verrà ignorato silenziosamente::
 
 .. _tut-match:
 
-L'istruzione :keyword:`!match`.
-===============================
+L'istruzione :keyword:`!match`
+==============================
 
 Un'istruzione match riceve un'espressione e ne compara il valore con diversi 
 pattern in successione, espressi con uno o più blocchi "case". A prima vista 
