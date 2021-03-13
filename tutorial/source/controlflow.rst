@@ -35,6 +35,11 @@ scorciatoia per "else if", e permette di evitare troppi livelli annidati. Una
 sequenza :keyword:`!if` ... :keyword:`!elif` ... :keyword:`!elif` ... 
 sostituisce le istruzioni ``switch`` o ``case`` tipiche di altri linguaggi.
 
+Se volete confrontare lo stesso valore con diverse costanti, o controllare 
+l'esistenza di tipi o attributi specifici, allora potreste trovare utile 
+l'istruzione :keyword:`!match`. Per ulteriori informazioni, si veda la sezione 
+:ref:`tut-match`.
+
 .. _tut-for:
 
 Istruzione :keyword:`!for`
@@ -242,6 +247,181 @@ termini più astratti. Il :keyword:`!pass` verrà ignorato silenziosamente::
    >>> def initlog(*args):
    ...     pass   # Ricordati di implementare questa funzione!
    ...
+
+.. _tut-match:
+
+L'istruzione :keyword:`!match`.
+===============================
+
+Un'istruzione match riceve un'espressione e ne compara il valore con diversi 
+pattern in successione, espressi con uno o più blocchi "case". A prima vista 
+è simile all'istruzione "switch" in C, Java o JavaScript (e molti altri 
+linguaggi), ma può anche estrarre e assegnare a variabili i componenti dei 
+valori confrontati (come elementi di sequenze, o attributi di oggetti). 
+
+Nella sua forma più semplice, confronta un valore dato con uno o più valori 
+(*literal*)::
+
+    def http_error(status):
+        match status:
+            case 400:
+                return "Richiesta non valida"
+            case 404:
+                return "Non trovato"
+            case 418:
+                return "Sono una teiera"
+            case _:
+                return "Qualcosa non va con Internet"
+
+Si noti che nell'ultimo blocco il "nome variabile" ``_`` funziona da jolly e 
+intercetta sempre tutto. Se nessun confronto riesce, nessun ramo viene 
+eseguito.
+
+Potete combinare diversi valori in un singolo pattern usando ``|`` ("or")::
+
+    case 401 | 403 | 404:
+        return "Non permesso"
+
+I pattern possono assomigliare a spacchettamenti di sequenze e possono essere 
+usati per assegnare a variabili::
+
+    # point è una tupla (x, y)
+    match point:
+        case (0, 0):
+            print("Origine")
+        case (0, y):
+            print(f"Y={y}")
+        case (x, 0):
+            print(f"X={x}")
+        case (x, y):
+            print(f"X={x}, Y={y}")
+        case _:
+            raise ValueError("Non è un punto")
+
+Studiate questo esempio con attenzione! Il primo pattern ha due valori 
+(*literal*) e può essere considerato un'estensione del pattern con i valori 
+mostrato prima. Ma i successivi due pattern uniscono un valore a una variabile, 
+e la variabile *referenzia* un valore preso dal soggetto iniziale (``point``). 
+Il quarto pattern intercetta due variabili, cosa che lo rende concettualmente 
+simile all'assegnamento con spacchettamento ``(x, y) = point``.
+
+Se usate le classi per strutturare i dati, potete usare il nome della classe 
+seguito da una lista di argomenti che ricorda quella di un costruttore, ma 
+con la capacità di catturare gli attributi e assegnarli a variabili::
+
+    class Point:
+        x: int
+        y: int
+
+    def where_is(point):
+        match point:
+            case Point(x=0, y=0):
+                print("Origine")
+            case Point(x=0, y=y):
+                print(f"Y={y}")
+            case Point(x=x, y=0):
+                print(f"X={x}")
+            case Point():
+                print("Altrove da qualche parte")
+            case _:
+                print("Non è un punto")
+
+Potete usare i parametri posizionali con alcune classi predefinite che offrono 
+un ordinamento degli attributi (per esempio le *dataclass*). Potete inoltre 
+definire una posizione specifica per gli attributi in un pattern, impostando 
+l'attributo speciale ``__match_args__`` della vostra classe. Se lo impostate a 
+``('x', 'y')``, allora tutti questi pattern sono equivalenti (e collegano 
+l'attributo ``y`` alla variabile ``var``)::
+
+    Point(1, var)
+    Point(1, y=var)
+    Point(x=1, y=var)
+    Point(y=var, x=1)
+
+Un buon modo di leggere i pattern è considerarli come una forma estesa di ciò 
+che si può mettere nella parte sinistra di un assegnamento, così da capire 
+quali variabili verranno assegnate a quali valori. Solo i nomi "sciolti" (come 
+il ``var`` qui sopra) possono essere assegnati in una istruzione *match*. 
+I nomi con il punto (come ``foo.bar``), gli attributi (come gli ``x=`` e 
+``y=`` qui sopra) o i nomi delle classi (riconoscibili dalle parentesi "(...)" 
+accanto al nome, come nei ``Point(...)`` qui sopra) non sono mai assegnati. 
+
+I pattern possono essere arbitrariamente annidati. Per esempio, se abbiamo una 
+breve lista di punti, potremmo confrontarla con dei pattern in questo modo::
+
+    match points:
+        case []:
+            print("Nessun punto")
+        case [Point(0, 0)]:
+            print("L'origine")
+        case [Point(x, y)]:
+            print(f"Un punto singolo {x}, {y}")
+        case [Point(0, y1), Point(0, y2)]:
+            print(f"Due sull'asse Y in {y1}, {y2}")
+        case _:
+            print("Qualcos'altro")
+
+Possiamo aggiungere una clausola ``if`` al pattern, detta "sentinella". Se la 
+sentinella è *False*, allora ``match`` passa a provare il blocco ``case`` 
+successivo. Si noti che la cattura dei valori avviene prima di valutare la 
+sentinella::
+
+    match point:
+        case Point(x, y) if x == y:
+            print(f"Y=X in {x}")
+        case Point(x, y):
+            print(f"Non sulla diagonale")
+
+Ecco alcune altre caratteristiche importanti dell'istruzione ``match``:
+
+- Come per gli assegnamenti con spacchettamento, i pattern con le tuple hanno 
+  lo stesso significato di quelli con le liste, e anzi catturano sequenze 
+  arbitrarie. Un'eccezione importante è che non catturano gli iteratori o 
+  le stringhe. 
+
+- I pattern con le sequenze supportano lo spacchettamento "esteso": 
+  ``[x, y, *rest]`` e ``(x, y, *rest)`` funzionano in modo simile agli 
+  assegnamenti con spacchettamento. Il nome dopo il ``*`` può anche essere 
+  ``_``, così che ``(x, y, *_)`` intercetta una sequenza di almeno due 
+  elementi, senza collegare i restanti a una variabile. 
+
+- I pattern con *mapping*: ``{"bandwidth": b, "latency": l}`` intercetta i 
+  valori di ``bandwidth`` e ``latency`` da un dizionario. A differenza dei 
+  pattern con le sequenze, qui i valori restanti sono ignorati. Gli 
+  spacchettamenti come ``**rest`` sono supportati, ma ``**_`` sarebbe 
+  ridondante e quindi non è permesso. 
+
+- I sotto-pattern si possono intercettare con la parola riservata ``as``::
+
+    case (Point(x1, y1), Point(x2, y2) as p2): ...
+
+  questo intercetta il secondo elemento dell'input come ``p2`` (fintanto che 
+  l'input è una sequenza di due punti). 
+
+- La maggior parte dei valori (*literal*) viene confrontata per uguaglianza, 
+  ma i *singleton* ``True``, ``False`` e ``None`` sono confrontati per 
+  identità. 
+
+- I pattern possono usare costanti con un nome. Queste però devono essere 
+  indicate con la sintassi col punto, per evitare che siano interpretate come 
+  variabili intercettate::
+
+      from enum import Enum
+      class Color(Enum):
+          RED = 0
+          GREEN = 1
+          BLUE = 2
+
+      match color:
+          case Color.RED:
+              print("Vedo rosso!")
+          case Color.GREEN:
+              print("L'erba è verde")
+          case Color.BLUE:
+              print("Mi sento giù :(")
+
+Per una spiegazione più dettagliata con esempi ulteriori, si veda la :pep:`636` 
+che è scritta in forma di tutorial. 
 
 .. _tut-functions:
 
