@@ -46,8 +46,8 @@ percorso della directory scelta::
    python3 -m venv tutorial-env
 
 Questo crea la directory ``tutorial-env`` se non esiste; inoltre crea al suo 
-interno le directory che contengono una copia dell'interprete Python, la 
-libreria standard e diversi file di corredo.
+interno le directory che contengono una copia dell'interprete Python 
+e diversi file di corredo.
 
 Un luogo comune per conservare i virtual environment è ``.venv``: questo nome 
 mantiene la directory nascosta nella shell in modo che non sia d'impiccio, e 
