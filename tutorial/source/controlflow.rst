@@ -1060,7 +1060,7 @@ un'espressione che restituisce il valore dell'annotazione. Le annotazioni per
 i valori di ritorno si indicano con un ``->`` seguito da un'espressione, 
 collocati tra la fine della lista dei parametri e il "due punti" che termina 
 l'istruzione :keyword:`def`. Nell'esempio che segue sono annotati un parametro 
-posizionale, un parametro keyword e il valore di ritorno::
+obbligatorio, un parametro opzionale e il valore di ritorno::
 
    >>> def f(ham: str, eggs: str = 'eggs') -> str:
    ...     print("Annotations:", f.__annotations__)
