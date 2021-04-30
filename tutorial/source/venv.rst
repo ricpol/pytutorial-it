@@ -93,19 +93,9 @@ Gestire i pacchetti con Pip
 Potete installare, aggiornare, rimuovere package usando un programma chiamato 
 :program:`pip`.  Per default ``pip`` installerà pacchetti pubblicati sul 
 `Python Package Index <https://pypi.org>`_. Potete cercare nel PyPI con il 
-vostro browser o usando le funzioni di ricerca di Pip:
+vostro browser.
 
-.. code-block:: bash
-
-  (tutorial-env) $ pip search astronomy
-  skyfield               - Elegant astronomy for Python
-  gary                   - Galactic astronomy and gravitational dynamics.
-  novas                  - The United States Naval Observatory NOVAS astronomy library
-  astroobs               - Provides astronomy ephemeris to plan telescope observations
-  PyAstronomy            - A collection of astronomy related tools for Python.
-  ...
-
-``pip`` offre un numero di comandi interni: "search", "install", "uninstall",
+``pip`` offre un numero di comandi interni: "install", "uninstall",
 "freeze", etc.  (Si veda la guida a 
 :ref:`Installare moduli Python<installing-index>` per la documentazione 
 completa di ``pip``.)

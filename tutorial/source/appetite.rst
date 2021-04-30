@@ -8,7 +8,7 @@
 
     Questa è la traduzione della **versione "stabile" del Tutorial per Python 
     3.8**, ed è aggiornata al 
-    `27 marzo 2021 <https://github.com/python/cpython/commits/3.8/Doc/tutorial>`_.
+    `14 aprile 2021 <https://github.com/python/cpython/commits/3.8/Doc/tutorial>`_.
     Raccomandiamo comunque di installare l'ultima versione di Python (3.9) 
     e di seguire il tutorial per quella versione. 
 
