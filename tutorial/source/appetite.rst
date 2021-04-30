@@ -8,7 +8,7 @@
 
     Questa è la traduzione della **versione "stabile" del Tutorial per 
     Python 3.9**, ed è aggiornata al 
-    `20 febbraio 2021 <https://github.com/python/cpython/commits/3.9/Doc/tutorial>`_.
+    `29 aprile 2021 <https://github.com/python/cpython/commits/3.9/Doc/tutorial>`_.
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: potete essere 

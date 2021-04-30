@@ -658,8 +658,8 @@ qualsiasi operatore, non solo di confronto.
 
 Gli operatori di confronto ``in`` e ``not in`` controllano se un valore esiste 
 o meno in una sequenza. Gli operatori ``is`` e ``is not`` ci dicono se due 
-oggetti sono effettivamente lo stesso oggetto: questo importa solo per gli 
-oggetti mutabili come le liste. Tutti gli operatori di confronto hanno la 
+oggetti sono effettivamente lo stesso oggetto. 
+Tutti gli operatori di confronto hanno la 
 stessa priorità, che è più bassa di quella di tutti gli altri operatori 
 numerici. 
 

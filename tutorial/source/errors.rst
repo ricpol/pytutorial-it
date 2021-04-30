@@ -281,8 +281,8 @@ di rilanciare l'eccezione::
 Concatenamento di eccezioni
 ===========================
 
-L'istruzione :keyword:`raise` accetta un'opzione :keyword:`from` che consente 
-di concatenare due eccezioni. Per esempio::
+L'istruzione :keyword:`raise` accetta un'opzione :keyword:`from<raise>` 
+che consente di concatenare due eccezioni. Per esempio::
 
     # exc deve essere l'istanza di una eccezione, o None
     raise RuntimeError from exc
