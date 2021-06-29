@@ -2,14 +2,13 @@
 .. topic:: Nota per la traduzione italiana.
 
     Questa è una traduzione del 
-    `Tutorial ufficiale <https://docs.python.org/3/tutorial/index.html>`_ 
+    `Tutorial ufficiale <https://docs.python.org/3.10/tutorial/index.html>`_ 
     della documentazione di Python, mantenuta in sincrono con il testo della 
-    `repository GitHub <https://github.com/python/cpython/tree/master/Doc/tutorial>`_.
+    `repository GitHub <https://github.com/python/cpython/tree/3.10/Doc/tutorial>`_.
 
-    Questa è la traduzione della **versione "di sviluppo" del Tutorial**, 
-    corrispondente a Python 3.10 e al "master branch" della repository, 
-    ed è aggiornata al 
-    `29 aprile 2021 <https://github.com/python/cpython/commits/master/Doc/tutorial>`_.
+    Questa è la traduzione della **versione "beta" del Tutorial**, 
+    corrispondente a Python 3.10, ed è aggiornata al 
+    `27 giugno 2021 <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_.
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: 
