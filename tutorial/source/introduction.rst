@@ -73,7 +73,7 @@ frazionaria, potete usare l'operatore ``//``. Per ottenere il resto usate
    5
    >>> 17 % 3  # l'operatore % restituisce il resto della divisione
    2
-   >>> 5 * 3 + 2  # risultato * divisore + resto
+   >>> 5 * 3 + 2  # quoziente arrotondato * divisore + resto
    17
 
 Con Python è possibile usare l'operatore ``**`` per calcolare le potenze [#]_::

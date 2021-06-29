@@ -98,14 +98,14 @@ sequenza di lunghezza 10. Potete far partire l'intervallo da un numero diverso
 o specificare un incremento, anche negativo. A volte l'incremento è chiamato 
 "il passo"::
 
-    range(5, 10)
-       5, 6, 7, 8, 9
+    >>> list(range(5, 10))
+    [5, 6, 7, 8, 9]
 
-    range(0, 10, 3)
-       0, 3, 6, 9
+    >>> list(range(0, 10, 3))
+    [0, 3, 6, 9]
 
-    range(-10, -100, -30)
-      -10, -40, -70
+    >>> list(range(-10, -100, -30))
+    [-10, -40, -70]
 
 Per iterare sugli indici di una sequenza, potete combinare le funzioni 
 :func:`range` e :func:`len` come segue::
@@ -125,7 +125,7 @@ si veda per questo :ref:`tut-loopidioms`.
 
 Se cercate semplicemente di "stampare" un intervallo, succede una cosa strana::
 
-   >>> print(range(10))
+   >>> range(10)
    range(0, 10)
 
 L'oggetto restituito da :func:`range` si comporta in modo simile a una lista, 
@@ -144,14 +144,8 @@ invece, un esempio di funzione che accetta un iterabile come argomento è
     6
 
 Vedremo più in là altri esempi di funzioni che restituiscono degli iterabili, 
-o che accettano iterabili come argomento. Infine, se siete curiosi di sapere 
-come si può ottenere una lista da un :func:`range`, ecco la risposta::
-
-   >>> list(range(4))
-   [0, 1, 2, 3]
-
-Nel capitolo :ref:`tut-structures` approfondiremo ancora la funzione 
-:func:`list`.
+o che accettano iterabili come argomento. Nel capitolo :ref:`tut-structures` 
+approfondiremo ancora la funzione :func:`list`.
 
 .. _tut-break:
 
