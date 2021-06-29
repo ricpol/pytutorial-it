@@ -21,7 +21,7 @@ clicca sulla *tab* "Issues" e poi sul pulsante verde "New Issue".
 Nella segnalazione dovresti indicare: 
 
 * la **versione** (o le versioni) della documentazione in cui hai visto 
-  l'errore: quella per Python 3.8, 3.9 o "latest";
+  l'errore: quella per Python 3.8, 3.9, 3.10 o "latest";
 
 * il numero del capitolo e paragrafo;
 
@@ -91,15 +91,19 @@ nella repository originale:
 * la versione "stabile" per Python 3.8: l'elenco dei *commit* relativi si trova 
   `qui <https://github.com/python/cpython/commits/3.8/Doc/tutorial>`_;
 
-* la versione in "pre-release" per Python 3.9: l'elenco dei *commit* 
+* la versione in "beta" per Python 3.9: l'elenco dei *commit* 
   relativi è 
   `questo <https://github.com/python/cpython/commits/3.9/Doc/tutorial>`_;
 
-* la versione "latest" è semplicemente il *master branch* e può essere seguito 
-  `qui <https://github.com/python/cpython/commits/master/Doc/tutorial>`_. 
+* la versione in "pre-release" per Python 3.10: l'elenco dei *commit* 
+  relativi è 
+  `questo <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_;
+
+* la versione "latest" è semplicemente il *main branch* e può essere seguito 
+  `qui <https://github.com/python/cpython/commits/main/Doc/tutorial>`_. 
 
 Naturalmente i *branch* più vecchi sono aggiornati sempre più sporadicamente, 
-mentre il *master* può ricevere più attenzione, specialmente in prossimità di 
+mentre il *main* può ricevere più attenzione, specialmente in prossimità di 
 una nuova release. 
 
 Ciascuna versione della traduzione riporta esattamente la data e il nome del 
