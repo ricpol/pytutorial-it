@@ -487,7 +487,8 @@ Dato un oggetto ``x``, potete ricavarne la rappresentazione JSON con una sola
 riga di codice::
 
    >>> import json
-   >>> json.dumps([1, 'simple', 'list'])
+   >>> x = [1, 'simple', 'list']
+   >>> json.dumps(x)
    '[1, "simple", "list"]'
 
 Una variante della funzione :func:`~json.dumps`, chiamata :func:`~json.dump`, 

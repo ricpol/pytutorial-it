@@ -315,7 +315,7 @@ concatenamento::
 
     >>> try:
     ...     open('database.sqlite')
-    ... except IOError:
+    ... except OSError:
     ...     raise RuntimeError from None
     ...
     Traceback (most recent call last):
@@ -414,6 +414,9 @@ dettaglio alcuni casi complessi:
 * L'eccezione potrebbe accadere durante l'esecuzione di una clausola 
   :keyword:`!except` o :keyword:`!else`. Anche in questo caso l'eccezione è 
   rilanciata dopo l'esecuzione del blocco :keyword:`!finally`. 
+
+* Se un blocco :keyword:`!finally` esegue una istruzione :keyword:`break`, 
+  :keyword:`continue` o :keyword:`return`, l'eccezione non viene rilanciata. 
 
 * Se il codice del blocco :keyword:`!try` raggiunge un'istruzione 
   :keyword:`break` :keyword:`continue` o :keyword:`return`, allora la clausola 
