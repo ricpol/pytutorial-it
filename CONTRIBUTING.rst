@@ -21,7 +21,7 @@ clicca sulla *tab* "Issues" e poi sul pulsante verde "New Issue".
 Nella segnalazione dovresti indicare: 
 
 * la **versione** (o le versioni) della documentazione in cui hai visto 
-  l'errore: quella per Python 3.8, 3.9, 3.10 o "latest";
+  l'errore: quella per Python 3.7, 3.8, 3.9, 3.10 o "latest";
 
 * il numero del capitolo e paragrafo;
 
@@ -37,10 +37,6 @@ di modesta entità.
 Tuttavia è possibile che, in futuro, io possa distrarmi o essere occupato in 
 altre faccende e che quindi la traduzione resti indietro. Inoltre restano 
 comunque dei punti in sospeso: per esempio, 
-
-* sarebbe opportuno creare (e mantenere) una versione anche per Python 3.6. 
-  L'ideale sarebbe avere una versione per ciascuna versione ancora 
-  ufficialmente supportata di Python.
 
 * sarebbe molto bello tradurre anche qualche documento ulteriore, oltre al 
   tutorial: per esempio sono molto tentato dagli 
@@ -88,10 +84,10 @@ nella repository originale:
   può essere visto 
   `qui <https://github.com/python/cpython/commits/3.7/Doc/tutorial>`_;
 
-* la versione "stabile" per Python 3.8: l'elenco dei *commit* relativi si trova 
+* la versione "legacy" per Python 3.8: l'elenco dei *commit* relativi si trova 
   `qui <https://github.com/python/cpython/commits/3.8/Doc/tutorial>`_;
 
-* la versione in "beta" per Python 3.9: l'elenco dei *commit* 
+* la versione in "stabile" per Python 3.9: l'elenco dei *commit* 
   relativi è 
   `questo <https://github.com/python/cpython/commits/3.9/Doc/tutorial>`_;
 
@@ -99,7 +95,7 @@ nella repository originale:
   relativi è 
   `questo <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_;
 
-* la versione "latest" è semplicemente il *main branch* e può essere seguito 
+* la versione "latest" per Python 3.11 è semplicemente il *main branch* e può essere seguito 
   `qui <https://github.com/python/cpython/commits/main/Doc/tutorial>`_. 
 
 Naturalmente i *branch* più vecchi sono aggiornati sempre più sporadicamente, 
