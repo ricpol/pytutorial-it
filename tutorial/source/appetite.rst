@@ -2,7 +2,7 @@
 .. topic:: Nota per la traduzione italiana.
 
     Questa è una traduzione del 
-    `Tutorial ufficiale <https://docs.python.org/3/tutorial/index.html>`_ 
+    `Tutorial ufficiale <https://docs.python.org/3.11/tutorial/index.html>`_ 
     della documentazione di Python, mantenuta in sincrono con il testo della 
     `repository GitHub <https://github.com/python/cpython/tree/main/Doc/tutorial>`_.
 
@@ -16,7 +16,7 @@
     potete essere informati sugli aggiornamenti mettendo una "star" alla 
     repository. Ogni collaborazione è gradita: se intendete partecipare, 
     leggete prima il file 
-    `CONTRIBUTING.rst <https://github.com/ricpol/pytutorial-it/blob/master/CONTRIBUTING.rst>`_. 
+    `CONTRIBUTING.rst <https://github.com/ricpol/pytutorial-it/blob/main/CONTRIBUTING.rst>`_. 
 
     Gli esempi *non* sono tradotti, perché il codice dovrebbe sempre essere 
     scritto in Inglese. Tuttavia i commenti all'interno del codice sono 

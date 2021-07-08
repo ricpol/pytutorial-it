@@ -25,6 +25,6 @@ Copyright dell'originale: 2001-2021 Python Software Foundation. All rights reser
 
 Copyright della traduzione: 2020-2021 Riccardo Polignieri. Tutti i diritti riservati.
 
-Licenza d'uso dell'originale: vedi https://github.com/python/cpython/blob/master/LICENSE
+Licenza d'uso dell'originale: vedi https://github.com/python/cpython/blob/main/LICENSE
 
 Licenza d'uso della traduzione: MIT
