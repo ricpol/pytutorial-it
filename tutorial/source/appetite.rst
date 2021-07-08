@@ -2,9 +2,9 @@
 .. topic:: Nota per la traduzione italiana.
 
     Questa è una traduzione del 
-    `Tutorial ufficiale <https://docs.python.org/3/tutorial/index.html>`_ 
+    `Tutorial ufficiale <https://docs.python.org/3.7/tutorial/index.html>`_ 
     della documentazione di Python, mantenuta in sincrono con il testo della 
-    `repository GitHub <https://github.com/python/cpython/tree/main/Doc/tutorial>`_.
+    `repository GitHub <https://github.com/python/cpython/tree/3.7/Doc/tutorial>`_.
 
     Questa è la traduzione della **versione "legacy" del Tutorial per Python 
     3.7**, ed è aggiornata al 
