@@ -664,7 +664,7 @@ non funziona perché viola questa restrizione::
    >>> function(0, a=0)
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
-   TypeError: function() got multiple values for keyword argument 'a'
+   TypeError: function() got multiple values for argument 'a'
 
 Quando compare un parametro finale nella forma ``**name``, questo può ricevere 
 un dizionario (vedi :ref:`Tipi di mapping - dizionari<typesmapping>`) che 
@@ -802,7 +802,7 @@ posizione, come prescrive il segno ``/`` nella sua definizione::
    >>> pos_only_arg(arg=1)
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
-   TypeError: pos_only_arg() got an unexpected keyword argument 'arg'
+   TypeError: pos_only_arg() got some positional-only arguments passed as keyword arguments: 'arg'
 
 La terza, ``kwd_only_args``, permette solo di passare gli argomenti per nome, 
 avendo il segno ``*`` nella definizione::
@@ -832,7 +832,7 @@ definizione::
    >>> combined_example(pos_only=1, standard=2, kwd_only=3)
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
-   TypeError: combined_example() got an unexpected keyword argument 'pos_only'
+   TypeError: combined_example() got some positional-only arguments passed as keyword arguments: 'pos_only'
 
 Infine, si consideri questa definizione di funzione, che presenta un 
 potenziale conflitto tra il parametro posizionale ``name`` e un ``**kwds`` che 

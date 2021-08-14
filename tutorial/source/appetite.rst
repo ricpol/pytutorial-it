@@ -8,7 +8,7 @@
 
     Questa è la traduzione della **versione "beta" del Tutorial**, 
     corrispondente a Python 3.10, ed è aggiornata al 
-    `27 giugno 2021 <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_.
+    `14 agosto 2021 <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_.
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: 

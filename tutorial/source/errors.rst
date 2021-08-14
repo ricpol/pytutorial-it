@@ -155,8 +155,8 @@ Si noti che, mettendo le clausole *except* in ordine inverso (con ``except B``
 al primo posto), l'output prodotto sarebbe B, B, B: viene eseguita la prima 
 clausola *except* in grado di gestire l'eccezione. 
 
-È possibile omettere il nome dell'eccezione nell'ultima clausola *except*, in 
-modo che serva come risorsa estrema. Questa strategia va però usata con 
+Tutte le eccezioni derivano da :exc:`BaseException`, che quindi possiamo  
+usare come risorsa estrema. Questa strategia va però usata con 
 cautela, dal momento che è facile mascherare in questo modo un errore di 
 programmazione. È anche possibile scrivere un messaggio di errore e quindi 
 ri-emettere l'eccezione, in modo che il codice chiamante possa eventualmente 
@@ -172,9 +172,13 @@ gestirla::
        print("OS error: {0}".format(err))
    except ValueError:
        print("Could not convert data to an integer.")
-   except:
-       print("Unexpected error:", sys.exc_info()[0])
+   except BaseException as err:
+       print(f"Unexpected {err=}, {type(err)=}")
        raise
+
+In alternativa, è possibile omettere il nome dell'eccezione nell'ultima 
+clausola: tuttavia in questo caso il valore dell'eccezione deve essere 
+recuperato da ``sys.exc_info()[1]``.
 
 L'istruzione :keyword:`try` ... :keyword:`except` prevede una clausola 
 opzionale *else* che, se presente, deve venire dopo tutte le clausole 
