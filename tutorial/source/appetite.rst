@@ -6,7 +6,7 @@
     della documentazione di Python, mantenuta in sincrono con il testo della 
     `repository GitHub <https://github.com/python/cpython/tree/3.10/Doc/tutorial>`_.
 
-    Questa è la traduzione della **versione "beta" del Tutorial**, 
+    Questa è la traduzione della **versione "stabile" del Tutorial**, 
     corrispondente a Python 3.10, ed è aggiornata al 
     `24 settembre 2021 <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_.
 
