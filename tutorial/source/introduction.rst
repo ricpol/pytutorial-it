@@ -272,14 +272,6 @@ sotto-stringhe::
    >>> word[2:5]  # i caratteri dalla posizione 2 inclusa a 5 esclusa
    'tho'
 
-Si noti che l'inizio è sempre incluso, la fine è esclusa. Questo fa sì che 
-``s[:i] + s[i:]`` sia sempre uguale a ``s``::
-
-   >>> word[:2] + word[2:]
-   'Python'
-   >>> word[:4] + word[4:]
-   'Python'
-
 Gli indici delle sezioni hanno dei pratici valori di default: se si omette il 
 primo indice, vuol dire "0"; se si omette il secondo, vuol dire "la lunghezza 
 della stringa". ::
@@ -290,6 +282,15 @@ della stringa". ::
    'on'
    >>> word[-2:]  # i caratteri dalla penultima posizione inclusa alla fine
    'on'
+
+
+Si noti che l'inizio è sempre incluso, la fine è esclusa. Questo fa sì che 
+``s[:i] + s[i:]`` sia sempre uguale a ``s``::
+
+   >>> word[:2] + word[2:]
+   'Python'
+   >>> word[:4] + word[4:]
+   'Python'
 
 Un trucco per ricordare come funzionano le sezioni è pensare che gli indici 
 puntino tra un carattere e l'altro, con lo spazio a sinistra del primo 
