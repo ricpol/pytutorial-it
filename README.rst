@@ -9,11 +9,11 @@ Esistono cinque traduzioni leggermente differenti, in altrettanti branch, che so
 
 * per la versione legacy `3.7 <https://docs.python.org/3.7/tutorial/index.html>`_;
 
-* per la versione stabile `3.8 <https://docs.python.org/3.8/tutorial/index.html>`_;
+* per la versione legacy `3.8 <https://docs.python.org/3.8/tutorial/index.html>`_;
 
 * per la versione stabile `3.9 <https://docs.python.org/3.9/tutorial/index.html>`_;
 
-* per la versione in beta `3.10 <https://docs.python.org/3.10/tutorial/index.html>`_;
+* per la versione stabile `3.10 <https://docs.python.org/3.10/tutorial/index.html>`_;
 
 * per la versione "più aggiornata", che corrisponde alle ultime modifiche fatte nel  `main branch <https://github.com/python/cpython/tree/main/Doc/tutorial>`_. 
 

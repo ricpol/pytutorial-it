@@ -87,11 +87,11 @@ nella repository originale:
 * la versione "legacy" per Python 3.8: l'elenco dei *commit* relativi si trova 
   `qui <https://github.com/python/cpython/commits/3.8/Doc/tutorial>`_;
 
-* la versione in "stabile" per Python 3.9: l'elenco dei *commit* 
+* la versione "stabile" per Python 3.9: l'elenco dei *commit* 
   relativi è 
   `questo <https://github.com/python/cpython/commits/3.9/Doc/tutorial>`_;
 
-* la versione in "pre-release" per Python 3.10: l'elenco dei *commit* 
+* la versione "stabile" per Python 3.10: l'elenco dei *commit* 
   relativi è 
   `questo <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_;
 
