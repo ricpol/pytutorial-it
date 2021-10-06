@@ -200,7 +200,8 @@ seguenti *path*:
   questo non è specificato).
 * La variabile d'ambiente :envvar:`PYTHONPATH` (se impostata, contiene una 
   lista di directory, con la stessa sintassi della variabile :envvar:`PATH`).
-* Un default che dipende dall'installazione di Python. 
+* Un default che dipende dall'installazione di Python (che per convenzione 
+  include una directory ``site-packages`` gestita dal modulo :mod:`site`).
 
 .. note::
    Nei file system che supportano i symlink, la directory che contiene lo 
@@ -547,6 +548,8 @@ Ricordate che non c'è niente di male a importare ``from package import
 specific_submodule``. In effetti questo è il modo raccomandato, a meno che il 
 modulo importatore non stia anche importando un altro modulo con lo stesso 
 nome da un altro package. 
+
+.. _intra-package-references:
 
 Riferimenti intra-package
 -------------------------

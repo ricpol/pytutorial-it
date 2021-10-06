@@ -8,7 +8,7 @@
 
     Questa è la traduzione della **versione "beta" del Tutorial**, 
     corrispondente a Python 3.10, ed è aggiornata al 
-    `14 agosto 2021 <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_.
+    `24 settembre 2021 <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_.
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: 
@@ -102,7 +102,7 @@ un *batch file* di Windows: gli script però vanno bene per spostare i file e
 modificare i dati testuali, non sono adatti alle applicazioni grafiche o ai 
 giochi. Potreste scrivere un programma in C, C++ o Java, ma questo 
 richiederebbe molto tempo di sviluppo anche solo per arrivare a una prima 
-bozza. Python è più semplice, è disponibile su Windows, Mac OS X e Unix, e vi 
+bozza. Python è più semplice, è disponibile su Windows, macOS e Unix, e vi 
 aiuterà a finire il lavoro più in fretta.  
 
 Python è semplice da usare, ma è un linguaggio di programmazione serio che 
