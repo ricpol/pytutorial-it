@@ -52,7 +52,7 @@ come questi::
    >>> '2' + 2
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
-   TypeError: Can't convert 'int' object to str implicitly
+   TypeError: Can only concatenate str (not "int") to str
 
 L'ultima riga del messaggio d'errore ci dice che cosa è successo. Gli 
 oggetti-eccezioni possono avere diversi tipi, e la prima parte del messaggio 
