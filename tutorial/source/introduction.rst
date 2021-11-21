@@ -12,6 +12,14 @@ quando una riga riporta solo il prompt secondario senza nient'altro, significa
 che dovete inserire una riga vuota: questo serve a terminare un'istruzione 
 multi-linea. 
 
+.. only:: html
+
+  Potete alternare la visualizzazione del prompt e dell'output cliccando il 
+  pulsante ``>>>`` nell'angolo in alto a destra di una casella di codice. Se 
+  nascondete il prompt e l'output, potete facilmente copincollare le righe 
+  di input nel vostro interprete. (N.d.T.: Questo funziona *solo* nella 
+  versione originale inglese del Tutorial.)
+
 .. index:: single: # (hash); comment
 
 Molti esempi nella documentazione, anche quelli da inserire nell'interprete 

@@ -86,6 +86,11 @@ installazione dell'interprete. Per esempio:
   '~/envs/tutorial-env/lib/python3.5/site-packages']
   >>>
 
+Per disattivare un virtual environment, inserite ::
+
+  deactivate
+
+nel vostro terminale. 
 
 Gestire i pacchetti con Pip
 ===========================
