@@ -161,7 +161,7 @@ Una forma alternativa di aritmetica esatta è quella del modulo
 numeri come 1/3 possano essere espressi in modo esatto).
 
 Se fate un uso massiccio di operazioni in virgola mobile potreste voler 
-considerare il pacchetto Numerical Python (NumPy) e i molti altri package di 
+considerare il pacchetto NumPy e i molti altri package di 
 interesse matematico e statistico compresi nel progetto 
 `SciPy <https://scipy.org>`_.
 
