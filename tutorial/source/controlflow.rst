@@ -403,10 +403,12 @@ Ecco alcune altre caratteristiche importanti dell'istruzione ``match``:
 
       from enum import Enum
       class Color(Enum):
-          RED = 0
-          GREEN = 1
-          BLUE = 2
+          RED = 'red'
+          GREEN = 'green'
+          BLUE = 'blue'
 
+	  color = Color(input('Scegliere tra "red", "blue" o "green": '))
+	  
       match color:
           case Color.RED:
               print("Vedo rosso!")

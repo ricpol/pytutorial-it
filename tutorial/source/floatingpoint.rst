@@ -134,7 +134,7 @@ modo da rendere confrontabili i risultati approssimati::
 
 L'aritmetica binaria in virgola mobile presenta molte sorprese come questa. 
 Spieghiamo nel dettaglio il problema di "0.1" nella sezione successiva. Si 
-veda `The Perils of Floating Point <http://www.lahey.com/float.htm>`_ per un 
+veda `The Perils of Floating Point <https://www.lahey.com/float.htm>`_ per un 
 elenco più completo di altri inciampi frequenti. 
 
 Come si usa concludere, "non ci sono risposte facili". Tuttavia non bisogna 
