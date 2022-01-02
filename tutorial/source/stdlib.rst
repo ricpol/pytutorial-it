@@ -172,14 +172,14 @@ Esistono diversi moduli per accedere a internet e gestire i protocolli
 internet. Due dei più semplici sono :mod:`urllib.request` per raccogliere dati 
 da una URL e :mod:`smtplib` per spedire email::
 
-   >>> from urllib.request import urlopen
-   >>> with urlopen('http://tycho.usno.navy.mil/cgi-bin/timer.pl') as response:
-   ...     for line in response:
-   ...         line = line.decode('utf-8')  # converte i dati binari in testo
-   ...         if 'EST' in line or 'EDT' in line:  # cerca EST
-   ...             print(line)
-
-   <BR>Nov. 25, 09:43:32 PM EST
+   >>> from urllib.request import urlopen
+   >>> with urlopen('http://worldtimeapi.org/api/timezone/etc/UTC.txt') as response:
+   ...     for line in response:
+   ...         line = line.decode()             # Convert bytes to a str
+   ...         if line.startswith('datetime'):
+   ...             print(line.rstrip())         # Remove trailing newline
+   ...
+   datetime: 2022-01-01T01:36:47.689215+00:00
 
    >>> import smtplib
    >>> server = smtplib.SMTP('localhost')

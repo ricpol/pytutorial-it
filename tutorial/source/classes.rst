@@ -838,7 +838,7 @@ esempio spiega come funziona il meccanismo::
    >>> s = 'abc'
    >>> it = iter(s)
    >>> it
-   <iterator object at 0x00A1DB50>
+   <str_iterator object at 0x10c90e650>
    >>> next(it)
    'a'
    >>> next(it)
