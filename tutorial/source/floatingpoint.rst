@@ -7,15 +7,9 @@ Aritmetica in virgola mobile: problemi e limiti
 .. sectionauthor:: Tim Peters <tim_one@users.sourceforge.net>
 
 I computer rappresentano i numeri in virgola mobile come frazioni binarie. Per 
-esempio, la frazione decimale [#]_ ::
-
-   0.125
-
-vale 1/10 + 2/100 + 5/1000, e allo stesso modo la frazione binaria ::
-
-   0.001
-
-vale 0/2 + 0/4 + 1/8.  Queste due frazioni hanno lo stesso valore: l'unica 
+esempio, la frazione decimale [#]_ ``0.125`` vale 1/10 + 2/100 + 5/1000, 
+e allo stesso modo la frazione binaria ``0.001`` vale 0/2 + 0/4 + 1/8.  
+Queste due frazioni hanno lo stesso valore: l'unica 
 differenza è che una è espressa come frazione in base 10, l'altra come 
 frazione in base 2.
 

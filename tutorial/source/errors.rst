@@ -178,7 +178,7 @@ gestirla::
 
 In alternativa, è possibile omettere il nome dell'eccezione nell'ultima 
 clausola: tuttavia in questo caso il valore dell'eccezione deve essere 
-recuperato da ``sys.exc_info()[1]``.
+recuperato con ``sys.exception()``.
 
 L'istruzione :keyword:`try` ... :keyword:`except` prevede una clausola 
 opzionale *else* che, se presente, deve venire dopo tutte le clausole 
@@ -342,41 +342,7 @@ derivare dalla classe :exc:`Exception`, direttamente o indirettamente.
 Le classi delle eccezioni possono fare tutto ciò che farebbe una classe 
 normale, ma di solito si preferisce mantenerle semplici, spesso fornendole 
 solo di qualche attributo che aiuta a capire il problema quando viene 
-intercettato dai gestori dell'eccezione. Quando si scrive un modulo che può 
-incontrare diversi casi di errore, una pratica comune è scrivere una 
-classe-madre per le eccezioni di quel modulo, e delle sotto-classi che 
-descrivono eccezioni specifiche per le diverse condizioni di errore::
-
-   class Error(Exception):
-       """Classe-madre per le eccezioni di questo modulo."""
-       pass
-
-   class InputError(Error):
-       """Eccezione emessa in caso di errore nell'input.
-
-       Attributi:
-           expression -- espressione di input che ha generato l'errore
-           message -- spiegazione dell'errore
-       """
-
-       def __init__(self, expression, message):
-           self.expression = expression
-           self.message = message
-
-   class TransitionError(Error):
-       """Emessa quando un'operazione provoca una transizione di stato
-       non permessa.
-
-       Attributi:
-           previous -- stato iniziale della transizione
-           next -- stato finale che si cercava di ottenere
-           message -- motivo per cui la transizione non è ammessa
-       """
-
-       def __init__(self, previous, next, message):
-           self.previous = previous
-           self.next = next
-           self.message = message
+intercettato dai gestori dell'eccezione. 
 
 In genere si fa in modo che le eccezioni personalizzate abbiano nomi che 
 finiscono in "Error", analogamente ai nomi delle eccezioni standard.
@@ -502,3 +468,90 @@ Dopo che l'istruzione è stata eseguita, il file *f* viene sempre chiuso, anche
 nel caso in cui, processandolo, si dovesse incontrare una condizione di 
 errore. Se un oggetto definisce, come i file, delle operazioni di chiusura 
 predefinite, questo viene indicato nella sua documentazione. 
+
+.. _tut-exception-groups:
+
+Emettere e gestire eccezioni multiple non correlate
+===================================================
+
+In certe situazioni si rende necessario segnalare diverse eccezioni che si 
+sono verificate. Questo è spesso il caso dei framework che gestiscono la 
+concorrenza, dove diversi task possono fallire in parallelo; ma ci sono 
+anche altri casi d'uso, dove si potrebbe voler continuare l'esecuzione e 
+raccogliere più errori, invece di fermarsi emettendo la prima eccezione. 
+
+:exc:`ExceptionGroup` è un *builtin* che accorpa una lista di istanze di 
+eccezioni, in modo che possano essere emesse insieme. Si tratta, essa 
+stessa, di un'eccezione che quindi può essere intercettata come di 
+consueto. ::
+
+	>>> def f ():
+	...     excs = [OSError('error 1'), SystemError('error 2')]
+	...     raise ExceptionGroup('ho avuto dei problemi', excs)
+	... 
+	>>> f()
+	  + Exception Group Traceback (most recent call last):
+	  | File "<stdin>", line 1, in <module>
+	  | File "<stdin>", line 3, in f
+	  | ExceptionGroup: ho avuto dei problemi
+	  +-+---------------- 1 ----------------
+	    | OSError: error 1
+	    +---------------- 2 ----------------
+	    | SystemError: error 2
+	    +------------------------------------
+    >>> try:
+    ...     f()
+    ... except Exception as e:
+    ...     print(f'intercettato {type(e)}: e')
+    ... 
+    intercettato  <class 'ExceptionGroup'>: e
+    >>> 
+
+Usando ``except*`` al posto di ``except``, possiamo selezionare e 
+gestire solo le eccezioni del gruppo che corrispondono a un certo 
+tipo. Nell'esempio che segue, che contiene due ExceptionGroup 
+innestati, ciascuna clausola ``except*`` estrae dal gruppo le 
+eccezioni di un certo tipo, lasciando che tutte le altre si 
+propaghino alle altre clausole, e siano rilanciate. ::
+
+    >>> def f():
+    ...     raise ExceptionGroup("group1",
+    ...                          [OSError(1), 
+    ...                           SystemError(2), 
+    ...                           ExceptionGroup("group2", 
+    ...                                          [OSError(3), RecursionError(4)])])
+    ...
+    >>> try:
+    ...     f()
+    ... except* OSError as e:
+    ...     print("Abbiamo avuto degli OSError")
+    ... except* SystemError as e:
+    ...     print("Abbiamo avuto dei SystemError")
+    ...
+    Abbiamo avuto degli OSError
+    Abbiamo avuto dei SystemError
+      + Exception Group Traceback (most recent call last):
+      | File "<stdin>", line 2, in <module>
+      | File "<stdin>", line 2, in f
+      | ExceptionGroup: group1
+      +-+---------------- 1 ----------------
+        | ExceptionGroup: group2
+        +-+---------------- 1 ----------------
+          | RecursionError: 4
+          +------------------------------------
+    >>>
+
+Si noti che le eccezioni innestate in un ExceptionGroup devono 
+essere delle istanze, e non dei tipi (classi). Questo perché, nella 
+pratica, queste eccezioni sono di solito quelle che sono già state 
+emesse e intercettate dal programma, come in questo pattern::
+
+    >>> excs = []
+    >>> for test in tests:
+    ...     try:
+    ... 	    test.run()
+    ... 	except Exception as e:
+    ... 		excs.append(e)
+    ...
+    >>> if excs:
+    ... 	raise ExceptionGroup("Alcuni test sono falliti:", excs)

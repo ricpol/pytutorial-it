@@ -203,6 +203,8 @@ seguenti *path*:
 * Un default che dipende dall'installazione di Python (che per convenzione 
   include una directory ``site-packages`` gestita dal modulo :mod:`site`). 
 
+Altri dettagli si trovano nella documentazione: :ref:`sys-path-init`.
+
 .. note::
    Nei file system che supportano i symlink, la directory che contiene lo 
    script importatore è calcolata dopo aver seguito i symlink. In altre 
