@@ -342,41 +342,7 @@ derivare dalla classe :exc:`Exception`, direttamente o indirettamente.
 Le classi delle eccezioni possono fare tutto ciò che farebbe una classe 
 normale, ma di solito si preferisce mantenerle semplici, spesso fornendole 
 solo di qualche attributo che aiuta a capire il problema quando viene 
-intercettato dai gestori dell'eccezione. Quando si scrive un modulo che può 
-incontrare diversi casi di errore, una pratica comune è scrivere una 
-classe-madre per le eccezioni di quel modulo, e delle sotto-classi che 
-descrivono eccezioni specifiche per le diverse condizioni di errore::
-
-   class Error(Exception):
-       """Classe-madre per le eccezioni di questo modulo."""
-       pass
-
-   class InputError(Error):
-       """Eccezione emessa in caso di errore nell'input.
-
-       Attributi:
-           expression -- espressione di input che ha generato l'errore
-           message -- spiegazione dell'errore
-       """
-
-       def __init__(self, expression, message):
-           self.expression = expression
-           self.message = message
-
-   class TransitionError(Error):
-       """Emessa quando un'operazione provoca una transizione di stato
-       non permessa.
-
-       Attributi:
-           previous -- stato iniziale della transizione
-           next -- stato finale che si cercava di ottenere
-           message -- motivo per cui la transizione non è ammessa
-       """
-
-       def __init__(self, previous, next, message):
-           self.previous = previous
-           self.next = next
-           self.message = message
+intercettato dai gestori dell'eccezione. 
 
 In genere si fa in modo che le eccezioni personalizzate abbiano nomi che 
 finiscono in "Error", analogamente ai nomi delle eccezioni standard.
