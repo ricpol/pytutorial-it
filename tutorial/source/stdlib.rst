@@ -76,7 +76,8 @@ uno o più nomi di file e un numero opzionale di righe da visualizzare::
 
     import argparse
 
-    parser = argparse.ArgumentParser(prog = 'top',
+    parser = argparse.ArgumentParser(
+        prog = 'top',
         description = 'Show top lines from each file')
     parser.add_argument('filenames', nargs='+')
     parser.add_argument('-l', '--lines', type=int, default=10)

@@ -519,7 +519,7 @@ importare "\*" dal suo package. Per esempio, il file
    __all__ = ["echo", "surround", "reverse"]
 
 In questo modo, ``from sound.effects import *`` importerebbe i tre moduli 
-indicati del package :mod:`sound`.
+indicati del package :mod:`sound.effects`.
 
 Se ``__all__`` non è definito, allora l'istruzione 
 ``from sound.effects import *`` *non* importa comunque tutti i moduli del 
