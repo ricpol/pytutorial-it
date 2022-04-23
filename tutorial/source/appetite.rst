@@ -7,10 +7,11 @@
     `repository GitHub <https://github.com/python/cpython/tree/3.8/Doc/tutorial>`_.
 
     Questa è la traduzione della **versione "legacy" del Tutorial per Python 
-    3.8**, ed è aggiornata al 
-    `14 aprile 2021 <https://github.com/python/cpython/commits/3.8/Doc/tutorial>`_.
-    Raccomandiamo comunque di installare l'ultima versione di Python (3.10) 
-    e di seguire il tutorial per quella versione. 
+    3.8**, ed è aggiornata al 14 aprile 2021. Questa versione è ormai "congelata" 
+    ed è improbabile che ci saranno ulteriori modifiche: potete controllare  
+    `qui <https://github.com/python/cpython/commits/3.8/Doc/tutorial>`_, nel caso. 
+    Raccomandiamo comunque di installare la versione più recente di Python 
+    e di seguire il tutorial corrispondente. 
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: potete essere 
