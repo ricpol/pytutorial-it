@@ -8,9 +8,9 @@
 
     Questa è la traduzione della **versione "stabile" del Tutorial per 
     Python 3.9**, ed è aggiornata al 
-    `8 marzo 2022 <https://github.com/python/cpython/commits/3.9/Doc/tutorial>`_. 
-    Raccomandiamo comunque di installare l’ultima versione di Python (3.10) 
-    e di seguire il tutorial per quella versione.
+    `17 aprile 2022 <https://github.com/python/cpython/commits/3.9/Doc/tutorial>`_. 
+    Raccomandiamo comunque di installare la versione più recente di Python 
+    e di seguire il tutorial corrispondente.
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: potete essere 
