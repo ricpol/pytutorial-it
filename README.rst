@@ -5,9 +5,9 @@ Questa è una traduzione italiana del `Tutorial ufficiale di Python <https://doc
 
 Se stai leggendo questo README, vuol dire che sei nel "branch" che contiene la traduzione della versione per Python 3.9. Spostati nel "main branch" per leggere le informazioni più rilevanti.
 
-Copyright dell'originale: 2001-2021 Python Software Foundation. All rights reserved.
+Copyright dell'originale: 2001-2022 Python Software Foundation. All rights reserved.
 
-Copyright della traduzione: 2020-2021 Riccardo Polignieri. Tutti i diritti riservati.
+Copyright della traduzione: 2020-2022 Riccardo Polignieri. Tutti i diritti riservati.
 
 Licenza d'uso dell'originale: vedi https://github.com/python/cpython/blob/main/LICENSE
 
