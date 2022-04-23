@@ -131,7 +131,7 @@ Potete anche installare una versione specifica, indicando il nome seguito da
 Se eseguite due volte questo comando, ``pip`` vi informerà che la versione 
 richiesta è già presente e non farà nient'altro. Potete indicare un altro 
 numero di versione per ottenere quella, oppure eseguire 
-``pip install --upgrade`` per aggiornare il pacchetto all'ultima versione:
+``python -m pip install --upgrade`` per aggiornare il pacchetto all'ultima versione:
 
 .. code-block:: bash
 
@@ -143,14 +143,14 @@ numero di versione per ottenere quella, oppure eseguire
         Successfully uninstalled requests-2.6.0
   Successfully installed requests-2.7.0
 
-``pip uninstall``, seguito dal nome di uno o più pacchetti, li rimuoverà dal 
-virtual environment. 
+``python -m pip uninstall``, seguito dal nome di uno o più pacchetti, 
+li rimuoverà dal virtual environment. 
 
-``pip show`` visualizza informazioni su un particolare pacchetto:
+``python -m pip show`` visualizza informazioni su un particolare pacchetto:
 
 .. code-block:: bash
 
-  (tutorial-env) $ pip show requests
+  (tutorial-env) $ python -m pip show requests
   ---
   Metadata-Version: 2.0
   Name: requests
@@ -163,24 +163,26 @@ virtual environment.
   Location: /Users/akuchling/envs/tutorial-env/lib/python3.4/site-packages
   Requires:
 
-``pip list`` elenca tutti i pacchetti installati in un virtual environment:
+``python -m pip list`` elenca tutti i pacchetti installati 
+in un virtual environment:
 
 .. code-block:: bash
 
-  (tutorial-env) $ pip list
+  (tutorial-env) $ python -m pip list
   novas (3.1.1.3)
   numpy (1.9.2)
   pip (7.0.3)
   requests (2.7.0)
   setuptools (16.0)
 
-``pip freeze`` produce una lista simile di pacchetti installati, ma usa un 
-formato che può essere letto da ``pip install``. Una convenzione molto usata è 
-di collocare questa lista in un file ``requirements.txt``:
+``python -m pip freeze`` produce una lista simile di pacchetti installati, 
+ma usa un formato che può essere letto da ``python -m pip install``. 
+Una convenzione molto usata è di collocare questa lista in un file 
+``requirements.txt``:
 
 .. code-block:: bash
 
-  (tutorial-env) $ pip freeze > requirements.txt
+  (tutorial-env) $ python -m pip freeze > requirements.txt
   (tutorial-env) $ cat requirements.txt
   novas==3.1.1.3
   numpy==1.9.2

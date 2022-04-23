@@ -155,50 +155,6 @@ Si noti che, mettendo le clausole *except* in ordine inverso (con ``except B``
 al primo posto), l'output prodotto sarebbe B, B, B: viene eseguita la prima 
 clausola *except* in grado di gestire l'eccezione. 
 
-Tutte le eccezioni derivano da :exc:`BaseException`, che quindi possiamo  
-usare come risorsa estrema. Questa strategia va però usata con 
-cautela, dal momento che è facile mascherare in questo modo un errore di 
-programmazione. È anche possibile scrivere un messaggio di errore e quindi 
-ri-emettere l'eccezione, in modo che il codice chiamante possa eventualmente 
-gestirla::
-
-   import sys
-
-   try:
-       f = open('myfile.txt')
-       s = f.readline()
-       i = int(s.strip())
-   except OSError as err:
-       print("OS error: {0}".format(err))
-   except ValueError:
-       print("Could not convert data to an integer.")
-   except BaseException as err:
-       print(f"Unexpected {err=}, {type(err)=}")
-       raise
-
-In alternativa, è possibile omettere il nome dell'eccezione nell'ultima 
-clausola: tuttavia in questo caso il valore dell'eccezione deve essere 
-recuperato con ``sys.exception()``.
-
-L'istruzione :keyword:`try` ... :keyword:`except` prevede una clausola 
-opzionale *else* che, se presente, deve venire dopo tutte le clausole 
-*except*. Vi si può inserire del codice che deve essere eseguito solo se la 
-clausola *try* non emette alcuna eccezione. Per esempio:: 
-
-   for arg in sys.argv[1:]:
-       try:
-           f = open(arg, 'r')
-       except OSError:
-           print('cannot open', arg)
-       else:
-           print(arg, 'has', len(f.readlines()), 'lines')
-           f.close()
-
-Usare :keyword:`!else` è preferibile a inserire del codice in più nel 
-:keyword:`try`, perché in questo modo si evita di intercettare accidentalmente 
-delle eccezioni emesse dal codice che non si intendeva proteggere nella 
-clausola *try*. 
-
 Quando si verifica un'eccezione, questa può avere un valore associato, detto 
 anche *argomento* dell'eccezione. La presenza e il tipo di questo argomento 
 dipende dall'eccezione. 
@@ -231,6 +187,59 @@ aggiungere gli attributi desiderati::
 Se un'eccezione ha degli argomenti, questi sono scritti nell'ultima parte 
 ("detail") del messaggio di errore causato dall'eccezione non gestita. 
 
+L'output del metodo :meth:`__str__` dell'eccezione viene stampato 
+nell'ultima parte ('detail') del messaggio, per le eccezioni non gestite. 
+
+:exc:`BaseException` è la classe-madre comune a tutte le eccezioni. Una 
+delle sue sotto-classi, :exc:`Exception`, è la classe-madre di tutte le 
+eccezioni non fatali. Le eccezioni che non derivano da :exc:`Exception` 
+di solito non vengono gestite, perché si usano per indicare che il programma 
+dovrebbe terminare. Tra queste c'è :exc:`SystemExit`, emessa da un 
+:meth:`sys.exit`, e :exc:`KeyboardInterrupt`, emessa quando l'utente vuole 
+interrompere il programma. 
+
+Si può usare :exc:`Exception` come un jolly che intercetta (quasi) tutto. 
+Ma è buona pratica essere quanto più specifici possibile con i tipi delle 
+eccezioni che si desidera intercettare, permettendo al contempo alle 
+eccezioni inattese di propagarsi. 
+
+La strategia più comune per gestire :exc:`Exception` è di stampare l'eccezione 
+a video o in un log, e quindi di ri-emettere l'eccezione, in modo che 
+il codice chiamante possa eventualmente gestirla::
+
+   import sys
+
+   try:
+       f = open('myfile.txt')
+       s = f.readline()
+       i = int(s.strip())
+   except OSError as err:
+       print("OS error:", err)
+   except ValueError:
+       print("Could not convert data to an integer.")
+   except Exception as err:
+       print(f"Unexpected {err=}, {type(err)=}")
+       raise
+
+L'istruzione :keyword:`try` ... :keyword:`except` prevede una clausola 
+opzionale *else* che, se presente, deve venire dopo tutte le clausole 
+*except*. Vi si può inserire del codice che deve essere eseguito solo se la 
+clausola *try* non emette alcuna eccezione. Per esempio:: 
+
+   for arg in sys.argv[1:]:
+       try:
+           f = open(arg, 'r')
+       except OSError:
+           print('cannot open', arg)
+       else:
+           print(arg, 'has', len(f.readlines()), 'lines')
+           f.close()
+
+Usare :keyword:`!else` è preferibile a inserire del codice in più nel 
+:keyword:`try`, perché in questo modo si evita di intercettare accidentalmente 
+delle eccezioni emesse dal codice che non si intendeva proteggere nella 
+clausola *try*. 
+
 Un gestore può intercettare non solo le eccezioni che accadono direttamente 
 nel blocco *try*, ma anche quelle emesse da funzioni chiamate (anche 
 indirettamente) dal codice del *try*. Per esempio::
@@ -260,7 +269,8 @@ eccezione. Per esempio::
 
 L'unico argomento di :keyword:`raise` è il nome dell'eccezione da emettere. 
 Questa deve essere o un'istanza o una classe-eccezione (ovvero, una classe che 
-deriva da :class:`Exception`). Se viene passata una classe, questa sarà 
+deriva da :exc:`BaseException`, per es. :exc:`Exception` o una delle sue 
+sotto-classi). Se viene passata una classe, questa sarà 
 implicitamente istanziata chiamando il costruttore senza argomenti::
 
    raise ValueError  # scorciatoia per 'raise ValueError()'
@@ -348,8 +358,7 @@ In genere si fa in modo che le eccezioni personalizzate abbiano nomi che
 finiscono in "Error", analogamente ai nomi delle eccezioni standard.
 
 Molti moduli della libreria standard definiscono eccezioni proprie, per 
-segnalare errori che possono verificarsi nelle funzioni che contengono. Per 
-altre informazioni sulle classi, si veda la sezione :ref:`tut-classes`.
+segnalare errori che possono verificarsi nelle funzioni che contengono. 
 
 .. _tut-cleanup:
 
@@ -555,3 +564,70 @@ emesse e intercettate dal programma, come in questo pattern::
     ...
     >>> if excs:
     ... 	raise ExceptionGroup("Alcuni test sono falliti:", excs)
+
+
+Arricchire le eccezioni con le Note.
+====================================
+
+Quando si crea un'eccezione con l'idea di emetterla, di solito la si 
+inizializza con informazioni che descrivono l'errore che è capitato. 
+Ci sono dei casi in cui diventa utile aggiungere informazioni dopo che 
+l'eccezione è stata intercettata. Per questo scopo le eccezioni hanno 
+un metodo ``add_note(note)`` che accetta una stringa e la aggiunge alla 
+lista di Note dell'eccezione. Il normale output del traceback include 
+tutte le Note, nell'ordine in cui sono state aggiunte, dopo l'eccezione. ::
+
+    >>> try:
+    ...     raise TypeError('tipo sbagliato')
+    ... except Exception as e:
+    ...     e.add_note('Aggiungo delle informazioni')
+    ...     e.add_note('Altre informazioni')
+    ...     raise
+    ...
+    Traceback (most recent call last):
+      File "<stdin>", line 2, in <module>
+    TypeError: tipo sbagliato
+    Aggiungo delle informazioni
+    Altre informazioni
+    >>> 
+
+Per esempio, quando raccogliamo le eccezioni in gruppi, possiamo voler 
+aggiungere delle informazioni di contesto per i singoli errori. 
+Nell'esempio che segue, ciascuna eccezione del gruppo ha una Nota che 
+indica quando è accaduto l'errore. ::
+
+    >>> def f():
+    ...     raise OsError('operazione fallita')
+    ...
+    >>> excs = []
+    >>> for i in range(3):
+    ...     try:
+    ...         f()
+    ...     except Exception as e:
+    ...         e.add_note(f"questo succede nell'iterazione {i+1}")
+    ...         excs.append(e)
+    ...
+    >>> raise ExceptionGroup('Ci sono dei problemi', excs)
+      + Exception Group Traceback (most recent call last):
+      | File "<stdin>", line 1, in <module>
+      | ExceptionGroup: We have some problems (3 sub-exceptions)
+      +-+---------------- 1 ----------------
+        | Traceback (most recent call last):
+        | File "<stdin>", line 3, in <module>
+        | File "<stdin>", line 2, in f
+        | OSError: opererazione fallita
+        | questo succede nell'iterazione 1
+        +---------------- 2 ----------------
+        | Traceback (most recent call last):
+        | File "<stdin>", line 3, in <module>
+        | File "<stdin>", line 2, in f
+        | OSError: opererazione fallita
+        | questo succede nell'iterazione 2
+        +---------------- 3 ----------------
+        | Traceback (most recent call last):
+        | File "<stdin>", line 3, in <module>
+        | File "<stdin>", line 2, in f
+        | OSError: opererazione fallita
+        | questo succede nell'iterazione 3
+        +------------------------------------
+    >>>
