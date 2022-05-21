@@ -295,7 +295,7 @@ La seguente *list comprehension* annidata traspone righe e colonne::
    >>> [[row[i] for row in matrix] for i in range(4)]
    [[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
 
-Come abbiamo visto nel paragrafo precedente, la *list comprehension* annidata 
+Come abbiamo visto nel paragrafo precedente, la *list comprehension* interna 
 è valutata nel contesto del :keyword:`for` che la segue; il nostro esempio 
 equivale quindi a::
 

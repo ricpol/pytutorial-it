@@ -59,7 +59,7 @@ Creato il virtual environment, non resta che attivarlo.
 
 Su Windows invocate::
 
-  tutorial-env\Scripts\activate.bat
+  tutorial-env\Scripts\activate
 
 Su Unix o MacOS::
 

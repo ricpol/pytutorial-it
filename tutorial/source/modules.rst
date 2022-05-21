@@ -191,7 +191,8 @@ Il percorso di ricerca dei moduli
 .. index:: triple: module; search; path
 
 Quando importiamo un modulo di nome :mod:`spam`, l'interprete per prima cosa 
-cerca tra i moduli predefiniti se ne esiste uno con quel nome. Se non lo 
+cerca tra i moduli predefiniti se ne esiste uno con quel nome. Questi sono 
+elencati in :data:`sys.builtin_module_names`. Se non lo 
 trova, cerca un file :file:`spam.py` in una lista di directory contenuta nella 
 variabile :data:`sys.path`. Questa, a sua volta, viene inizializzata con le 
 seguenti *path*:
