@@ -283,11 +283,12 @@ Leggere e scrivere files
    object: file
 
 La funzione :func:`open` restituisce un :term:`oggetto-file<file object>` e si 
-usa in genere con due argomenti: ``open(filename, mode)``.
+usa in genere con due argomenti posizionali e uno *keyword*: 
+``open(filename, mode, encoding=None)``.
 
 ::
 
-   >>> f = open('workfile', 'w')
+   >>> f = open('workfile', 'w', encoding='utf-8')
 
 .. XXX str(f) is <io.TextIOWrapper object at 0x82e8dc4>
 
@@ -305,8 +306,10 @@ l'argomento è omesso, il file è aperto in modalità ``'r'`` di default.
 In genere i file sono aperti in modalità testuale (:dfn:`text mode`), il che 
 significa leggere e scrivere delle *stringhe* di testo con un encoding 
 specificato. Se l'encoding non è indicato, il default dipende dalla 
-piattaforma (si veda la documentazione della funzione :func:`open`). Se si 
-aggiunge una ``'b'`` all'argomento *mode*, il file è aperto in modalità 
+piattaforma (si veda la documentazione della funzione :func:`open`). 
+Dal momento che UTF-8 è ormai lo standard di fatto, ``encoding='utf-8'`` è 
+raccomandato, a meno di essere certi di aver bisogno di un altro encoding. 
+Se si aggiunge una ``'b'`` all'argomento *mode*, il file è aperto in modalità 
 binaria (:dfn:`binary mode`): i dati sono letti e scritti in forma di *bytes*. 
 Tutti i file che non contengono testo dovrebbero essere aperti con questa 
 modalità. 
@@ -324,7 +327,7 @@ termine delle operazioni, anche se nel frattempo dovesse essere emessa
 un'eccezione. Usare :keyword:`!with` è anche più sintetico del corrispondente 
 blocco :keyword:`try`\ -\ :keyword:`finally`::
 
-    >>> with open('workfile') as f:
+    >>> with open('workfile', encoding='utf-8') as f:
     ...     read_data = f.read()
 
     >>> # In effetti il file è stato chiuso automaticamente:
@@ -498,10 +501,14 @@ questo::
 
    json.dump(x, f)
 
-Per ricostruire l'oggetto, se ``f`` è un file aperto in modalità di lettura, 
-basta fare::
+Per ricostruire l'oggetto, se ``f`` è un file binario o di testo aperto 
+in modalità di lettura, basta fare::
 
    x = json.load(f)
+
+.. note::
+   I file JSON devono avere encoding UTF-8. Usate ``encoding='utf-8'`` al 
+   momento di aprire un JSON come file di testo, in lettura o in scrittura. 
 
 Questa tecnica di serializzazione è semplice e riesce a gestire liste e 
 dizionari; tuttavia, serializzare istanze di classi arbitrarie in JSON 
