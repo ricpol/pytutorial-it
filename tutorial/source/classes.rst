@@ -506,9 +506,9 @@ Se lo stesso nome è usato per un attributo di classe e uno di istanza, allora
 il meccanismo di ricerca dà priorità all'attributo di istanza::
 
     >>> class Warehouse:
-            purpose = 'storage'
-            region = 'west'
-
+    ...     purpose = 'storage'
+    ...     region = 'west'
+    ...
     >>> w1 = Warehouse()
     >>> print(w1.purpose, w1.region)
     storage west

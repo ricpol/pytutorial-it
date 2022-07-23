@@ -31,9 +31,7 @@ Altro materiale su Python:
 
 * https://www.python.org: il sito web di Python. Contiene codice, 
   documentazione e indicazioni per altri contenuti su Python in giro per il 
-  web. Questo sito ha dei *mirror* in vari posti nel mondo: Europa, Giappone, 
-  Australia etc. Il *mirror* potrebbe essere più veloce del sito principale, 
-  dipende dalla vostra posizione geografica. 
+  web. 
 
 * https://docs.python.org: accesso rapido alla documentazione di Python. 
 
@@ -48,7 +46,7 @@ Altro materiale su Python:
   utili. I contributi più interessanti sono raccolti nel libro omonimo 
   (O'Reilly & Associates, ISBN 0-596-00797-3).
 
-* http://www.pyvideo.org raccoglie video su Python, da convegni e incontri di 
+* https://pyvideo.org raccoglie video su Python, da convegni e incontri di 
   *user-group*.
 
 * https://scipy.org: il progetto "Scientific Python" comprende moduli per 

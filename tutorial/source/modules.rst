@@ -49,7 +49,8 @@ modulo così::
    >>> import fibo
 
 Questa istruzione non inserisce i nomi delle funzioni definite in ``fibo`` 
-direttamente nella tabella dei simboli corrente; invece, vi inserisce il nome 
+direttamente nel :term:`namespace` corrente (vedi :ref:`tut-scopes` 
+per ulteriori dettagli); invece, vi inserisce il nome 
 del modulo ``fibo``. Usando il nome del modulo potete accedere alle funzioni 
 che contiene::
 
@@ -77,7 +78,7 @@ modulo. Sono eseguite solo la *prima volta* che il nome del modulo è
 incontrato in una istruzione ``import``. [#]_ (Sono anche eseguite se il 
 modulo è eseguito come script.) 
 
-Ciascun modulo ha una sua tabella dei simboli, che vale come tabella globale 
+Ciascun modulo ha un suo namespace privato, che vale come namespace globale 
 per tutte le funzioni che vi sono definite. Quindi l'autore del modulo può 
 usare delle variabili globali senza preoccuparsi di conflitti accidentali con 
 le variabili globali dell'utente del modulo. D'altra parte, se siete sicuri di 
@@ -87,12 +88,13 @@ stessa notazione che usate per riferirvi alle sue funzioni, ovvero
 
 I moduli possono importare altri moduli. È consuetudine, ma non obbligatorio, 
 mettere tutte le istruzioni :keyword:`import` all'inizio del modulo (o dello 
-script). I nomi dei moduli importati sono inseriti nella tabella dei simboli 
+script). I nomi dei moduli importati, se collocati al livello più alto del 
+modulo (fuori da ogni classe o funzione) sono inseriti nel namespace  
 globale del modulo importatore. 
 
 Esiste una variante dell'istruzione :keyword:`import` che consente di 
-importare direttamente i nomi contenuti in un modulo nella tabella dei 
-simboli del modulo importatore. Per esempio::
+importare direttamente i nomi contenuti in un modulo nel namespace 
+del modulo importatore. Per esempio::
 
    >>> from fibo import fib, fib2
    >>> fib(500)
@@ -595,5 +597,4 @@ estendere l'insieme dei moduli disponibili in un package.
 
 .. [#] In effetti anche le definizioni di funzione sono delle "istruzioni" che 
    vengono eseguite; l'esecuzione della definizione di una funzione a livello 
-   del modulo inserisce il nome della funzione nella tabella dei simboli 
-   globale. 
+   del modulo aggiunge il nome della funzione al namespace globale. 
