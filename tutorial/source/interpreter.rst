@@ -16,7 +16,7 @@ con il comando [#]_
 
 .. code-block:: text
 
-   python3.12
+   python3.11
 
 Dal momento che la scelta della directory dell'interprete è un'opzione di 
 installazione, sono possibili altre configurazioni. Chiedete a un esperto di 
@@ -25,7 +25,7 @@ Python o all'amministratore del sistema. Per esempio, un'alternativa popolare
 
 Su Windows, se avete installato Python dal 
 :ref:`Microsoft Store<windows-store>`, sarà disponibile il comando 
-:file:`python3.12`. Se avete installato il *launcher* :ref:`py.exe <launcher>` 
+:file:`python3.11`. Se avete installato il *launcher* :ref:`py.exe <launcher>` 
 potete usare il comando :file:`py`. Il paragrafo :ref:`Excursus: Impostare le 
 variabili d'ambiente<setting-envvars>` descrive altri modi per avviare Python. 
 
@@ -100,8 +100,8 @@ copyright, prima di presentare il prompt:
 
 .. code-block:: shell-session
 
-   $ python3.12
-   Python 3.12 (default, April 4 2022, 09:25:04)
+   $ python3.11
+   Python 3.11 (default, April 4 2021, 09:25:04)
    [GCC 10.2.0] on linux
    Type "help", "copyright", "credits" or "license" for more information.
    >>>
