@@ -21,7 +21,7 @@ clicca sulla *tab* "Issues" e poi sul pulsante verde "New Issue".
 Nella segnalazione dovresti indicare: 
 
 * la **versione** (o le versioni) della documentazione in cui hai visto 
-  l'errore: quella per Python 3.7, 3.8, 3.9, 3.10 o "latest";
+  l'errore: quella per Python 3.7, 3.8, 3.9, 3.10, 3.11 o "latest";
 
 * il numero del capitolo e paragrafo;
 
@@ -95,7 +95,11 @@ nella repository originale:
   relativi è 
   `questo <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_;
 
-* la versione "latest" per Python 3.11 è semplicemente il *main branch* e può essere seguito 
+* la versione "in sviluppo" per Python 3.11: l'elenco dei *commit* 
+  relativi è 
+  `questo <https://github.com/python/cpython/commits/3.11/Doc/tutorial>`_;
+
+* la versione "in sviluppo" per Python 3.12 è semplicemente il *main branch* e può essere seguito 
   `qui <https://github.com/python/cpython/commits/main/Doc/tutorial>`_. 
 
 Naturalmente i *branch* più vecchi sono aggiornati sempre più sporadicamente, 

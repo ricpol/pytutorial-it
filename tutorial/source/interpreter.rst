@@ -10,7 +10,7 @@ Invocare l'interprete
 =====================
 
 L'interprete Python di solito è installato in 
-:file:`/usr/local/bin/python3.11` sui computer dove è disponibile. Aggiungere 
+:file:`/usr/local/bin/python3.12` sui computer dove è disponibile. Aggiungere 
 :file:`/usr/local/bin` alla *path* della shell Unix vi permette di invocarlo 
 con il comando [#]_
 

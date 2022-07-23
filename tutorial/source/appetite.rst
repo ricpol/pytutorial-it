@@ -2,12 +2,12 @@
 .. topic:: Nota per la traduzione italiana.
 
     Questa è una traduzione del 
-    `Tutorial ufficiale <https://docs.python.org/3.11/tutorial/index.html>`_ 
+    `Tutorial ufficiale <https://docs.python.org/3.12/tutorial/index.html>`_ 
     della documentazione di Python, mantenuta in sincrono con il testo della 
     `repository GitHub <https://github.com/python/cpython/tree/main/Doc/tutorial>`_.
 
     Questa è la traduzione della **versione "di sviluppo" del Tutorial**, 
-    corrispondente a Python 3.11 e al "main branch" della repository, 
+    corrispondente a Python 3.12 e al "main branch" della repository, 
     ed è aggiornata al 
     `23 luglio 2022 <https://github.com/python/cpython/commits/main/Doc/tutorial>`_.
 

@@ -61,7 +61,7 @@ per i dati. Per esempio, l'attributo *grouping* della funzione localizzata
    'English_United States.1252'
    >>> conv = locale.localeconv()  # un mapping delle convenzioni applicabili
    >>> x = 1234567.8
-   >>> locale.format("%d", x, grouping=True)
+   >>> locale.format_string("%d", x, grouping=True)
    '1,234,567'
    >>> locale.format_string("%s%.*f", (conv['currency_symbol'],
    ...                      conv['frac_digits'], x), grouping=True)
@@ -288,7 +288,7 @@ esempio, per conservare in cache gli oggetti costosi da creare::
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
        d['primary']                # la chiave è stata rimossa automaticamente
-     File "C:/python311/lib/weakref.py", line 46, in __getitem__
+     File "C:/python312/lib/weakref.py", line 46, in __getitem__
        o = self.data[key]()
    KeyError: 'primary'
 

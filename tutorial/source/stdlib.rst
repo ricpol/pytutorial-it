@@ -63,11 +63,16 @@ Argomenti della riga di comando
 
 Molti script di hanno bisogno di processare gli argomenti della riga di 
 comando. Questi argomenti vengono conservati nell'attributo *argv* del modulo 
-:mod:`sys`, sotto forma di una lista. Per esempio, l'output che segue risulta 
-dall'aver invocato ``python demo.py one two three`` al prompt della shell::
+:mod:`sys`, sotto forma di una lista. Per esempio, consideriamo il file 
+:file:`demo.py` che segue::
 
-   >>> import sys
-   >>> print(sys.argv)
+   # file demo.py
+   import sys
+   print(sys.argv)
+
+Ecco l'output che risulta dopo aver eseguito ``python demo.py one two three`` 
+alla riga di comando::
+
    ['demo.py', 'one', 'two', 'three']
 
 Il modulo :mod:`argparse` mette a disposizione un meccanismo più sofisticato 
