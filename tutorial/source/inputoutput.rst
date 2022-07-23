@@ -182,8 +182,8 @@ con le parentesi quadre ``'[]'`` per accedere alle sue chiavi::
    ...       'Dcab: {0[Dcab]:d}'.format(table))
    Jack: 4098; Sjoerd: 4127; Dcab: 8637678
 
-Un'alternativa è passare la tabella come argomento keyword, con la notazione 
-'**'. ::
+Un'alternativa è passare il dizionario della tabella come argomento keyword,
+con la notazione '**'. ::
 
    >>> table = {'Sjoerd': 4127, 'Jack': 4098, 'Dcab': 8637678}
    >>> print('Jack: {Jack:d}; Sjoerd: {Sjoerd:d}; Dcab: {Dcab:d}'.format(**table))

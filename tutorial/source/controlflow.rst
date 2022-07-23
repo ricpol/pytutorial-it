@@ -252,8 +252,10 @@ Un'istruzione :keyword:`match` riceve un'espressione e ne compara il valore
 con diversi 
 pattern in successione, espressi con uno o più blocchi "case". A prima vista 
 è simile all'istruzione "switch" in C, Java o JavaScript (e molti altri 
-linguaggi), ma può anche estrarre e assegnare a variabili i componenti dei 
-valori confrontati (come elementi di sequenze, o attributi di oggetti). 
+linguaggi), ma è più simile al pattern matching di linguaggi come Rust o 
+Haskell. Solo il primo pattern che corrisponde viene eseguito, e può anche 
+estrarre e assegnare a variabili i componenti dei valori confrontati 
+(come elementi di sequenze, o attributi di oggetti).
 
 Nella sua forma più semplice, confronta un valore dato con uno o più valori 
 (*literal*)::
