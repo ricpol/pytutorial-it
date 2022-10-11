@@ -613,8 +613,9 @@ l'ereditarietà. La sintassi per definire una sotto-classe è questa::
        .
        <statement-N>
 
-Il nome della classe-madre :class:`BaseClassName` deve essere definito in uno 
-*scope* che contiene la definizione della sotto-classe. Al posto del nome 
+Il nome della classe-madre :class:`BaseClassName` deve essere definito in un 
+*namespace* accessible dallo *scope* che contiene la definizione della 
+sotto-classe. Al posto del nome 
 della classe-madre è anche consentito inserire un'espressione arbitraria. 
 Questo è utile, per esempio, quando la classe-madre è definita in un altro 
 modulo::

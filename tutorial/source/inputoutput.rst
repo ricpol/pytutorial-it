@@ -133,6 +133,18 @@ e ``'!r'`` applica :func:`repr`::
    >>> print(f'My hovercraft is full of {animals!r}.')
    My hovercraft is full of 'eels'.
 
+Il modificatore ``=`` può essere usato per espandere un'espressione in: testo 
+dell'espressione, seguito dal segno di uguaglianza, seguito dalla rappresentazione 
+dell'espressione valutata::
+
+   >>> bugs = 'roaches'
+   >>> count = 13
+   >>> area = 'living room'
+   >>> print(f'Debugging {bugs=} {count=} {area=}')
+   Debugging bugs='roaches' count=13 area='living room'
+
+Si veda :ref:`espressioni auto-documentate <bpo-36817-whatsnew>` per ulteriori 
+informazioni sul modificatore ``=``. 
 Informazioni complete su come specificare la formattazione si trovano nella 
 guida di riferimento nella sezione 
 :ref:`Linguaggio di specifica della formattazione<formatspec>`.
@@ -472,7 +484,7 @@ dizionari, diventa complicato fare a mano il *parsing* e la serializzazione.
 Invece di costringervi a scrivere e correggere continuamente del codice per 
 persistere dati complessi nei file, Python vi consente di usare un formato di 
 interscambio popolare, chiamato 
-`JSON (JavaScript Object Notation) <http://json.org>`_. Il modulo :mod:`json` 
+`JSON (JavaScript Object Notation) <https://json.org>`_. Il modulo :mod:`json` 
 della libreria standard converte gerarchie di dati Python nelle loro 
 rappresentazioni in formato stringa: questo processo si chiama serializzazione 
 (:dfn:`serializing`). Ricostruire i dati a partire dalla loro rappresentazione 

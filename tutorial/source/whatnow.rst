@@ -16,7 +16,7 @@ sezioni della documentazione sono:
   e moduli della libreria standard. La distribuzione di Python contiene 
   *molte cose*. Ci sono moduli per leggere le caselle di posta Unix, ricevere 
   documenti via HTTP, generare numeri casuali, leggere le opzioni della riga 
-  di comando, scrivere programmi grafici, comprimere dati e molto altro 
+  di comando, comprimere dati e molto altro 
   ancora. Un'occhiata veloce a questa documentazione dovrebbe bastare per 
   farsi un'idea di che cosa è disponibile. 
 
