@@ -70,8 +70,8 @@ quelli frazionari (es. ``5.0``, ``1.6``) hanno il tipo :class:`float`. Vedremo
 altri tipi numerici più avanti in questo tutorial. 
 
 La divisione (``/``) restituisce sempre un numero *float*. Per 
-:term:`arrotondare<floor division>` e ottenere un intero, scartando la parte 
-frazionaria, potete usare l'operatore ``//``. Per ottenere il resto usate 
+:term:`arrotondare<floor division>` e ottenere un intero,
+ potete usare l'operatore ``//``. Per ottenere il resto usate 
 ``%``::
 
    >>> 17 / 3  # la divisione normale restituisce un float
@@ -236,12 +236,12 @@ espressioni::
    >>> prefix 'thon'  # non potete concatenare una variabile e una stringa
      File "<stdin>", line 1
        prefix 'thon'
-                   ^
+              ^^^^^^
    SyntaxError: invalid syntax
    >>> ('un' * 3) 'ium'
      File "<stdin>", line 1
        ('un' * 3) 'ium'
-                      ^
+                  ^^^^^
    SyntaxError: invalid syntax
 
 Per concatenare le variabili, o una variabile con una stringa, usate 
