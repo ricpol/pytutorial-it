@@ -285,8 +285,27 @@ di rilanciare l'eccezione::
 Concatenamento di eccezioni
 ===========================
 
-L'istruzione :keyword:`raise` accetta un'opzione :keyword:`from<raise>` 
-che consente di concatenare due eccezioni. Per esempio::
+Se un'eccezione non gestita si verifica all'interno di un blocco 
+:keyword:`except`, le sarà aggiunta l'eccezione che era gestita 
+in quel momento, che sarà aggiunta al messaggio di errore::
+
+   >>> try:
+   ...     open("database.sqlite")
+   ... except OSError:
+   ...     raise RuntimeError("unable to handle error")
+   ...
+   Traceback (most recent call last):
+     File "<stdin>", line 2, in <module>
+   FileNotFoundError: [Errno 2] No such file or directory: 'database.sqlite'
+   <BLANKLINE>
+   During handling of the above exception, another exception occurred:
+   <BLANKLINE>
+   Traceback (most recent call last):
+     File "<stdin>", line 4, in <module>
+   RuntimeError: unable to handle error
+
+Per indicare che un'eccezione è diretta conseguenza di un'altra, 
+l'istruzione :keyword:`raise` accetta un'opzione :keyword:`from<raise>`::
 
     # exc deve essere l'istanza di una eccezione, o None
     raise RuntimeError from exc
