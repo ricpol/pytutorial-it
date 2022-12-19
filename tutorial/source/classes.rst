@@ -139,7 +139,7 @@ o quattro *scope* annidati, i cui *namespace* sono direttamente accessibili:
   che contiene i nomi predefiniti.
 
 Se un nome è dichiarato *global*, allora tutti i riferimenti a questo puntano 
-direttamente allo *scope* intermedio che contiene i nomi globali del moduli. 
+direttamente al penultimo *scope*, che contiene i nomi globali del moduli. 
 Per ri-collegare variabili che si trovano fuori dallo *scope* più interno, 
 potete usare l'istruzione :keyword:`nonlocal`. Se dichiarata *nonlocal*, una 
 variabile è di sola lettura: tentare di scrivere in questa variabile non farà 
