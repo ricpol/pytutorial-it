@@ -54,7 +54,7 @@ Un altro modo di avviare l'interprete è ``python -c command [arg] ...``, che
 esegue l'istruzione (o le istruzioni) in *command*, analogamente all'opzione 
 :option:`-c` della shell. Siccome le istruzioni Python di solito comprendono 
 spazi o altri caratteri speciali della shell, è consigliabile racchiudere 
-*command* tra apici singoli. 
+*command* tra apici. 
 
 Alcuni moduli Python possono essere eseguiti come script. Si possono invocare 
 con ``python -m module [arg] ...``, che esegue il file *module* come se ne 

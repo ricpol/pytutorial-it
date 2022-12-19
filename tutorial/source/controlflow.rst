@@ -859,8 +859,9 @@ Tuttavia, se usiamo il segno ``/`` per specificare i parametri solo
 posizionali, allora diventa possibile usare ``name`` come parametro 
 posizionale e allo stesso tempo mettere ``'name'`` tra gli argomenti keyword::
 
-    def foo(name, /, **kwds):
-        return 'name' in kwds
+    >>> def foo(name, /, **kwds):
+    ...     return 'name' in kwds
+    ...
     >>> foo(1, **{'name': 2})
     True
 
