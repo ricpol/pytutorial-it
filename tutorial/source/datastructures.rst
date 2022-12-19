@@ -115,7 +115,7 @@ Un esempio che utilizza molti metodi delle liste::
 
 Avrete notato che i metodi come ``insert``, ``remove`` o ``sort``, che 
 modificano soltanto la lista, non hanno valore di ritorno -- ovvero, 
-restituiscono il ``None`` di default. [1]_  Questo è un principio di design 
+restituiscono il ``None`` di default. [#]_  Questo è un principio di design 
 che vale per tutte le strutture-dati mutabili in Python.
 
 Un'altra cosa da osservare è che non tutti i dati possono essere ordinati o 
@@ -733,6 +733,6 @@ non fornisce un ordinamento arbitrario, ma emette invece un'eccezione
 
    .. rubric:: Note
 
-.. [1] Altri linguaggi preferiscono restituire l'oggetto mutato, cosa che 
+.. [#] Altri linguaggi preferiscono restituire l'oggetto mutato, cosa che 
    consente il concatenamento dei metodi, per esempio 
    ``d->insert("a")->remove("b")->sort();``.
