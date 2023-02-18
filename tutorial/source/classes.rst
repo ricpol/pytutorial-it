@@ -777,17 +777,23 @@ Note varie
 
 Può essere utile talvolta disporre di una struttura-dati simile al "record" di 
 Pascal o a "struct" in C, impacchettando insieme alcuni dati referenziati con 
-variabili. Si può usare una classe vuota::
+variabili. L'approccio più idiomatico è usare una :mod:`data-class<dataclasses>`::
 
-   class Employee:
-       pass
+    from dataclasses import dataclass
 
-   john = Employee()  # Crea una scheda di impiegato vuota
+    @dataclass
+    class Employee:
+        name: str
+        dept: str
+        salary: int
 
-   # Riempie i campi della scheda
-   john.name = 'John Doe'
-   john.dept = 'computer lab'
-   john.salary = 1000
+::
+
+    >>> john = Employee('john', 'computer lab', 1000)
+    >>> john.dept
+    'computer lab'
+    >>> john.salary
+    1000
 
 Se una sezione di codice Python si aspetta di ricevere uno specifico tipo di 
 dato astratto, le si può passare invece una classe che emula i metodi di quel 
