@@ -15,7 +15,7 @@ Esistono sei traduzioni leggermente differenti, in altrettanti branch, che sono 
 
 * per la versione stabile `3.10 <https://docs.python.org/3.10/tutorial/index.html>`_;
 
-* per la versione in sviluppo `3.11 <https://docs.python.org/3.11/tutorial/index.html>`_;
+* per la versione stabile `3.11 <https://docs.python.org/3.11/tutorial/index.html>`_;
 
 * per la versione in sviluppo "più aggiornata" (Python 3.12), che corrisponde alle ultime modifiche fatte nel  `main branch <https://github.com/python/cpython/tree/main/Doc/tutorial>`_. 
 
