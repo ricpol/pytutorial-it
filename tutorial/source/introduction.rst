@@ -190,6 +190,10 @@ prima dell'apice iniziale::
    >>> print(r'C:\some\name')  # si noti la r iniziale
    C:\some\name
 
+Le *raw string* hanno una sottigliezza: non possono terminare con un numero 
+dispari di *backslash* ``\``: si veda :ref:`la FAQ<faq-programming-raw-string-backslash>` 
+per ulteriori informazioni e soluzioni. 
+
 Le stringhe possono occupare più di una riga. Un modo per ottenere questo è 
 usare gli apici tripli: ``"""..."""`` o ``'''...'''``. Gli "a-capo" sono 
 inclusi automaticamente nelle stringhe, ma è possibile evitarlo aggiungendo un 
