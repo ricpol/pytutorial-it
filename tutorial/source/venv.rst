@@ -43,7 +43,7 @@ Per creare un virtual environment, decidete in quale directory volete
 collocarlo e avviate il modulo :mod:`venv` come uno script, passando il 
 percorso della directory scelta::
 
-   python3 -m venv tutorial-env
+   python -m venv tutorial-env
 
 Questo crea la directory ``tutorial-env`` se non esiste; inoltre crea al suo 
 interno le directory che contengono una copia dell'interprete Python 

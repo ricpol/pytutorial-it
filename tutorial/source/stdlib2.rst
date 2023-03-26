@@ -403,7 +403,7 @@ fallirebbero con la rappresentazione binaria in virgola mobile::
 
    >>> sum([Decimal('0.1')]*10) == Decimal('1.0')
    True
-   >>> sum([0.1]*10) == 1.0
+   >>> 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 == 1.0
    False
 
 Il modulo :mod:`decimal` permette di svolgere calcoli con tutta la precisione 

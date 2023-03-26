@@ -5,10 +5,12 @@ Aritmetica in virgola mobile: problemi e limiti
 ***********************************************
 
 .. sectionauthor:: Tim Peters <tim_one@users.sourceforge.net>
+.. sectionauthor:: Raymond Hettinger <python at rnc dot com>
+
 
 I computer rappresentano i numeri in virgola mobile come frazioni binarie. Per 
-esempio, la frazione decimale [#]_ ``0.125`` vale 1/10 + 2/100 + 5/1000, 
-e allo stesso modo la frazione binaria ``0.001`` vale 0/2 + 0/4 + 1/8.  
+esempio, la frazione decimale [#]_ ``0.625`` vale 6/10 + 2/100 + 5/1000, 
+e allo stesso modo la frazione binaria ``0.101`` vale 1/2 + 0/4 + 1/8.  
 Queste due frazioni hanno lo stesso valore: l'unica 
 differenza è che una è espressa come frazione in base 10, l'altra come 
 frazione in base 2.
@@ -53,7 +55,7 @@ visualizzate non sono abbastanza. Python scrive un'approssimazione decimale
 del vero valore che internamente è rappresentato come un'approssimazione 
 binaria. Sulla maggior parte dei computer, se Python dovesse scrivere il 
 valore decimale esatto dell'approssimazione binaria interna di 0.1, dovrebbe 
-farci vedere ::
+farci vedere::
 
    >>> 0.1
    0.1000000000000000055511151231257827021181583404541015625
@@ -109,26 +111,34 @@ computer.
 Un'illusione può portare a un'altra illusione. Per esempio, siccome 0.1 non è 
 esattamente 1/10, sommare tre volte 0.1 potrebbe non dare 0.3::
 
-   >>> .1 + .1 + .1 == .3
+   >>> 0.1 + 0.1 + 0.1 == 0.3
    False
 
 Inoltre, siccome 0.1 non può avvicinarsi ulteriormente al valore esatto di 
 1/10 e 0.3 non può avvicinarsi di più a 3/10, arrotondare preventivamente con 
 la funzione :func:`round` non è una soluzione::
 
-   >>> round(.1, 1) + round(.1, 1) + round(.1, 1) == round(.3, 1)
+   >>> round(0.1, 1) + round(0.1, 1) + round(0.1, 1) == round(0.3, 1)
    False
 
 Anche se i numeri non possono avvicinarsi di più al loro valore reale, la 
-funzione :func:`round` può essere utile comunque per arrotondare *dopo*, in 
-modo da rendere confrontabili i risultati approssimati::
+funzione :funct:`math.isclose` può servire a confrontare valori non esatti::
 
-    >>> round(.1 + .1 + .1, 10) == round(.3, 10)
+   >>> math.isclose(0.1 + 0.1 + 0.1, 0.3)
+   True
+
+In alternativa la funzione :func:`round` può essere utile comunque per 
+confrontare valori arrotondati::
+
+    >>> round(math.py, ndigits=2) == round(22 / 7, ndigits=2)
     True
 
 L'aritmetica binaria in virgola mobile presenta molte sorprese come questa. 
 Spieghiamo nel dettaglio il problema di "0.1" nella sezione successiva. Si 
-veda `The Perils of Floating Point <https://www.lahey.com/float.htm>`_ per un 
+veda `Examples of Floating Point Problems <https://jvns.ca/blog/01/13/examples-of-floating-point-problems/>`_ 
+per un riassunto accessibile di come funziona l'aritmetica in virgola mobile 
+e i problemi che si incontrano di solito in pratica. Inoltre 
+`The Perils of Floating Point <https://www.lahey.com/float.htm>`_ ha un 
 elenco più completo di altri inciampi frequenti. 
 
 Come si usa concludere, "non ci sono risposte facili". Tuttavia non bisogna 
@@ -191,7 +201,7 @@ trasportare il valore in modo affidabile tra diverse versioni di Python (su
 diverse piattaforme) e per scambiare dati con altri linguaggi che supportano 
 lo stesso formato (come Java e C99).
 
-Un altro strumento utile è la funzione :func:`math.fsum`, che aiuta ad 
+Un altro strumento utile è la funzione :func:`sum`, che aiuta ad 
 alleviare il problema della perdita di precisione durante la somma. Questa 
 funzione tiene traccia dei "decimali perduti" man mano che i valori sono 
 aggiunti al totale. Questo può fare la differenza nella precisione 
@@ -200,8 +210,30 @@ risultato finale::
 
    >>> 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 == 1.0
    False
-   >>> math.fsum([0.1] * 10) == 1.0
+   >>> sum([0.1] * 10) == 1.0
    True
+
+La funzione :funct:`math.fsum()` va oltre, e tiene traccia di tutti i 
+"decimali perduti" man mano che i valori si sommano, in modo che il totale 
+abbia un arrotondamento unico. Questo metodo è più lento di :func:`sum` ma 
+è più accurato nei rari casi in cui dei valori in ingresso anche grandi si 
+cancellano a vicenda lasciando una somma finale prossima allo zero::
+
+   >>> arr = [-0.10430216751806065, -266310978.67179024, 143401161448607.16, 
+   ...        -143401161400469.7, 266262841.31058735, -0.003244936839808227]
+   >>> float(sum(map(Fraction, arr))) # somma esatta con un solo arrotondamento
+   8.042173697819788e-13
+   >>> math.fsum(arr)  # un solo arrotondamento
+   8.042173697819788e-13
+   >>> sum(arr) # arrotondamenti multipli con precisione estesa
+   8.042178034628478e-13
+   >>> total = 0.0
+   >>> for x in arr:
+   ...     total += x # arrotondamenti multipli con precisione standard
+   ...
+   >>> total # l'addizione non ha un decimale corretto!
+   -0.0051575902860057365
+
 
 .. _tut-fp-error:
 
