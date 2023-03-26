@@ -170,7 +170,7 @@ aggiungere gli attributi desiderati::
    >>> try:
    ...     raise Exception('spam', 'eggs')
    ... except Exception as inst:
-   ...     print(type(inst))    # l'istanza dell'eccezione
+   ...     print(type(inst))    # il tipo dell'eccezione
    ...     print(inst.args)     # gli argomenti conservati in .args
    ...     print(inst)          # __str__ scrive direttamente gli argomenti
    ...                          # ma può essere sovrascritto nelle sottoclassi
