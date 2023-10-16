@@ -128,7 +128,11 @@ modo da rendere confrontabili i risultati approssimati::
 
 L'aritmetica binaria in virgola mobile presenta molte sorprese come questa. 
 Spieghiamo nel dettaglio il problema di "0.1" nella sezione successiva. Si 
-veda `The Perils of Floating Point <https://www.lahey.com/float.htm>`_ per un 
+veda 
+`Examples of FLoating Point Problems <https://jvns.ca/blog/2023/01/13/examples-of-floating-point-problems/>`_ 
+per una introduzione piacevole alla virgola mobile binaria e ai problemi che 
+si possono trovare in pratica. Si veda inoltre 
+`The Perils of Floating Point <https://www.lahey.com/float.htm>`_ per un 
 elenco più completo di altri inciampi frequenti. 
 
 Come si usa concludere, "non ci sono risposte facili". Tuttavia non bisogna 
@@ -219,7 +223,7 @@ cui Python (o Perl, C, C++, Java, Fortran e molti altri) talvolta non
 visualizzano esattamente il numero decimale che uno si aspetta. 
 
 Perché succede? 1/10 non può essere rappresentato come una frazione binaria. 
-Quasi tutti i computer oggi (novembre 2000) usano l'aritmetica in virgola 
+Quasi tutti i computer da almeno il 2000 usano l'aritmetica in virgola 
 mobile IEEE-754 e in quasi tutte le piattaforme un *float* di Python è 
 implementato come un numero "in doppia precisione" IEEE-754. Questi numeri 
 hanno una precisione di 53 bit, quindi il computer in ingresso cerca di 

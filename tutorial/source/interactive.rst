@@ -23,7 +23,7 @@ nomi dei moduli disponibili. Le espressioni con il punto, come ``string.a``,
 sono valutate fino al punto finale; quindi vengono suggeriti completamenti 
 tratti dagli attributi dell'oggetto risultante. Si noti che così facendo è 
 possibile che sia eseguito del codice dell'applicazione, se l'espressione 
-comprende un oggetto con un metodo :meth:`__getattr__` definito. La 
+comprende un oggetto con un metodo :meth:`~object.__getattr__` definito. La 
 configurazione di default salva inoltre la storia dei comandi in un file 
 :file:`.python_history` nella vostra directory home. La storia sarà nuovamente 
 disponibile nella prossima sessione dell'interprete. 

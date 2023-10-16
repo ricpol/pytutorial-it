@@ -162,7 +162,7 @@ dipende dall'eccezione.
 La clausola *except* può specificare una variabile dopo il nome 
 dell'eccezione. La variabile è legata all'istanza dell'eccezione, e i suoi 
 argomenti sono conservati in ``instance.args``. Per comodità, l'istanza 
-dell'eccezione definisce un metodo :meth:`__str__` tale per cui gli argomenti 
+dell'eccezione definisce un metodo :meth:`~object.__str__` tale per cui gli argomenti 
 possono essere scritti direttamente, senza doversi riferire a ``.args``. È 
 possibile anche istanziare l'eccezione prima di emetterla, in modo da 
 aggiungere gli attributi desiderati::
@@ -187,7 +187,7 @@ aggiungere gli attributi desiderati::
 Se un'eccezione ha degli argomenti, questi sono scritti nell'ultima parte 
 ("detail") del messaggio di errore causato dall'eccezione non gestita. 
 
-L'output del metodo :meth:`__str__` dell'eccezione viene stampato 
+L'output del metodo :meth:`~object.__str__` dell'eccezione viene stampato 
 nell'ultima parte ('detail') del messaggio, per le eccezioni non gestite. 
 
 :exc:`BaseException` è la classe-madre comune a tutte le eccezioni. Una 
@@ -543,11 +543,20 @@ eccezioni di un certo tipo, lasciando che tutte le altre si
 propaghino alle altre clausole, e siano rilanciate. ::
 
     >>> def f():
-    ...     raise ExceptionGroup("group1",
-    ...                          [OSError(1), 
-    ...                           SystemError(2), 
-    ...                           ExceptionGroup("group2", 
-    ...                                          [OSError(3), RecursionError(4)])])
+    ...     raise ExceptionGroup(
+    ...         "group1",
+    ...         [
+    ...             OSError(1), 
+    ...             SystemError(2), 
+    ...             ExceptionGroup(
+    ...                 "group2", 
+    ...                 [
+    ...                     OSError(3), 
+    ...                     RecursionError(4)
+    ...                 ]
+    ...             )
+    ...         ]
+    ...      )
     ...
     >>> try:
     ...     f()
@@ -584,6 +593,8 @@ emesse e intercettate dal programma, come in questo pattern::
     >>> if excs:
     ... 	raise ExceptionGroup("Alcuni test sono falliti:", excs)
 
+
+.. _tut-exception-notes:
 
 Arricchire le eccezioni con le Note.
 ====================================

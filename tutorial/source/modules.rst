@@ -192,7 +192,7 @@ Il percorso di ricerca dei moduli
 
 .. index:: triple: module; search; path
 
-Quando importiamo un modulo di nome :mod:`spam`, l'interprete per prima cosa 
+Quando importiamo un modulo di nome :mod:`!spam`, l'interprete per prima cosa 
 cerca tra i moduli predefiniti se ne esiste uno con quel nome. Questi sono 
 elencati in :data:`sys.builtin_module_names`. Se non lo 
 trova, cerca un file :file:`spam.py` in una lista di directory contenuta nella 
@@ -276,7 +276,7 @@ Alcuni consigli per gli esperti:
 Moduli della libreria standard
 ==============================
 
-.. index:: module: sys
+.. index:: pair: module; sys
 
 Python è distribuito con una libreria standard di moduli, documentata in un 
 una sezione separata, la Guida di Riferimento della Libreria Standard. Alcuni 
@@ -357,7 +357,7 @@ Senza argomenti, :func:`dir` elenca i nomi disponibili attualmente::
 Si noti che nell'elenco compaiono tutti i tipi di nomi: variabili, moduli, 
 funzioni e così via. 
 
-.. index:: module: builtins
+.. index:: pair: module; builtins
 
 :func:`dir` non elenca però i nomi delle funzioni e delle variabili 
 predefinite. Se volete un lista di questi, sono definiti nel modulo 
@@ -401,7 +401,7 @@ Package
 =======
 
 I package sono un modo di strutturare il *namespace* di un modulo Python 
-usando la "notazione col punto". Per esempio, il nome :mod:`A.B` indica un 
+usando la "notazione col punto". Per esempio, il nome :mod:`!A.B` indica un 
 sotto-modulo ``B`` all'interno di un package ``A``. Proprio come i moduli 
 permettono a diversi autori di non doversi preoccupare dei nomi *di variabile* 
 usati in altri moduli, così i package permettono agli autori di package con 
@@ -461,7 +461,7 @@ per esempio::
 
    import sound.effects.echo
 
-Questo carica il modulo :mod:`sound.effects.echo`. Occorre riferirsi a questo 
+Questo carica il modulo :mod:`!sound.effects.echo`. Occorre riferirsi a questo 
 con il nome completo. ::
 
    sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)
@@ -470,7 +470,7 @@ Un modo alternativo per importare il modulo è questo::
 
    from sound.effects import echo
 
-Anche in questo modo carichiamo il modulo :mod:`echo`, ma lo rendiamo 
+Anche in questo modo carichiamo il modulo :mod:`!echo`, ma lo rendiamo 
 disponibile senza il prefisso del nome del package. Può essere quindi usato 
 così::
 
@@ -481,8 +481,8 @@ richiesta::
 
    from sound.effects.echo import echofilter
 
-Ancora una volta, questo carica il modulo :mod:`echo`, rendendo però 
-direttamente disponibile la sua funzione :func:`echofilter`::
+Ancora una volta, questo carica il modulo :mod:`!echo`, rendendo però 
+direttamente disponibile la sua funzione :func:`!echofilter`::
 
    echofilter(input, output, delay=0.7, atten=4)
 
@@ -526,12 +526,28 @@ importare "\*" dal suo package. Per esempio, il file
    __all__ = ["echo", "surround", "reverse"]
 
 In questo modo, ``from sound.effects import *`` importerebbe i tre moduli 
-indicati del package :mod:`sound.effects`.
+indicati del package :mod:`!sound.effects`.
+
+Attenzione però che i sotto-moduli potrebbero finire "coperti" da nomi 
+definiti localmente. Per esempio, se aggiungete una funzione ``reverse`` al 
+file :file:`sound/effects/__init__.py`, allora ``from sound.effects import *`` 
+finirebbe per importare solo i due sotto-moduli ``echo`` e ``surround`` ma 
+**non** anche il modulo ``reverse``, perché sarebbe nascosto dalla funzione 
+``reverse`` definita localmente::
+
+    __all__ = [
+    	"echo",      # si riferisce al file 'echo.py'
+    	"surround",  # si riferisce al file 'surround.py'
+    	"reverse",   # !!! si riferisce alla funzione 'reverse' adesso !!!
+    ]
+
+    def reverse(msg: str):  # <-- questo nome copre il modulo 'reverse.py'
+        return msg[::-1]    #     se fate un 'from sound.effects import *'
 
 Se ``__all__`` non è definito, allora l'istruzione 
 ``from sound.effects import *`` *non* importa comunque tutti i moduli del 
-package :mod:`sound.effects` nel *namespace* corrente. Si limita a garantire 
-che il package :mod:`sound.effects` sia stato effettivamente importato 
+package :mod:`!sound.effects` nel *namespace* corrente. Si limita a garantire 
+che il package :mod:`!sound.effects` sia stato effettivamente importato 
 eventualmente eseguendo il codice trovato nel file :file:`__init__.py`) e 
 quindi importa tutti i nomi definiti nel package: questo comprende tutti i 
 nomi definiti (e i moduli esplicitamente importati) nel :file:`__init__.py`. 
@@ -542,8 +558,8 @@ importati in precedenza. Si consideri questo codice::
    import sound.effects.surround
    from sound.effects import *
 
-In questo esempio, i moduli :mod:`echo` e :mod:`surround` sono importati nel 
-*namespace* corrente perché sono definiti nel package :mod:`sound.effects` al 
+In questo esempio, i moduli :mod:`!echo` e :mod:`!surround` sono importati nel 
+*namespace* corrente perché sono definiti nel package :mod:`!sound.effects` al 
 momento di eseguire l'istruzione ``from...import`` (funziona allo stesso modo 
 quando la variabile ``__all__`` è definita).
 
@@ -562,16 +578,16 @@ Riferimenti intra-package
 -------------------------
 
 Quando i package contengono a loro volta dei sub-package (come nel caso del 
-nostro esempio :mod:`sound`), potete usare gli import *assoluti* per riferirvi 
+nostro esempio :mod:`!sound`), potete usare gli import *assoluti* per riferirvi 
 a moduli di package "cugini". Per esempio, se il modulo 
-:mod:`sound.filters.vocoder` ha bisogno di usare il modulo :mod:`echo` nel 
-package :mod:`sound.effects`, può importarlo con 
+:mod:`!sound.filters.vocoder` ha bisogno di usare il modulo :mod:`!echo` nel 
+package :mod:`!sound.effects`, può importarlo con 
 ``from sound.effects import echo``.
 
 Potete anche usare gli import *relativi*, negli import del tipo 
 ``from module import name``. Gli import relativi usano una notazione con punti 
 iniziali per indicare il package corrente e genitore interessati dall'import. 
-Dal modulo :mod:`surround`, per esempio, potreste importare::
+Dal modulo :mod:`!surround`, per esempio, potreste importare::
 
    from . import echo
    from .. import formats

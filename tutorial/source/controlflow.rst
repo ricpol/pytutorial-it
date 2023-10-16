@@ -4,9 +4,9 @@
 Altri strumenti per il controllo di flusso
 ******************************************
 
-Oltre a :keyword:`while` di cui abbiamo già parlato, Python utilizza le 
-consuete istruzioni per il controllo del flusso, comuni a molti linguggi, con 
-qualche peculiarità. 
+Oltre a :keyword:`while` di cui abbiamo già parlato, Python utilizza 
+alcune altre istruzioni per il controllo del flusso, che incontriamo in 
+questo capitolo.
 
 .. _tut-if:
 
@@ -46,7 +46,7 @@ Istruzione :keyword:`!for`
 ==========================
 
 .. index::
-   statement: for
+   pair: statement; for
 
 Se siete abituati a Pascal o a C, troverete l'istruzione :keyword:`for` in 
 Python leggermente diversa. Invece di iterare solo su una progressione 
@@ -160,15 +160,22 @@ approfondiremo ancora la funzione :func:`list`.
 Le istruzioni :keyword:`!break` e :keyword:`!continue`, e la clausola :keyword:`!else` nei cicli
 ================================================================================================
 
-L'istruzione :keyword:`break` come in C, "salta fuori" dal ciclo 
+L'istruzione :keyword:`break` "salta fuori" dal ciclo 
 :keyword:`for` o :keyword:`while` più interno in cui è inserita.
 
-Le istruzioni di iterazione possono avere una clausola :keyword:`!else`: 
-questa viene eseguita quando il ciclo termina perché l'iterabile si è esaurito 
-(in un :keyword:`for`), o perché la condizione è divenuta "falsa" (in un 
-:keyword:`while`); non viene però eseguita quando il ciclo termina a causa di 
-una istruzione :keyword:`break`. Per esempio, il ciclo seguente ricerca i 
-numeri primi::
+Le istruzioni :keyword:`!for` o :keyword:`!while` possono avere una clausola 
+:keyword:`!else`:. 
+
+In un ciclo :keyword:`for`, la :keyword:`!else` viene eseguita quando il ciclo 
+ha raggiunto la sua ultima iterazione. 
+
+In un ciclo :keyword:`while` viene eseguita quando la condizione del ciclo 
+diventa falsa. 
+
+In entrambi i cicli, la clausola :keyword:`!else` **non** viene eseguita se 
+il ciclo termina con un :keyword:`break`.
+
+Per esempio, questo ciclo :keyword:`!for` ricerca i numeri primi::
 
    >>> for n in range(2, 10):
    ...     for x in range(2, n):
@@ -308,8 +315,9 @@ seguito da una lista di argomenti che ricorda quella di un costruttore, ma
 con la capacità di catturare gli attributi e assegnarli a variabili::
 
     class Point:
-        x: int
-        y: int
+        def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
     def where_is(point):
         match point:
@@ -345,8 +353,15 @@ I nomi con il punto (come ``foo.bar``), gli attributi (come gli ``x=`` e
 accanto al nome, come nei ``Point(...)`` qui sopra) non sono mai assegnati. 
 
 I pattern possono essere arbitrariamente annidati. Per esempio, se abbiamo una 
-breve lista di punti, potremmo confrontarla con dei pattern in questo modo::
+breve lista di punti, inserendo ``__match_args__`` potremmo confrontarla con 
+dei pattern in questo modo::
 
+    class Point:
+        __match_args__ = ('x', 'y')
+        def __init__(self, x, y):
+            self.x = x
+            self.y = y
+            
     match points:
         case []:
             print("Nessun punto")
@@ -536,7 +551,7 @@ Questo esempio, come di consueto, introduce alcuni concetti nuovi:
   definiscono metodi diversi. Metodi di tipi diversi possono avere lo stesso 
   nome, senza che ciò produca ambiguità. Potete definire i vostri tipi e i 
   vostri metodi, usando le *classi*: vedi :ref:`tut-classes`. Il metodo 
-  :meth:`append` mostrato nell'esempio è definito per gli oggetti-lista: 
+  :meth:`!append` mostrato nell'esempio è definito per gli oggetti-lista: 
   aggiunge un nuovo elemento in coda alla lista. In questo esempio è 
   equivalente a ``result = result + [a]``, ma più efficiente. 
 
@@ -1054,7 +1069,7 @@ metadati informativi sui tipi utilizzati dalle funzioni (si vedano la
 :pep:`3107` e la :pep:`484` per ulteriori informazioni). 
 
 Le :term:`annotazioni <function annotation>` sono conservate nell'attributo 
-:attr:`__annotations__` della funzione, che è un dizionario, e non hanno 
+:attr:`!__annotations__` della funzione, che è un dizionario, e non hanno 
 effetto su nessun'altra parte della funzione. Le annotazioni dei parametri si 
 indicano con un "due punti" dopo il nome del parametro, seguito da 
 un'espressione che restituisce il valore dell'annotazione. Le annotazioni per 

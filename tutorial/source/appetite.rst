@@ -8,7 +8,7 @@
 
     Questa è la traduzione della **versione "stabile" del Tutorial**, 
     corrispondente a Python 3.11, ed è aggiornata al 
-    `22 marzo 2023 <https://github.com/python/cpython/commits/main/Doc/tutorial>`_.
+    `9 ottobre 2023 <https://github.com/python/cpython/commits/main/Doc/tutorial>`_.
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: 

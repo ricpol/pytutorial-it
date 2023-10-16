@@ -52,8 +52,8 @@ Numeri
 
 L'interprete funziona come una semplice calcolatrice: potete inserire 
 un'espressione e lui restituirà il suo valore. La sintassi delle espressioni 
-è banale: gli operatori ``+``, ``-``, ``*`` e ``/`` funzionano come negli 
-altri linguaggi (Pascal o C, per esempio); le parentesi (``()``) si possono 
+è banale: gli operatori ``+``, ``-``, ``*`` e ``/`` funzionano come per  
+l'aritmetica; le parentesi (``()``) si possono 
 usare per i raggruppamenti. Per esempio::
 
    >>> 2 + 2
@@ -140,16 +140,25 @@ il supporto per i :ref:`numeri complessi <typesnumeric>` e usa il suffisso
 
 .. _tut-strings:
 
-Stringhe
---------
+Testo
+-----
 
-Oltre ai numeri, Python può manipolare le stringhe, che si possono esprimere 
-in molti modi. Potete delimitarle con apici singoli (``'...'``) o doppi 
-(``"..."``): funzionano allo stesso modo [#]_. Usate ``\`` (*backslash*) per 
-fare *escaping* degli apici::
+Oltre ai numeri, Python può manipolare il testo (rappresentato dal tipo 
+:class:`str`, le cosiddette "stringhe"). Ciò include caratteri "``!``", 
+parole "``coniglio``", nomi "``Parigi``", frasi "``Ti copro io.``", 
+e così via "``Yay! :)``". Potete delimitarle con apici singoli (``'...'``) 
+o doppi (``"..."``): funzionano allo stesso modo [#]_. 
 
    >>> 'spam eggs'  # apici singoli
    'spam eggs'
+   >>> "Il coniglio di Parigi, ti copre lui :)! Yay!" # apici doppi
+   'Il coniglio di Parigi, ti copre lui :)! Yay!'
+   >>> '1975'  # i numeri tra apici sono comunque stringhe
+   '1975'
+
+Per virgolettare le virgolette, dovete fare "l'escaping" facendola precedere da 
+``\``. Oppure, usate l'altro tipo di apice::
+
    >>> 'doesn\'t'  # usate \' per inserire un apice singolo nella stringa...
    "doesn't"
    >>> "doesn't"  # ...o usate apici doppi per delimitarla
@@ -161,22 +170,15 @@ fare *escaping* degli apici::
    >>> '"Isn\'t," they said.'
    '"Isn\'t," they said.'
 
-Nell'output dell'interprete interattivo, le stringhe sono chiuse tra apici e i 
-caratteri speciali sono resi con il *backslash* di *escape*. A volte l'output 
-può sembrare diverso dall'input, perché gli apici possono cambiare, ma le due 
-versioni sono equivalenti. La stringa è chiusa nei doppi apici se contiene un 
-apice singolo e nessun apice doppio; altrimenti è delimitata da apici singoli. 
-La funzione :func:`print` produce un output più leggibile perché omette gli 
-apici iniziali e finali, e "stampa" anche i caratteri speciali::
+Nella shell di Python, la definizione di una stringa e il suo output possono 
+sembrare differenti. La funzione :func:`print` produce un output più leggibile 
+perché omette gli apici iniziali e finali, e "stampa" anche i caratteri speciali::
 
-   >>> '"Isn\'t," they said.'
-   '"Isn\'t," they said.'
-   >>> print('"Isn\'t," they said.')
-   "Isn't," they said.
    >>> s = 'First line.\nSecond line.'  # \n significa "a-capo"
-   >>> s  # senza print(), \n viene incluso nell'output
+   >>> s  # senza print(), i caratteri speciali sono inclusi nell'output
    'First line.\nSecond line.'
-   >>> print(s)  # con print(), \n produce una nuova riga
+   >>> print(s)  # con print(), i caratteri speciali sono interpretati, 
+   ...           # quindi \n produce una nuova riga
    First line.
    Second line.
 
@@ -485,7 +487,7 @@ I primi passi verso la programmazione
 
 Certamente possiamo usare Python per compiti più complessi che sommare due più 
 due. Per esempio, possiamo scrivere i primi numeri della 
-`serie di Fibonacci <https://en.wikipedia.org/wiki/Fibonacci_number>`_ in 
+`serie di Fibonacci <https://en.wikipedia.org/wiki/Fibonacci_sequence>`_ in 
 questo modo::
 
    >>> # serie di Fibonacci:
