@@ -4,12 +4,12 @@
     Questa è una traduzione del 
     `Tutorial ufficiale <https://docs.python.org/3.12/tutorial/index.html>`_ 
     della documentazione di Python, mantenuta in sincrono con il testo della 
-    `repository GitHub <https://github.com/python/cpython/tree/main/Doc/tutorial>`_.
+    `repository GitHub <https://github.com/python/cpython/tree/3.12/Doc/tutorial>`_.
 
-    Questa è la traduzione della **versione "di sviluppo" del Tutorial**, 
-    corrispondente a Python 3.12 e al "main branch" della repository, 
+    Questa è la traduzione della **versione "stabile" del Tutorial**, 
+    corrispondente a Python 3.12, 
     ed è aggiornata al 
-    `6 maggio 2023 <https://github.com/python/cpython/commits/main/Doc/tutorial>`_.
+    `9 ottobre 2023 <https://github.com/python/cpython/commits/3.12/Doc/tutorial>`_.
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: 
