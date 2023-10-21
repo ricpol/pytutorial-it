@@ -251,7 +251,7 @@ cui Python (o Perl, C, C++, Java, Fortran e molti altri) talvolta non
 visualizzano esattamente il numero decimale che uno si aspetta. 
 
 Perché succede? 1/10 non può essere rappresentato come una frazione binaria. 
-Quasi tutti i computer oggi (novembre 2000) usano l'aritmetica in virgola 
+Quasi tutti i computer da almeno il 2000 usano l'aritmetica in virgola  
 mobile IEEE-754 e in quasi tutte le piattaforme un *float* di Python è 
 implementato come un numero "in doppia precisione" IEEE-754. Questi numeri 
 hanno una precisione di 53 bit, quindi il computer in ingresso cerca di 

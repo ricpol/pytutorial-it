@@ -208,4 +208,6 @@ installare tutti i pacchetti necessari con ``install -r``:
 ``pip`` ha molte altre opzioni. Consultate la guida a :ref:`Installare moduli 
 Python<installing-index>` per la documentazione completa di ``pip``.  Se avete 
 scritto un package Python e volete pubblicarlo sul Python Package Index, 
-leggete la guida a :ref:`Distribuire moduli Python<distributing-index>`.
+leggete la :ref:`Python packaging user guide`_.
+
+.. _Python Packaging User Guide: https://packaging.python.org/en/latest/tutorials/packaging-projects/

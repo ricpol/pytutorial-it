@@ -100,7 +100,7 @@ Personalizzare l'installazione
 ------------------------------
 
 Python mette a disposizione due strumenti che vi consentono di 
-personalizzarlo: i moduli :mod:`sitecustomize` e :mod:`usercustomize`. Per 
+personalizzarlo: i moduli :index:`sitecustomize` e :index:`usercustomize`. Per 
 vederli in azione, dovete per prima cosa ricavare la collocazione della vostra 
 directory *site-packages*. Avviate Python ed eseguite questo codice::
 
@@ -113,9 +113,9 @@ collocarvi qualsiasi istruzione. Questo avrà effetto su qualsiasi invocazione
 di Python, a meno che non venga passata l'opzione :option:`-s` per 
 disabilitarne l'importazione automatica. 
 
-Il modulo :mod:`sitecustomize` funziona allo stesso modo, ma viene creato di 
+Il modulo :index:`sitecustomize` funziona allo stesso modo, ma viene creato di 
 solito da un amministratore del computer nella directory *site-packages* 
-globale, ed è importato *prima* di :mod:`usercustomize`. Si veda la 
+globale, ed è importato *prima* di :index:`usercustomize`. Si veda la 
 documentazione del modulo :mod:`site` per ulteriori informazioni. 
 
 .. only:: html

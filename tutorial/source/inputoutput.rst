@@ -15,7 +15,7 @@ Formattazione gradevole dell'output
 
 Finora abbiamo visto due modi di scrivere un valore: le espressioni e la 
 funzione :func:`print`. (Un terzo modo è quello di usare il metodo 
-:meth:`write` degli oggetti-file: lo standard output può essere raggiunto con 
+:meth:`~io.TextIOBase.write` degli oggetti-file: lo standard output può essere raggiunto con 
 ``sys.stdout``. Si veda la documentazione della libreria standard per maggiori 
 informazioni.)
 
@@ -463,7 +463,7 @@ file; inoltre gli unici *offset* validi sono quelli restituiti da
 non definiti. 
 
 Gli oggetti-file dispongono di altri metodi di uso meno frequente, come 
-:meth:`~file.isatty` o :meth:`~file.truncate`; rimandiamo alla documentazione 
+:meth:`~io.IOBase.isatty` o :meth:`~io.IOBase.truncate`; rimandiamo alla documentazione 
 della libreria standard per informazioni complete su questi oggetti.
 
 .. _tut-json:
@@ -475,7 +475,7 @@ Persistenza di dati strutturati con :mod:`json`
 
 Le stringhe si possono leggere e scrivere facilmente nei file. I numeri 
 richiedono un piccolo sforzo aggiuntivo, dal momento che il metodo 
-:meth:`read` restituisce solo una stringa, che quindi deve poi essere passata 
+:meth:`~io.TextIOBase.read` restituisce solo una stringa, che quindi deve poi essere passata 
 per la conversione a funzioni come :func:`int`, che riceve stringhe come 
 ``'123'`` e restituisce il corrispondente valore numerico 123. Tuttavia, 
 quando volete "salvare" strutture-dati più complesse come liste annidate e 

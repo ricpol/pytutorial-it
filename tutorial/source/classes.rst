@@ -99,7 +99,7 @@ Gli attributi possono essere di sola lettura o scrivibili: a questi ultimi è
 possibile assegnare dei valori. Gli attributi dei moduli sono scrivibili: 
 potete scrivere ``modname.the_answer = 42``. Gli attributi scrivibili sono 
 anche eliminabili con l'istruzione :keyword:`del`. Per esempio, 
-``del modname.the_answer`` rimuoverà l'attributo :attr:`the_answer` 
+``del modname.the_answer`` rimuoverà l'attributo :attr:`!the_answer` 
 dall'oggetto ``modname``.
 
 I *namespace* sono creati in momenti diversi e hanno cicli di vita diversi. 
@@ -273,7 +273,7 @@ nella prossima sezione. Lo *scope* locale originario (quello che era attivo
 subito prima di entrare nella definizione della classe) viene ripristinato e 
 l'oggetto-classe viene collegato in questo *namespace* al nome fornito 
 nell'intestazione della definizione della classe (nel nostro esempio, 
-:class:`ClassName`).
+:class:`!ClassName`).
 
 .. _tut-classobjects:
 
@@ -298,7 +298,7 @@ dell'oggetto-classe. Quindi, se una definizione di classe è fatta così, ::
 allora ``MyClass.i`` e ``MyClass.f`` sono riferimenti validi agli attributi, e 
 restituiscono un intero e un oggetto-funzione rispettivamente. Gli attributi 
 della classe possono anche essere assegnati, ovvero potete cambiare il valore 
-di ``MyClass.i`` con un assegnamento. Anche :attr:`__doc__` è un attributo 
+di ``MyClass.i`` con un assegnamento. Anche :attr:`!__doc__` è un attributo 
 valido, e restituisce la docstring della classe 
 (``"Un semplice esempio di classe."``)
 
@@ -315,21 +315,21 @@ locale ``x``.
 L'operazione di istanziamento ("invocare" un oggetto-classe) crea un oggetto 
 vuoto. Molto spesso le classi preferiscono creare istanze predisposte con uno 
 specifico stato iniziale. Per questo è possibile definire nella classe un 
-metodo speciale chiamato :meth:`__init__`, così::
+metodo speciale chiamato :meth:`~object.__init__`, così::
 
    def __init__(self):
        self.data = []
 
-Se la classe definisce un metodo :meth:`__init__` allora l'operazione di 
+Se la classe definisce un metodo :meth:`~object.__init__` allora l'operazione di 
 istanziamento lo invoca automaticamente per l'istanza appena creata. Quindi 
 nel nostro esempio, una nuova istanza già inizializzata può essere ottenuta 
 con::
 
    x = MyClass()
 
-Naturalmente il metodo :meth:`__init__` può essere reso più flessibile 
+Naturalmente il metodo :meth:`~object.__init__` può essere reso più flessibile 
 dotandolo di parametri. In questo caso gli argomenti passati all'istanziamento 
-della classe sono trasferiti al metodo :meth:`__init__`. Per esempio::
+della classe sono trasferiti al metodo :meth:`!__init__`. Per esempio::
 
    >>> class Complex:
    ...     def __init__(self, realpart, imagpart):
@@ -353,7 +353,7 @@ I *dati* corrispondono alle "variabili di istanza" di Smalltalk e ai "data
 members" di C++. Gli attributi-dati non devono essere dichiarati: proprio come 
 le variabili locali, iniziano a esistere nel momento in cui sono assegnati per 
 la prima volta. Per esempio, se ``x`` è una istanza della classe 
-:class:`MyClass` che abbiamo definito sopra, questo codice scriverà il valore 
+:class:`!MyClass` che abbiamo definito sopra, questo codice scriverà il valore 
 "16" senza lasciar traccia::
 
    x.counter = 1
@@ -389,7 +389,7 @@ Di solito un metodo viene invocato non appena è stato collegato::
 
    x.f()
 
-Nell'esempio di :class:`MyClass`, questa chiamata restituirà la stringa 
+Nell'esempio di :class:`!MyClass`, questa chiamata restituirà la stringa 
 ``'hello world'``. Tuttavia non è necessario invocare il metodo 
 immediatamente: ``x.f`` è un oggetto-metodo che può essere "conservato" e 
 chiamato più tardi. Per esempio, ::
@@ -402,7 +402,7 @@ continuerà a scrivere ``hello world`` fino alla fine del mondo.
 
 Che cosa succede di preciso quando un metodo è invocato? Avrete notato che 
 l'invocazione ``x.f()`` è stata fatta senza passare argomenti, anche se la 
-definizione di :meth:`f` specifica in effetti un parametro. Che cosa succede a 
+definizione di :meth:`!f` specifica in effetti un parametro. Che cosa succede a 
 questo? Certamente Python dovrebbe emettere un'eccezione se una funzione che 
 richiede un argomento è invocata senza passarlo, anche se poi l'argomento non 
 dovesse essere usato nella funzione stessa...
@@ -564,7 +564,7 @@ esterno. Per esempio::
 
        h = g
 
-Adesso ``f``, ``g`` e ``h`` sono tutti attributi della classe :class:`C`, che 
+Adesso ``f``, ``g`` e ``h`` sono tutti attributi della classe :class:`!C`, che 
 si riferiscono a oggetti-funzione: di conseguenza sono anche tutti metodi 
 delle istanze della classe; ``h`` sarà esattamente equivalente a ``g``. Si 
 noti però che questa pratica in genere confonde solo le idee a chi deve 
@@ -613,7 +613,7 @@ l'ereditarietà. La sintassi per definire una sotto-classe è questa::
        .
        <statement-N>
 
-Il nome della classe-madre :class:`BaseClassName` deve essere definito in un 
+Il nome della classe-madre :class:`!BaseClassName` deve essere definito in un 
 *namespace* accessible dallo *scope* che contiene la definizione della 
 sotto-classe. Al posto del nome 
 della classe-madre è anche consentito inserire un'espressione arbitraria. 
@@ -680,8 +680,8 @@ Nei casi più semplici e per la maggior parte dei casi d'uso, potete assumere
 che la ricerca di un attributo ereditato proceda da sinistra a destra, con una 
 "ricerca in profondità", e senza cercare una seconda volta nella stessa classe 
 quando le gerarchie si sovrappongono. Quindi, se un attributo non viene 
-trovato in :class:`DerivedClassName`, lo si cerca in :class:`Base1`, quindi 
-ricorsivamente nelle classi-madre di :class:`Base1`, quindi in :class:`Base2` 
+trovato in :class:`!DerivedClassName`, lo si cerca in :class:`Base1`, quindi 
+ricorsivamente nelle classi-madre di :class:`!Base1`, quindi in :class:`!Base2` 
 e così via. 
 
 In realtà le cose sono leggermente più complicate; il meccanismo di ricerca 
@@ -800,7 +800,7 @@ Se una sezione di codice Python si aspetta di ricevere uno specifico tipo di
 dato astratto, le si può passare invece una classe che emula i metodi di quel 
 tipo di dato. Per esempio, se avete una funzione che formatta dei dati 
 provenienti da un file di testo, potete definire una classe con dei metodi 
-:meth:`read` e :meth:`!readline` che invece prelevano i dati da una 
+:meth:`~io.TextIOBase.read` e :meth:`~io.TextIOBase.readline` che invece prelevano i dati da una 
 stringa-buffer, e passare questa alla funzione come argomento. 
 
 .. (Unfortunately, this technique has its limitations: a class can't define
@@ -809,7 +809,7 @@ stringa-buffer, e passare questa alla funzione come argomento.
    not cause the interpreter to read further input from it.)
 
 Gli oggetti-metodi di istanza hanno a loro volta degli attributi: 
-``m.__self__`` è l'oggetto-istanza che possiede il metodo :meth:`m`, e 
+``m.__self__`` è l'oggetto-istanza che possiede il metodo :meth:`!m`, e 
 ``m.__func__`` è l'oggetto-funzione corrispondente al metodo.
 
 .. _tut-iterators:
@@ -860,9 +860,9 @@ esempio spiega come funziona il meccanismo::
 
 Conoscendo il meccanismo che governa il comportamento degli iteratori, è 
 facile aggiungere questa funzionalità alle vostre classi. Occorre definire un 
-metodo :meth:`__iter__` che restituisce un oggetto a sua volta dotato di un 
+metodo :meth:`~container.__iter__` che restituisce un oggetto a sua volta dotato di un 
 metodo :meth:`~iterator.__next__`. Se la classe definisce già 
-:meth:`__next__`, allora :meth:`__iter__` può limitarsi a restituire 
+:meth:`__next__`, allora :meth:`!__iter__` può limitarsi a restituire 
 ``self``::
 
    class Reverse:
@@ -922,7 +922,7 @@ esempio che mostra come creare un generatore può essere molto semplice::
 
 Tutto ciò che può essere fatto con un generatore può anche essere fatto con un 
 iteratore in una classe, come visto nel paragrafo precedente. I generatori 
-però sono più compatti grazie al fatto che i metodi :meth:`__iter__` e 
+però sono più compatti grazie al fatto che i metodi :meth:`~iterator.__iter__` e 
 :meth:`~generator.__next__` vengono creati automaticamente.
 
 Un altro vantaggio importante è che le variabili locali e lo stato 
