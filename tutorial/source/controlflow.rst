@@ -46,7 +46,7 @@ Istruzione :keyword:`!for`
 ==========================
 
 .. index::
-   statement: for
+   pair: statement; for
 
 Se siete abituati a Pascal o a C, troverete l'istruzione :keyword:`for` in 
 Python leggermente diversa. Invece di iterare solo su una progressione 

@@ -23,7 +23,7 @@ operativo::
 funzione :func:`os.open` non mascheri la funzione predefinita :func:`open` che 
 lavora in modo molto differente.
 
-.. index:: builtin: help
+.. index:: pair: built-in function; help
 
 È conveniente ricorrere alle funzioni predefinite :func:`dir` e :func:`help` 
 per ricevere aiuto interattivo quando si lavora con moduli di grandi 

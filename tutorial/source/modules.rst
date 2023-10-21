@@ -276,7 +276,7 @@ Alcuni consigli per gli esperti:
 Moduli della libreria standard
 ==============================
 
-.. index:: module: sys
+.. index:: pair: module; sys
 
 Python è distribuito con una libreria standard di moduli, documentata in un 
 una sezione separata, la Guida di Riferimento della Libreria Standard. Alcuni 
@@ -357,7 +357,7 @@ Senza argomenti, :func:`dir` elenca i nomi disponibili attualmente::
 Si noti che nell'elenco compaiono tutti i tipi di nomi: variabili, moduli, 
 funzioni e così via. 
 
-.. index:: module: builtins
+.. index:: pair: module; builtins
 
 :func:`dir` non elenca però i nomi delle funzioni e delle variabili 
 predefinite. Se volete un lista di questi, sono definiti nel modulo 

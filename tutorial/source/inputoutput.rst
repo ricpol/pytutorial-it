@@ -291,8 +291,8 @@ Leggere e scrivere files
 ========================
 
 .. index::
-   builtin: open
-   object: file
+   pair: built-in function; open
+   pair: object; file
 
 La funzione :func:`open` restituisce un :term:`oggetto-file<file object>` e si 
 usa in genere con due argomenti posizionali e uno *keyword*: 
@@ -471,7 +471,7 @@ della libreria standard per informazioni complete su questi oggetti.
 Persistenza di dati strutturati con :mod:`json`
 -----------------------------------------------
 
-.. index:: module: json
+.. index::pair: module; json
 
 Le stringhe si possono leggere e scrivere facilmente nei file. I numeri 
 richiedono un piccolo sforzo aggiuntivo, dal momento che il metodo 

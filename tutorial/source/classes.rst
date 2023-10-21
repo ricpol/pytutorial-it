@@ -370,7 +370,7 @@ possono avere dei metodi. Per esempio, gli oggetti-lista hanno metodi come
 questo capitolo, useremo "metodo" solo per riferirci ai metodi degli 
 oggetti-istanza di una classe, a meno che non sia specificato diversamente.)
 
-.. index:: object: method
+.. index:: pair: object; method
 
 I nomi validi per i metodi di un'istanza dipendono dalla sua classe. Per 
 definizione, tutti gli attributi della classe che corrispondono a degli 
