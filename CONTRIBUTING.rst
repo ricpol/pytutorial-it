@@ -101,7 +101,7 @@ nella repository originale:
 
 * la versione "stabile" per Python 3.12: l'elenco dei *commit* 
   relativi è 
-    `questo <https://github.com/python/cpython/commits/3.12/Doc/tutorial>`_;
+  `questo <https://github.com/python/cpython/commits/3.12/Doc/tutorial>`_;
 
 * la versione "in sviluppo" per Python 3.13 è semplicemente il *main branch* e può essere seguito 
   `qui <https://github.com/python/cpython/commits/main/Doc/tutorial>`_. 
