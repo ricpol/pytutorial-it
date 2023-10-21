@@ -8,7 +8,8 @@
 
     Questa è la traduzione della **versione "stabile" del Tutorial per 
     Python 3.9**, ed è aggiornata al 
-    `8 maggio 2022 <https://github.com/python/cpython/commits/3.9/Doc/tutorial>`_. 
+    `8 maggio 2022 <https://github.com/python/cpython/commits/3.9/Doc/tutorial>`_ 
+    (il testo originale non viene più aggiornato). 
     Raccomandiamo comunque di installare la versione più recente di Python 
     e di seguire il tutorial corrispondente.
 
