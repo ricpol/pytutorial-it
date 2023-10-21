@@ -6,9 +6,10 @@
     della documentazione di Python, mantenuta in sincrono con il testo della 
     `repository GitHub <https://github.com/python/cpython/tree/3.10/Doc/tutorial>`_.
 
-    Questa è la traduzione della **versione "stabile" del Tutorial**, 
+    Questa è la traduzione della **versione "legacy" del Tutorial**, 
     corrispondente a Python 3.10, ed è aggiornata al 
-    `15 marzo 2023 <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_.
+    `15 marzo 2023 <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_ 
+    (il testo originale non viene più aggiornato).
 
     La repository GitHub di questo progetto 
     `si trova qui <https://github.com/ricpol/pytutorial-it>`_: 
