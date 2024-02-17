@@ -138,7 +138,7 @@ Spieghiamo nel dettaglio il problema di "0.1" nella sezione successiva. Si
 veda `Examples of Floating Point Problems <https://jvns.ca/blog/01/13/examples-of-floating-point-problems/>`_ 
 per un riassunto accessibile di come funziona l'aritmetica in virgola mobile 
 e i problemi che si incontrano di solito in pratica. Inoltre 
-`The Perils of Floating Point <https://www.lahey.com/float.htm>`_ ha un 
+`The Perils of Floating Point <http://www.indowsway.com/floatingpoint.htm>`_ ha un 
 elenco più completo di altri inciampi frequenti. 
 
 Come si usa concludere, "non ci sono risposte facili". Tuttavia non bisogna 

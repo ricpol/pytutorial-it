@@ -288,7 +288,7 @@ esempio, per conservare in cache gli oggetti costosi da creare::
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
        d['primary']                # la chiave è stata rimossa automaticamente
-     File "C:/python312/lib/weakref.py", line 46, in __getitem__
+     File "C:/python313/lib/weakref.py", line 46, in __getitem__
        o = self.data[key]()
    KeyError: 'primary'
 

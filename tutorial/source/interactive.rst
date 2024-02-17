@@ -49,4 +49,4 @@ Un ambiente di sviluppo simile è bpython_.
 
 .. _GNU Readline: https://tiswww.case.edu/php/chet/readline/rltop.html
 .. _IPython: https://ipython.org/
-.. _bpython: https://www.bpython-interpreter.org/
+.. _bpython: https://bpython-interpreter.org/

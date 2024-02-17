@@ -14,7 +14,7 @@ operativo::
 
    >>> import os
    >>> os.getcwd()      # restituisce la directory corrente
-   'C:\\Python312'
+   'C:\\Python313'
    >>> os.chdir('/server/accesslogs')   # cambia la directory corrente
    >>> os.system('mkdir today')   # esegue "mkdir" nella shell di sistema
    0
@@ -149,7 +149,7 @@ Il modulo :mod:`random` consente di effettuare selezioni casuali::
    'apple'
    >>> random.sample(range(100), 10)   # campionamento senza rimpiazzamento
    [30, 83, 16, 4, 8, 81, 41, 50, 18, 33]
-   >>> random.random()    # un float casuale
+   >>> random.random()    # un float casuale nell'intervallo [0.0, 1.0)
    0.17970987693706186
    >>> random.randrange(6)    # in intero casuale compreso in range(6)
    4
