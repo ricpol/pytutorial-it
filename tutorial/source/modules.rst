@@ -449,7 +449,8 @@ Quando importate il package, Python cerca nei percorsi della ``sys.path`` la
 directory del package.
 
 I file :file:`__init__.py` sono necessari perché Python consideri 
-effettivamente come un package la directory che contiene i moduli. Questo è 
+effettivamente come un package la directory che contiene i moduli (a meno che
+non siano dei :term:`namespace package`, una possibilità più avanzata). Questo è 
 per evitare che directory con un nome comune, per esempio ``string``, possano 
 nascondere inavvertitamente dei nomi di moduli che vengono dopo nell'ordine 
 dei percorsi di ricerca. Nel caso più semplice, :file:`__init__.py` può essere 

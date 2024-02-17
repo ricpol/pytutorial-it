@@ -435,7 +435,7 @@ contenuto::
     [1, 8, 27, 64, 125]
 
 Potete anche aggiungere nuovi elementi alla fine della lista, con il metodo 
-:meth:`~list.append` (parleremo meglio dei metodi più tardi)::
+:meth:`!list.append` (parleremo meglio dei metodi più tardi)::
 
    >>> cubes.append(216)  # aggiunge il cubo di 6
    >>> cubes.append(7 ** 3)  # e il cubo di 7
