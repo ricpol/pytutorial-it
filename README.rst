@@ -25,9 +25,9 @@ Su ReadTheDocs è possibile selezionare la versione desiderata.
 
 **Ogni contributo a questo progetto è benvenuto!** Per contribuire, vedi CONTRIBUTING.rst.
 
-Copyright dell'originale: 2001-2023 Python Software Foundation. All rights reserved.
+Copyright dell'originale: 2001-2024 Python Software Foundation. All rights reserved.
 
-Copyright della traduzione: 2020-2023 Riccardo Polignieri. Tutti i diritti riservati.
+Copyright della traduzione: 2020-2024 Riccardo Polignieri. Tutti i diritti riservati.
 
 Licenza d'uso dell'originale: vedi https://github.com/python/cpython/blob/main/LICENSE
 
