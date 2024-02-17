@@ -132,7 +132,7 @@ veda
 `Examples of FLoating Point Problems <https://jvns.ca/blog/2023/01/13/examples-of-floating-point-problems/>`_ 
 per una introduzione piacevole alla virgola mobile binaria e ai problemi che 
 si possono trovare in pratica. Si veda inoltre 
-`The Perils of Floating Point <https://www.lahey.com/float.htm>`_ per un 
+`The Perils of Floating Point <http://www.indowsway.com/floatingpoint.htm>`_ per un 
 elenco più completo di altri inciampi frequenti. 
 
 Come si usa concludere, "non ci sono risposte facili". Tuttavia non bisogna 

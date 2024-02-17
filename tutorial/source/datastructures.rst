@@ -45,12 +45,9 @@ tutti i metodi disponibili per gli oggetti-lista:
 
    Rimuove e *restituisce* l'elemento alla posizione specificata. Se non viene 
    specificato un indice, ``a.pop()`` rimuove e restituisce l'ultimo elemento 
-   della lista. (Le parentesi quadre intorno alla *i* nell'elenco dei 
-   parametri non significano che dovreste usare quelle parentesi quando 
-   chiamate il metodo, ma indicano invece che il parametro è *opzionale*. 
-   Vedrete molto spesso questa notazione nella documentazione della libreria 
-   standard di Python.)
-
+   della lista. Se la lista è vuota o l'indice esce dai limiti, emette un 
+   :exc:`IndexError`.
+   
 .. method:: list.clear()
    :noindex:
 

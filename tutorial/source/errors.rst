@@ -113,7 +113,7 @@ L'istruzione :keyword:`try` funziona in questo modo:
   sezione *except*, allora l'eccezione è passata ad eventuali altre istruzioni 
   :keyword:`try` annidate di livello superiore; se nessun gestore viene 
   trovato, l'eccezione è *non gestita*: a questo punto l'esecuzione del 
-  programma si arresta con il messaggio di errore visto sopra. 
+  programma si arresta con un messaggio di errore. 
 
 L'istruzione :keyword:`try` può avere più di una clausola *except*, per 
 specificare gestori per diverse eccezioni: non più di un gestore per volta può 

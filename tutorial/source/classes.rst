@@ -414,13 +414,11 @@ equivalente a ``MyClass.f(x)``. In generale, invocare un metodo con una lista
 di *n* argomenti è equivalente a chiamare la corrispondente funzione con una 
 lista di argomenti identica, ma che inserisce al primo posto l'oggetto-istanza. 
 
-Se non riuscite a comprendere esattamente come funziona, può essere utile dare 
-un'occhiata all'implementazione. Quando referenziamo un attributo (che non sia 
+In generale, i metodi funzionano come segue. Quando referenziamo un attributo (che non sia 
 un dato) di una classe, il nome viene cercato nell'istanza della classe. Se il 
 nome corrisponde a un attributo che è un oggetto-funzione, allora un 
-oggetto-metodo viene creato mettendo insieme (puntatori a) l'oggetto-istanza e 
-l'oggetto-funzione appena trovato, per formare un nuovo oggetto astratto: 
-l'oggetto-metodo, appunto. Quando l'oggetto-metodo è invocato con una lista di 
+oggetto-metodo viene creato mettendo insieme riferimenti all'oggetto-istanza e 
+all'oggetto-funzione. Quando l'oggetto-metodo è invocato con una lista di 
 argomenti, una nuova lista viene creata unendola all'oggetto-istanza: 
 l'oggetto-funzione viene chiamato con questa nuova lista di argomenti. 
 
@@ -807,9 +805,10 @@ stringa-buffer, e passare questa alla funzione come argomento.
    or arithmetic operators, and assigning such a "pseudo-file" to sys.stdin will
    not cause the interpreter to read further input from it.)
 
-Gli oggetti-metodi di istanza hanno a loro volta degli attributi: 
-``m.__self__`` è l'oggetto-istanza che possiede il metodo :meth:`m`, e 
-``m.__func__`` è l'oggetto-funzione corrispondente al metodo.
+Gli :ref:`oggetti-metodi di istanza <instance-methods>` hanno a loro volta degli attributi: 
+:attr:`m.__self__ <method.__self__>` è l'oggetto-istanza che possiede il metodo :meth:`!m`, e 
+:attr:`m.__func__ <method.__func__>` è :ref:`l'oggetto-funzione <user-defined-funcs>` 
+corrispondente al metodo.
 
 .. _tut-iterators:
 
