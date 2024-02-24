@@ -22,6 +22,8 @@ Esistono sette traduzioni leggermente differenti, in altrettanti branch, che son
 * per la versione in sviluppo "più aggiornata" (Python 3.13), che corrisponde alle ultime modifiche fatte nel  `main branch <https://github.com/python/cpython/tree/main/Doc/tutorial>`_. 
 
 Su ReadTheDocs è possibile selezionare la versione desiderata.
+
+Non perdete la traduzione, `disponibile separatamente <https://pymisc-it.readthedocs.io>`_, della guida di stile PEP8 e dello Zen di Python!
 
 **Ogni contributo a questo progetto è benvenuto!** Per contribuire, vedi CONTRIBUTING.rst.
 

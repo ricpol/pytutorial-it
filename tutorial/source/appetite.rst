@@ -22,6 +22,9 @@
     scritto in Inglese. Tuttavia i commenti all'interno del codice sono 
     tradotti e così pure le stringhe, quando il loro contenuto è utile alla 
     comprensione del tutorial.
+
+    Una traduzione italiana della guida di stile PEP 8 e dello Zen di Python 
+    `è disponibile separatamente <https://pymisc-it.readthedocs.io>`_.
     
     *(traduzione a cura di Riccardo Polignieri)*
 
