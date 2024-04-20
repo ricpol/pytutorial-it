@@ -19,12 +19,12 @@ l'inciampo più comune quando state ancora imparando Python::
    >>> while True print('Hello world')
      File "<stdin>", line 1
        while True print('Hello world')
-                      ^
+                  ^^^^^
    SyntaxError: invalid syntax
 
-Il parser riporta la riga sbagliata e mostra una piccola "freccia" che indica 
-il primo punto in cui l'errore è stato rilevato. L'errore è causato (o almeno 
-rilevato) dall'elemento che *precede* la freccia: nell'esempio qui sopra, 
+Il parser riporta la riga sbagliata e mostra delle piccole "frecce" che indicano 
+dove l'errore è stato rilevato. L'errore può essere causato dall'assenza di un 
+elemento *prima* di quello evidenziato: nell'esempio qui sopra, 
 l'errore è rilevato nella funzione :func:`print`, perché mancano i "due punti" 
 (``':'``) prima. Anche il nome del file e la riga sono riportati, in modo da 
 sapere dove guardare, se l'input proviene da uno script. 
@@ -126,11 +126,11 @@ clausola *except* può gestire più eccezioni, specificandole come una tupla
    ... except (RuntimeError, TypeError, NameError):
    ...     pass
 
-Un'eccezione specificata in una clausola :keyword:`except` è compatibile con 
-l'eccezione che si verifica se sono istanze della stessa classe, o se 
-quest'ultima è una sotto-classe della prima (ma non il contrario: se 
-l'eccezione specificata è una sotto-classe di quella che si verifica, non sono 
-compatibili). Per esempio, il codice che segue produrrà nell'ordine B, C, D:: 
+Un'eccezione specificata in una clausola :keyword:`except` intercetta eccezioni  
+che sono istanze della medesima classe, o di una sua sotto-classe (ma non il 
+contrario: una clausola :keyword:`except` che specifica una sotto-classe non 
+intercetterà eccezioni che sono istanze della classe-madre). Per esempio, 
+il codice che segue produrrà nell'ordine B, C, D:: 
 
    class B(Exception):
        pass
