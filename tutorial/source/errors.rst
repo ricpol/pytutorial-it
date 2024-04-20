@@ -19,12 +19,12 @@ l'inciampo più comune quando state ancora imparando Python::
    >>> while True print('Hello world')
      File "<stdin>", line 1
        while True print('Hello world')
-                      ^
+                  ^^^^^
    SyntaxError: invalid syntax
 
-Il parser riporta la riga sbagliata e mostra una piccola "freccia" che indica 
-il primo punto in cui l'errore è stato rilevato. L'errore è causato (o almeno 
-rilevato) dall'elemento che *precede* la freccia: nell'esempio qui sopra, 
+Il parser riporta la riga sbagliata e mostra delle piccole "frecce" che indicano 
+dove l'errore è stato rilevato. L'errore può essere causato dall'assenza di un 
+elemento *prima* di quello evidenziato: nell'esempio qui sopra, 
 l'errore è rilevato nella funzione :func:`print`, perché mancano i "due punti" 
 (``':'``) prima. Anche il nome del file e la riga sono riportati, in modo da 
 sapere dove guardare, se l'input proviene da uno script. 

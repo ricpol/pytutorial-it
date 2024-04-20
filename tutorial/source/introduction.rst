@@ -411,13 +411,6 @@ liste possono essere indicizzate e sezionate::
    >>> squares[-3:]  # la sezione restituisce una nuova lista
    [9, 16, 25]
 
-Tutte le operazioni di sezionamento restituiscono una nuova lista che contiene 
-gli elementi richiesti. Ciò significa che la sezione dell'esempio seguente 
-restituisce una :ref:`copia per indirizzo<shallow_vs_deep_copy>` della lista::
-
-   >>> squares[:]
-   [1, 4, 9, 16, 25]
-
 Le liste supportano anche operazioni come il concatenamento::
 
    >>> squares + [36, 49, 64, 81, 100]
@@ -441,6 +434,30 @@ Potete anche aggiungere nuovi elementi alla fine della lista, con il metodo
    >>> cubes.append(7 ** 3)  # e il cubo di 7
    >>> cubes
    [1, 8, 27, 64, 125, 216, 343]
+
+Un semplice assegnamento, in Python, non copia mai i dati. Quando assegnate 
+una lista a una variabile, la variabile si riferisce alla lista *esistente*. 
+Ogni cambiamento apportato alla lista attraverso una variabile sarà visto 
+anche attraverso tutte le altre variabili che si riferiscono a questa. ::
+
+   >>> rgb = ["Red", "Green", "Blue"]
+   >>> rgba = rgb
+   >>> id(rgb) == id(rgba) # si riferiscono allo stesso oggetto
+   True
+   >>> rgba.append("Alph")
+   >>> rgb
+   ["Red", "Green", "Blue", "Alph"]
+
+Tutte le operazioni di sezionamento restituiscono una nuova lista che contiene 
+gli elementi richiesti. Ciò vuol dire che il sezionamento che segue restituisce 
+una :ref:`shallow copy <shallow_vs_deep_copy>` della lista::
+
+   >>> correct_rgba = rgba[:]
+   >>> correct_rgba[-1] = "Alpha"
+   >>> correct_rgba
+   ["Red", "Green", "Blue", "Alpha"]
+   >>> rgba
+   ["Red", "Green", "Blue", "Alph"]
 
 È possibile inoltre assegnare a una sezione, cosa che può anche cambiare la 
 dimensione della lista o svuotarla del tutto::
