@@ -579,7 +579,7 @@ Questa funzione può essere chiamata in diversi modi:
   ``ask_ok('OK to overwrite the file?', 2, 'Come on, only yes or no!')``
 
 Questo esempio introduce anche la parola-chiave :keyword:`in`, che testa se 
-na sequenza contiene un certo valore oppure no.
+una sequenza contiene un certo valore oppure no.
 
 I valori di default sono valutati al momento della definizione della funzione, 
 nella tabella dei simboli che ospita la definizione. Quindi questo ::
