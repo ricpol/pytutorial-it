@@ -701,7 +701,7 @@ monotonico (ovvero, è possibile creare una sotto-classe senza influenzare il
 percorso di ricerca già esistente per la gerarchia superiore). Queste 
 proprietà, nel loro insieme, rendono possibile la progettazione di classi 
 affidabili ed estensibili in un contesto di ereditarietà multipla. Per 
-ulteriori dettagli, si veda https://www.python.org/download/releases/2.3/mro/.
+ulteriori dettagli, si veda :ref:`python_2.3_mro`. 
 
 .. _tut-private:
 
