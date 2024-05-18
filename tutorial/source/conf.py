@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Il tutorial di Python'
-copyright = '2020, Riccardo Polignieri'
+copyright = '2024, Riccardo Polignieri'
 author = 'Riccardo Polignieri'
 
 # we don't need version number - we just track Python releases
@@ -33,7 +33,7 @@ master_doc = 'index'
 # ones.
 extensions = ['sphinx.ext.intersphinx']
 
-intersphinx_mapping = {'python': ('https://docs.python.org/3.13', None)}
+intersphinx_mapping = {'python': ('https://docs.python.org/3.14', None)}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

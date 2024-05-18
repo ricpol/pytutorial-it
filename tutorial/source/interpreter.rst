@@ -16,7 +16,7 @@ con il comando [#]_
 
 .. code-block:: text
 
-   python3.13
+   python3.14
 
 Dal momento che la scelta della directory dell'interprete è un'opzione di 
 installazione, sono possibili altre configurazioni. Chiedete a un esperto di 
@@ -100,8 +100,8 @@ copyright, prima di presentare il prompt:
 
 .. code-block:: shell-session
 
-   $ python3.13
-   Python 3.13 (default, April 4 2023, 09:25:04)
+   $ python3.14
+   Python 3.14 (default, April 4 2024, 09:25:04)
    [GCC 10.2.0] on linux
    Type "help", "copyright", "credits" or "license" for more information.
    >>>

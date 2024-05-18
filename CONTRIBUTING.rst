@@ -21,7 +21,7 @@ clicca sulla *tab* "Issues" e poi sul pulsante verde "New Issue".
 Nella segnalazione dovresti indicare: 
 
 * la **versione** (o le versioni) della documentazione in cui hai visto 
-  l'errore: quella per Python 3.7, 3.8, 3.9, 3.10, 3.11, 3.12 o "latest";
+  l'errore: quella per Python 3.7, 3.8, 3.9, 3.10, 3.11, 3.12, 3.13 o "latest";
 
 * il numero del capitolo e paragrafo;
 
@@ -76,7 +76,7 @@ dovrebbe essere fatto anche  un *commit* per aggiornare la traduzione (a meno
 che, come capita spesso, la modifica non sia solo una questione di ortografia 
 nell'originale). 
 
-In particolare, ci sono (attualmente) quattro versioni della traduzione, che 
+In particolare, ci sono diverse versioni della traduzione, che 
 corrispondono ad altrettanti *branch* sia in questo progetto sia ovviamente 
 nella repository originale: 
 
@@ -103,7 +103,11 @@ nella repository originale:
   relativi è 
   `questo <https://github.com/python/cpython/commits/3.12/Doc/tutorial>`_;
 
-* la versione "in sviluppo" per Python 3.13 è semplicemente il *main branch* e può essere seguito 
+* la versione "in sviluppo" per Python 3.13: l'elenco dei *commit* 
+  relativi è  
+  `qui <https://github.com/python/cpython/commits/3.13/Doc/tutorial>`_. 
+
+* la versione "in sviluppo" per Python 3.14 è semplicemente il *main branch* e può essere seguito 
   `qui <https://github.com/python/cpython/commits/main/Doc/tutorial>`_. 
 
 Naturalmente i *branch* più vecchi sono aggiornati sempre più sporadicamente, 
@@ -134,7 +138,7 @@ sincronizzati (tradotti), questa è la procedura da seguire:
 
   .. code-block:: bash
 
-    $ git checkout python3.9
+    $ git checkout python3.12
     $ git pull
     $ git checkout -b syncXXXXXX
 
