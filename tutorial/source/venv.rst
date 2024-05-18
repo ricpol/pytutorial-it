@@ -34,10 +34,9 @@ Creare un virtual environment
 =============================
 
 :mod:`venv` è il modulo usato per creare e gestire virtual environment. 
-:mod:`venv` installa in genere la versione più recente di Python che avete 
-disponibile. Se avete installato più versioni di Python nel vostro sistema, 
-potete selezionarne una in particolare invocando ``python3`` o qualsiasi 
-versione desiderate.
+:mod:`venv` installa la versione di Python da cui il comando 
+è stato eseguito (verificabile con l'opzione :option:`--version`). 
+Per esempio, eseguendo il comando con ``python3.12``, installerà Python 3.12.
 
 Per creare un virtual environment, decidete in quale directory volete 
 collocarlo e avviate il modulo :mod:`venv` come uno script, passando il 
