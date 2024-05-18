@@ -9,6 +9,27 @@ Appendice
 Modalità interattiva
 ====================
 
+Esistono due versioni della :term:`REPL` interattiva. L'interprete di base, 
+tradizionale, è supportato su tutte le piattaforme ma ha minime capacità di 
+controllo della riga di comando. 
+
+Sui sistemi Unix-like (es. Linux o macOS) che supportano :mod:`curses` e 
+:mod:`readline`, di default è usata una nuova shell interattiva. Questa 
+supporta i colori, l'editing multi-riga, la storia dei comandi e la modalità 
+"incolla". Per disabilitare i colori, si veda :ref:`using-on-controlling-color` 
+per i dettagli. I tasti-funzione forniscono alcune funzionalità aggiuntive: 
+:kbd:`F1` attiva l'aiuto interattivo di :mod:`pydoc`. :kbd:`F2` permette di 
+scorrere la storia dei comandi senza l'output e i prompt :term:`>>>` e 
+:term:`...`. :kbd:`F3` attiva la modalità "incolla", che facilita il copincolla 
+di grandi blocchi di testo; premere di nuovo :kbd:`F3` per tornare al normale 
+prompt. 
+
+Per uscire dalla nuova shell, si inserisca :kbd:`exit` o :kbd:`quit`. Non è 
+necessario aggiungere le parentesi di chiamata. 
+
+Se non si desidera la nuova shell interattiva, si può disabilitare con la 
+variabile d'ambiente :envvar:`PYTHON_BASIC_REPL`. 
+
 .. _tut-error:
 
 Gestione degli errori
@@ -39,7 +60,7 @@ Script Python eseguibili
 Sui sistemi Unix/BSD, gli script Python possono essere resi direttamente 
 eseguibili, come gli script della shell, con la riga ::
 
-   #!/usr/bin/env python3.5
+   #!/usr/bin/env python3
 
 all'inizio dello script (si assume che l'interprete sia nella :envvar:`PATH` 
 di sistema dell'utente) e dando al file modalità eseguibile. I caratteri 
@@ -106,7 +127,7 @@ directory *site-packages*. Avviate Python ed eseguite questo codice::
 
    >>> import site
    >>> site.getusersitepackages()
-   '/home/user/.local/lib/python3.5/site-packages'
+   '/home/user/.local/lib/python3.x/site-packages'
 
 Adesso potete creare un file :file:`usercustomize.py` in questa directory e 
 collocarvi qualsiasi istruzione. Questo avrà effetto su qualsiasi invocazione 
