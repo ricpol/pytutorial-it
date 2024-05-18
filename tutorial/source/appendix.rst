@@ -39,7 +39,7 @@ Script Python eseguibili
 Sui sistemi Unix/BSD, gli script Python possono essere resi direttamente 
 eseguibili, come gli script della shell, con la riga ::
 
-   #!/usr/bin/env python3.5
+   #!/usr/bin/env python3
 
 all'inizio dello script (si assume che l'interprete sia nella :envvar:`PATH` 
 di sistema dell'utente) e dando al file modalità eseguibile. I caratteri 
@@ -106,7 +106,7 @@ directory *site-packages*. Avviate Python ed eseguite questo codice::
 
    >>> import site
    >>> site.getusersitepackages()
-   '/home/user/.local/lib/python3.5/site-packages'
+   '/home/user/.local/lib/python3.x/site-packages'
 
 Adesso potete creare un file :file:`usercustomize.py` in questa directory e 
 collocarvi qualsiasi istruzione. Questo avrà effetto su qualsiasi invocazione 

@@ -117,7 +117,7 @@ che vale per tutte le strutture-dati mutabili in Python.
 
 Un'altra cosa da osservare è che non tutti i dati possono essere ordinati o 
 confrontati. Per esempio, ``[None, 'hello', 10]`` non può essere ordinato 
-perché gli interi non possono essere confrontati con le stringhe e *None* non 
+perché gli interi non possono essere confrontati con le stringhe e ``None`` non 
 si può confrontare con altri tipi di dato. Inoltre, ci sono alcuni tipi che 
 non hanno un ordinamento predefinito: per esempio, ``3+4j < 5+7j`` non è una 
 comparazione valida.
