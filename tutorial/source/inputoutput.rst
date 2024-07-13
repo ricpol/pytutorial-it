@@ -39,14 +39,20 @@ modi per formattare l'output.
   Potete usare le parentesi graffe per marcare il posto dove una variabile 
   sarà sostituita e potete specificare delle indicazioni dettagliate di 
   formattazione, ma dovete anche indicare quali informazioni formattare. 
-
-  ::
+  Nel codice che segue ci sono due esempi di come formattare le variabili:
+  
+    ::
 
      >>> yes_votes = 42_572_654
-     >>> no_votes = 43_132_495
-     >>> percentage = yes_votes / (yes_votes + no_votes)
+     >>> total_votes = 85_705_149
+     >>> percentage = yes_votes / (total_votes)
      >>> '{:-9} YES votes  {:2.2%}'.format(yes_votes, percentage)
      ' 42572654 YES votes  49.67%'
+
+  Si noti che ``yes_votes`` è circondata da spazi e un segno "meno" solo in caso 
+  di numero negativo. L'esempio produce inoltre ``percentage`` moltiplicato per 100, 
+  con 2 decimali e un segno "%" a seguire (si veda :ref:`formatspec` per più dettagli).
+                             
 
 * Infine, potete gestire la stringa "manualmente", usando gli operatori di 
   concatenamento e sezionamento per creare qualunque layout vi venga in mente. 
@@ -203,7 +209,12 @@ con la notazione '**'. ::
 
 Questo metodo è particolarmente utile in combinazione con la funzione 
 predefinita :func:`vars`, che restituisce un dizionario che contiene tutte le 
-variabili locali.
+variabili locali:
+
+   >>> table = {k: str(v) for k, v in vars().items()}
+   >>> message = " ".join([f'{k}: ' + '{' + k +'};' for k in table.keys()])
+   >>> print(message.format(**table))
+   __name__: __main__; __doc__: None; __package__: None; __loader__: ...'])
 
 Per esempio, questo produce delle colonne bene allineate che mostrano i numeri 
 interi, i loro quadrati e cubi::
@@ -273,10 +284,10 @@ Vecchio metodo di formattazione
 -------------------------------
 
 L'operatore ``%`` (modulo) può anche essere usato per la formattazione delle 
-stringhe. Data la sintassi ``'stringa' % valori``, le occorrenze di ``%`` in 
-``'stringa'`` sono rimpiazzate da zero o più elementi di ``valori``. Questa 
-operazione viene chiamata comunemente "interpolazione di stringa". Per 
-esempio::
+stringhe. Data la sintassi ``formato % valori`` (dove *formato* è una stringa), 
+le specifiche di conversione con ``%`` in *formato* sono rimpiazzate da 
+zero o più elementi di *valori*. Questa operazione viene chiamata comunemente 
+"interpolazione di stringa". Per esempio::
 
    >>> import math
    >>> print('The value of pi is approximately %5.3f.' % math.pi)

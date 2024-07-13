@@ -301,7 +301,7 @@ Il tipo predefinito "lista" può soddisfare le esigenze di molte
 strutture-dati. Tuttavia occasionalmente c'è bisogno di un'implementazione 
 alternativa con altri vantaggi e svantaggi in termini di performance. 
 
-Il modulo :mod:`array` ha una classe :class:`~array.array()` simile a una 
+Il modulo :mod:`array` ha una classe :class:`~array.array` simile a una 
 lista che conserva i dati in modo più compatto, ma solo se sono di un medesimo 
 tipo. L'esempio che segue mostra un array i cui elementi sono conservati come 
 numeri binari di due byte senza segno (codice ``"H"``), invece dei consueti 16 
@@ -314,7 +314,7 @@ byte che sarebbero impiegati da una normale lista Python::
    >>> a[1:3]
    array('H', [10, 700])
 
-Il modulo :mod:`collections` ha un oggetto :class:`~collections.deque()` 
+Il modulo :mod:`collections` ha un oggetto :class:`~collections.deque` 
 simile a una lista, che permette *append* e *pop* rapidi a entrambi gli 
 estremi, ma accessi più lenti al centro. Questi oggetti vanno bene per 
 implementare code e ricerche in ampiezza nei grafi::

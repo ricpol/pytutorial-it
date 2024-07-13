@@ -363,12 +363,7 @@ la prima volta. Per esempio, se ``x`` è una istanza della classe
    del x.counter
 
 L'altro tipo di attributo dell'istanza è il *metodo*. Un metodo è una funzione 
-che "appartiene" all'oggetto-istanza. (In Python, il termine "metodo" non si 
-usa solo in relazione alle istanze delle classi: anche altri tipi di oggetti 
-possono avere dei metodi. Per esempio, gli oggetti-lista hanno metodi come 
-*append*, *insert*, *remove*, *sort* e così via. In ogni caso, nel resto di 
-questo capitolo, useremo "metodo" solo per riferirci ai metodi degli 
-oggetti-istanza di una classe, a meno che non sia specificato diversamente.)
+che "appartiene" all'oggetto-istanza. 
 
 .. index:: pair: object; method
 
@@ -728,6 +723,11 @@ attraverso il :dfn:`name mangling`. Tutti i nomi che hanno almeno due
 nome della classe corrente senza trattini bassi iniziali. Questa manipolazione 
 avviene per tutti gli identificatori di questo tipo, indipendentemente dalla 
 loro posizione, purché siano definiti all'interno della classe. 
+
+.. seealso::
+
+   Le :ref:`specifiche per il name mangling <private-name-mangling>` per dettagli 
+   e casi speciali.
 
 La manipolazione dei nomi permette alle sotto-classi di sovrascrivere un 
 metodo senza comprometterne l'invocazione da un'altra classe. Per esempio::
