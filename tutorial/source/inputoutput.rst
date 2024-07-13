@@ -49,9 +49,9 @@ modi per formattare l'output.
      >>> '{:-9} YES votes  {:2.2%}'.format(yes_votes, percentage)
      ' 42572654 YES votes  49.67%'
 
-Si noti che ``yes_votes`` è circondata da spazi e un segno "meno" solo in caso 
-di numero negativo. L'esempio produce inoltre ``percentage`` moltiplicato per 100, 
-con 2 decimali e un segno "%" a seguire (si veda :ref:`formatspec` per più dettagli).
+  Si noti che ``yes_votes`` è circondata da spazi e un segno "meno" solo in caso 
+  di numero negativo. L'esempio produce inoltre ``percentage`` moltiplicato per 100, 
+  con 2 decimali e un segno "%" a seguire (si veda :ref:`formatspec` per più dettagli).
                              
 
 * Infine, potete gestire la stringa "manualmente", usando gli operatori di 
