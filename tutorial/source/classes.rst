@@ -724,6 +724,11 @@ nome della classe corrente senza trattini bassi iniziali. Questa manipolazione
 avviene per tutti gli identificatori di questo tipo, indipendentemente dalla 
 loro posizione, purché siano definiti all'interno della classe. 
 
+.. seealso::
+
+   Le :ref:`specifiche per il name mangling <private-name-mangling>` per dettagli 
+   e casi speciali.
+
 La manipolazione dei nomi permette alle sotto-classi di sovrascrivere un 
 metodo senza comprometterne l'invocazione da un'altra classe. Per esempio::
 
