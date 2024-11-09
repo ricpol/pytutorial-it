@@ -18,13 +18,13 @@ tutti i metodi disponibili per gli oggetti-lista:
 .. method:: list.append(x)
    :noindex:
 
-   Aggiunge un elemento alla fine della lista. Equivale a ``a[len(a):] = [x]``.
+   Aggiunge un elemento alla fine della lista. Simile a ``a[len(a):] = [x]``.
 
 .. method:: list.extend(iterable)
    :noindex:
 
    Estende una lista aggiungendovi tutti gli elementi di un oggetto iterabile. 
-   Equivale a ``a[len(a):] = iterable``.
+   Simile a ``a[len(a):] = iterable``.
 
 .. method:: list.insert(i, x)
    :noindex:
@@ -51,7 +51,7 @@ tutti i metodi disponibili per gli oggetti-lista:
 .. method:: list.clear()
    :noindex:
 
-   Rimuove tutti gli elementi della lista. Equivale a ``del a[:]``.
+   Rimuove tutti gli elementi della lista. Simile a ``del a[:]``.
 
 .. method:: list.index(x[, start[, end]])
    :noindex:
@@ -84,7 +84,7 @@ tutti i metodi disponibili per gli oggetti-lista:
 .. method:: list.copy()
    :noindex:
 
-   Restituisce una copia per indirizzo (*shallow copy*) della lista. Equivale 
+   Restituisce una copia per indirizzo (*shallow copy*) della lista. Simile  
    a ``a[:]``.
 
 Un esempio che utilizza molti metodi delle liste::
@@ -377,16 +377,16 @@ Una tupla è una serie di valori separati da virgola, per esempio::
    >>> t
    (12345, 54321, 'hello!')
    >>> # Le tuple possono essere annidate:
-   ... u = t, (1, 2, 3, 4, 5)
+   >>> u = t, (1, 2, 3, 4, 5)
    >>> u
    ((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))
    >>> # Le tuple sono immutabili:
-   ... t[0] = 88888
+   >>> t[0] = 88888
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
    TypeError: 'tuple' object does not support item assignment
    >>> # ma possono contenere oggetti mutabili:
-   ... v = ([1, 2, 3], [3, 2, 1])
+   >>> v = ([1, 2, 3], [3, 2, 1])
    >>> v
    ([1, 2, 3], [3, 2, 1])
 
@@ -460,7 +460,7 @@ Ecco una breve dimostrazione::
    False
 
    >>> # Dimostra le operazioni sui set con i caratteri di due parole
-   ...
+   >>>
    >>> a = set('abracadabra')
    >>> b = set('alacazam')
    >>> a                                  # caratteri unici in a
