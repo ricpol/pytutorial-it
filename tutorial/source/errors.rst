@@ -44,14 +44,20 @@ come questi::
    >>> 10 * (1/0)
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
+       1 * (1/0)
+            ~^~
    ZeroDivisionError: division by zero
    >>> 4 + spam*3
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
+       4 + spam*3
+           ^^^^
    NameError: name 'spam' is not defined
    >>> '2' + 2
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
+       '2' + 2
+       ~~~~^~~
    TypeError: Can only concatenate str (not "int") to str
 
 L'ultima riga del messaggio d'errore ci dice che cosa è successo. Gli 
@@ -265,6 +271,7 @@ eccezione. Per esempio::
    >>> raise NameError('HiThere')
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
+       raise NameError('HiThere')
    NameError: HiThere
 
 L'unico argomento di :keyword:`raise` è il nome dell'eccezione da emettere. 
@@ -288,6 +295,7 @@ di rilanciare l'eccezione::
    An exception flew by!
    Traceback (most recent call last):
      File "<stdin>", line 2, in <module>
+       raise NameError('HiThere')
    NameError: HiThere
 
 .. _tut-exception-chaining:
@@ -306,12 +314,15 @@ in quel momento, che sarà aggiunta al messaggio di errore::
     ...
     Traceback (most recent call last):
       File "<stdin>", line 2, in <module>
+        open("database.sqlite")
+        ~~~~^^^^^^^^^^^^^^^^^^^
     FileNotFoundError: [Errno 2] No such file or directory: 'database.sqlite'
     <BLANKLINE>
     During handling of the above exception, another exception occurred:
     <BLANKLINE>
     Traceback (most recent call last):
       File "<stdin>", line 4, in <module>
+        raise RuntimeError("unable to handle error")
     RuntimeError: unable to handle error
 
 Per indicare che un'eccezione è diretta conseguenza di un'altra, 
@@ -332,6 +343,8 @@ Questo è utile per trasformare un'eccezione in un'altra. Per esempio::
     ...
     Traceback (most recent call last):
       File "<stdin>", line 2, in <module>
+        func()
+        ~~~~^^
       File "<stdin>", line 2, in func
     ConnectionError
     <BLANKLINE>
@@ -339,6 +352,7 @@ Questo è utile per trasformare un'eccezione in un'altra. Per esempio::
     <BLANKLINE>
     Traceback (most recent call last):
       File "<stdin>", line 4, in <module>
+        raise RuntimeError('Failed to open database') from exc
     RuntimeError: Failed to open database
 
 Il concatenamento delle eccezioni avviene automaticamente quando 
@@ -353,6 +367,7 @@ concatenamento::
     ...
     Traceback (most recent call last):
       File "<stdin>", line 4, in <module>
+        raise RuntimeError from None
     RuntimeError
 
 Per ulteriori informazioni sul meccanismo del concatenamento, si veda 
@@ -396,6 +411,7 @@ qualsiasi circostanza. Per esempio::
    Goodbye, world!
    Traceback (most recent call last):
      File "<stdin>", line 2, in <module>
+       raise KeyboardInterrupt
    KeyboardInterrupt
 
 Se è presente una clausola :keyword:`finally`, questa verrà eseguita come 
@@ -457,7 +473,11 @@ Un esempio più complesso::
    eseguo la clausola finally
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
+       divide("2", "1")
+       ~~~~~~^^^^^^^^^^
      File "<stdin>", line 3, in divide
+       result = x / y
+                ~~^~~
    TypeError: unsupported operand type(s) for /: 'str' and 'str'
 
 Come si può vedere, il blocco :keyword:`finally` è eseguito in ogni caso. 
@@ -520,8 +540,11 @@ consueto. ::
 	>>> f()
 	  + Exception Group Traceback (most recent call last):
 	  | File "<stdin>", line 1, in <module>
+	  |   f()
+	  |   ~^^
 	  | File "<stdin>", line 3, in f
-	  | ExceptionGroup: ho avuto dei problemi
+	  |   raise ExceptionGroup('ho avuto dei problemi', excs)
+	  | ExceptionGroup: ho avuto dei problemi (2 sub-exceptions)
 	  +-+---------------- 1 ----------------
 	    | OSError: error 1
 	    +---------------- 2 ----------------
@@ -569,10 +592,15 @@ propaghino alle altre clausole, e siano rilanciate. ::
     Abbiamo avuto dei SystemError
       + Exception Group Traceback (most recent call last):
       | File "<stdin>", line 2, in <module>
+      |   f()
+      |   ~^^
       | File "<stdin>", line 2, in f
-      | ExceptionGroup: group1
+      |   raise ExceptionGroup(
+      |   ...<12 righe>...
+      |   )
+      | ExceptionGroup: group1 (1 sub-exception)
       +-+---------------- 1 ----------------
-        | ExceptionGroup: group2
+        | ExceptionGroup: group2 (1 sub-exception)
         +-+---------------- 1 ----------------
           | RecursionError: 4
           +------------------------------------
@@ -615,6 +643,7 @@ tutte le Note, nell'ordine in cui sono state aggiunte, dopo l'eccezione. ::
     ...
     Traceback (most recent call last):
       File "<stdin>", line 2, in <module>
+        raise TypeError('tipo sbagliato')
     TypeError: tipo sbagliato
     Aggiungo delle informazioni
     Altre informazioni
@@ -639,23 +668,33 @@ indica quando è accaduto l'errore. ::
     >>> raise ExceptionGroup('Ci sono dei problemi', excs)
       + Exception Group Traceback (most recent call last):
       | File "<stdin>", line 1, in <module>
+      |   raise ExceptionGroup('Ci sono dei problemi', excs)
       | ExceptionGroup: We have some problems (3 sub-exceptions)
       +-+---------------- 1 ----------------
         | Traceback (most recent call last):
         | File "<stdin>", line 3, in <module>
+        |   f()
+        |   ~^^
         | File "<stdin>", line 2, in f
+        |   raise OSError('operazione fallita')
         | OSError: opererazione fallita
         | questo succede nell'iterazione 1
         +---------------- 2 ----------------
         | Traceback (most recent call last):
         | File "<stdin>", line 3, in <module>
+        |   f()
+        |   ~^^
         | File "<stdin>", line 2, in f
+        |   raise OSError('operazione fallita')
         | OSError: opererazione fallita
         | questo succede nell'iterazione 2
         +---------------- 3 ----------------
         | Traceback (most recent call last):
         | File "<stdin>", line 3, in <module>
+        |   f()
+        |   ~^^
         | File "<stdin>", line 2, in f
+        |   raise OSError('operazione fallita')
         | OSError: opererazione fallita
         | questo succede nell'iterazione 3
         +------------------------------------

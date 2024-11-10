@@ -213,7 +213,7 @@ risultato finale::
    >>> sum([0.1] * 10) == 1.0
    True
 
-La funzione :funct:`math.fsum()` va oltre, e tiene traccia di tutti i 
+La funzione :funct:`math.fsum` va oltre, e tiene traccia di tutti i 
 "decimali perduti" man mano che i valori si sommano, in modo che il totale 
 abbia un arrotondamento unico. Questo metodo è più lento di :func:`sum` ma 
 è più accurato nei rari casi in cui dei valori in ingresso anche grandi si 
