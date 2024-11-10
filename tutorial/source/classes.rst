@@ -981,7 +981,7 @@ Esempi::
 .. [#] Tranne che per una cosa. Gli oggetti-modulo hanno un attributo di sola 
    lettura nascosto, che si chiama :attr:`~object.__dict__`: è il dizionario 
    usato per implementare il *namespace* del modulo. Il nome 
-   `__dict__` è un attributo del modulo, ma non un suo nome 
+   ``__dict__`` è un attributo del modulo, ma non un suo nome 
    globale. Naturalmente questa è un'eccezione nell'implementazione astratta 
    dei *namespace* e dovrebbe essere usata solo da strumenti come i *debugger* 
    post-mortem. 
