@@ -73,7 +73,7 @@ nome dell'environment in uso; modifica inoltre l'ambiente di lavoro in modo
 che invocare ``python`` restituisca quella particolare versione e 
 installazione dell'interprete. Per esempio:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ source ~/envs/tutorial-env/bin/activate
   (tutorial-env) $ python
@@ -107,7 +107,7 @@ completa di ``pip``.)
 Per installare l'ultima versione disponibile di un package, basta specificare 
 il suo nome:
 
-.. code-block:: bash
+.. code-block:: console
 
   (tutorial-env) $ python -m pip install novas
   Collecting novas
@@ -119,7 +119,7 @@ il suo nome:
 Potete anche installare una versione specifica, indicando il nome seguito da 
 ``==`` e il numero di versione:
 
-.. code-block:: bash
+.. code-block:: console
 
   (tutorial-env) $ python -m pip install requests==2.6.0
   Collecting requests==2.6.0
@@ -132,7 +132,7 @@ richiesta è già presente e non farà nient'altro. Potete indicare un altro
 numero di versione per ottenere quella, oppure eseguire 
 ``python -m pip install --upgrade`` per aggiornare il pacchetto all'ultima versione:
 
-.. code-block:: bash
+.. code-block:: console
 
   (tutorial-env) $ python -m pip install --upgrade requests
   Collecting requests
@@ -147,7 +147,7 @@ li rimuoverà dal virtual environment.
 
 ``python -m pip show`` visualizza informazioni su un particolare pacchetto:
 
-.. code-block:: bash
+.. code-block:: console
 
   (tutorial-env) $ python -m pip show requests
   ---
@@ -165,7 +165,7 @@ li rimuoverà dal virtual environment.
 ``python -m pip list`` elenca tutti i pacchetti installati 
 in un virtual environment:
 
-.. code-block:: bash
+.. code-block:: console
 
   (tutorial-env) $ python -m pip list
   novas (3.1.1.3)
@@ -179,7 +179,7 @@ ma usa un formato che può essere letto da ``python -m pip install``.
 Una convenzione molto usata è di collocare questa lista in un file 
 ``requirements.txt``:
 
-.. code-block:: bash
+.. code-block:: console
 
   (tutorial-env) $ python -m pip freeze > requirements.txt
   (tutorial-env) $ cat requirements.txt
@@ -191,7 +191,7 @@ Il file ``requirements.txt`` può essere incluso nel controllo di versione e
 distribuito come parte dell'applicazione. Gli utenti possono poi usarlo per 
 installare tutti i pacchetti necessari con ``install -r``:
 
-.. code-block:: bash
+.. code-block:: console
 
   (tutorial-env) $ python -m pip install -r requirements.txt
   Collecting novas==3.1.1.3 (from -r requirements.txt (line 1))

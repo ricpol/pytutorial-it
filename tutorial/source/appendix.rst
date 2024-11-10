@@ -13,8 +13,8 @@ Esistono due versioni della :term:`REPL` interattiva. L'interprete di base,
 tradizionale, è supportato su tutte le piattaforme ma ha minime capacità di 
 controllo della riga di comando. 
 
-Sui sistemi Unix-like (es. Linux o macOS) che supportano :mod:`curses` e 
-:mod:`readline`, di default è usata una nuova shell interattiva. Questa 
+Su Windows e i sistemi Unix-like che supportano :mod:`curses`, 
+di default è usata una nuova shell interattiva. Questa 
 supporta i colori, l'editing multi-riga, la storia dei comandi e la modalità 
 "incolla". Per disabilitare i colori, si veda :ref:`using-on-controlling-color` 
 per i dettagli. I tasti-funzione forniscono alcune funzionalità aggiuntive: 

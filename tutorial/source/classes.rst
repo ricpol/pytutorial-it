@@ -298,8 +298,8 @@ dell'oggetto-classe. Quindi, se una definizione di classe è fatta così, ::
 allora ``MyClass.i`` e ``MyClass.f`` sono riferimenti validi agli attributi, e 
 restituiscono un intero e un oggetto-funzione rispettivamente. Gli attributi 
 della classe possono anche essere assegnati, ovvero potete cambiare il valore 
-di ``MyClass.i`` con un assegnamento. Anche :attr:`!__doc__` è un attributo 
-valido, e restituisce la docstring della classe 
+di ``MyClass.i`` con un assegnamento. Anche :attr:`~type.__doc__` è un 
+attributo valido, e restituisce la docstring della classe 
 (``"Un semplice esempio di classe."``)
 
 Lo *istanziamento* usa invece la notazione di chiamata di funzione. Fate finta 
@@ -981,7 +981,7 @@ Esempi::
 .. [#] Tranne che per una cosa. Gli oggetti-modulo hanno un attributo di sola 
    lettura nascosto, che si chiama :attr:`~object.__dict__`: è il dizionario 
    usato per implementare il *namespace* del modulo. Il nome 
-   :attr:`~object.__dict__` è un attributo del modulo, ma non un suo nome 
+   ``__dict__`` è un attributo del modulo, ma non un suo nome 
    globale. Naturalmente questa è un'eccezione nell'implementazione astratta 
    dei *namespace* e dovrebbe essere usata solo da strumenti come i *debugger* 
    post-mortem. 

@@ -602,9 +602,9 @@ Python) devono sempre usare gli import assoluti.
 Package in directory multiple
 -----------------------------
 
-I package hanno un attributo speciale :attr:`__path__`. Questa variabile è una 
-lista, inizializzata con il nome della directory dove risiede il file 
-:file:`__init__.py` del package, prima che il codice di questo sia eseguito. 
+I package hanno un attributo speciale :attr:`~module.__path__`. Questa variabile  
+è una sequenza di stringhe che contiene il nome della directory dove risiede il  
+file :file:`__init__.py` del package, prima che il codice di questo sia eseguito.  
 Potete modificare il contenuto della variabile: così facendo modificate i 
 percorsi di ricerca dei moduli e dei sub-package del package, per tutte le 
 successive importazioni. 

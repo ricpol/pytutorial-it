@@ -86,18 +86,27 @@ Alcuni esempi::
    >>> print(s)
    The value of x is 32.5, and y is 40000...
    >>> # repr() aggiunge apici e backslash:
-   ... hello = 'hello, world\n'
+   >>> hello = 'hello, world\n'
    >>> hellos = repr(hello)
    >>> print(hellos)
    'hello, world\n'
    >>> # possiamo passare a repr() qualsiasi oggetto come argomento:
-   ... repr((x, y, ('spam', 'eggs')))
+   >>> repr((x, y, ('spam', 'eggs')))
    "(32.5, 40000, ('spam', 'eggs'))"
 
 Il modulo :mod:`string` contiene una classe :class:`~string.Template` che 
 presenta ancora un altro metodo per integrare valori dentro una stringa, 
 usando dei segnaposto come ``$x`` e rimpiazzandoli con valori da un 
 dizionario; offre però meno controllo sulla formattazione. 
+
+
+.. index::
+   single: formatted string literal
+   single: interpolated string literal
+   single: string; formatted literal
+   single: string; interpolated literal
+   single: f-string
+   single: fstring
 
 .. _tut-f-strings:
 

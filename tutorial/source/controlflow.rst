@@ -57,7 +57,7 @@ stringa...), nell'ordine in cui appaiono nella sequenza. Per esempio, ma senza
 alcun sottinteso omicida::
 
    >>> # Misura la lunghezza di alcune stringhe:
-   ... words = ['cat', 'window', 'defenestrate']
+   >>> words = ['cat', 'window', 'defenestrate']
    >>> for w in words:
    ...     print(w, len(w))
    ...
@@ -156,24 +156,61 @@ o che accettano iterabili come argomento. Nel capitolo :ref:`tut-structures`
 approfondiremo ancora la funzione :func:`list`.
 
 .. _tut-break:
+.. _break-and-continue-statements-and-else-clauses-on-loops:
 
-Le istruzioni :keyword:`!break` e :keyword:`!continue`, e la clausola :keyword:`!else` nei cicli
-================================================================================================
+Le istruzioni :keyword:`!break` e :keyword:`!continue`
+======================================================
 
 L'istruzione :keyword:`break` "salta fuori" dal ciclo 
 :keyword:`for` o :keyword:`while` più interno in cui è inserita.
 
-Le istruzioni :keyword:`!for` o :keyword:`!while` possono avere una clausola 
-:keyword:`!else`:. 
+   >>> for n in range(2, 10):
+   ...     for x in range(2, n):
+   ...         if n % x == 0:
+   ...             print(f"{n} uguale {x} * {n//x}")")
+   ...             break
+   4 uguale 2 * 2
+   6 uguale 2 * 3
+   8 uguale 2 * 4
+   9 uguale 3 * 3
+
+L'istruzione :keyword:`continue` prosegue con la prossima iterazione del ciclo::
+
+   >>> for num in range(2, 10):
+   ...     if num % 2 == 0:
+   ...         print(f"Trovato il numero pari {num}")")
+   ...         continue
+   ...     print(f"Trovato il numero dispari {num}")")
+   Trovato il numero pari 2
+   Trovato il numero dispari 3
+   Trovato il numero pari 4
+   Trovato il numero dispari 5
+   Trovato il numero pari 6
+   Trovato il numero dispari 7
+   Trovato il numero pari 8
+   Trovato il numero dispari 9
+
+
+.. _tut-for-else:
+
+L'istruzione :keyword:`!else` nei cicli
+=======================================
+
+In un ciclo :keyword:`!for` o :keyword:`!while`, l'istruzione :keyword:`!break` 
+può essere accoppiata con una clausola :keyword:`!else`. Se il ciclo ha termine 
+senza eseguire il blocco :keyword:`!break`, allora viene eseguito il blocco 
+:keyword:`!else`. 
 
 In un ciclo :keyword:`for`, la :keyword:`!else` viene eseguita quando il ciclo 
-ha raggiunto la sua ultima iterazione.
+termina la sua ultima iterazione, senza che sia avvenuto un ``break``.
 
 In un ciclo :keyword:`while` viene eseguita quando la condizione del ciclo 
 diventa falsa.
 
 In entrambi i cicli, la clausola :keyword:`!else` **non** viene eseguita se 
-il ciclo termina con un :keyword:`break`. 
+il ciclo termina con un :keyword:`break`. Beninteso, ci sono altri modi di 
+terminare il ciclo prematuramente (come un :keyword:`!return` o innescare 
+una eccezione), e anche in questi casi la ``else`` verrà saltata.
 
 Per esempio, questo ciclo :keyword:`!for` ricerca i numeri primi:: 
 
@@ -198,30 +235,17 @@ Per esempio, questo ciclo :keyword:`!for` ricerca i numeri primi::
 (Sì, questo codice è giusto. Fate attenzione: la clausola ``else`` appartiene 
 al ciclo :keyword:`for`, *non* all'istruzione :keyword:`if`.)
 
-Quando viene usata in un ciclo, la clausola ``else`` è più simile alla 
-``else`` di un'istruzione :keyword:`try`, piuttosto che a quella di un 
-:keyword:`if`. La ``else`` di un'istruzione :keyword:`try` viene eseguita 
-quando non sono rilevate eccezioni, e allo stesso modo la ``else`` di un ciclo 
-viene eseguita quando non ci sono ``break``. Approfondiremo l'istruzione 
-:keyword:`!try` e le eccezioni nel capitolo :ref:`tut-handling`.
+Un modo di capire il blocco ``else`` è immaginarlo accoppiato con la ``if`` 
+dentro il ciclo. Man mano che il ciclo va avanti, passerà attraverso una sequenza 
+come if/if/if/else: ossia, la ``if`` dentro il ciclo, incontrata diverse volte. 
+Se la condizione a un certo punto è vera, allora si verifica un ``break``. Se 
+la condizione non è mai vera, allora viene eseguita la ``else`` fuori dal ciclo. 
 
-L'istruzione :keyword:`continue`, anch'essa un prestito dal C, prosegue con la 
-successiva iterazione del ciclo::
+Quando è usata nei cicli, la ``else`` è più vicina alla ``else`` delle istruzioni 
+:keyword:`try` che a quella degli ``if``: la ``else`` nei ``try`` è eseguita quando 
+nessuna eccezione si verifica, quella dei cicli è eseguita quando nessun ``break`` 
+si verifica. Le istruzioni ``try`` sono discusse in :ref:`tut-handling`. 
 
-    >>> for num in range(2, 10):
-    ...     if num % 2 == 0:
-    ...         print("Trovato un numero pari", num)
-    ...         continue
-    ...     print("Trovato un numero dispari", num)
-    ...
-    Trovato un numero pari 2
-    Trovato un numero dispari 3
-    Trovato un numero pari 4
-    Trovato un numero dispari 5
-    Trovato un numero pari 6
-    Trovato un numero dispari 7
-    Trovato un numero pari 8
-    Trovato un numero dispari 9
 
 .. _tut-pass:
 
@@ -446,8 +470,8 @@ Definire le funzioni
 Possiamo creare una funzione che scrive i numeri di Fibonacci fino a un limite 
 determinato::
 
-   >>> def fib(n):    # scrive la serie di Fibonacci fino a n
-   ...     """Scrive la serie di Fibonacci fino a n."""
+   >>> def fib(n):    # scrive i numeri di Fibonacci minori di n
+   ...     """Scrive i numeri di Fibonacci minori di n."""
    ...     a, b = 0, 1
    ...     while a < n:
    ...         print(a, end=' ')
@@ -455,7 +479,7 @@ determinato::
    ...     print()
    ...
    >>> # Adesso chiamate la funzione appena definita:
-   ... fib(2000)
+   >>> fib(2000)
    0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597
 
 .. index::
@@ -824,7 +848,7 @@ posizione, come prescrive il segno ``/`` nella sua definizione::
      File "<stdin>", line 1, in <module>
    TypeError: pos_only_arg() got some positional-only arguments paased as keyword arguments: 'arg'
 
-La terza, ``kwd_only_args``, permette solo di passare gli argomenti per nome, 
+La terza, ``kwd_only_arg``, permette solo di passare gli argomenti per nome, 
 avendo il segno ``*`` nella definizione::
 
    >>> kwd_only_arg(3)

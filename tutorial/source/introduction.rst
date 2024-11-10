@@ -199,18 +199,14 @@ per ulteriori informazioni e soluzioni.
 Le stringhe possono occupare più di una riga. Un modo per ottenere questo è 
 usare gli apici tripli: ``"""..."""`` o ``'''...'''``. Gli "a-capo" sono 
 inclusi automaticamente nelle stringhe, ma è possibile evitarlo aggiungendo un 
-*backslash* ``\`` alla fine della riga. Questo esempio::
+*backslash* ``\`` alla fine della riga. In questo esempio si noti che lo "a-capo" iniziale 
+non è incluso::
 
-   print("""\
-   Usage: thingy [OPTIONS]
-        -h                        Display this usage message
-        -H hostname               Hostname to connect to
-   """)
-
-produce questo output (si noti che lo "a-capo" iniziale non è incluso):
-
-.. code-block:: text
-
+   >>> print("""\
+   ... Usage: thingy [OPTIONS]
+   ...      -h                        Display this usage message
+   ...      -H hostname               Hostname to connect to
+   ... """)
    Usage: thingy [OPTIONS]
         -h                        Display this usage message
         -H hostname               Hostname to connect to
@@ -508,8 +504,8 @@ due. Per esempio, possiamo scrivere i primi numeri della
 questo modo::
 
    >>> # serie di Fibonacci:
-   ... # la somma di due elementi è l'elemento seguente
-   ... a, b = 0, 1
+   >>> # la somma di due elementi è l'elemento seguente
+   >>> a, b = 0, 1
    >>> while a < 10:
    ...     print(a)
    ...     a, b = b, a+b
