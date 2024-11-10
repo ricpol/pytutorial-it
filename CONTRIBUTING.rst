@@ -95,7 +95,7 @@ nella repository originale:
   relativi è 
   `questo <https://github.com/python/cpython/commits/3.10/Doc/tutorial>`_;
 
-* la versione "stabile" per Python 3.11: l'elenco dei *commit* 
+* la versione "legacy" per Python 3.11: l'elenco dei *commit* 
   relativi è 
   `questo <https://github.com/python/cpython/commits/3.11/Doc/tutorial>`_;
 
@@ -103,7 +103,7 @@ nella repository originale:
   relativi è 
   `questo <https://github.com/python/cpython/commits/3.12/Doc/tutorial>`_;
 
-* la versione "in sviluppo" per Python 3.13: l'elenco dei *commit* 
+* la versione "stabile" per Python 3.13: l'elenco dei *commit* 
   relativi è  
   `qui <https://github.com/python/cpython/commits/3.13/Doc/tutorial>`_. 
 

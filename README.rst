@@ -7,19 +7,9 @@ Potete leggere la traduzione, in formato Html, Pdf o Epub, su ReadTheDocs: https
 
 Esistono otto traduzioni leggermente differenti, in altrettanti branch, che sono mantenute in sincrono con le successive release di Python e della sua documentazione:
 
-* per la versione legacy `3.7 <https://docs.python.org/3.7/tutorial/index.html>`_;
-
-* per la versione legacy `3.8 <https://docs.python.org/3.8/tutorial/index.html>`_;
-
-* per la versione legacy `3.9 <https://docs.python.org/3.9/tutorial/index.html>`_;
-
-* per la versione legacy `3.10 <https://docs.python.org/3.10/tutorial/index.html>`_;
+* per la versioni legacy `3.7 <https://docs.python.org/3.7/tutorial/index.html>`_, `3.8 <https://docs.python.org/3.8/tutorial/index.html>`_, `3.9 <https://docs.python.org/3.9/tutorial/index.html>`_, `3.10 <https://docs.python.org/3.10/tutorial/index.html>`_ e `3.11 <https://docs.python.org/3.11/tutorial/index.html>`_;
 
-* per la versione stabile `3.11 <https://docs.python.org/3.11/tutorial/index.html>`_;
-
-* per la versione stabile `3.12 <https://docs.python.org/3.12/tutorial/index.html>`_;
-
-* per la versione in sviluppo `3.13 <https://docs.python.org/3.13/tutorial/index.html>`_;
+* per la versioni stabili `3.12 <https://docs.python.org/3.12/tutorial/index.html>`_ e `3.13 <https://docs.python.org/3.13/tutorial/index.html>`_;
 
 * per la versione in sviluppo "più aggiornata" (Python 3.14), che corrisponde alle ultime modifiche fatte nel  `main branch <https://github.com/python/cpython/tree/main/Doc/tutorial>`_. 
 
