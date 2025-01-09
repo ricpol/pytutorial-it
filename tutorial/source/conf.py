@@ -65,6 +65,8 @@ html_static_path = ['_static']
 
 # -- Latex options ------------------------
 
+latex_engine = 'xelatex'
+
 preamble_contents = r'''
 \addto\captionsitalian{\renewcommand{\literalblockcontinuedname}{...segue}}
 \addto\captionsitalian{\renewcommand{\literalblockcontinuesname}{continua...}}
