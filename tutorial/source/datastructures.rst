@@ -132,8 +132,8 @@ Usare le liste come pile
 È molto facile, grazie ai metodi che abbiamo visto, usare le liste come una 
 pila (*stack*) ovvero come strutture in cui l'ultimo elemento aggiunto è il 
 primo restituito (*last-in, first-out*). Per aggiungere un elemento in cima 
-allo stack, usate :meth:`~list.append`. Per estrarre un elemento dalla cima dello 
-stack, usate :meth:`~list.pop` senza un indice esplicito. Per esempio::
+allo stack, usate :meth:`!append`. Per estrarre un elemento dalla cima dello 
+stack, usate :meth:`!pop` senza un indice esplicito. Per esempio::
 
    >>> stack = [3, 4, 5]
    >>> stack.append(6)
@@ -332,7 +332,7 @@ L'istruzione :keyword:`!del`
 ============================
 
 L'istruzione :keyword:`del` consente di rimuovere un elemento da una lista, 
-data la sua posizione anziché il valore. È differente dal metodo :meth:`~list.pop`, 
+data la sua posizione anziché il valore. È differente dal metodo :meth:`!pop`, 
 che restituisce il valore dell'elemento rimosso. L'istruzione :keyword:`!del` 
 può anche essere usata per rimuovere una sezione della lista, o svuotare 
 l'intera lista (come abbiamo già fatto assegnando una lista vuota alla 
@@ -497,7 +497,7 @@ tuple; se una tupla contiene qualsiasi altro oggetto mutabile, direttamente o
 indirettamente, allora non può fungere da chiave per un dizionario. Non potete 
 usare le liste come chiavi, dal momento che queste possono essere modificate 
 sul posto con l'assegnamento a un indice, il sezionamento o metodi come 
-:meth:`~list.append` e :meth:`~list.extend`.
+:meth:`!append` e :meth:`!extend`.
 
 Conviene pensare a un dizionario come a una collezione di coppie 
 *chiave: valore*, con il requisito che le chiavi devono essere univoche 
