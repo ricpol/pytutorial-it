@@ -7,3 +7,6 @@ build:
     python: "3.11"
 sphinx:
   configuration: tutorial/source/conf.py
+formats:
+   - epub
+   - pdf
