@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Il tutorial di Python'
-copyright = '2024, Riccardo Polignieri'
+copyright = '2025, Riccardo Polignieri'
 author = 'Riccardo Polignieri'
 
 # we don't need version number - we just track Python releases
