@@ -19,9 +19,9 @@ Non perdete la traduzione, `disponibile separatamente <https://pymisc-it.readthe
 
 **Ogni contributo a questo progetto è benvenuto!** Per contribuire, vedi CONTRIBUTING.rst.
 
-Copyright dell'originale: 2001-2024 Python Software Foundation. All rights reserved.
+Copyright dell'originale: 2001-2025 Python Software Foundation. All rights reserved.
 
-Copyright della traduzione: 2020-2024 Riccardo Polignieri. Tutti i diritti riservati.
+Copyright della traduzione: 2020-2025 Riccardo Polignieri. Tutti i diritti riservati.
 
 Licenza d'uso dell'originale: vedi https://github.com/python/cpython/blob/main/LICENSE
 
